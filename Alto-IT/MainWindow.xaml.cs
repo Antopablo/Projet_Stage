@@ -34,6 +34,10 @@ namespace Alto_IT
                 User us = (from u in database.UsersDatabase
                          where u.Identifiant == Champ_identifiant.Text && u.Password == Champ_password.Password
                            select u).First();
+
+                Dashboard D = new Dashboard();
+                D.Show();
+                Close();
             }
             catch (Exception)
             {
