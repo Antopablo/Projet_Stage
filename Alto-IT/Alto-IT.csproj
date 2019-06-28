@@ -69,6 +69,18 @@
     <Compile Include="Migrations\201906271010462_Ajout_User.Designer.cs">
       <DependentUpon>201906271010462_Ajout_User.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906271209246_Ajout_File.cs" />
+    <Compile Include="Migrations\201906271209246_Ajout_File.Designer.cs">
+      <DependentUpon>201906271209246_Ajout_File.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906271256069_Essai_itemsSource.cs" />
+    <Compile Include="Migrations\201906271256069_Essai_itemsSource.Designer.cs">
+      <DependentUpon>201906271256069_Essai_itemsSource.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906280708546_ConceptionTreeView.cs" />
+    <Compile Include="Migrations\201906280708546_ConceptionTreeView.Designer.cs">
+      <DependentUpon>201906280708546_ConceptionTreeView.cs</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Page Include="Dashboard.xaml">
       <SubType>Designer</SubType>
@@ -113,6 +125,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906271010462_Ajout_User.resx">
       <DependentUpon>201906271010462_Ajout_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906271209246_Ajout_File.resx">
+      <DependentUpon>201906271209246_Ajout_File.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906271256069_Essai_itemsSource.resx">
+      <DependentUpon>201906271256069_Essai_itemsSource.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906280708546_ConceptionTreeView.resx">
+      <DependentUpon>201906280708546_ConceptionTreeView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

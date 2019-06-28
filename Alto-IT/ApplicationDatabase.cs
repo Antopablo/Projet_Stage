@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Alto_IT
 {
-    class ApplicationDatabase : DbContext
+    public class ApplicationDatabase : DbContext
     {
         public DbSet<File> FilesDatabase { get; set; }
         public DbSet<User> UsersDatabase { get; set; }

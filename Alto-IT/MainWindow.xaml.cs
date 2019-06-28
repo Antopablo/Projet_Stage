@@ -20,7 +20,7 @@ namespace Alto_IT
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ApplicationDatabase database;
+        public ApplicationDatabase database;
         public MainWindow()
         {
             InitializeComponent();
@@ -29,20 +29,25 @@ namespace Alto_IT
 
         private void SignIn_bouton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                User us = (from u in database.UsersDatabase
-                         where u.Identifiant == Champ_identifiant.Text && u.Password == Champ_password.Password
-                           select u).First();
+            //try
+            //{
+            //    User us = (from u in database.UsersDatabase
+            //             where u.Identifiant == Champ_identifiant.Text && u.Password == Champ_password.Password
+            //               select u).First();
 
-                Dashboard D = new Dashboard();
-                D.Show();
-                Close();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Identifiant ou Mot de Passe invalide");
-            }
+            //    Dashboard D = new Dashboard(this);
+            //    D.Show();
+            //    Close();
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Identifiant ou Mot de Passe invalide");
+            //}
+
+            Dashboard D = new Dashboard(this);
+            D.Show();
+            Close();
+
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,17 +20,25 @@ namespace Alto_IT
     /// </summary>
     public partial class Dashboard : Window
     {
-        public Dashboard()
+        public MainWindow mw { get; set; }
+        public Dashboard(MainWindow m)
         {
             InitializeComponent();
+            mw = m;
+
+            //treeview.ItemsSource = mw.database.FilesDatabase.Local;
+            //mw.database.FilesDatabase.ToList();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // FullScreen
             this.Left = SystemParameters.WorkArea.Left;
             this.Top = SystemParameters.WorkArea.Top;
             this.Height = SystemParameters.WorkArea.Height;
             this.Width = SystemParameters.WorkArea.Width;
+
+
         }
     }
 }
