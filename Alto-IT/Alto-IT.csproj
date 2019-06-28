@@ -62,9 +62,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Circulaire.cs" />
     <Compile Include="Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Exigence.cs" />
     <Compile Include="Migrations\201906271010462_Ajout_User.cs" />
     <Compile Include="Migrations\201906271010462_Ajout_User.Designer.cs">
       <DependentUpon>201906271010462_Ajout_User.cs</DependentUpon>
@@ -81,6 +83,7 @@
     <Compile Include="Migrations\201906280708546_ConceptionTreeView.Designer.cs">
       <DependentUpon>201906280708546_ConceptionTreeView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Theme.cs" />
     <Compile Include="User.cs" />
     <Page Include="Dashboard.xaml">
       <SubType>Designer</SubType>
@@ -95,7 +98,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ApplicationDatabase.cs" />
-    <Compile Include="File.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

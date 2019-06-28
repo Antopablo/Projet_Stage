@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Alto_IT
 {
-    public class ApplicationDatabase : DbContext
+    class Theme
     {
-        public DbSet<User> UsersDatabase { get; set; }
+        public string Name { get; set; }
+
+        public List<Exigence> ListeExigences { get; set; }
     }
 }
