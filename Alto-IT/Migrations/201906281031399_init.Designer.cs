@@ -7,13 +7,13 @@ namespace Alto_IT.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class ConceptionTreeView : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ConceptionTreeView));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201906280708546_ConceptionTreeView"; }
+            get { return "201906281031399_init"; }
         }
         
         string IMigrationMetadata.Source

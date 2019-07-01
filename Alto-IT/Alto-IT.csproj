@@ -62,29 +62,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Circulaire.cs" />
+    <Compile Include="Ajout.xaml.cs">
+      <DependentUpon>Ajout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906281031399_init.cs" />
+    <Compile Include="Migrations\201906281031399_init.Designer.cs">
+      <DependentUpon>201906281031399_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907010720017_SQL.cs" />
+    <Compile Include="Migrations\201907010720017_SQL.Designer.cs">
+      <DependentUpon>201907010720017_SQL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Norme.cs" />
     <Compile Include="Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Exigence.cs" />
-    <Compile Include="Migrations\201906271010462_Ajout_User.cs" />
-    <Compile Include="Migrations\201906271010462_Ajout_User.Designer.cs">
-      <DependentUpon>201906271010462_Ajout_User.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906271209246_Ajout_File.cs" />
-    <Compile Include="Migrations\201906271209246_Ajout_File.Designer.cs">
-      <DependentUpon>201906271209246_Ajout_File.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906271256069_Essai_itemsSource.cs" />
-    <Compile Include="Migrations\201906271256069_Essai_itemsSource.Designer.cs">
-      <DependentUpon>201906271256069_Essai_itemsSource.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906280708546_ConceptionTreeView.cs" />
-    <Compile Include="Migrations\201906280708546_ConceptionTreeView.Designer.cs">
-      <DependentUpon>201906280708546_ConceptionTreeView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Theme.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="Vue_Circulaire.xaml.cs">
+      <DependentUpon>Vue_Circulaire.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Ajout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,13 +103,12 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Vue_Circulaire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201906270957316_Init.cs" />
-    <Compile Include="Migrations\201906270957316_Init.Designer.cs">
-      <DependentUpon>201906270957316_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -122,20 +122,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201906270957316_Init.resx">
-      <DependentUpon>201906270957316_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906281031399_init.resx">
+      <DependentUpon>201906281031399_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906271010462_Ajout_User.resx">
-      <DependentUpon>201906271010462_Ajout_User.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906271209246_Ajout_File.resx">
-      <DependentUpon>201906271209246_Ajout_File.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906271256069_Essai_itemsSource.resx">
-      <DependentUpon>201906271256069_Essai_itemsSource.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906280708546_ConceptionTreeView.resx">
-      <DependentUpon>201906280708546_ConceptionTreeView.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907010720017_SQL.resx">
+      <DependentUpon>201907010720017_SQL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -150,5 +141,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

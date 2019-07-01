@@ -21,23 +21,51 @@ namespace Alto_IT
     public partial class Dashboard : Window
     {
         public MainWindow mw { get; set; }
+        public Norme SelectedItem { get; set; }
         public Dashboard(MainWindow m)
         {
             InitializeComponent();
             mw = m;
-
-            //treeview.ItemsSource = mw.database.FilesDatabase.Local;
-            //mw.database.FilesDatabase.ToList();
+            //Frame_Vue_Circulaire.Navigate(mw);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // FullScreen
-            this.Left = SystemParameters.WorkArea.Left;
-            this.Top = SystemParameters.WorkArea.Top;
-            this.Height = SystemParameters.WorkArea.Height;
-            this.Width = SystemParameters.WorkArea.Width;
+            //this.Left = SystemParameters.WorkArea.Left;
+            //this.Top = SystemParameters.WorkArea.Top;
+            //this.Height = SystemParameters.WorkArea.Height;
+            //this.Width = SystemParameters.WorkArea.Width;
+        }
 
+        private void TreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+        }
+
+        private void AjoutNorme_Click(object sender, RoutedEventArgs e)
+        {
+            Ajout A = new Ajout(mw);
+            A.Show();
+        }
+
+        private void Modif_norme_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Supr_norme_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Cloud19714_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            GridControle.Visibility = Visibility.Visible;
+            Frame_Vue_Circulaire.Visibility = Visibility.Visible;
+        }
+
+        private void Frame_Vue_Circulaire_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
 
         }
     }

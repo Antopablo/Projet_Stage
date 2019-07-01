@@ -10,5 +10,6 @@ namespace Alto_IT
     public class ApplicationDatabase : DbContext
     {
         public DbSet<User> UsersDatabase { get; set; }
+        public DbSet<Norme> NormesDatabase { get; set; }
     }
 }

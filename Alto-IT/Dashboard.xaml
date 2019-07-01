@@ -7,8 +7,9 @@
         xmlns:local="clr-namespace:Alto_IT"
         mc:Ignorable="d"
         Title="Dashboard"
-        Loaded="Window_Loaded">
-    
+        Loaded="Window_Loaded"
+        Width="auto">
+
     <Grid x:Name="EspaceTravail">
         <TreeView Name="treeview">
             <TreeView.Resources>
@@ -16,7 +17,7 @@
                     <Setter Property="HeaderTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <TextBlock Width="150"
+                                <TextBlock Width="160"
                                    TextWrapping="Wrap"
                                    Text="{Binding}" 
                                    Margin="5,10,0,10"
@@ -26,10 +27,9 @@
                     </Setter>
                 </Style>
             </TreeView.Resources>
-            <TreeViewItem Header="Conformité">
-                <TreeViewItem Header="Gestion des normes"></TreeViewItem>
-                <TreeViewItem Header="Cloud Computing Circular 19/714 from CSSF - MATERIAL" ></TreeViewItem>
-                <TreeViewItem Header="Cloud Computing Circular 19/714 from CSSF - NON MATERIAL"></TreeViewItem>
+            <TreeViewItem Header="Norme" Width="201" HorizontalAlignment="Left">
+                <TreeViewItem Header="Gestion des normes" MouseDoubleClick="TreeViewItem_MouseDoubleClick"></TreeViewItem>
+                <TreeViewItem Name="Cloud19714" Header="Cloud Computing Circular 19/714 from CSSF" MouseDoubleClick="Cloud19714_MouseDoubleClick"></TreeViewItem>
             </TreeViewItem>
             <TreeViewItem Header="Appréciations">
                 <TreeViewItem Header="Mesures de sécurtié"></TreeViewItem>
@@ -42,7 +42,22 @@
             </TreeViewItem>
         </TreeView>
 
+        <Grid Name="GridControle" Background="Aqua" Height="50" VerticalAlignment="Top" Margin="200,0,0,0" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="Ajout_norme" Click="AjoutNorme_Click" Content="Ajouter une norme"/>
+            <Button x:Name="Modif_norme" Click="Modif_norme_Click" Content="Modifier une norme" Grid.Column="1"/>
+            <Button x:Name="Supr_norme" Click="Supr_norme_Click" Content="Supprimer une norme" Grid.Column="2"/>
+        </Grid>
+
+        <Frame x:Name="Frame_Vue_Circulaire" Source="Vue_Circulaire.xaml" Margin="200,0,9.6,-0.4" Visibility="Collapsed"/>
         
-        <TextBlock Name="VueContent" Margin="150,0,0,0" />
     </Grid>
 </Window>
