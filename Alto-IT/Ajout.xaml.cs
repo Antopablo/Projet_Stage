@@ -20,6 +20,7 @@ namespace Alto_IT
     public partial class Ajout : Window
     {
         MainWindow mw;
+        public int CompteurID { get; set; }
         public Ajout(MainWindow m)
         {
             InitializeComponent();
@@ -33,19 +34,23 @@ namespace Alto_IT
             mw.database.SaveChanges();
             Close();
             CreateTable(Title.Text, 0 /* <= fonction LINQ qui retourne la FOREIGN KEY*/);
+            RemplirTable(Title.Text, 0);
         }
 
         public void CreateTable(string TableName, int ForeignKey)
         {
-            using (ApplicationDatabase context = mw.database)
+            using (ApplicationDatabase context = new ApplicationDatabase())
             {
-                var x = context.Database.ExecuteSqlCommand("CREATE TABLE"+TableName+"(COLUMNTESTE INTEGER PRIMARY KEY, FOREIGNKEY INT)");
+                var x = context.Database.ExecuteSqlCommand("CREATE TABLE "+TableName+"(ID INTEGER PRIMARY KEY, ForeignKey INT, Titre VARCHAR(1000), Description VARCHAR(1000))");
             }
         }
 
-        public void RemplirTable(int key)
+        public void RemplirTable(string TableName, int key)
         {
-
+            using (ApplicationDatabase context = new ApplicationDatabase())
+            {
+                var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + "(ID, Titre, Description) VALUES (" + "'" + key + "'" + "," + "'" + Title.Text + "'" + "," + "'" + Content.Text + "'" + ")");
+            }
         }
     }
 }

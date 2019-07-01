@@ -22,12 +22,10 @@ namespace Alto_IT
     public partial class MainWindow : Window
     {
         public ApplicationDatabase database;
-        //public ObservableCollection<Norme> normeOC;
         public MainWindow()
         {
             InitializeComponent();
             database = new ApplicationDatabase();
-            //normeOC = new ObservableCollection<Norme>();
         }
 
         private void SignIn_bouton_Click(object sender, RoutedEventArgs e)
