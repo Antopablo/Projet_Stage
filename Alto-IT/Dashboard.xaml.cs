@@ -21,11 +21,13 @@ namespace Alto_IT
     public partial class Dashboard : Window
     {
         public MainWindow mw { get; set; }
+        public Vue_Circulaire Vue { get; set; }
 
         public Dashboard(MainWindow m)
         {
             InitializeComponent();
             mw = m;
+            Vue = new Vue_Circulaire(this);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -49,19 +51,27 @@ namespace Alto_IT
 
         private void Modif_norme_Click(object sender, RoutedEventArgs e)
         {
-
+            Modifier M = new Modifier();
+            M.Title.Text = Vue.ItemSelectionne.Name;
+            M.Content.Text = Vue.ItemSelectionne.Description;
+            M.Show();
         }
 
         private void Supr_norme_Click(object sender, RoutedEventArgs e)
         {
-
+            using (ApplicationDatabase context = new ApplicationDatabase())
+            {
+                var x = context.Database.ExecuteSqlCommand("DROP TABLE " + Vue.ItemSelectionne.Name);
+                var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Name = '"+Vue.ItemSelectionne.Name+"'");
+                mw.database.NormesDatabase.Remove(Vue.ItemSelectionne); // à mettre à la fin, reviens à la position 1
+            }
         }
 
         private void Cloud19714_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             GridControle.Visibility = Visibility.Visible;
             Frame_Vue_Circulaire.Visibility = Visibility.Visible;            
-            Frame_Vue_Circulaire.Content = new Vue_Circulaire(this);
+            Frame_Vue_Circulaire.Content = Vue;
         }
     }
 }

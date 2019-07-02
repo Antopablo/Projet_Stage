@@ -22,7 +22,6 @@ namespace Alto_IT
         MainWindow mw;
         Dashboard dashb;
         Vue_Circulaire VC;
-        public int CompteurID { get; set; }
         public Ajout(MainWindow m, Dashboard d, Vue_Circulaire vc)
         {
             InitializeComponent();
@@ -38,7 +37,13 @@ namespace Alto_IT
             mw.database.SaveChanges();
 
             CreateTable(Title.Text);
-            RemplirTable(Title.Text,VC.ItemSelectionne.Id);
+            if (VC.ItemSelectionne != null)
+            {
+                RemplirTable(Title.Text, VC.ItemSelectionne.Id);
+            } else
+            {
+                RemplirTable(Title.Text, 0);
+            }
         }
 
         public void CreateTable(string TableName)
@@ -48,7 +53,7 @@ namespace Alto_IT
             {
                 try
                 {
-                    var x = context.Database.ExecuteSqlCommand("CREATE TABLE " + TableName + "(ID INTEGER IDENTITY(1,1) PRIMARY KEY, ForeignKey INT, Titre VARCHAR(1000), Description VARCHAR(1000))");
+                    var x = context.Database.ExecuteSqlCommand("CREATE TABLE " + TableName + " (ID INTEGER IDENTITY(1,1) PRIMARY KEY, ForeignKey INT, Titre VARCHAR(1000), Description VARCHAR(1000))");
                 }
                 catch (System.Data.SqlClient.SqlException)
                 {
@@ -61,7 +66,7 @@ namespace Alto_IT
             TableName = TableName.Replace(" ", "_");
                 using (ApplicationDatabase context = new ApplicationDatabase())                                                     
                 {
-                    var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + "(ForeignKey, Titre, Description) VALUES (" + "'" + ForeignKey + "'" +","+ "'" + Title.Text + "'" + "," + "'" + Content.Text + "'" + ")");
+                    var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + " (ForeignKey, Titre, Description) VALUES (" + "'" + ForeignKey + "'" +","+ "'" + Title.Text + "'" + "," + "'" + Content.Text + "'" + ")");
                     Close();
                 }
         }
