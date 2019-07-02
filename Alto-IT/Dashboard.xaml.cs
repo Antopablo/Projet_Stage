@@ -21,12 +21,12 @@ namespace Alto_IT
     public partial class Dashboard : Window
     {
         public MainWindow mw { get; set; }
-        public Norme SelectedItem { get; set; }
+        public Norme ItemSelectionne { get; set; }
         public Dashboard(MainWindow m)
         {
             InitializeComponent();
+            ItemSelectionne = new Norme();
             mw = m;
-            //Frame_Vue_Circulaire.Navigate(mw);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -44,7 +44,7 @@ namespace Alto_IT
 
         private void AjoutNorme_Click(object sender, RoutedEventArgs e)
         {
-            Ajout A = new Ajout(mw);
+            Ajout A = new Ajout(mw, this);
             A.Show();
         }
 
@@ -62,11 +62,8 @@ namespace Alto_IT
         {
             GridControle.Visibility = Visibility.Visible;
             Frame_Vue_Circulaire.Visibility = Visibility.Visible;
-        }
 
-        private void Frame_Vue_Circulaire_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-
+            treeview.ItemContainerGenerator.ContainerFromItem(treeview.SelectedItem);
         }
     }
 }

@@ -20,11 +20,13 @@ namespace Alto_IT
     public partial class Ajout : Window
     {
         MainWindow mw;
+        Dashboard dashb;
         public int CompteurID { get; set; }
-        public Ajout(MainWindow m)
+        public Ajout(MainWindow m, Dashboard d)
         {
             InitializeComponent();
             mw = m;
+            dashb = d;
         }
 
         private void ValiderNorme_Click(object sender, RoutedEventArgs e)
@@ -32,24 +34,36 @@ namespace Alto_IT
             Norme N = new Norme(Title.Text, Content.Text);
             mw.database.NormesDatabase.Add(N);
             mw.database.SaveChanges();
-            Close();
-            CreateTable(Title.Text, 0 /* <= fonction LINQ qui retourne la FOREIGN KEY*/);
+
+            CreateTable(Title.Text);
             RemplirTable(Title.Text, 0);
         }
 
-        public void CreateTable(string TableName, int ForeignKey)
+        public void CreateTable(string TableName)
         {
+            TableName = TableName.Replace(" ", "_");
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
-                var x = context.Database.ExecuteSqlCommand("CREATE TABLE "+TableName+"(ID INTEGER PRIMARY KEY, ForeignKey INT, Titre VARCHAR(1000), Description VARCHAR(1000))");
+                try
+                {
+                    var x = context.Database.ExecuteSqlCommand("CREATE TABLE " + TableName + "(ID INTEGER IDENTITY(1,1) PRIMARY KEY, ForeignKey INT, Titre VARCHAR(1000), Description VARCHAR(1000))");
+                }
+                catch (System.Data.SqlClient.SqlException)
+                {
+                }
             }
         }
 
-        public void RemplirTable(string TableName, int key)
+        public void RemplirTable(string TableName, int ForeignKey)
         {
-            using (ApplicationDatabase context = new ApplicationDatabase())
+            TableName = TableName.Replace(" ", "_");
+            if (dashb.ItemSelectionne != null)
             {
-                var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + "(ID, Titre, Description) VALUES (" + "'" + key + "'" + "," + "'" + Title.Text + "'" + "," + "'" + Content.Text + "'" + ")");
+                using (ApplicationDatabase context = new ApplicationDatabase())                                                     
+                {
+                    var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + "(ForeignKey, Titre, Description) VALUES (" + "'" + ForeignKey + "'" +","+ "'" + Title.Text + "'" + "," + "'" + Content.Text + "'" + ")");
+                    Close();
+                }
             }
         }
     }
