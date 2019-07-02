@@ -51,10 +51,12 @@ namespace Alto_IT
 
         private void Modif_norme_Click(object sender, RoutedEventArgs e)
         {
-            Modifier M = new Modifier();
+            Modifier M = new Modifier(mw, Vue);
             M.Title.Text = Vue.ItemSelectionne.Name;
             M.Content.Text = Vue.ItemSelectionne.Description;
             M.Show();
+
+
         }
 
         private void Supr_norme_Click(object sender, RoutedEventArgs e)

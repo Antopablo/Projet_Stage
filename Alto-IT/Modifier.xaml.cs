@@ -19,14 +19,29 @@ namespace Alto_IT
     /// </summary>
     public partial class Modifier : Window
     {
+        public MainWindow mw { get; set; }
+        public Vue_Circulaire Vue { get; set; }
         public Modifier()
         {
             InitializeComponent();
         }
 
+        public Modifier(MainWindow m, Vue_Circulaire v)
+        {
+            InitializeComponent();
+            mw = m;
+            Vue = v;
+        }
+
         private void ModifierNorme_Click(object sender, RoutedEventArgs e)
         {
+            String name = Vue.ItemSelectionne.Name.Replace(' ', '_');
+            MessageBox.Show(name);
 
+            using ( ApplicationDatabase context = new ApplicationDatabase())
+            {
+                var x = context.Database.ExecuteSqlCommand("UPDATE " + name + " SET Titre = '" + Title.Text + "' WHERE Titre = "+"'"+name+"'"+" ");
+            }
         }
     }
 }
