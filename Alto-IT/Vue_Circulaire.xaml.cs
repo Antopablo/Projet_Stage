@@ -20,29 +20,39 @@ namespace Alto_IT
     /// </summary>
     public partial class Vue_Circulaire : Page
     {
+        public Dashboard dash { get; set; }
+        public Norme ItemSelectionne { get; set; }
+
         public Vue_Circulaire()
         {
             InitializeComponent();
         }
 
-        private void AjoutNorme_Click(object sender, RoutedEventArgs e)
+        public Vue_Circulaire(Dashboard D)
         {
-
+            InitializeComponent();
+            dash = D;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
+            AfficherDatabase();
         }
 
-        private void Modif_norme_Click(object sender, RoutedEventArgs e)
+        private void AfficherDatabase()
         {
-
+            treeviewFrame.ItemsSource = dash.mw.database.NormesDatabase.Local ;
+            dash.mw.database.NormesDatabase.ToList();
         }
 
-        private void Supr_norme_Click(object sender, RoutedEventArgs e)
+        private void TreeviewFrame_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+           
+        }
 
+        private void TreeviewFrame_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            ItemSelectionne = (Norme)treeviewFrame.SelectedItem;
         }
     }
 }

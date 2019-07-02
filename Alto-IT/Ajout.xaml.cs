@@ -21,12 +21,14 @@ namespace Alto_IT
     {
         MainWindow mw;
         Dashboard dashb;
+        Vue_Circulaire VC;
         public int CompteurID { get; set; }
-        public Ajout(MainWindow m, Dashboard d)
+        public Ajout(MainWindow m, Dashboard d, Vue_Circulaire vc)
         {
             InitializeComponent();
             mw = m;
             dashb = d;
+            VC = vc;
         }
 
         private void ValiderNorme_Click(object sender, RoutedEventArgs e)
@@ -36,7 +38,7 @@ namespace Alto_IT
             mw.database.SaveChanges();
 
             CreateTable(Title.Text);
-            RemplirTable(Title.Text, 0);
+            RemplirTable(Title.Text,VC.ItemSelectionne.Id);
         }
 
         public void CreateTable(string TableName)
@@ -57,14 +59,11 @@ namespace Alto_IT
         public void RemplirTable(string TableName, int ForeignKey)
         {
             TableName = TableName.Replace(" ", "_");
-            if (dashb.ItemSelectionne != null)
-            {
                 using (ApplicationDatabase context = new ApplicationDatabase())                                                     
                 {
                     var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + "(ForeignKey, Titre, Description) VALUES (" + "'" + ForeignKey + "'" +","+ "'" + Title.Text + "'" + "," + "'" + Content.Text + "'" + ")");
                     Close();
                 }
-            }
         }
     }
 }

@@ -21,11 +21,10 @@ namespace Alto_IT
     public partial class Dashboard : Window
     {
         public MainWindow mw { get; set; }
-        public Norme ItemSelectionne { get; set; }
+
         public Dashboard(MainWindow m)
         {
             InitializeComponent();
-            ItemSelectionne = new Norme();
             mw = m;
         }
 
@@ -44,7 +43,7 @@ namespace Alto_IT
 
         private void AjoutNorme_Click(object sender, RoutedEventArgs e)
         {
-            Ajout A = new Ajout(mw, this);
+            Ajout A = new Ajout(mw, this, (Vue_Circulaire)Frame_Vue_Circulaire.Content);
             A.Show();
         }
 
@@ -61,9 +60,8 @@ namespace Alto_IT
         private void Cloud19714_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             GridControle.Visibility = Visibility.Visible;
-            Frame_Vue_Circulaire.Visibility = Visibility.Visible;
-
-            treeview.ItemContainerGenerator.ContainerFromItem(treeview.SelectedItem);
+            Frame_Vue_Circulaire.Visibility = Visibility.Visible;            
+            Frame_Vue_Circulaire.Content = new Vue_Circulaire(this);
         }
     }
 }

@@ -6,13 +6,11 @@
       xmlns:local="clr-namespace:Alto_IT"
       mc:Ignorable="d"
       Title="Vue_Circulaire" Width="950.6" Height="505.8"
-      Loaded="Page_Loaded"
       HorizontalAlignment="Left"
-      VerticalAlignment="Bottom">
+      VerticalAlignment="Bottom"
+      Loaded="Page_Loaded">
 
     <Grid Background="#FFEBDFDF" Margin="0,0,0.4,0">
-        
-        
-
+        <TreeView Name="treeviewFrame" HorizontalAlignment="Left" Height="486" Margin="10,10,0,0" VerticalAlignment="Top" Width="930" MouseDoubleClick="TreeviewFrame_MouseDoubleClick" SelectedItemChanged="TreeviewFrame_SelectedItemChanged"/>
     </Grid>
 </Page>

@@ -57,7 +57,7 @@
             <Button x:Name="Supr_norme" Click="Supr_norme_Click" Content="Supprimer une norme" Grid.Column="2"/>
         </Grid>
 
-        <Frame x:Name="Frame_Vue_Circulaire" Source="Vue_Circulaire.xaml" Margin="200,0,9.6,-0.4" Visibility="Collapsed"/>
+        <Frame x:Name="Frame_Vue_Circulaire" Margin="200,0,9.6,-0.4"/>
         
     </Grid>
 </Window>
