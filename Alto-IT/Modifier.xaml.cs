@@ -24,31 +24,39 @@ namespace Alto_IT
 
         private void ModifierNorme_Click(object sender, RoutedEventArgs e)
         {
-            string CurrentItem = Vue.ItemSelectionne.Name.Replace(' ', '_');
-            
-
-            using (ApplicationDatabase context = new ApplicationDatabase())
+            if (Vue.ItemSelectionne != null)
             {
-                // modif dans sa table
-                var xx = context.Database.ExecuteSqlCommand("UPDATE " + CurrentItem + " SET Description = '" + Content.Text + "' WHERE Titre = " + "'" + CurrentItem + "'" + " ");
-                var x = context.Database.ExecuteSqlCommand("UPDATE " + CurrentItem + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + CurrentItem + "'" + " ");
+                string CurrentItem = Vue.ItemSelectionne.Name.Replace(' ', '_');
 
-                //modif dans la table Normes
-                var yy = context.Database.ExecuteSqlCommand("UPDATE Normes" + " SET Description = '" + Content.Text + "' WHERE Name = " + "'" + CurrentItem + "'" + " ");
-                var y = context.Database.ExecuteSqlCommand("UPDATE Normes" + " SET Name = '" + Title.Text + "' WHERE Name = " + "'" + CurrentItem + "'" + " ");
-                
 
-                //renomme la table
-                var z = context.Database.ExecuteSqlCommand("EXEC sp_rename '" + CurrentItem + "', '" + Title.Text + "'");
+                using (ApplicationDatabase context = new ApplicationDatabase())
+                {
+                    string newTableName = Title.Text.Replace(' ', '_');
+                    //renomme la table
+                    var z = context.Database.ExecuteSqlCommand("EXEC sp_rename '" + CurrentItem + "', '" + newTableName + "'");
 
-                //actualise l'itemSleceted
-                Vue.ItemSelectionne.Name = Title.Text;
-                Vue.ItemSelectionne.Description = Content.Text;
 
-                //sauvegarde et modifie la vue dans le treeView
-                mw.database.SaveChanges();
-                Vue.AfficherDatabase();
-                Close();
+                    // modif dans sa table
+                    var xx = context.Database.ExecuteSqlCommand("UPDATE " + newTableName + " SET Description = '" + Content.Text + "' WHERE Titre = " + "'" + newTableName + "'" + " ");
+                    var x = context.Database.ExecuteSqlCommand("UPDATE " + newTableName + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + newTableName + "'" + " ");
+
+                    //modif dans la table Normes
+                    var yy = context.Database.ExecuteSqlCommand("UPDATE Normes" + " SET Description = '" + Content.Text + "' WHERE Name = " + "'" + newTableName + "'" + " ");
+                    var y = context.Database.ExecuteSqlCommand("UPDATE Normes" + " SET Name = '" + Title.Text + "' WHERE Name = " + "'" + newTableName + "'" + " ");
+
+
+                    //actualise l'itemSleceted
+                    Vue.ItemSelectionne.Name = Title.Text;
+                    Vue.ItemSelectionne.Description = Content.Text;
+
+                    //sauvegarde et modifie la vue dans le treeView
+                    mw.database.SaveChanges();
+                    Vue.AfficherDatabase();
+                    Close();
+                }
+            } else
+            {
+                MessageBox.Show("Selectionner une ligne", "error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

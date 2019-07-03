@@ -21,13 +21,13 @@ namespace Alto_IT
     {
         MainWindow mw;
         Dashboard dashb;
-        Vue_Circulaire VC;
+        Vue_Circulaire Vue;
         public Ajout(MainWindow m, Dashboard d, Vue_Circulaire vc)
         {
             InitializeComponent();
             mw = m;
             dashb = d;
-            VC = vc;
+            Vue = vc;
         }
 
         private void ValiderNorme_Click(object sender, RoutedEventArgs e)
@@ -37,9 +37,9 @@ namespace Alto_IT
             mw.database.SaveChanges();
 
             CreateTable(Title.Text);
-            if (VC.ItemSelectionne != null)
+            if (Vue.ItemSelectionne != null)
             {
-                RemplirTable(Title.Text, VC.ItemSelectionne.Id);
+                RemplirTable(Title.Text, Vue.ItemSelectionne.Id);
             } else
             {
                 RemplirTable(Title.Text, 0);

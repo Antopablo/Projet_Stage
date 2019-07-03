@@ -55,12 +55,25 @@ namespace Alto_IT
 
         private void Supr_norme_Click(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDatabase context = new ApplicationDatabase())
+            if (Vue.ItemSelectionne != null)
             {
-                var x = context.Database.ExecuteSqlCommand("DROP TABLE " + Vue.ItemSelectionne.Name);
-                var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Name = '" + Vue.ItemSelectionne.Name + "'");
-                mw.database.NormesDatabase.Remove(Vue.ItemSelectionne); // à mettre à la fin, reviens à la position 1
+                if (MessageBox.Show("Voulez-vous supprimer", "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
+                {
+                    string CurrentItem = Vue.ItemSelectionne.Name.Replace(' ', '_');
+
+                    using (ApplicationDatabase context = new ApplicationDatabase())
+                    {
+                        var x = context.Database.ExecuteSqlCommand("DROP TABLE " + CurrentItem);
+                        var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Id = '" + Vue.ItemSelectionne.Id + "'");
+                        mw.database.NormesDatabase.Remove(Vue.ItemSelectionne); // à mettre à la fin, reviens à la position 1
+                    }
+                }
+            } else
+            {
+                MessageBox.Show("Selectionner une ligne", "error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            
+            
         }
 
         private void Cloud19714_MouseDoubleClick(object sender, MouseButtonEventArgs e)
