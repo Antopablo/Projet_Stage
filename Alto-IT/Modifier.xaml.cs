@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Alto_IT
 {
@@ -35,12 +23,17 @@ namespace Alto_IT
 
         private void ModifierNorme_Click(object sender, RoutedEventArgs e)
         {
-            String name = Vue.ItemSelectionne.Name.Replace(' ', '_');
-            MessageBox.Show(name);
+            string CurrentItem = Vue.ItemSelectionne.Name.Replace(' ', '_');
+            
 
-            using ( ApplicationDatabase context = new ApplicationDatabase())
+            using (ApplicationDatabase context = new ApplicationDatabase())
             {
-                var x = context.Database.ExecuteSqlCommand("UPDATE " + name + " SET Titre = '" + Title.Text + "' WHERE Titre = "+"'"+name+"'"+" ");
+                var x = context.Database.ExecuteSqlCommand("UPDATE " + CurrentItem + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + CurrentItem + "'" + " ");
+                var xx = context.Database.ExecuteSqlCommand("UPDATE " + CurrentItem + " SET Description = '" + Content.Text + "' WHERE Titre = " + "'" + CurrentItem + "'" + " ");
+                var y = context.Database.ExecuteSqlCommand("UPDATE Normes" + " SET Name = '" + Title.Text + "' WHERE Name = " + "'" + CurrentItem + "'" + " ");
+                var yy = context.Database.ExecuteSqlCommand("UPDATE Normes" + " SET Description = '" + Content.Text + "' WHERE Name = " + "'" + CurrentItem + "'" + " ");
+                var z = context.Database.ExecuteSqlCommand("EXEC sp_rename '" + CurrentItem + "', '" + Title.Text + "'");
+                Close();
             }
         }
     }

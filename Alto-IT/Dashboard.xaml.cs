@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Alto_IT
 {
@@ -41,6 +29,8 @@ namespace Alto_IT
 
         private void TreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+
+
         }
 
         private void AjoutNorme_Click(object sender, RoutedEventArgs e)
@@ -64,7 +54,7 @@ namespace Alto_IT
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
                 var x = context.Database.ExecuteSqlCommand("DROP TABLE " + Vue.ItemSelectionne.Name);
-                var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Name = '"+Vue.ItemSelectionne.Name+"'");
+                var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Name = '" + Vue.ItemSelectionne.Name + "'");
                 mw.database.NormesDatabase.Remove(Vue.ItemSelectionne); // à mettre à la fin, reviens à la position 1
             }
         }
@@ -72,7 +62,7 @@ namespace Alto_IT
         private void Cloud19714_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             GridControle.Visibility = Visibility.Visible;
-            Frame_Vue_Circulaire.Visibility = Visibility.Visible;            
+            Frame_Vue_Circulaire.Visibility = Visibility.Visible;
             Frame_Vue_Circulaire.Content = Vue;
         }
     }
