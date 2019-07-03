@@ -26,6 +26,7 @@ namespace Alto_IT
         {
             InitializeComponent();
             database = new ApplicationDatabase();
+
         }
 
         private void SignIn_bouton_Click(object sender, RoutedEventArgs e)

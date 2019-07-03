@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Alto_IT
@@ -72,8 +73,6 @@ namespace Alto_IT
             {
                 MessageBox.Show("Selectionner une ligne", "error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            
-            
         }
 
         private void Cloud19714_MouseDoubleClick(object sender, MouseButtonEventArgs e)

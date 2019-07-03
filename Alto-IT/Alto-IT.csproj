@@ -81,6 +81,14 @@
     <Compile Include="Migrations\201907030817170_Test_majVue2.Designer.cs">
       <DependentUpon>201907030817170_Test_majVue2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907031158414_test_treeview.cs" />
+    <Compile Include="Migrations\201907031158414_test_treeview.Designer.cs">
+      <DependentUpon>201907031158414_test_treeview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907031252341_foreignKey.cs" />
+    <Compile Include="Migrations\201907031252341_foreignKey.Designer.cs">
+      <DependentUpon>201907031252341_foreignKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -148,6 +156,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907030817170_Test_majVue2.resx">
       <DependentUpon>201907030817170_Test_majVue2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907031158414_test_treeview.resx">
+      <DependentUpon>201907031158414_test_treeview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907031252341_foreignKey.resx">
+      <DependentUpon>201907031252341_foreignKey.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

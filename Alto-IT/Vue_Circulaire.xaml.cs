@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,9 @@ namespace Alto_IT
     {
         public Dashboard dash { get; set; }
         public Norme ItemSelectionne { get; set; }
+       public List<Norme> ListeNormes { get; set; }
+
+        public Norme ROOT { get; set; }
 
         public Vue_Circulaire()
         {
@@ -32,6 +36,9 @@ namespace Alto_IT
         {
             InitializeComponent();
             dash = D;
+
+            ROOT = new Norme() { Name = "Menu" }; //modifier le nom entraine un changement dans Ajout.cs(RemplirTable)
+            treeviewFrame.Items.Add(ROOT);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -41,15 +48,21 @@ namespace Alto_IT
 
         public void AfficherDatabase()
         {
-            treeviewFrame.Items.Refresh();
-            treeviewFrame.ItemsSource = dash.mw.database.NormesDatabase.Local;
             dash.mw.database.NormesDatabase.ToList();
+            for (int i = 0; i < (dash.mw.database.NormesDatabase.ToList().Count() / 2)+1; i++)
+            {
+                for (int j = dash.mw.database.NormesDatabase.ToList().Count(); j <= i; j--)
+                {
+                    if (dash.mw.database.NormesDatabase.ToList()[j].ForeignKey == dash.mw.database.NormesDatabase.ToList()[i].Id)
+                    {
+                        dash.mw.database.NormesDatabase.ToList()[i].NormeObervCollec.Add(dash.mw.database.NormesDatabase.ToList()[j]);
+                    }
+                }
+                ROOT.NormeObervCollec.Add(dash.mw.database.NormesDatabase.ToList()[i]);
+            }
+
         }
 
-        private void TreeviewFrame_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-           
-        }
 
         private void TreeviewFrame_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {

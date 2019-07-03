@@ -11,7 +11,5 @@ namespace Alto_IT
     {
         public DbSet<User> UsersDatabase { get; set; }
         public DbSet<Norme> NormesDatabase { get; set; }
-
-     
     }
 }

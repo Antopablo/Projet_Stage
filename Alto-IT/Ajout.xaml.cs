@@ -32,18 +32,28 @@ namespace Alto_IT
 
         private void ValiderNorme_Click(object sender, RoutedEventArgs e)
         {
-            Norme N = new Norme(Title.Text, Content.Text);
-            mw.database.NormesDatabase.Add(N);
-            mw.database.SaveChanges();
+            
 
-            CreateTable(Title.Text);
-            if (Vue.ItemSelectionne != null)
+
+            if (Vue.ItemSelectionne == null)
             {
-                RemplirTable(Title.Text, Vue.ItemSelectionne.Id);
+                CreateTable(Title.Text);
+                Norme NormeParent = new Norme(Title.Text, 0);
+                Vue.ROOT.NormeObervCollec.Add(NormeParent);
+                mw.database.NormesDatabase.Add(NormeParent);
+                mw.database.SaveChanges();
+
             } else
             {
-                RemplirTable(Title.Text, 0);
+                CreateTable(Title.Text);
+                RemplirTable(Vue.ItemSelectionne.Name, Vue.ItemSelectionne.Id);
+                Norme NormeEnfant = new Norme(Title.Text, Vue.ItemSelectionne.Id);
+                Vue.ItemSelectionne.NormeObervCollec.Add(NormeEnfant);
+                mw.database.NormesDatabase.Add(NormeEnfant);
+                mw.database.SaveChanges();
             }
+
+            Close();
         }
 
         public void CreateTable(string TableName)
@@ -64,11 +74,21 @@ namespace Alto_IT
         public void RemplirTable(string TableName, int ForeignKey)
         {
             TableName = TableName.Replace(" ", "_");
-                using (ApplicationDatabase context = new ApplicationDatabase())                                                     
+            if (TableName != "Menu")
+            {
+                try
                 {
-                    var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + " (ForeignKey, Titre, Description) VALUES (" + "'" + ForeignKey + "'" +","+ "'" + Title.Text + "'" + "," + "'" + Content.Text + "'" + ")");
-                    Close();
+                    using (ApplicationDatabase context = new ApplicationDatabase())
+                    {
+                        var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + " (ForeignKey, Titre, Description) VALUES (" + "'" + ForeignKey + "'" + "," + "'" + Title.Text + "'" + "," + "'" + Content.Text + "'" + ")");
+                        Close();
+                    }
                 }
+                catch (Exception)
+                {
+                }
+            }
+            
         }
     }
 }
