@@ -73,6 +73,14 @@
     <Compile Include="Migrations\201907010720017_SQL.Designer.cs">
       <DependentUpon>201907010720017_SQL.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907030815198_Test_majVue.cs" />
+    <Compile Include="Migrations\201907030815198_Test_majVue.Designer.cs">
+      <DependentUpon>201907030815198_Test_majVue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907030817170_Test_majVue2.cs" />
+    <Compile Include="Migrations\201907030817170_Test_majVue2.Designer.cs">
+      <DependentUpon>201907030817170_Test_majVue2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -134,6 +142,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907010720017_SQL.resx">
       <DependentUpon>201907010720017_SQL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907030815198_Test_majVue.resx">
+      <DependentUpon>201907030815198_Test_majVue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907030817170_Test_majVue2.resx">
+      <DependentUpon>201907030817170_Test_majVue2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -39,9 +39,10 @@ namespace Alto_IT
             AfficherDatabase();
         }
 
-        private void AfficherDatabase()
+        public void AfficherDatabase()
         {
-            treeviewFrame.ItemsSource = dash.mw.database.NormesDatabase.Local ;
+            treeviewFrame.Items.Refresh();
+            treeviewFrame.ItemsSource = dash.mw.database.NormesDatabase.Local;
             dash.mw.database.NormesDatabase.ToList();
         }
 

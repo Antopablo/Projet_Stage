@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 
 namespace Alto_IT
 {
@@ -28,11 +29,25 @@ namespace Alto_IT
 
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
-                var x = context.Database.ExecuteSqlCommand("UPDATE " + CurrentItem + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + CurrentItem + "'" + " ");
+                // modif dans sa table
                 var xx = context.Database.ExecuteSqlCommand("UPDATE " + CurrentItem + " SET Description = '" + Content.Text + "' WHERE Titre = " + "'" + CurrentItem + "'" + " ");
-                var y = context.Database.ExecuteSqlCommand("UPDATE Normes" + " SET Name = '" + Title.Text + "' WHERE Name = " + "'" + CurrentItem + "'" + " ");
+                var x = context.Database.ExecuteSqlCommand("UPDATE " + CurrentItem + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + CurrentItem + "'" + " ");
+
+                //modif dans la table Normes
                 var yy = context.Database.ExecuteSqlCommand("UPDATE Normes" + " SET Description = '" + Content.Text + "' WHERE Name = " + "'" + CurrentItem + "'" + " ");
+                var y = context.Database.ExecuteSqlCommand("UPDATE Normes" + " SET Name = '" + Title.Text + "' WHERE Name = " + "'" + CurrentItem + "'" + " ");
+                
+
+                //renomme la table
                 var z = context.Database.ExecuteSqlCommand("EXEC sp_rename '" + CurrentItem + "', '" + Title.Text + "'");
+
+                //actualise l'itemSleceted
+                Vue.ItemSelectionne.Name = Title.Text;
+                Vue.ItemSelectionne.Description = Content.Text;
+
+                //sauvegarde et modifie la vue dans le treeView
+                mw.database.SaveChanges();
+                Vue.AfficherDatabase();
                 Close();
             }
         }
