@@ -49,10 +49,14 @@ namespace Alto_IT
                     Vue.ItemSelectionne.Name = Title.Text;
                     Vue.ItemSelectionne.Description = Content.Text;
 
+                    //MajCollection obesrvable
+                    // Réaliser avec INotifyPropertyChanges
+
                     //sauvegarde et modifie la vue dans le treeView
                     mw.database.SaveChanges();
                     Vue.AfficherDatabase();
                     Close();
+
                 }
             } else
             {
