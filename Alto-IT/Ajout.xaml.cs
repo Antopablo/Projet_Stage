@@ -83,7 +83,17 @@ namespace Alto_IT
 
         public void RemplirTable(string TableName, int ForeignKey)
         {
-            TableName = TableName.Replace(" ", "_");
+            StringBuilder builder = new StringBuilder(TableName);
+            TableName = builder.Insert(0, "_").ToString();
+            TableName = TableName.Replace(' ', '_');
+            TableName = TableName.Replace(' ', '_');
+            TableName = TableName.Replace('/', '_');
+            TableName = TableName.Replace("'", "");
+            TableName = TableName.Replace("[", "_");
+            TableName = TableName.Replace("]", "_");
+            TableName = TableName.Replace(".", "_");
+
+
             if (TableName != "Menu")
             {
                 try
@@ -98,7 +108,11 @@ namespace Alto_IT
                 {
                 }
             }
-            
+        }
+
+        public void SajouterDansParent()
+        {
+
         }
     }
 }
