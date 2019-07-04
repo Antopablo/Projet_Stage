@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 
@@ -60,8 +61,16 @@ namespace Alto_IT
             {
                 if (MessageBox.Show("Voulez-vous supprimer", "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
-                    string CurrentItem = Vue.ItemSelectionne.Name.Replace(' ', '_');
-                    CurrentItem = Vue.ItemSelectionne.Name.Replace("'", "");
+                    string CurrentItem = Vue.ItemSelectionne.Name;
+                    StringBuilder builder = new StringBuilder(CurrentItem);
+                    CurrentItem = builder.Insert(0, "_").ToString();
+                    CurrentItem = CurrentItem.Replace(' ', '_');
+                    CurrentItem = CurrentItem.Replace("'", "");
+                    CurrentItem = CurrentItem.Replace('/', '_');
+                    CurrentItem = CurrentItem.Replace("'", "");
+                    CurrentItem = CurrentItem.Replace("[", "_");
+                    CurrentItem = CurrentItem.Replace("]", "_");
+                    CurrentItem = CurrentItem.Replace(".", "_");
 
                     using (ApplicationDatabase context = new ApplicationDatabase())
                     {
