@@ -27,7 +27,9 @@ namespace Alto_IT
         {
             if (Vue.ItemSelectionne != null && Vue.ItemSelectionne.Name != "Menu")
             {
-                string CurrentItem = Vue.ItemSelectionne.Name;
+                string CurrentItem = Vue.ItemSelectionne.Name;               
+                StringBuilder builder = new StringBuilder(CurrentItem);
+                CurrentItem = builder.Insert(0, "_").ToString();
                 CurrentItem = CurrentItem.Replace(' ', '_');
                 CurrentItem = CurrentItem.Replace(' ', '_');
                 CurrentItem = CurrentItem.Replace('/', '_');
@@ -40,8 +42,8 @@ namespace Alto_IT
                 using (ApplicationDatabase context = new ApplicationDatabase())
                 {
                     string newTableName = Title.Text;
-                    StringBuilder builder = new StringBuilder(newTableName);
-                    newTableName = builder.Insert(0, "_").ToString();
+                    StringBuilder builder2 = new StringBuilder(newTableName);
+                    newTableName = builder2.Insert(0, "_").ToString();
                     newTableName = newTableName.Replace(' ', '_');
                     newTableName = newTableName.Replace('/', '_');
                     newTableName = newTableName.Replace("'", "");

@@ -57,8 +57,6 @@ namespace Alto_IT
             {
                 MessageBox.Show("Selectionner une norme à modifier", "error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            
-
         }
 
         private void Supr_norme_Click(object sender, RoutedEventArgs e)
