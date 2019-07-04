@@ -64,10 +64,13 @@ namespace Alto_IT
 
                     using (ApplicationDatabase context = new ApplicationDatabase())
                     {
-                        var x = context.Database.ExecuteSqlCommand("DROP TABLE " + CurrentItem);
-                        var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Id = '" + Vue.ItemSelectionne.Id + "'");
-                        mw.database.NormesDatabase.Remove(Vue.ItemSelectionne); // à mettre à la fin, reviens à la position 1
+                        var x = context.Database.ExecuteSqlCommand("DROP TABLE " + CurrentItem); // supprime la table à son nom
+                        var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Id = '" + Vue.ItemSelectionne.Id + "'"); 
+                        mw.database.NormesDatabase.Remove(Vue.ItemSelectionne); // Supprime de la DbSet, à mettre à la fin, reviens à la position 1
                     }
+
+                    Vue.ItemSelectionne.NormeObervCollec.Clear(); // remove tous ses enfants
+                    Vue.ROOT.NormeObervCollec.Remove(Vue.ItemSelectionne); // le remove de la liste général dans le treeview
                 }
             } else
             {

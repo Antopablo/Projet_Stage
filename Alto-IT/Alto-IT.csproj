@@ -89,6 +89,10 @@
     <Compile Include="Migrations\201907031252341_foreignKey.Designer.cs">
       <DependentUpon>201907031252341_foreignKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907040756129_NO-FK.cs" />
+    <Compile Include="Migrations\201907040756129_NO-FK.Designer.cs">
+      <DependentUpon>201907040756129_NO-FK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -162,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907031252341_foreignKey.resx">
       <DependentUpon>201907031252341_foreignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907040756129_NO-FK.resx">
+      <DependentUpon>201907040756129_NO-FK.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
