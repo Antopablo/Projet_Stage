@@ -49,16 +49,27 @@ namespace Alto_IT
         public void AfficherDatabase()
         {
             dash.mw.database.NormesDatabase.ToList();
-            for (int i = 0; i < (dash.mw.database.NormesDatabase.ToList().Count() / 2); i++)
+            
+            for (int i = 0; i < dash.mw.database.NormesDatabase.ToList().Count(); i++)
             {
-                for (int j = dash.mw.database.NormesDatabase.ToList().Count(); j > dash.mw.database.NormesDatabase.ToList().Count() / 2; j--)
+                for (int j = 0; j < dash.mw.database.NormesDatabase.ToList().Count(); j++)
                 {
-                    if (dash.mw.database.NormesDatabase.ToList()[j].ForeignKey == dash.mw.database.NormesDatabase.ToList()[i].Id)
+                    if (dash.mw.database.NormesDatabase.ToList()[i].Id == dash.mw.database.NormesDatabase.ToList()[j].ForeignKey)
                     {
-                        dash.mw.database.NormesDatabase.ToList()[i].NormeObervCollec.Add(dash.mw.database.NormesDatabase.ToList()[j]);
+                        if (!dash.mw.database.NormesDatabase.ToList().Contains(dash.mw.database.NormesDatabase.ToList()[i]) )
+                        {
+                            dash.mw.database.NormesDatabase.ToList()[i].NormeObervCollec.Add(dash.mw.database.NormesDatabase.ToList()[j]);
+                        }
                     }
+                    else if(dash.mw.database.NormesDatabase.ToList()[i].ForeignKey == 0)
+                    {
+                        if (!ROOT.NormeObervCollec.ToList().Contains(dash.mw.database.NormesDatabase.ToList()[i]))
+                        {
+                            ROOT.NormeObervCollec.Add(dash.mw.database.NormesDatabase.ToList()[i]);
+                        }
+                    }
+                    
                 }
-                ROOT.NormeObervCollec.Add(dash.mw.database.NormesDatabase.ToList()[i]);
             }
         }
 
