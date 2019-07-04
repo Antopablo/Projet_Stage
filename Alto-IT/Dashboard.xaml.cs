@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using System.Windows;
 using System.Windows.Input;
 
@@ -43,16 +42,23 @@ namespace Alto_IT
 
         private void Modif_norme_Click(object sender, RoutedEventArgs e)
         {
-            Modifier M = new Modifier(mw, Vue);
             try
             {
-                M.Title.Text = Vue.ItemSelectionne.Name;
-                M.Content.Text = Vue.ItemSelectionne.Description;
-                M.Show();
+                if (Vue.ItemSelectionne.Name != "Menu")
+                {
+                    Modifier M = new Modifier(mw, Vue);
+                    M.Title.Text = Vue.ItemSelectionne.Name;
+                    M.Content.Text = Vue.ItemSelectionne.Description;
+                    M.Show();
+
+                }
             }
             catch (System.Exception)
             {
+                MessageBox.Show("Selectionner une norme à modifier", "error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            
+
         }
 
         private void Supr_norme_Click(object sender, RoutedEventArgs e)
@@ -75,14 +81,15 @@ namespace Alto_IT
                     using (ApplicationDatabase context = new ApplicationDatabase())
                     {
                         var x = context.Database.ExecuteSqlCommand("DROP TABLE " + CurrentItem); // supprime la table à son nom
-                        var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Id = '" + Vue.ItemSelectionne.Id + "'"); 
+                        var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Id = '" + Vue.ItemSelectionne.Id + "'");
                         mw.database.NormesDatabase.Remove(Vue.ItemSelectionne); // Supprime de la DbSet, à mettre à la fin, reviens à la position 1
                     }
 
                     Vue.ItemSelectionne.NormeObervCollec.Clear(); // remove tous ses enfants
                     Vue.ROOT.NormeObervCollec.Remove(Vue.ItemSelectionne); // le remove de la liste général dans le treeview
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("Selectionner une ligne", "error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
