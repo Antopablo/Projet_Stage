@@ -59,6 +59,11 @@ namespace Alto_IT
         public void CreateTable(string TableName)
         {
             TableName = TableName.Replace(" ", "_");
+            TableName = TableName.Replace("'", "");
+            TableName = TableName.Replace('/', '_');
+            TableName = TableName.Replace("[", "_");
+            TableName = TableName.Replace(']', '_');
+
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
                 try
@@ -67,6 +72,7 @@ namespace Alto_IT
                 }
                 catch (System.Data.SqlClient.SqlException)
                 {
+                    MessageBox.Show("Table non crée", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

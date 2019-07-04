@@ -32,6 +32,11 @@ namespace Alto_IT
                 using (ApplicationDatabase context = new ApplicationDatabase())
                 {
                     string newTableName = Title.Text.Replace(' ', '_');
+                    newTableName = Title.Text.Replace('/', '_');
+                    newTableName = Title.Text.Replace("'", "");
+                    newTableName = Title.Text.Replace("[", "_");
+                    newTableName = Title.Text.Replace("]", "_");
+
                     //renomme la table
                     var z = context.Database.ExecuteSqlCommand("EXEC sp_rename '" + CurrentItem + "', '" + newTableName + "'");
 

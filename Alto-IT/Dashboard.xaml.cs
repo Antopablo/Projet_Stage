@@ -56,11 +56,12 @@ namespace Alto_IT
 
         private void Supr_norme_Click(object sender, RoutedEventArgs e)
         {
-            if (Vue.ItemSelectionne != null)
+            if (Vue.ItemSelectionne != null && Vue.ItemSelectionne.Name != "Menu")
             {
                 if (MessageBox.Show("Voulez-vous supprimer", "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
                     string CurrentItem = Vue.ItemSelectionne.Name.Replace(' ', '_');
+                    CurrentItem = Vue.ItemSelectionne.Name.Replace("'", "");
 
                     using (ApplicationDatabase context = new ApplicationDatabase())
                     {
