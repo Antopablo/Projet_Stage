@@ -58,11 +58,15 @@ namespace Alto_IT
 
         public void CreateTable(string TableName)
         {
+            StringBuilder builder = new StringBuilder(TableName);
+            TableName = builder.Insert(0, "_").ToString();
             TableName = TableName.Replace(" ", "_");
             TableName = TableName.Replace("'", "");
             TableName = TableName.Replace('/', '_');
             TableName = TableName.Replace("[", "_");
             TableName = TableName.Replace(']', '_');
+            TableName = TableName.Replace('.', '_');
+            TableName.Trim();
 
             using (ApplicationDatabase context = new ApplicationDatabase())
             {

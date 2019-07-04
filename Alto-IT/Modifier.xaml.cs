@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text;
 using System.Windows;
 
 namespace Alto_IT
@@ -26,16 +27,28 @@ namespace Alto_IT
         {
             if (Vue.ItemSelectionne != null)
             {
-                string CurrentItem = Vue.ItemSelectionne.Name.Replace(' ', '_');
+                string CurrentItem = Vue.ItemSelectionne.Name;
+                CurrentItem = CurrentItem.Replace(' ', '_');
+                CurrentItem = CurrentItem.Replace(' ', '_');
+                CurrentItem = CurrentItem.Replace('/', '_');
+                CurrentItem = CurrentItem.Replace("'", "");
+                CurrentItem = CurrentItem.Replace("[", "_");
+                CurrentItem = CurrentItem.Replace("]", "_");
+                CurrentItem = CurrentItem.Replace(".", "_");
 
 
                 using (ApplicationDatabase context = new ApplicationDatabase())
                 {
-                    string newTableName = Title.Text.Replace(' ', '_');
-                    newTableName = Title.Text.Replace('/', '_');
-                    newTableName = Title.Text.Replace("'", "");
-                    newTableName = Title.Text.Replace("[", "_");
-                    newTableName = Title.Text.Replace("]", "_");
+                    string newTableName = Title.Text;
+                    StringBuilder builder = new StringBuilder(newTableName);
+                    newTableName = builder.Insert(0, "_").ToString();
+                    newTableName = newTableName.Replace(' ', '_');
+                    newTableName = newTableName.Replace('/', '_');
+                    newTableName = newTableName.Replace("'", "");
+                    newTableName = newTableName.Replace("[", "_");
+                    newTableName = newTableName.Replace("]", "_");
+                    newTableName = newTableName.Replace(".", "_");
+                    newTableName.Trim();
 
                     //renomme la table
                     var z = context.Database.ExecuteSqlCommand("EXEC sp_rename '" + CurrentItem + "', '" + newTableName + "'");
