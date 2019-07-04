@@ -49,9 +49,9 @@ namespace Alto_IT
         public void AfficherDatabase()
         {
             dash.mw.database.NormesDatabase.ToList();
-            for (int i = 0; i < (dash.mw.database.NormesDatabase.ToList().Count() / 2)+1; i++)
+            for (int i = 0; i < (dash.mw.database.NormesDatabase.ToList().Count() / 2); i++)
             {
-                for (int j = dash.mw.database.NormesDatabase.ToList().Count(); j <= i; j--)
+                for (int j = dash.mw.database.NormesDatabase.ToList().Count(); j > dash.mw.database.NormesDatabase.ToList().Count() / 2; j--)
                 {
                     if (dash.mw.database.NormesDatabase.ToList()[j].ForeignKey == dash.mw.database.NormesDatabase.ToList()[i].Id)
                     {
@@ -60,7 +60,6 @@ namespace Alto_IT
                 }
                 ROOT.NormeObervCollec.Add(dash.mw.database.NormesDatabase.ToList()[i]);
             }
-
         }
 
 
