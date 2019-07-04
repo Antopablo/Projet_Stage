@@ -25,7 +25,7 @@ namespace Alto_IT
 
         private void ModifierNorme_Click(object sender, RoutedEventArgs e)
         {
-            if (Vue.ItemSelectionne != null)
+            if (Vue.ItemSelectionne != null && Vue.ItemSelectionne.Name != "Menu")
             {
                 string CurrentItem = Vue.ItemSelectionne.Name;
                 CurrentItem = CurrentItem.Replace(' ', '_');
