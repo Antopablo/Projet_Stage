@@ -46,6 +46,8 @@ namespace Alto_IT
             //    MessageBox.Show("Identifiant ou Mot de Passe invalide");
             //}
 
+
+            
             Dashboard D = new Dashboard(this);
             D.Show();
             Close();

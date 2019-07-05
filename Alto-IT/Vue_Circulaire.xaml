@@ -14,11 +14,11 @@
     <Grid Background="#FFEBDFDF" Margin="0,0,32.2,9.6" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
         <TreeView Name="treeviewFrame"  SelectedItemChanged="TreeviewFrame_SelectedItemChanged" Margin="10">
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type self:Norme}" ItemsSource="{Binding NormeObervCollec}">
+                <HierarchicalDataTemplate DataType="{x:Type self:Exigence}" ItemsSource="{Binding ExigenceObervCollec}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Name}" />
                         <TextBlock Text=" [" Foreground="DodgerBlue" />
-                        <TextBlock Text="{Binding NormeObervCollec.Count}" Foreground="DodgerBlue" />
+                        <TextBlock Text="{Binding ExigenceObervCollec.Count}" Foreground="DodgerBlue" />
                         <TextBlock Text="]" Foreground="DodgerBlue" />
                     </StackPanel>
                 </HierarchicalDataTemplate>

@@ -65,43 +65,15 @@
     <Compile Include="Ajout.xaml.cs">
       <DependentUpon>Ajout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906281031399_init.cs" />
-    <Compile Include="Migrations\201906281031399_init.Designer.cs">
-      <DependentUpon>201906281031399_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907010720017_SQL.cs" />
-    <Compile Include="Migrations\201907010720017_SQL.Designer.cs">
-      <DependentUpon>201907010720017_SQL.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907030815198_Test_majVue.cs" />
-    <Compile Include="Migrations\201907030815198_Test_majVue.Designer.cs">
-      <DependentUpon>201907030815198_Test_majVue.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907030817170_Test_majVue2.cs" />
-    <Compile Include="Migrations\201907030817170_Test_majVue2.Designer.cs">
-      <DependentUpon>201907030817170_Test_majVue2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907031158414_test_treeview.cs" />
-    <Compile Include="Migrations\201907031158414_test_treeview.Designer.cs">
-      <DependentUpon>201907031158414_test_treeview.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907031252341_foreignKey.cs" />
-    <Compile Include="Migrations\201907031252341_foreignKey.Designer.cs">
-      <DependentUpon>201907031252341_foreignKey.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907040756129_NO-FK.cs" />
-    <Compile Include="Migrations\201907040756129_NO-FK.Designer.cs">
-      <DependentUpon>201907040756129_NO-FK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907041258189_delete.cs" />
-    <Compile Include="Migrations\201907041258189_delete.Designer.cs">
-      <DependentUpon>201907041258189_delete.cs</DependentUpon>
+    <Compile Include="Migrations\201907051027092_exigene.cs" />
+    <Compile Include="Migrations\201907051027092_exigene.Designer.cs">
+      <DependentUpon>201907051027092_exigene.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Norme.cs" />
+    <Compile Include="Exigence.cs" />
     <Compile Include="Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
@@ -153,29 +125,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201906281031399_init.resx">
-      <DependentUpon>201906281031399_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907010720017_SQL.resx">
-      <DependentUpon>201907010720017_SQL.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907030815198_Test_majVue.resx">
-      <DependentUpon>201907030815198_Test_majVue.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907030817170_Test_majVue2.resx">
-      <DependentUpon>201907030817170_Test_majVue2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907031158414_test_treeview.resx">
-      <DependentUpon>201907031158414_test_treeview.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907031252341_foreignKey.resx">
-      <DependentUpon>201907031252341_foreignKey.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907040756129_NO-FK.resx">
-      <DependentUpon>201907040756129_NO-FK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907041258189_delete.resx">
-      <DependentUpon>201907041258189_delete.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907051027092_exigene.resx">
+      <DependentUpon>201907051027092_exigene.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

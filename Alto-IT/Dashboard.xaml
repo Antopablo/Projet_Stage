@@ -28,7 +28,7 @@
                 </Style>
             </TreeView.Resources>
             <TreeViewItem Header="Norme" Width="201" HorizontalAlignment="Left">
-                <TreeViewItem Header="Gestion des normes" MouseDoubleClick="TreeViewItem_MouseDoubleClick"></TreeViewItem>
+                <TreeViewItem Name="GestionNorme" Header="Gestion des normes" MouseDoubleClick="GestionNorme_MouseDoubleClick"></TreeViewItem>
                 <TreeViewItem Name="Cloud19714" Header="Cloud Computing Circular 19/714 from CSSF" MouseDoubleClick="Cloud19714_MouseDoubleClick"></TreeViewItem>
             </TreeViewItem>
             <TreeViewItem Header="Appréciations">
@@ -42,7 +42,7 @@
             </TreeViewItem>
         </TreeView>
 
-        <Grid Name="GridControle" Background="Aqua" Height="50" VerticalAlignment="Top" Margin="200,0,0,0" Visibility="Collapsed">
+        <Grid Name="GridControle_Norme" Background="Aqua" Height="50" VerticalAlignment="Top" Margin="203,0,0,0" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -52,12 +52,27 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button x:Name="Ajout_norme" Click="AjoutNorme_Click" Content="Ajouter une norme"/>
-            <Button x:Name="Modif_norme" Click="Modif_norme_Click" Content="Modifier une norme" Grid.Column="1"/>
-            <Button x:Name="Supr_norme" Click="Supr_norme_Click" Content="Supprimer une norme" Grid.Column="2"/>
+            <Button x:Name="Ajout_Norme" Click="Ajout_Norme_Click"  Content="Ajouter une Norme"/>
+            <Button x:Name="Modif_Norme" Click="Modif_Norme_Click" Content="Modifier une Norme" Grid.Column="1"/>
+            <Button x:Name="Supr_Norme" Click="Supr_Norme_Click" Content="Supprimer une Norme" Grid.Column="2"/>
         </Grid>
 
-        <Frame x:Name="Frame_Vue_Circulaire" Margin="200,0,9.6,-0.4"/>
+        <Grid Name="GridControle_exigence" Background="Aqua" Height="50" VerticalAlignment="Top" Margin="203,0,0,0" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="Ajout_exigence" Click="Ajout_exigence_Click" Content="Ajouter une exigence"/>
+            <Button x:Name="Modif_exigence" Click="Modif_exigence_Click" Content="Modifier une exigence" Grid.Column="1"/>
+            <Button x:Name="Supr_exigence" Click="Supr_exigence_Click" Content="Supprimer une exigence" Grid.Column="2"/>
+        </Grid>
+
+        <Frame x:Name="Frame_Vue_Circulaire" Margin="203,0,9.6,-0.4" ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Automatic"/>
         
     </Grid>
 </Window>

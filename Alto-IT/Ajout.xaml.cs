@@ -38,19 +38,26 @@ namespace Alto_IT
             if (Vue.ItemSelectionne == null)
             {
                 CreateTable(Title.Text);
-                Norme NormeParent = new Norme(Title.Text,Content.Text, 0);
-                Vue.ROOT.NormeObervCollec.Add(NormeParent);
-                mw.database.NormesDatabase.Add(NormeParent);
+                Exigence ExigenceParent = new Exigence(Title.Text,Content.Text, 0);
+                Vue.ROOT.ExigenceObervCollec.Add(ExigenceParent);
+                mw.database.ExigenceDatabase.Add(ExigenceParent);
                 mw.database.SaveChanges();
 
             } else
             {
                 CreateTable(Title.Text);
                 RemplirTable(Vue.ItemSelectionne.Name, Vue.ItemSelectionne.Id);
-                Norme NormeEnfant = new Norme(Title.Text, Content.Text, Vue.ItemSelectionne.Id);
-                Vue.ItemSelectionne.NormeObervCollec.Add(NormeEnfant);
-                mw.database.NormesDatabase.Add(NormeEnfant);
-                mw.database.SaveChanges();
+                Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ItemSelectionne.Id);
+                Vue.ItemSelectionne.ExigenceObervCollec.Add(ExigenceEnfant);
+                mw.database.ExigenceDatabase.Add(ExigenceEnfant);
+                try
+                {
+                    mw.database.SaveChanges();
+                }
+                catch (Exception)
+                {
+                }
+
             }
             Close();
         }

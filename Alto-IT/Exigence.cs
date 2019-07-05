@@ -10,24 +10,24 @@ using System.Threading.Tasks;
 
 namespace Alto_IT
 {
-    public class Norme : INotifyPropertyChanged
+    public class Exigence : INotifyPropertyChanged
     {
-        public Norme(string name, string description, int foreignkey)
+        public Exigence(string name, string description, int foreignkey)
         {
             Name = name;
             Description = description;
             ForeignKey = foreignkey;
-            this.NormeObervCollec = new ObservableCollection<Norme>();
+            this.ExigenceObervCollec = new ObservableCollection<Exigence>();
         }
 
-        public Norme(string name, int foreignkey)
+        public Exigence(string name, int foreignkey)
         {
             Name = name;
             ForeignKey = foreignkey;
-            this.NormeObervCollec = new ObservableCollection<Norme>();
+            this.ExigenceObervCollec = new ObservableCollection<Exigence>();
         }
 
-        public Norme () { this.NormeObervCollec = new ObservableCollection<Norme>(); }
+        public Exigence () { this.ExigenceObervCollec = new ObservableCollection<Exigence>(); }
 
         [Key]
         public int Id { get; set; }
@@ -56,7 +56,7 @@ namespace Alto_IT
 
         public int ForeignKey { get; set; }
 
-        public ObservableCollection<Norme> NormeObervCollec { get; set; }
+        public ObservableCollection<Exigence> ExigenceObervCollec { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

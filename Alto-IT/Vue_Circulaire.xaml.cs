@@ -22,10 +22,10 @@ namespace Alto_IT
     public partial class Vue_Circulaire : Page
     {
         public Dashboard dash { get; set; }
-        public Norme ItemSelectionne { get; set; }
-       public List<Norme> ListeNormes { get; set; }
+        public Exigence ItemSelectionne { get; set; }
+       public List<Exigence> ListeExigence { get; set; }
 
-        public Norme ROOT { get; set; }
+        public Exigence ROOT { get; set; }
 
         public Vue_Circulaire()
         {
@@ -37,7 +37,7 @@ namespace Alto_IT
             InitializeComponent();
             dash = D;
 
-            ROOT = new Norme() { Name = "Menu" }; //modifier le nom entraine un changement dans Ajout.cs(RemplirTable)
+            ROOT = new Exigence() { Name = "Menu" }; //modifier le nom entraine un changement dans Ajout.cs(RemplirTable)
             treeviewFrame.Items.Add(ROOT);
         }
 
@@ -50,24 +50,24 @@ namespace Alto_IT
 
         public void AfficherDatabase()
         {
-            dash.mw.database.NormesDatabase.ToList();
+            dash.mw.database.ExigenceDatabase.ToList();
             
-            for (int i = 0; i < dash.mw.database.NormesDatabase.ToList().Count(); i++)
+            for (int i = 0; i < dash.mw.database.ExigenceDatabase.ToList().Count(); i++)
             {
-                for (int j = 0; j < dash.mw.database.NormesDatabase.ToList().Count(); j++)
+                for (int j = 0; j < dash.mw.database.ExigenceDatabase.ToList().Count(); j++)
                 {
-                    if (dash.mw.database.NormesDatabase.ToList()[i].Id == dash.mw.database.NormesDatabase.ToList()[j].ForeignKey)
+                    if (dash.mw.database.ExigenceDatabase.ToList()[i].Id == dash.mw.database.ExigenceDatabase.ToList()[j].ForeignKey)
                     {
-                        if (!dash.mw.database.NormesDatabase.ToList().Contains(dash.mw.database.NormesDatabase.ToList()[i]) )
+                        if (!dash.mw.database.ExigenceDatabase.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]) )
                         {
-                            dash.mw.database.NormesDatabase.ToList()[i].NormeObervCollec.Add(dash.mw.database.NormesDatabase.ToList()[j]);
+                            dash.mw.database.ExigenceDatabase.ToList()[i].ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[j]);
                         }
                     }
-                    else if(dash.mw.database.NormesDatabase.ToList()[i].ForeignKey == 0)
+                    else if(dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey == 0)
                     {
-                        if (!ROOT.NormeObervCollec.ToList().Contains(dash.mw.database.NormesDatabase.ToList()[i]))
+                        if (!ROOT.ExigenceObervCollec.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]))
                         {
-                            ROOT.NormeObervCollec.Add(dash.mw.database.NormesDatabase.ToList()[i]);
+                            ROOT.ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[i]);
                         }
                     }
                     
@@ -78,7 +78,7 @@ namespace Alto_IT
 
         private void TreeviewFrame_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            ItemSelectionne = (Norme)treeviewFrame.SelectedItem;
+            ItemSelectionne = (Exigence)treeviewFrame.SelectedItem;
         }
     }
 }

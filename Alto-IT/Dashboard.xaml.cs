@@ -35,13 +35,13 @@ namespace Alto_IT
 
         }
 
-        private void AjoutNorme_Click(object sender, RoutedEventArgs e)
+        private void Ajout_exigence_Click(object sender, RoutedEventArgs e)
         {
             Ajout A = new Ajout(mw, this, (Vue_Circulaire)Frame_Vue_Circulaire.Content);
             A.Show();
         }
 
-        private void Modif_norme_Click(object sender, RoutedEventArgs e)
+        private void Modif_exigence_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -60,14 +60,14 @@ namespace Alto_IT
             }
         }
 
-        private void Supr_norme_Click(object sender, RoutedEventArgs e)
+        private void Supr_exigence_Click(object sender, RoutedEventArgs e)
         {
             if (Vue.ItemSelectionne != null && Vue.ItemSelectionne.Name != "Menu")
             {
                 if (MessageBox.Show("Voulez-vous supprimer "+ Vue.ItemSelectionne.Name, "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
                     string CurrentItem = mw.FormaterToSQLRequest(Vue.ItemSelectionne.Name);
-                    Norme Ntmp = Vue.ItemSelectionne;
+                    Exigence Ntmp = Vue.ItemSelectionne;
 
                     string NtmpTableName = "";
                     NtmpTableName = mw.FormaterToSQLRequest(Ntmp.Name);
@@ -75,17 +75,15 @@ namespace Alto_IT
                     using (ApplicationDatabase context = new ApplicationDatabase())
                     {
                         
-                        //supprime de Normes son nom
-                        var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Id = '" + Ntmp.Id + "'");
+                        //supprime de la table Exigence son nom
+                        var xx = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Id = '" + Ntmp.Id + "'");
 
-                        //supprime de Normes ses enfants
-
-
+                        
                         //Quand suppression d'un parent => supprimer la table nominative des enfants
                         SuppressionTabEntant(CurrentItem);
 
                         //supprime de la table parent
-                        var ParentName = context.Database.SqlQuery<string>("SELECT Name from Normes WHERE Id= " + Ntmp.ForeignKey).FirstOrDefault();
+                        var ParentName = context.Database.SqlQuery<string>("SELECT Name from Exigences WHERE Id= " + Ntmp.ForeignKey).FirstOrDefault();
 
                         var ListeEnfant = context.Database.SqlQuery<string>("SELECT * FROM " + Ntmp);
 
@@ -102,13 +100,13 @@ namespace Alto_IT
                     }
 
                     // Supprime de la DbSet, à mettre à la fin, reviens à la position 1
-                    mw.database.NormesDatabase.Remove(Ntmp);
+                    mw.database.ExigenceDatabase.Remove(Ntmp);
 
                     // remove tous ses enfants de la collection Observable
-                    Ntmp.NormeObervCollec.Clear();
+                    Ntmp.ExigenceObervCollec.Clear();
 
                     // remove de la liste général dans le treeview
-                    Vue.ROOT.NormeObervCollec.Remove(Ntmp);
+                    Vue.ROOT.ExigenceObervCollec.Remove(Ntmp);
                 }
             }
             else
@@ -119,9 +117,20 @@ namespace Alto_IT
 
         private void Cloud19714_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            GridControle.Visibility = Visibility.Visible;
+            GridControle_Norme.Visibility = Visibility.Collapsed;
+
+
+            GridControle_exigence.Visibility = Visibility.Visible;
             Frame_Vue_Circulaire.Visibility = Visibility.Visible;
             Frame_Vue_Circulaire.Content = Vue;
+        }
+
+        private void GestionNorme_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            GridControle_exigence.Visibility = Visibility.Collapsed;
+            Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
+
+            GridControle_Norme.Visibility = Visibility.Visible;
         }
 
         public void SuppressionTabEntant(string CurrentItem)
@@ -140,12 +149,29 @@ namespace Alto_IT
                 foreach (string item2 in ListeGenerale)
                 {
                     var suppenfant = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.FormaterToSQLRequest(item2));
-                    var suppenfantTableNormes = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Name = '" + item2 + "'");
+                    var suppenfantTableExigence = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" + item2 + "'");
                 }
                 RequestListEnfant.Clear();
             }
             ListeGenerale.Clear();
             ListeEnfant.Clear();
         }
+
+        private void Ajout_Norme_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Modif_Norme_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Supr_Norme_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
     }
 }
