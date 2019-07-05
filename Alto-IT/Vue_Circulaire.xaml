@@ -6,13 +6,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Alto_IT"
       mc:Ignorable="d"
-      Title="Vue_Circulaire" Width="950.6" Height="505.8"
+      Title="Vue_Circulaire" Width="727.4" Height="505.8"
       HorizontalAlignment="Left"
       VerticalAlignment="Bottom"
       Loaded="Page_Loaded">
 
-    <Grid Background="#FFEBDFDF" Margin="0,0,0.4,0">
-        <TreeView Name="treeviewFrame"  SelectedItemChanged="TreeviewFrame_SelectedItemChanged" Margin="109,40,137,57.6">
+    <Grid Background="#FFEBDFDF" Margin="0,0,32.2,9.6" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <TreeView Name="treeviewFrame"  SelectedItemChanged="TreeviewFrame_SelectedItemChanged" Margin="10">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type self:Norme}" ItemsSource="{Binding NormeObervCollec}">
                     <StackPanel Orientation="Horizontal">

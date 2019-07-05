@@ -43,6 +43,8 @@ namespace Alto_IT
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            this.Height = SystemParameters.WorkArea.Height - 90;
+            this.Width = SystemParameters.WorkArea.Width - 190;
             AfficherDatabase();
         }
 

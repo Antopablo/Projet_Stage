@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -22,10 +23,10 @@ namespace Alto_IT
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // FullScreen
-            //this.Left = SystemParameters.WorkArea.Left;
-            //this.Top = SystemParameters.WorkArea.Top;
-            //this.Height = SystemParameters.WorkArea.Height;
-            //this.Width = SystemParameters.WorkArea.Width;
+            this.Left = SystemParameters.WorkArea.Left;
+            this.Top = SystemParameters.WorkArea.Top;
+            this.Height = SystemParameters.WorkArea.Height;
+            this.Width = SystemParameters.WorkArea.Width;
         }
 
         private void TreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -65,26 +66,46 @@ namespace Alto_IT
             {
                 if (MessageBox.Show("Voulez-vous supprimer", "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
-                    string CurrentItem = Vue.ItemSelectionne.Name;
-                    StringBuilder builder = new StringBuilder(CurrentItem);
-                    CurrentItem = builder.Insert(0, "_").ToString();
-                    CurrentItem = CurrentItem.Replace(' ', '_');
-                    CurrentItem = CurrentItem.Replace("'", "");
-                    CurrentItem = CurrentItem.Replace('/', '_');
-                    CurrentItem = CurrentItem.Replace("'", "");
-                    CurrentItem = CurrentItem.Replace("[", "_");
-                    CurrentItem = CurrentItem.Replace("]", "_");
-                    CurrentItem = CurrentItem.Replace(".", "_");
+                    string CurrentItem = mw.FormaterToSQLRequest(Vue.ItemSelectionne.Name);
+                    Norme Ntmp = Vue.ItemSelectionne;
+
+                    string NtmpTableName = "";
+                    NtmpTableName = mw.FormaterToSQLRequest(Ntmp.Name);
 
                     using (ApplicationDatabase context = new ApplicationDatabase())
                     {
-                        var x = context.Database.ExecuteSqlCommand("DROP TABLE " + CurrentItem); // supprime la table à son nom
-                        var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Id = '" + Vue.ItemSelectionne.Id + "'");
-                        mw.database.NormesDatabase.Remove(Vue.ItemSelectionne); // Supprime de la DbSet, à mettre à la fin, reviens à la position 1
+                        
+                        //supprime de Normes
+                        var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Id = '" + Ntmp.Id + "'");
+
+                        //Quand suppression d'un parent => supprimer la table nominative des enfants
+                        SuppressionTabEntant(CurrentItem);
+
+                        //supprime de la table parent
+                        var ParentName = context.Database.SqlQuery<string>("SELECT Name from Normes WHERE Id= " + Ntmp.ForeignKey).FirstOrDefault();
+
+                        var ListeEnfant = context.Database.SqlQuery<string>("SELECT * FROM " + Ntmp);
+
+                        if (ParentName != "Menu" && ParentName != null)
+                        {
+                            ParentName = mw.FormaterToSQLRequest(ParentName);
+                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM " + ParentName + " WHERE Titre = "+"'" + Ntmp.Name +"'");
+                        }
+
+                        // supprime la table à son nom
+                        var x = context.Database.ExecuteSqlCommand("DROP TABLE " + CurrentItem);
+
+                        
                     }
 
-                    Vue.ItemSelectionne.NormeObervCollec.Clear(); // remove tous ses enfants
-                    Vue.ROOT.NormeObervCollec.Remove(Vue.ItemSelectionne); // le remove de la liste général dans le treeview
+                    // Supprime de la DbSet, à mettre à la fin, reviens à la position 1
+                    mw.database.NormesDatabase.Remove(Ntmp);
+
+                    // remove tous ses enfants de la collection Observable
+                    Ntmp.NormeObervCollec.Clear();
+
+                    // remove de la liste général dans le treeview
+                    Vue.ROOT.NormeObervCollec.Remove(Ntmp);
                 }
             }
             else
@@ -98,6 +119,24 @@ namespace Alto_IT
             GridControle.Visibility = Visibility.Visible;
             Frame_Vue_Circulaire.Visibility = Visibility.Visible;
             Frame_Vue_Circulaire.Content = Vue;
+        }
+
+        public void SuppressionTabEntant(string CurrentItem)
+        {
+            List<string> ListeGenerale2 = new List<string>();
+            using (ApplicationDatabase context = new ApplicationDatabase())
+            {
+                var ListeEnfant = context.Database.SqlQuery<string>("Select Titre from " + CurrentItem).ToList();
+                foreach (string item in ListeEnfant)
+                {
+                    ListeGenerale2.Add(item);
+                    SuppressionTabEntant(mw.FormaterToSqlRequest(item));
+                }
+                foreach (string item2 in ListeGenerale2)
+                {
+                    var suppenfant = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.FormaterToSqlRequest(item2));
+                }
+            }
         }
     }
 }

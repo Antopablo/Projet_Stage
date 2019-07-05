@@ -93,6 +93,10 @@
     <Compile Include="Migrations\201907040756129_NO-FK.Designer.cs">
       <DependentUpon>201907040756129_NO-FK.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907041258189_delete.cs" />
+    <Compile Include="Migrations\201907041258189_delete.Designer.cs">
+      <DependentUpon>201907041258189_delete.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -169,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907040756129_NO-FK.resx">
       <DependentUpon>201907040756129_NO-FK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907041258189_delete.resx">
+      <DependentUpon>201907041258189_delete.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

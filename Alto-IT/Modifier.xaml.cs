@@ -11,6 +11,7 @@ namespace Alto_IT
     {
         public MainWindow mw { get; set; }
         public Vue_Circulaire Vue { get; set; }
+
         public Modifier()
         {
             InitializeComponent();
@@ -27,33 +28,16 @@ namespace Alto_IT
         {
             if (Vue.ItemSelectionne != null && Vue.ItemSelectionne.Name != "Menu")
             {
-                string CurrentItem = Vue.ItemSelectionne.Name;               
-                StringBuilder builder = new StringBuilder(CurrentItem);
-                CurrentItem = builder.Insert(0, "_").ToString();
-                CurrentItem = CurrentItem.Replace(' ', '_');
-                CurrentItem = CurrentItem.Replace(' ', '_');
-                CurrentItem = CurrentItem.Replace('/', '_');
-                CurrentItem = CurrentItem.Replace("'", "");
-                CurrentItem = CurrentItem.Replace("[", "_");
-                CurrentItem = CurrentItem.Replace("]", "_");
-                CurrentItem = CurrentItem.Replace(".", "_");
+                string CurrentItem = mw.FormaterToSQLRequest(Vue.ItemSelectionne.Name);               
 
 
                 using (ApplicationDatabase context = new ApplicationDatabase())
                 {
-                    string newTableName = Title.Text;
-                    StringBuilder builder2 = new StringBuilder(newTableName);
-                    newTableName = builder2.Insert(0, "_").ToString();
-                    newTableName = newTableName.Replace(' ', '_');
-                    newTableName = newTableName.Replace('/', '_');
-                    newTableName = newTableName.Replace("'", "");
-                    newTableName = newTableName.Replace("[", "_");
-                    newTableName = newTableName.Replace("]", "_");
-                    newTableName = newTableName.Replace(".", "_");
-                    newTableName.Trim();
+                    string newTableName = mw.FormaterToSQLRequest(Title.Text);
+                                      
 
                     //renomme la table
-                    var z = context.Database.ExecuteSqlCommand("EXEC sp_rename '" + CurrentItem + "', '" + newTableName + "'");
+                    var w = context.Database.ExecuteSqlCommand("EXEC sp_rename '" + CurrentItem + "', '" + newTableName + "'");
 
 
                     // modif dans sa table
@@ -64,6 +48,15 @@ namespace Alto_IT
                     var yy = context.Database.ExecuteSqlCommand("UPDATE Normes" + " SET Description = '" + Content.Text + "' WHERE Name = " + "'" + newTableName + "'" + " ");
                     var y = context.Database.ExecuteSqlCommand("UPDATE Normes" + " SET Name = '" + Title.Text + "' WHERE Name = " + "'" + newTableName + "'" + " ");
 
+                    //modif dans table parents
+                    var ParentName = context.Database.SqlQuery<string>("SELECT Name from Normes WHERE Id= " + Vue.ItemSelectionne.ForeignKey).FirstOrDefault();
+                    if (ParentName != "Menu" && ParentName != null)
+                    {
+                        ParentName = mw.FormaterToSQLRequest(ParentName);
+                        var zz = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Description = '" + Content.Text + "' WHERE Titre = " + "'" + Vue.ItemSelectionne.Name + "'" + " ");
+                        var z = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + Vue.ItemSelectionne.Name + "'" + " ");
+                    }
+
 
                     //actualise l'itemSleceted
                     Vue.ItemSelectionne.Name = Title.Text;
@@ -72,8 +65,8 @@ namespace Alto_IT
                     //MajCollection obesrvable
                     // Réaliser avec INotifyPropertyChanges
 
-                    //sauvegarde et modifie la vue dans le treeView
-                    mw.database.SaveChanges();
+                    //sauvegarde
+                    //mw.database.SaveChanges();
                     Vue.AfficherDatabase();
                     Close();
 

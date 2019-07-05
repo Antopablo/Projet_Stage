@@ -50,7 +50,6 @@ namespace Alto_IT
                 Norme NormeEnfant = new Norme(Title.Text, Content.Text, Vue.ItemSelectionne.Id);
                 Vue.ItemSelectionne.NormeObervCollec.Add(NormeEnfant);
                 mw.database.NormesDatabase.Add(NormeEnfant);
-                mw.database.SaveChanges();
             }
 
             Close();
@@ -58,15 +57,7 @@ namespace Alto_IT
 
         public void CreateTable(string TableName)
         {
-            StringBuilder builder = new StringBuilder(TableName);
-            TableName = builder.Insert(0, "_").ToString();
-            TableName = TableName.Replace(" ", "_");
-            TableName = TableName.Replace("'", "");
-            TableName = TableName.Replace('/', '_');
-            TableName = TableName.Replace("[", "_");
-            TableName = TableName.Replace(']', '_');
-            TableName = TableName.Replace('.', '_');
-            TableName.Trim();
+            TableName = mw.FormaterToSQLRequest(TableName);
 
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
@@ -83,16 +74,7 @@ namespace Alto_IT
 
         public void RemplirTable(string TableName, int ForeignKey)
         {
-            StringBuilder builder = new StringBuilder(TableName);
-            TableName = builder.Insert(0, "_").ToString();
-            TableName = TableName.Replace(' ', '_');
-            TableName = TableName.Replace(' ', '_');
-            TableName = TableName.Replace('/', '_');
-            TableName = TableName.Replace("'", "");
-            TableName = TableName.Replace("[", "_");
-            TableName = TableName.Replace("]", "_");
-            TableName = TableName.Replace(".", "_");
-
+            TableName = mw.FormaterToSQLRequest(TableName);
 
             if (TableName != "Menu")
             {
@@ -108,11 +90,6 @@ namespace Alto_IT
                 {
                 }
             }
-        }
-
-        public void SajouterDansParent()
-        {
-
         }
     }
 }

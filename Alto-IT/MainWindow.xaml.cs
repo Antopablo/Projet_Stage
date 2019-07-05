@@ -51,5 +51,20 @@ namespace Alto_IT
             Close();
 
         }
+
+        public string FormaterToSQLRequest(string Text)
+        {
+            StringBuilder builder = new StringBuilder(Text);
+            Text = builder.Insert(0, "_").ToString();
+            Text = Text.Replace(' ', '_');
+            Text = Text.Replace("'", "");
+            Text = Text.Replace('/', '_');
+            Text = Text.Replace("'", "");
+            Text = Text.Replace("[", "_");
+            Text = Text.Replace("]", "_");
+            Text = Text.Replace(".", "_");
+            Text.Trim();
+            return Text;
+        }
     }
 }
