@@ -130,11 +130,11 @@ namespace Alto_IT
                 foreach (string item in ListeEnfant)
                 {
                     ListeGenerale2.Add(item);
-                    SuppressionTabEntant(mw.FormaterToSqlRequest(item));
+                    SuppressionTabEntant(mw.FormaterToSQLRequest(item));
                 }
                 foreach (string item2 in ListeGenerale2)
                 {
-                    var suppenfant = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.FormaterToSqlRequest(item2));
+                    var suppenfant = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.FormaterToSQLRequest(item2));
                 }
             }
         }
