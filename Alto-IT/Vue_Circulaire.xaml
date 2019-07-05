@@ -17,9 +17,9 @@
                 <HierarchicalDataTemplate DataType="{x:Type self:Norme}" ItemsSource="{Binding NormeObervCollec}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Name}" />
-                        <TextBlock Text=" [" Foreground="Blue" />
-                        <TextBlock Text="{Binding NormeObervCollec.Count}" Foreground="Blue" />
-                        <TextBlock Text="]" Foreground="Blue" />
+                        <TextBlock Text=" [" Foreground="DodgerBlue" />
+                        <TextBlock Text="{Binding NormeObervCollec.Count}" Foreground="DodgerBlue" />
+                        <TextBlock Text="]" Foreground="DodgerBlue" />
                     </StackPanel>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>

@@ -50,8 +50,8 @@ namespace Alto_IT
                 Norme NormeEnfant = new Norme(Title.Text, Content.Text, Vue.ItemSelectionne.Id);
                 Vue.ItemSelectionne.NormeObervCollec.Add(NormeEnfant);
                 mw.database.NormesDatabase.Add(NormeEnfant);
+                mw.database.SaveChanges();
             }
-
             Close();
         }
 

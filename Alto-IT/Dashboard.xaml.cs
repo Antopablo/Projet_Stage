@@ -64,7 +64,7 @@ namespace Alto_IT
         {
             if (Vue.ItemSelectionne != null && Vue.ItemSelectionne.Name != "Menu")
             {
-                if (MessageBox.Show("Voulez-vous supprimer", "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Voulez-vous supprimer "+ Vue.ItemSelectionne.Name, "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
                     string CurrentItem = mw.FormaterToSQLRequest(Vue.ItemSelectionne.Name);
                     Norme Ntmp = Vue.ItemSelectionne;
@@ -75,8 +75,11 @@ namespace Alto_IT
                     using (ApplicationDatabase context = new ApplicationDatabase())
                     {
                         
-                        //supprime de Normes
+                        //supprime de Normes son nom
                         var xx = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Id = '" + Ntmp.Id + "'");
+
+                        //supprime de Normes ses enfants
+
 
                         //Quand suppression d'un parent => supprimer la table nominative des enfants
                         SuppressionTabEntant(CurrentItem);
@@ -123,20 +126,26 @@ namespace Alto_IT
 
         public void SuppressionTabEntant(string CurrentItem)
         {
-            List<string> ListeGenerale2 = new List<string>();
+            List<string> ListeGenerale = new List<string>();
+            List<string> ListeEnfant = new List<string>();
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
-                var ListeEnfant = context.Database.SqlQuery<string>("Select Titre from " + CurrentItem).ToList();
+                var RequestListEnfant = context.Database.SqlQuery<string>("Select Titre from " + CurrentItem).ToList();
+                ListeEnfant = RequestListEnfant;
                 foreach (string item in ListeEnfant)
                 {
-                    ListeGenerale2.Add(item);
+                    ListeGenerale.Add(item);
                     SuppressionTabEntant(mw.FormaterToSQLRequest(item));
                 }
-                foreach (string item2 in ListeGenerale2)
+                foreach (string item2 in ListeGenerale)
                 {
                     var suppenfant = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.FormaterToSQLRequest(item2));
+                    var suppenfantTableNormes = context.Database.ExecuteSqlCommand("DELETE FROM Normes WHERE Name = '" + item2 + "'");
                 }
+                RequestListEnfant.Clear();
             }
+            ListeGenerale.Clear();
+            ListeEnfant.Clear();
         }
     }
 }
