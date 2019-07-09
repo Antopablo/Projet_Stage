@@ -21,6 +21,7 @@ namespace Alto_IT
         {
             Nom_Norme = nom_Norme;
             NormeObervCollec = new ObservableCollection<Norme>();
+            
         }
 
         public Norme() { }

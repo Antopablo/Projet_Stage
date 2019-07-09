@@ -24,7 +24,6 @@ namespace Alto_IT
         public Dashboard dash { get; set; }
         public Exigence ItemSelectionne { get; set; }
        public List<Exigence> ListeExigence { get; set; }
-
         public Exigence ROOT_Exigences { get; set; }
 
 
@@ -66,7 +65,7 @@ namespace Alto_IT
                             dash.mw.database.ExigenceDatabase.ToList()[i].ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[j]);
                         }
                     }
-                    else if(dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey == 0)
+                    else if((dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey == 0) && (dash.NormeSelectionnee.Id == dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey_TO_Norme))
                     {
                         if (!ROOT_Exigences.ExigenceObervCollec.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]))
                         {

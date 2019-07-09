@@ -6,9 +6,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alto_IT"
         mc:Ignorable="d"
-        Title="AffichageDesNormes" Height="455.6" Width="528.542">
+        Title="Liste des Normes" Height="455.6" Width="528.542">
     <Grid Margin="0,0,3.4,3.4">
-        <ListView x:Name="ListeViewNormes" HorizontalAlignment="Left" Height="395" Margin="10,10,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ListeViewNormes_SelectionChanged">
+        <ListView x:Name="ListeViewNormes" HorizontalAlignment="Left" Height="395" Margin="10,10,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ListeViewNormes_SelectionChanged" SelectionMode="Single">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

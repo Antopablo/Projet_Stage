@@ -101,7 +101,7 @@
             <Button x:Name="Modif_exigence" Click="Modif_exigence_Click" Content="Modifier une exigence" Grid.Column="1"/>
             <Button x:Name="Supr_exigence" Click="Supr_exigence_Click" Content="Supprimer une exigence" Grid.Column="2"/>
         </Grid>
-        <Frame x:Name="Frame_Vue_Circulaire" Margin="203,0,9.6,-0.4" ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Automatic"/>
+        <Frame x:Name="Frame_Vue_Circulaire" Margin="203,0,9.6,-0.4" ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
 
     </Grid>
 </Window>

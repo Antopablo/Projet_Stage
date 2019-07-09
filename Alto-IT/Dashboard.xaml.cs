@@ -13,7 +13,6 @@ namespace Alto_IT
         public MainWindow mw { get; set; }
         public Vue_Circulaire Vue { get; set; }
         public Norme ROOT_Normes { get; set; }
-
         public Norme NormeSelectionnee { get; set; }
 
 
@@ -25,7 +24,6 @@ namespace Alto_IT
 
             ROOT_Normes = new Norme("Normes");
             TreeViewNORME.Items.Add(ROOT_Normes);
-
             AfficherLesNormes();
 
         }
@@ -182,11 +180,11 @@ namespace Alto_IT
                 GridControle_Norme.Visibility = Visibility.Collapsed;
                 GridControle_exigence.Visibility = Visibility.Visible;
                 Frame_Vue_Circulaire.Visibility = Visibility.Visible;
-                Frame_Vue_Circulaire.Content = Vue;
+                //Frame_Vue_Circulaire.Content = Vue;
+                Frame_Vue_Circulaire.Content = new Vue_Circulaire(this);
             }
 
             NormeSelectionnee = (Norme)TreeViewNORME.SelectedItem;
-
         }
 
         public void AfficherLesNormes()
