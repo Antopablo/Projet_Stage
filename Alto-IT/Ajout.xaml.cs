@@ -40,7 +40,7 @@ namespace Alto_IT
                 if (Vue.ItemSelectionne == null)
                 {
                     CreateTable(Title.Text);
-                    Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0);
+                    Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id);
                     Vue.ROOT_Exigences.ExigenceObervCollec.Add(ExigenceParent);
                     mw.database.ExigenceDatabase.Add(ExigenceParent);
                     mw.database.SaveChanges();
@@ -49,7 +49,7 @@ namespace Alto_IT
                 {
                     CreateTable(Title.Text);
                     RemplirTable(Vue.ItemSelectionne.Name, Vue.ItemSelectionne.Id);
-                    Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ItemSelectionne.Id);
+                    Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ItemSelectionne.Id, dashb.NormeSelectionnee.Id);
                     Vue.ItemSelectionne.ExigenceObervCollec.Add(ExigenceEnfant);
                     mw.database.ExigenceDatabase.Add(ExigenceEnfant);
                     try

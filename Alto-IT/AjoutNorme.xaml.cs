@@ -37,6 +37,7 @@ namespace Alto_IT
             dashb.ROOT_Normes.NormeObervCollec.Add(N);
             mw.database.NormeDatabase.Add(N);
             mw.database.SaveChanges();
+            Close();
         }
     }
 }

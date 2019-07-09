@@ -18,7 +18,7 @@
                     <Setter Property="HeaderTemplate">
                         <Setter.Value>
                             <DataTemplate>
-                                <TextBlock Width="160"
+                                <TextBlock Width="150"
                                    TextWrapping="Wrap"
                                    Text="{Binding}" 
                                    Margin="5,10,0,10"
@@ -31,7 +31,7 @@
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type self:Norme}" ItemsSource="{Binding NormeObervCollec}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock  Text="{Binding Nom_Norme}" Width="201"/>
+                        <TextBlock  Text="{Binding Nom_Norme}" Width="150"/>
                     </StackPanel>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>

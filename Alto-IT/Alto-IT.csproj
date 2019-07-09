@@ -62,6 +62,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AffichageDesNormes.xaml.cs">
+      <DependentUpon>AffichageDesNormes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ajout.xaml.cs">
       <DependentUpon>Ajout.xaml</DependentUpon>
     </Compile>
@@ -76,6 +79,10 @@
     <Compile Include="Migrations\201907091132244_Ajout Normes.Designer.cs">
       <DependentUpon>201907091132244_Ajout Normes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907091153501_add foreignkeyTONorme.cs" />
+    <Compile Include="Migrations\201907091153501_add foreignkeyTONorme.Designer.cs">
+      <DependentUpon>201907091153501_add foreignkeyTONorme.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -89,6 +96,10 @@
     <Compile Include="Vue_Circulaire.xaml.cs">
       <DependentUpon>Vue_Circulaire.xaml</DependentUpon>
     </Compile>
+    <Page Include="AffichageDesNormes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Ajout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907091132244_Ajout Normes.resx">
       <DependentUpon>201907091132244_Ajout Normes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907091153501_add foreignkeyTONorme.resx">
+      <DependentUpon>201907091153501_add foreignkeyTONorme.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

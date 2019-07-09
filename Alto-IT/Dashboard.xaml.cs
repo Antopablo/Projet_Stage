@@ -14,6 +14,8 @@ namespace Alto_IT
         public Vue_Circulaire Vue { get; set; }
         public Norme ROOT_Normes { get; set; }
 
+        public Norme NormeSelectionnee { get; set; }
+
 
         public Dashboard(MainWindow m)
         {
@@ -35,10 +37,7 @@ namespace Alto_IT
             this.Top = SystemParameters.WorkArea.Top;
             this.Height = SystemParameters.WorkArea.Height;
             this.Width = SystemParameters.WorkArea.Width;
-
-            
         }
-
 
         private void Ajout_exigence_Click(object sender, RoutedEventArgs e)
         {
@@ -153,12 +152,22 @@ namespace Alto_IT
 
         private void Modif_Norme_Click(object sender, RoutedEventArgs e)
         {
-
+            AffichageDesNormes AF = new AffichageDesNormes(mw, this);
+            AF.BoutonValiderModify.Visibility = Visibility.Visible;
+            AF.BoutonSupprimer.Visibility = Visibility.Hidden;
+            AF.TitreModify.Visibility = Visibility.Visible;
+            AF.TitreModifyBlock.Visibility = Visibility.Hidden;
+            AF.Show();
         }
 
         private void Supr_Norme_Click(object sender, RoutedEventArgs e)
         {
-
+            AffichageDesNormes AF = new AffichageDesNormes(mw, this);
+            AF.BoutonValiderModify.Visibility = Visibility.Hidden;
+            AF.BoutonSupprimer.Visibility = Visibility.Visible;
+            AF.TitreModify.Visibility = Visibility.Hidden;
+            AF.TitreModifyBlock.Visibility = Visibility.Visible;
+            AF.Show();
         }
 
         private void TreeViewNORME_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -176,6 +185,8 @@ namespace Alto_IT
                 Frame_Vue_Circulaire.Content = Vue;
             }
 
+            NormeSelectionnee = (Norme)TreeViewNORME.SelectedItem;
+
         }
 
         public void AfficherLesNormes()
@@ -185,6 +196,5 @@ namespace Alto_IT
                 ROOT_Normes.NormeObervCollec.Add(item);
             }
         }
-
     }
 }

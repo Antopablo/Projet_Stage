@@ -12,18 +12,20 @@ namespace Alto_IT
 {
     public class Exigence : INotifyPropertyChanged
     {
-        public Exigence(string name, string description, int foreignkey)
+        public Exigence(string name, string description, int foreignkey, int foreignkeyTOnorme)
         {
             Name = name;
             Description = description;
             ForeignKey = foreignkey;
+            ForeignKey_TO_Norme = foreignkeyTOnorme;
             this.ExigenceObervCollec = new ObservableCollection<Exigence>();
         }
 
-        public Exigence(string name, int foreignkey)
+        public Exigence(string name, int foreignkey, int foreignkeyTOnorme)
         {
             Name = name;
             ForeignKey = foreignkey;
+            ForeignKey_TO_Norme = foreignkeyTOnorme;
             this.ExigenceObervCollec = new ObservableCollection<Exigence>();
         }
 
@@ -55,6 +57,8 @@ namespace Alto_IT
 
 
         public int ForeignKey { get; set; }
+
+        public int ForeignKey_TO_Norme { get; set; }
 
         public ObservableCollection<Exigence> ExigenceObervCollec { get; set; }
 
