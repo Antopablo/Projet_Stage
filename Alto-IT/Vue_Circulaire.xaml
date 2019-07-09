@@ -16,7 +16,7 @@
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type self:Exigence}" ItemsSource="{Binding ExigenceObervCollec}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Name}"/>
                         <TextBlock Text=" [" Foreground="DodgerBlue" />
                         <TextBlock Text="{Binding ExigenceObervCollec.Count}" Foreground="DodgerBlue" />
                         <TextBlock Text="]" Foreground="DodgerBlue" />

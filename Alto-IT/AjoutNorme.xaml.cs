@@ -20,14 +20,23 @@ namespace Alto_IT
     /// </summary>
     public partial class AjoutNorme : Window
     {
-        public AjoutNorme()
+        MainWindow mw;
+        Dashboard dashb;
+        Vue_Circulaire Vue;
+        public AjoutNorme(MainWindow m, Dashboard dash,Vue_Circulaire v)
         {
             InitializeComponent();
+            mw = m;
+            dashb = dash;
+            Vue = v;
         }
 
         private void ValiderNorme_Click(object sender, RoutedEventArgs e)
         {
-
+            Norme N = new Norme(Title.Text) ;
+            dashb.ROOT_Normes.NormeObervCollec.Add(N);
+            mw.database.NormeDatabase.Add(N);
+            mw.database.SaveChanges();
         }
     }
 }

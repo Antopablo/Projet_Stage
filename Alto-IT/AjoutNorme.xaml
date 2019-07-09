@@ -8,7 +8,7 @@
       Title="Ajouter une Norme" Width="381.991" Height="210.071">
 
     <Grid Margin="0,0,-0.4,0.4">
-        <TextBox Name="Title" HorizontalAlignment="Left" Height="84" Margin="26,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="331" VerticalContentAlignment="Center"/>
+        <TextBox Name="Title" HorizontalAlignment="Left" Height="84" Margin="26,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="331" VerticalContentAlignment="Center" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" FontFamily="Cooper Black" FontSize="25" FontWeight="Bold"/>
         <Button Name="ValiderNorme" Content="Valider la norme" HorizontalAlignment="Left" Margin="26,117,0,0" VerticalAlignment="Top" Width="331" Height="40" Click="ValiderNorme_Click"/>
 
     </Grid>

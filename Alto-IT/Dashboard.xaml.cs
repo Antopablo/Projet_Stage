@@ -12,12 +12,20 @@ namespace Alto_IT
     {
         public MainWindow mw { get; set; }
         public Vue_Circulaire Vue { get; set; }
+        public Norme ROOT_Normes { get; set; }
+
 
         public Dashboard(MainWindow m)
         {
             InitializeComponent();
             mw = m;
             Vue = new Vue_Circulaire(this);
+
+            ROOT_Normes = new Norme("Normes");
+            TreeViewNORME.Items.Add(ROOT_Normes);
+
+            AfficherLesNormes();
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -27,13 +35,10 @@ namespace Alto_IT
             this.Top = SystemParameters.WorkArea.Top;
             this.Height = SystemParameters.WorkArea.Height;
             this.Width = SystemParameters.WorkArea.Width;
+
+            
         }
 
-        private void TreeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-
-        }
 
         private void Ajout_exigence_Click(object sender, RoutedEventArgs e)
         {
@@ -106,7 +111,7 @@ namespace Alto_IT
                     Ntmp.ExigenceObervCollec.Clear();
 
                     // remove de la liste général dans le treeview
-                    Vue.ROOT.ExigenceObervCollec.Remove(Ntmp);
+                    Vue.ROOT_Exigences.ExigenceObervCollec.Remove(Ntmp);
                 }
             }
             else
@@ -115,23 +120,6 @@ namespace Alto_IT
             }
         }
 
-        private void Cloud19714_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            GridControle_Norme.Visibility = Visibility.Collapsed;
-
-
-            GridControle_exigence.Visibility = Visibility.Visible;
-            Frame_Vue_Circulaire.Visibility = Visibility.Visible;
-            Frame_Vue_Circulaire.Content = Vue;
-        }
-
-        private void GestionNorme_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            GridControle_exigence.Visibility = Visibility.Collapsed;
-            Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
-
-            GridControle_Norme.Visibility = Visibility.Visible;
-        }
 
         public void SuppressionTabEntant(string CurrentItem)
         {
@@ -159,7 +147,7 @@ namespace Alto_IT
 
         private void Ajout_Norme_Click(object sender, RoutedEventArgs e)
         {
-            AjoutNorme AJ = new AjoutNorme();
+            AjoutNorme AJ = new AjoutNorme(mw, this, Vue);
             AJ.Show();
         }
 
@@ -173,6 +161,30 @@ namespace Alto_IT
 
         }
 
+        private void TreeViewNORME_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (TreeViewNORME.SelectedItem.ToString() == "Normes")
+            {
+                GridControle_Norme.Visibility = Visibility.Visible;
+                GridControle_exigence.Visibility = Visibility.Collapsed;
+                Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
+            } else
+            {
+                GridControle_Norme.Visibility = Visibility.Collapsed;
+                GridControle_exigence.Visibility = Visibility.Visible;
+                Frame_Vue_Circulaire.Visibility = Visibility.Visible;
+                Frame_Vue_Circulaire.Content = Vue;
+            }
+
+        }
+
+        public void AfficherLesNormes()
+        {
+            foreach (Norme item in mw.database.NormeDatabase)
+            {
+                ROOT_Normes.NormeObervCollec.Add(item);
+            }
+        }
 
     }
 }

@@ -72,6 +72,10 @@
     <Compile Include="Migrations\201907051027092_exigene.Designer.cs">
       <DependentUpon>201907051027092_exigene.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907091132244_Ajout Normes.cs" />
+    <Compile Include="Migrations\201907091132244_Ajout Normes.Designer.cs">
+      <DependentUpon>201907091132244_Ajout Normes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -135,6 +139,9 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201907051027092_exigene.resx">
       <DependentUpon>201907051027092_exigene.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907091132244_Ajout Normes.resx">
+      <DependentUpon>201907091132244_Ajout Normes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

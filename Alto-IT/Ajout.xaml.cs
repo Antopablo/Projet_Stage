@@ -41,7 +41,7 @@ namespace Alto_IT
                 {
                     CreateTable(Title.Text);
                     Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0);
-                    Vue.ROOT.ExigenceObervCollec.Add(ExigenceParent);
+                    Vue.ROOT_Exigences.ExigenceObervCollec.Add(ExigenceParent);
                     mw.database.ExigenceDatabase.Add(ExigenceParent);
                     mw.database.SaveChanges();
                 }

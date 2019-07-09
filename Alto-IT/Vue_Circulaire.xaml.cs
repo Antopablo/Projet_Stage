@@ -25,7 +25,8 @@ namespace Alto_IT
         public Exigence ItemSelectionne { get; set; }
        public List<Exigence> ListeExigence { get; set; }
 
-        public Exigence ROOT { get; set; }
+        public Exigence ROOT_Exigences { get; set; }
+
 
         public Vue_Circulaire()
         {
@@ -36,9 +37,11 @@ namespace Alto_IT
         {
             InitializeComponent();
             dash = D;
+            
+            ROOT_Exigences = new Exigence() { Name = "Menu" }; //modifier le nom entraine un changement dans plusieurs classes            
+            treeviewFrame.Items.Add(ROOT_Exigences);
 
-            ROOT = new Exigence() { Name = "Menu" }; //modifier le nom entraine un changement dans Ajout.cs(RemplirTable)
-            treeviewFrame.Items.Add(ROOT);
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -65,9 +68,9 @@ namespace Alto_IT
                     }
                     else if(dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey == 0)
                     {
-                        if (!ROOT.ExigenceObervCollec.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]))
+                        if (!ROOT_Exigences.ExigenceObervCollec.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]))
                         {
-                            ROOT.ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[i]);
+                            ROOT_Exigences.ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[i]);
                         }
                     }
                     
