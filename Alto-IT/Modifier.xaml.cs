@@ -41,12 +41,12 @@ namespace Alto_IT
 
 
                     // modif dans sa table
-                    var xx = context.Database.ExecuteSqlCommand("UPDATE " + newTableName + " SET Description = '" + Content.Text + "' WHERE Titre = " + "'" + newTableName + "'" + " ");
-                    var x = context.Database.ExecuteSqlCommand("UPDATE " + newTableName + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + newTableName + "'" + " ");
+                    //var xx = context.Database.ExecuteSqlCommand("UPDATE " + newTableName + " SET Description = '" + Content.Text + "' WHERE Titre = " + "'" + newTableName + "'" + " ");
+                    //var x = context.Database.ExecuteSqlCommand("UPDATE " + newTableName + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + newTableName + "'" + " ");
 
                     //modif dans la table Exigence
-                    var yy = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Description = '" + Content.Text + "' WHERE Name = " + "'" + newTableName + "'" + " ");
-                    var y = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = '" + Title.Text + "' WHERE Name = " + "'" + newTableName + "'" + " ");
+                    var yy = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Description = '" + Content.Text + "' WHERE Name = " + "'" + Vue.ItemSelectionne.Name + "'" + " ");
+                    var y = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = '" + Title.Text + "' WHERE Name = " + "'" + Vue.ItemSelectionne.Name + "'" + " ");
 
                     //modif dans table parents
                     var ParentName = context.Database.SqlQuery<string>("SELECT Name from Exigences WHERE Id= " + Vue.ItemSelectionne.ForeignKey).FirstOrDefault();

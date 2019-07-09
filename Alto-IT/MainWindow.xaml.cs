@@ -62,6 +62,7 @@ namespace Alto_IT
             Text = Text.Replace("'", "");
             Text = Text.Replace('/', '_');
             Text = Text.Replace("'", "");
+            Text = Text.Replace("\"", "");
             Text = Text.Replace("[", "_");
             Text = Text.Replace("]", "_");
             Text = Text.Replace(".", "_");

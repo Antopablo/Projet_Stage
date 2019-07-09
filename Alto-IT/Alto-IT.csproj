@@ -65,6 +65,9 @@
     <Compile Include="Ajout.xaml.cs">
       <DependentUpon>Ajout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AjoutNorme.xaml.cs">
+      <DependentUpon>AjoutNorme.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201907051027092_exigene.cs" />
     <Compile Include="Migrations\201907051027092_exigene.Designer.cs">
       <DependentUpon>201907051027092_exigene.cs</DependentUpon>
@@ -77,11 +80,16 @@
     <Compile Include="Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Norme.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Vue_Circulaire.xaml.cs">
       <DependentUpon>Vue_Circulaire.xaml</DependentUpon>
     </Compile>
     <Page Include="Ajout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AjoutNorme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

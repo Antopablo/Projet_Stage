@@ -159,7 +159,8 @@ namespace Alto_IT
 
         private void Ajout_Norme_Click(object sender, RoutedEventArgs e)
         {
-
+            AjoutNorme AJ = new AjoutNorme();
+            AJ.Show();
         }
 
         private void Modif_Norme_Click(object sender, RoutedEventArgs e)

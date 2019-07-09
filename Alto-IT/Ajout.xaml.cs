@@ -32,32 +32,35 @@ namespace Alto_IT
 
         private void ValiderNorme_Click(object sender, RoutedEventArgs e)
         {
-            
-
-
-            if (Vue.ItemSelectionne == null)
+            if (Title.Text == "Menu")
             {
-                CreateTable(Title.Text);
-                Exigence ExigenceParent = new Exigence(Title.Text,Content.Text, 0);
-                Vue.ROOT.ExigenceObervCollec.Add(ExigenceParent);
-                mw.database.ExigenceDatabase.Add(ExigenceParent);
-                mw.database.SaveChanges();
-
+                MessageBox.Show("Vous ne pouvez pas appeler une norme ainsi", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             } else
             {
-                CreateTable(Title.Text);
-                RemplirTable(Vue.ItemSelectionne.Name, Vue.ItemSelectionne.Id);
-                Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ItemSelectionne.Id);
-                Vue.ItemSelectionne.ExigenceObervCollec.Add(ExigenceEnfant);
-                mw.database.ExigenceDatabase.Add(ExigenceEnfant);
-                try
+                if (Vue.ItemSelectionne == null)
                 {
+                    CreateTable(Title.Text);
+                    Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0);
+                    Vue.ROOT.ExigenceObervCollec.Add(ExigenceParent);
+                    mw.database.ExigenceDatabase.Add(ExigenceParent);
                     mw.database.SaveChanges();
                 }
-                catch (Exception)
+                else
                 {
+                    CreateTable(Title.Text);
+                    RemplirTable(Vue.ItemSelectionne.Name, Vue.ItemSelectionne.Id);
+                    Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ItemSelectionne.Id);
+                    Vue.ItemSelectionne.ExigenceObervCollec.Add(ExigenceEnfant);
+                    mw.database.ExigenceDatabase.Add(ExigenceEnfant);
+                    try
+                    {
+                        mw.database.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("saveChanges AJOUT KO");
+                    }
                 }
-
             }
             Close();
         }
