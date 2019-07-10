@@ -36,7 +36,14 @@ namespace Alto_IT
             Norme N = new Norme(Title.Text) ;
             dashb.ROOT_Normes.NormeObervCollec.Add(N);
             mw.database.NormeDatabase.Add(N);
-            mw.database.SaveChanges();
+            try
+            {
+                mw.database.SaveChanges();
+            }
+            catch (Exception)
+            {
+            }
+
             Close();
         }
     }

@@ -20,7 +20,7 @@ namespace Alto_IT
         {
             InitializeComponent();
             mw = m;
-            Vue = new Vue_Circulaire(this);
+           Vue = new Vue_Circulaire(this);
 
             ROOT_Normes = new Norme("Normes");
             TreeViewNORME.Items.Add(ROOT_Normes);
@@ -47,11 +47,11 @@ namespace Alto_IT
         {
             try
             {
-                if (Vue.ItemSelectionne.Name != "Menu")
+                if (Vue.ExigenceSelectionnee.Name != "Menu")
                 {
                     Modifier M = new Modifier(mw, Vue);
-                    M.Title.Text = Vue.ItemSelectionne.Name;
-                    M.Content.Text = Vue.ItemSelectionne.Description;
+                    M.Title.Text = Vue.ExigenceSelectionnee.Name;
+                    M.Content.Text = Vue.ExigenceSelectionnee.Description;
                     M.Show();
 
                 }
@@ -64,12 +64,12 @@ namespace Alto_IT
 
         private void Supr_exigence_Click(object sender, RoutedEventArgs e)
         {
-            if (Vue.ItemSelectionne != null && Vue.ItemSelectionne.Name != "Menu")
+            if (Vue.ExigenceSelectionnee != null && Vue.ExigenceSelectionnee.Name != "Menu")
             {
-                if (MessageBox.Show("Voulez-vous supprimer "+ Vue.ItemSelectionne.Name, "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Voulez-vous supprimer "+ Vue.ExigenceSelectionnee.Name, "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
-                    string CurrentItem = mw.FormaterToSQLRequest(Vue.ItemSelectionne.Name);
-                    Exigence Ntmp = Vue.ItemSelectionne;
+                    string CurrentItem = mw.FormaterToSQLRequest(Vue.ExigenceSelectionnee.Name);
+                    Exigence Ntmp = Vue.ExigenceSelectionnee;
 
                     string NtmpTableName = "";
                     NtmpTableName = mw.FormaterToSQLRequest(Ntmp.Name);
@@ -170,17 +170,19 @@ namespace Alto_IT
 
         private void TreeViewNORME_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+           
             if (TreeViewNORME.SelectedItem.ToString() == "Normes")
             {
                 GridControle_Norme.Visibility = Visibility.Visible;
                 GridControle_exigence.Visibility = Visibility.Collapsed;
                 Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
-            } else
+                
+            }
+            else
             {
                 GridControle_Norme.Visibility = Visibility.Collapsed;
                 GridControle_exigence.Visibility = Visibility.Visible;
                 Frame_Vue_Circulaire.Visibility = Visibility.Visible;
-                //Frame_Vue_Circulaire.Content = Vue;
                 Frame_Vue_Circulaire.Content = new Vue_Circulaire(this);
             }
 

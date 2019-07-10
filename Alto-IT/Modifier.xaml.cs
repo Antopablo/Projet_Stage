@@ -26,9 +26,9 @@ namespace Alto_IT
 
         private void ModifierNorme_Click(object sender, RoutedEventArgs e)
         {
-            if (Vue.ItemSelectionne != null && Vue.ItemSelectionne.Name != "Menu")
+            if (Vue.ExigenceSelectionnee != null && Vue.ExigenceSelectionnee.Name != "Menu")
             {
-                string CurrentItem = mw.FormaterToSQLRequest(Vue.ItemSelectionne.Name);               
+                string CurrentItem = mw.FormaterToSQLRequest(Vue.ExigenceSelectionnee.Name);               
 
 
                 using (ApplicationDatabase context = new ApplicationDatabase())
@@ -45,22 +45,22 @@ namespace Alto_IT
                     //var x = context.Database.ExecuteSqlCommand("UPDATE " + newTableName + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + newTableName + "'" + " ");
 
                     //modif dans la table Exigence
-                    var yy = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Description = '" + Content.Text + "' WHERE Name = " + "'" + Vue.ItemSelectionne.Name + "'" + " ");
-                    var y = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = '" + Title.Text + "' WHERE Name = " + "'" + Vue.ItemSelectionne.Name + "'" + " ");
+                    var yy = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Description = '" + Content.Text + "' WHERE Name = " + "'" + Vue.ExigenceSelectionnee.Name + "'" + " ");
+                    var y = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = '" + Title.Text + "' WHERE Name = " + "'" + Vue.ExigenceSelectionnee.Name + "'" + " ");
 
                     //modif dans table parents
-                    var ParentName = context.Database.SqlQuery<string>("SELECT Name from Exigences WHERE Id= " + Vue.ItemSelectionne.ForeignKey).FirstOrDefault();
+                    var ParentName = context.Database.SqlQuery<string>("SELECT Name from Exigences WHERE Id= " + Vue.ExigenceSelectionnee.ForeignKey).FirstOrDefault();
                     if (ParentName != "Menu" && ParentName != null)
                     {
                         ParentName = mw.FormaterToSQLRequest(ParentName);
-                        var zz = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Description = '" + Content.Text + "' WHERE Titre = " + "'" + Vue.ItemSelectionne.Name + "'" + " ");
-                        var z = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + Vue.ItemSelectionne.Name + "'" + " ");
+                        var zz = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Description = '" + Content.Text + "' WHERE Titre = " + "'" + Vue.ExigenceSelectionnee.Name + "'" + " ");
+                        var z = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + Vue.ExigenceSelectionnee.Name + "'" + " ");
                     }
 
 
                     //actualise l'itemSleceted
-                    Vue.ItemSelectionne.Name = Title.Text;
-                    Vue.ItemSelectionne.Description = Content.Text;
+                    Vue.ExigenceSelectionnee.Name = Title.Text;
+                    Vue.ExigenceSelectionnee.Description = Content.Text;
 
                     //MajCollection obesrvable
                     // Réaliser avec INotifyPropertyChanges

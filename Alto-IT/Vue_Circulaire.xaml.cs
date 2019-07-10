@@ -22,7 +22,7 @@ namespace Alto_IT
     public partial class Vue_Circulaire : Page
     {
         public Dashboard dash { get; set; }
-        public Exigence ItemSelectionne { get; set; }
+        public Exigence ExigenceSelectionnee { get; set; }
        public List<Exigence> ListeExigence { get; set; }
         public Exigence ROOT_Exigences { get; set; }
 
@@ -36,11 +36,9 @@ namespace Alto_IT
         {
             InitializeComponent();
             dash = D;
-            
+            dash.Vue = this;
             ROOT_Exigences = new Exigence() { Name = "Menu" }; //modifier le nom entraine un changement dans plusieurs classes            
             treeviewFrame.Items.Add(ROOT_Exigences);
-
-
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -80,7 +78,7 @@ namespace Alto_IT
 
         private void TreeviewFrame_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            ItemSelectionne = (Exigence)treeviewFrame.SelectedItem;
+            ExigenceSelectionnee = (Exigence)treeviewFrame.SelectedItem;
         }
     }
 }

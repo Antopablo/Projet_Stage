@@ -57,7 +57,7 @@
             <Button x:Name="Supr_Norme" Click="Supr_Norme_Click" Content="Supprimer une Norme" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
         </Grid>
 
-        <Grid Name="GridControle_exigence" Height="50" VerticalAlignment="Top" Margin="203,0,0,0" Visibility="Visible">
+        <Grid Name="GridControle_exigence" Height="50" VerticalAlignment="Top" Margin="203,0,0,0" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

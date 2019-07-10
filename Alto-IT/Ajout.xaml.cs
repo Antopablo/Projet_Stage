@@ -37,7 +37,7 @@ namespace Alto_IT
                 MessageBox.Show("Vous ne pouvez pas appeler une norme ainsi", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             } else
             {
-                if (Vue.ItemSelectionne == null)
+                if (Vue.ExigenceSelectionnee == null)
                 {
                     CreateTable(Title.Text);
                     Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id);
@@ -48,17 +48,18 @@ namespace Alto_IT
                 else
                 {
                     CreateTable(Title.Text);
-                    RemplirTable(Vue.ItemSelectionne.Name, Vue.ItemSelectionne.Id);
-                    Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ItemSelectionne.Id, dashb.NormeSelectionnee.Id);
-                    Vue.ItemSelectionne.ExigenceObervCollec.Add(ExigenceEnfant);
+                    RemplirTable(Vue.ExigenceSelectionnee.Name, Vue.ExigenceSelectionnee.Id);
+                    Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ExigenceSelectionnee.Id, dashb.NormeSelectionnee.Id);
+                    Vue.ExigenceSelectionnee.ExigenceObervCollec.Add(ExigenceEnfant);
                     mw.database.ExigenceDatabase.Add(ExigenceEnfant);
                     try
                     {
                         mw.database.SaveChanges();
                     }
-                    catch (Exception)
+                    catch (Exception msg)
                     {
                         MessageBox.Show("saveChanges AJOUT KO");
+                        MessageBox.Show(msg.Message);
                     }
                 }
             }
