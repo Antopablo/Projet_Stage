@@ -65,6 +65,17 @@ namespace Alto_IT
             {
                 if (MessageBox.Show("Êtes-vous sûr de vouloir supprimer la norme " + NormeSelectionnee.Nom_Norme + " ?", "Supprimer", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
+                    using (ApplicationDatabase context = new ApplicationDatabase())
+                    {
+                        var ListeEnfant = context.Database.SqlQuery<string>("SELECT Name FROM Exigences WHERE ForeignKey_TO_Norme = " + NormeSelectionnee.Id).ToList();
+                        foreach (string item in ListeEnfant)
+                        {
+                            // supprime de Exigences
+                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" + item + "'");
+                            // supprime la table à son nom
+                            var x = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.FormaterToSQLRequest(item));
+                        }
+                    }
                     mw.database.NormeDatabase.Remove(NormeSelectionnee);
                     mw.database.SaveChanges();
                     dashb.ROOT_Normes.NormeObervCollec.Clear();

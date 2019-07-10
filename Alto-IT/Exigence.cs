@@ -27,6 +27,7 @@ namespace Alto_IT
             ForeignKey = foreignkey;
             ForeignKey_TO_Norme = foreignkeyTOnorme;
             this.ExigenceObervCollec = new ObservableCollection<Exigence>();
+            IDExigence = Id;
         }
 
         public Exigence () { this.ExigenceObervCollec = new ObservableCollection<Exigence>(); }
@@ -34,6 +35,8 @@ namespace Alto_IT
         [Key]
         public int Id { get; set; }
 
+        [InverseProperty ("ForeignKey")]
+        public int IDExigence { get; set; }
 
         private string _Name;
         public string Name
@@ -55,7 +58,7 @@ namespace Alto_IT
                 }
         }
 
-
+        
         public int ForeignKey { get; set; }
 
         public int ForeignKey_TO_Norme { get; set; }

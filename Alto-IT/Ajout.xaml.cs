@@ -37,7 +37,7 @@ namespace Alto_IT
                 MessageBox.Show("Vous ne pouvez pas appeler une norme ainsi", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             } else
             {
-                if (Vue.ExigenceSelectionnee == null)
+                if (Vue.ExigenceSelectionnee == null || Vue.ExigenceSelectionnee.Name == "Menu")
                 {
                     CreateTable(Title.Text);
                     Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id);
@@ -59,7 +59,6 @@ namespace Alto_IT
                     catch (Exception msg)
                     {
                         MessageBox.Show("saveChanges AJOUT KO");
-                        MessageBox.Show(msg.Message);
                     }
                 }
             }
@@ -87,7 +86,7 @@ namespace Alto_IT
         {
             TableName = mw.FormaterToSQLRequest(TableName);
 
-            if (TableName != "Menu")
+            if (TableName != "_Menu")
             {
                 try
                 {

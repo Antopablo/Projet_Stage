@@ -83,6 +83,10 @@
     <Compile Include="Migrations\201907091153501_add foreignkeyTONorme.Designer.cs">
       <DependentUpon>201907091153501_add foreignkeyTONorme.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907100814505_ivrseProp.cs" />
+    <Compile Include="Migrations\201907100814505_ivrseProp.Designer.cs">
+      <DependentUpon>201907100814505_ivrseProp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -156,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907091153501_add foreignkeyTONorme.resx">
       <DependentUpon>201907091153501_add foreignkeyTONorme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907100814505_ivrseProp.resx">
+      <DependentUpon>201907100814505_ivrseProp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

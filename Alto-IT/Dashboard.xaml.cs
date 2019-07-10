@@ -64,6 +64,7 @@ namespace Alto_IT
 
         private void Supr_exigence_Click(object sender, RoutedEventArgs e)
         {
+
             if (Vue.ExigenceSelectionnee != null && Vue.ExigenceSelectionnee.Name != "Menu")
             {
                 if (MessageBox.Show("Voulez-vous supprimer "+ Vue.ExigenceSelectionnee.Name, "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
@@ -74,12 +75,14 @@ namespace Alto_IT
                     string NtmpTableName = "";
                     NtmpTableName = mw.FormaterToSQLRequest(Ntmp.Name);
 
+
+                    // Supprime de la DbSet, à mettre en 1er
+                    mw.database.ExigenceDatabase.Remove(Ntmp);
+                    mw.database.SaveChanges();
+
+
                     using (ApplicationDatabase context = new ApplicationDatabase())
                     {
-                        
-                        //supprime de la table Exigence son nom
-                        var xx = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Id = '" + Ntmp.Id + "'");
-
                         
                         //Quand suppression d'un parent => supprimer la table nominative des enfants
                         SuppressionTabEntant(CurrentItem);
@@ -97,12 +100,7 @@ namespace Alto_IT
 
                         // supprime la table à son nom
                         var x = context.Database.ExecuteSqlCommand("DROP TABLE " + CurrentItem);
-
-                        
                     }
-
-                    // Supprime de la DbSet, à mettre à la fin, reviens à la position 1
-                    mw.database.ExigenceDatabase.Remove(Ntmp);
 
                     // remove tous ses enfants de la collection Observable
                     Ntmp.ExigenceObervCollec.Clear();
