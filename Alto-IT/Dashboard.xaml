@@ -12,35 +12,7 @@
 
     <Grid x:Name="EspaceTravail">
 
-        <TreeView Name="TreeViewNORME"  SelectedItemChanged="TreeViewNORME_SelectedItemChanged" Margin="10,10,9.6,9.6">
-            <TreeView.Resources>
-                <Style TargetType="{x:Type TreeViewItem}">
-                    <Setter Property="HeaderTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <TextBlock Width="150"
-                                   TextWrapping="Wrap"
-                                   Text="{Binding}" 
-                                   Margin="5,10,0,10"
-                                   />
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TreeView.Resources>
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type self:Norme}" ItemsSource="{Binding NormeObervCollec}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock  Text="{Binding Nom_Norme}" Width="150"/>
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
-
-
-
-
-            <!--<TreeView Name="treeview">
+        <TreeView Name="TreeViewNORME"  SelectedItemChanged="TreeViewNORME_SelectedItemChanged" Margin="0,0,9.6,9.6" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="#00828790">
             <TreeView.Resources>
                 <Style TargetType="{x:Type TreeViewItem}">
                     <Setter Property="HeaderTemplate">
@@ -50,29 +22,27 @@
                                    TextWrapping="Wrap"
                                    Text="{Binding}" 
                                    Margin="5,10,0,10"
+                                   
                                    />
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>
                 </Style>
             </TreeView.Resources>
-            <TreeViewItem Header="Norme" Width="201" HorizontalAlignment="Left">
-                <TreeViewItem Name="GestionNorme" Header="Gestion des normes" MouseDoubleClick="GestionNorme_MouseDoubleClick"></TreeViewItem>
-                <TreeViewItem Name="Cloud19714" Header="Cloud Computing Circular 19/714 from CSSF" MouseDoubleClick="Cloud19714_MouseDoubleClick"></TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem Header="Appréciations">
-                <TreeViewItem Header="Mesures de sécurtié"></TreeViewItem>
-                <TreeViewItem Header="Vulnérabilités"></TreeViewItem>
-                <TreeViewItem Header="Risques"></TreeViewItem>
-                <TreeViewItem Header="Évènements redoutés"></TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem Header="Documentation">
-                <TreeViewItem Header="?????"></TreeViewItem>
-            </TreeViewItem>
-        </TreeView>-->
-        
+            <TreeView.Background>
+                <SolidColorBrush Color="#7FA5D8F7"/>
+            </TreeView.Background>
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type self:Norme}" ItemsSource="{Binding NormeObervCollec}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock  Text="{Binding Nom_Norme}" Width="160"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
 
-        <Grid Name="GridControle_Norme" Background="Aqua" Height="50" VerticalAlignment="Top" Margin="203,0,0,0" Visibility="Visible">
+
+        <Grid Name="GridControle_Norme" Height="50" VerticalAlignment="Top" Margin="203,0,-0.4,0" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -84,10 +54,10 @@
 
             <Button x:Name="Ajout_Norme" Click="Ajout_Norme_Click"  Content="Ajouter une Norme"/>
             <Button x:Name="Modif_Norme" Click="Modif_Norme_Click" Content="Modifier une Norme" Grid.Column="1"/>
-            <Button x:Name="Supr_Norme" Click="Supr_Norme_Click" Content="Supprimer une Norme" Grid.Column="2"/>
+            <Button x:Name="Supr_Norme" Click="Supr_Norme_Click" Content="Supprimer une Norme" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
         </Grid>
 
-        <Grid Name="GridControle_exigence" Background="Aqua" Height="50" VerticalAlignment="Top" Margin="203,0,0,0" Visibility="Collapsed">
+        <Grid Name="GridControle_exigence" Height="50" VerticalAlignment="Top" Margin="203,0,0,0" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -99,9 +69,10 @@
 
             <Button x:Name="Ajout_exigence" Click="Ajout_exigence_Click" Content="Ajouter une exigence"/>
             <Button x:Name="Modif_exigence" Click="Modif_exigence_Click" Content="Modifier une exigence" Grid.Column="1"/>
-            <Button x:Name="Supr_exigence" Click="Supr_exigence_Click" Content="Supprimer une exigence" Grid.Column="2"/>
+            <Button x:Name="Supr_exigence" Click="Supr_exigence_Click" Content="Supprimer une exigence" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
         </Grid>
-        <Frame x:Name="Frame_Vue_Circulaire" Margin="203,0,9.6,-0.4" ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
+
+        <Frame x:Name="Frame_Vue_Circulaire" Margin="203,50,9.6,-0.4" ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
 
     </Grid>
 </Window>
