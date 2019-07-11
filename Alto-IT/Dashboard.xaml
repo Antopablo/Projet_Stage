@@ -21,9 +21,7 @@
                                 <TextBlock Width="160"
                                    TextWrapping="Wrap"
                                    Text="{Binding}" 
-                                   Margin="5,10,0,10"
-                                   
-                                   />
+                                   Margin="5,10,0,10"/>
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>

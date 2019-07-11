@@ -19,6 +19,8 @@ namespace Alto_IT
     /// <summary>
     /// Logique d'interaction pour Vue_Circulaire.xaml
     /// </summary>
+    /// 
+
     public partial class Vue_Circulaire : Page
     {
         public Dashboard dash { get; set; }
@@ -80,5 +82,10 @@ namespace Alto_IT
         {
             ExigenceSelectionnee = (Exigence)treeviewFrame.SelectedItem;
         }
+
+
+        
+
+
     }
 }

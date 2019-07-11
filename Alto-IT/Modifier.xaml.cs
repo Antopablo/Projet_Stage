@@ -40,21 +40,18 @@ namespace Alto_IT
                     var w = context.Database.ExecuteSqlCommand("EXEC sp_rename '" + CurrentItem + "', '" + newTableName + "'");
 
 
-                    // modif dans sa table
-                    //var xx = context.Database.ExecuteSqlCommand("UPDATE " + newTableName + " SET Description = '" + Content.Text + "' WHERE Titre = " + "'" + newTableName + "'" + " ");
-                    //var x = context.Database.ExecuteSqlCommand("UPDATE " + newTableName + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + newTableName + "'" + " ");
-
                     //modif dans la table Exigence
-                    var yy = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Description = '" + Content.Text + "' WHERE Name = " + "'" + Vue.ExigenceSelectionnee.Name + "'" + " ");
-                    var y = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = '" + Title.Text + "' WHERE Name = " + "'" + Vue.ExigenceSelectionnee.Name + "'" + " ");
+
+                    var yy = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Description = ' " + mw.SimpleQuoteFormater(Content.Text) + " ' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
+                    var y = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = ' " + mw.SimpleQuoteFormater(Title.Text) + " ' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
 
                     //modif dans table parents
                     var ParentName = context.Database.SqlQuery<string>("SELECT Name from Exigences WHERE Id= " + Vue.ExigenceSelectionnee.ForeignKey).FirstOrDefault();
                     if (ParentName != "Menu" && ParentName != null)
                     {
                         ParentName = mw.FormaterToSQLRequest(ParentName);
-                        var zz = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Description = '" + Content.Text + "' WHERE Titre = " + "'" + Vue.ExigenceSelectionnee.Name + "'" + " ");
-                        var z = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Titre = '" + Title.Text + "' WHERE Titre = " + "'" + Vue.ExigenceSelectionnee.Name + "'" + " ");
+                        var zz = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Description = '" + mw.SimpleQuoteFormater(Content.Text) + "' WHERE ForeignKey = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
+                        var z = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Titre = '" + mw.SimpleQuoteFormater(Title.Text) + "' WHERE ForeignKey = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
                     }
 
 
@@ -65,8 +62,6 @@ namespace Alto_IT
                     //MajCollection obesrvable
                     // Réaliser avec INotifyPropertyChanges
 
-                    //sauvegarde
-                    //mw.database.SaveChanges();
                     Vue.AfficherDatabase();
                     Close();
 

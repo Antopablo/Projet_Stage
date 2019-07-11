@@ -30,11 +30,11 @@ namespace Alto_IT
             Vue = vc;
         }
 
-        private void ValiderNorme_Click(object sender, RoutedEventArgs e)
+        private void ValiderExigence_Click(object sender, RoutedEventArgs e)
         {
             if (Title.Text == "Menu")
             {
-                MessageBox.Show("Vous ne pouvez pas appeler une norme ainsi", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Vous ne pouvez pas appeler une exigence ainsi", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             } else
             {
                 if (Vue.ExigenceSelectionnee == null || Vue.ExigenceSelectionnee.Name == "Menu")
@@ -56,9 +56,9 @@ namespace Alto_IT
                     {
                         mw.database.SaveChanges();
                     }
-                    catch (Exception msg)
+                    catch (Exception)
                     {
-                        MessageBox.Show("saveChanges AJOUT KO");
+                        MessageBox.Show("Sauvegarde BDD impossible", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
@@ -77,14 +77,14 @@ namespace Alto_IT
                 }
                 catch (System.Data.SqlClient.SqlException)
                 {
-                    MessageBox.Show("Table non crée", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Impossible de créer la table dans la BDD", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
 
         public void RemplirTable(string TableName, int ForeignKey)
         {
-            TableName = mw.FormaterToSQLRequest(TableName);
+            TableName = mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(TableName));
 
             if (TableName != "_Menu")
             {
@@ -92,12 +92,13 @@ namespace Alto_IT
                 {
                     using (ApplicationDatabase context = new ApplicationDatabase())
                     {
-                        var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + " (ForeignKey, Titre, Description) VALUES (" + "'" + ForeignKey + "'" + "," + "'" + Title.Text + "'" + "," + "'" + Content.Text + "'" + ")");
+                        var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + " (ForeignKey, Titre, Description) VALUES (" + "'" + ForeignKey + "'" + "," + "'" + mw.SimpleQuoteFormater(Title.Text) + "'" + "," + "'" + mw.SimpleQuoteFormater(Content.Text) + "'" + ")");
                         Close();
                     }
                 }
                 catch (Exception)
                 {
+                    MessageBox.Show("Impossible d'ajouter à la table parent", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

@@ -54,7 +54,7 @@ namespace Alto_IT
 
             } else
             {
-                MessageBox.Show("Selectionnez une norme", "error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Selectionnez une norme à modifier", "error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
 
         }
@@ -71,9 +71,9 @@ namespace Alto_IT
                         foreach (string item in ListeEnfant)
                         {
                             // supprime de Exigences
-                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" + item + "'");
+                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" + mw.SimpleQuoteFormater(item) + "'");
                             // supprime la table à son nom
-                            var x = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.FormaterToSQLRequest(item));
+                            var x = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(item)));
                         }
                     }
                     mw.database.NormeDatabase.Remove(NormeSelectionnee);
@@ -85,7 +85,7 @@ namespace Alto_IT
             }
             else
             {
-                MessageBox.Show("Selectionnez une norme", "error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Selectionnez une norme à supprimer", "error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
     }

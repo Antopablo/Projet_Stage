@@ -69,11 +69,11 @@ namespace Alto_IT
             {
                 if (MessageBox.Show("Voulez-vous supprimer "+ Vue.ExigenceSelectionnee.Name, "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
-                    string CurrentItem = mw.FormaterToSQLRequest(Vue.ExigenceSelectionnee.Name);
+                    string CurrentItem = mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(Vue.ExigenceSelectionnee.Name));
                     Exigence Ntmp = Vue.ExigenceSelectionnee;
 
                     string NtmpTableName = "";
-                    NtmpTableName = mw.FormaterToSQLRequest(Ntmp.Name);
+                    NtmpTableName = mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(Ntmp.Name));
 
 
                     // Supprime de la DbSet, à mettre en 1er
@@ -95,7 +95,7 @@ namespace Alto_IT
                         if (ParentName != "Menu" && ParentName != null)
                         {
                             ParentName = mw.FormaterToSQLRequest(ParentName);
-                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM " + ParentName + " WHERE Titre = "+"'" + Ntmp.Name +"'");
+                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM " + ParentName + " WHERE Titre = '" + mw.SimpleQuoteFormater(Ntmp.Name) +"'");
                         }
 
                         // supprime la table à son nom
@@ -131,8 +131,8 @@ namespace Alto_IT
                 }
                 foreach (string item2 in ListeGenerale)
                 {
-                    var suppenfant = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.FormaterToSQLRequest(item2));
-                    var suppenfantTableExigence = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" + item2 + "'");
+                    var suppenfant = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(item2)));
+                    var suppenfantTableExigence = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" +mw.SimpleQuoteFormater(item2) + "'");
                 }
                 RequestListEnfant.Clear();
             }
