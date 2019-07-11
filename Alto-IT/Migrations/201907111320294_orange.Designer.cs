@@ -7,13 +7,13 @@ namespace Alto_IT.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class exigene : IMigrationMetadata
+    public sealed partial class orange : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(exigene));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(orange));
         
         string IMigrationMetadata.Id
         {
-            get { return "201907051027092_exigene"; }
+            get { return "201907111320294_orange"; }
         }
         
         string IMigrationMetadata.Source

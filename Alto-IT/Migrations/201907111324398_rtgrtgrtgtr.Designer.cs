@@ -7,13 +7,13 @@ namespace Alto_IT.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class ivrseProp : IMigrationMetadata
+    public sealed partial class rtgrtgrtgtr : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ivrseProp));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(rtgrtgrtgtr));
         
         string IMigrationMetadata.Id
         {
-            get { return "201907100814505_ivrseProp"; }
+            get { return "201907111324398_rtgrtgrtgtr"; }
         }
         
         string IMigrationMetadata.Source

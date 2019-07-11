@@ -48,6 +48,7 @@ namespace Alto_IT
             this.Height = SystemParameters.WorkArea.Height - 90;
             this.Width = SystemParameters.WorkArea.Width - 190;
             AfficherDatabase();
+
         }
 
         public void AfficherDatabase()
@@ -83,9 +84,10 @@ namespace Alto_IT
             ExigenceSelectionnee = (Exigence)treeviewFrame.SelectedItem;
         }
 
-
-        
-
-
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            ExigenceSelectionnee.Status = Exigence.STATUS.appliquee;
+            dash.mw.database.SaveChanges();
+        }
     }
 }

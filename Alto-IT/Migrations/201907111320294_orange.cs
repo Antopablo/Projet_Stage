@@ -3,16 +3,16 @@ namespace Alto_IT.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addforeignkeyTONorme : DbMigration
+    public partial class orange : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Exigences", "ForeignKey_TO_Norme", c => c.Int(nullable: false));
+            AddColumn("dbo.Exigences", "orange", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Exigences", "ForeignKey_TO_Norme");
+            DropColumn("dbo.Exigences", "orange");
         }
     }
 }

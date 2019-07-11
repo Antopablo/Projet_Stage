@@ -91,9 +91,10 @@
                                 <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="true">
-                                
-                                <Setter Property="Background" TargetName="Bd" Value="#FFADD8E6"/> <!--couleur du surlignage -->
-                                
+
+                                <Setter Property="Background" TargetName="Bd" Value="#FFADD8E6"/>
+                                <!--couleur du surlignage -->
+
                                 <Setter Property="Foreground" Value="Chocolate"/>
                             </Trigger>
                             <MultiTrigger>
@@ -134,8 +135,8 @@
                         <TextBlock Text=" [" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding ExigenceObervCollec.Count}" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <TextBlock Text="]" Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                        <Button Content="Bouton" DockPanel.Dock="Right" MaxWidth="70" HorizontalAlignment="Right" Margin="0,0,5,0"></Button>
-                        <ProgressBar x:Name="StatutExigence" Value="100" DockPanel.Dock="Right" HorizontalAlignment="Right" Width="100" Height="20" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="Gray" ToolTip="Status"></ProgressBar>
+                        <Button Name="test" Content="Bouton" DockPanel.Dock="Right" MaxWidth="70" HorizontalAlignment="Right" Margin="0,0,5,0" Click="Test_Click"></Button>
+                        <StatusBar x:Name="StatutExigence" DockPanel.Dock="Right" HorizontalAlignment="Right" Width="100" Height="20" VerticalAlignment="Center" Margin="0,0,5,0" Background="{Binding Couleur}" ToolTip="Status"></StatusBar>
                     </DockPanel>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>

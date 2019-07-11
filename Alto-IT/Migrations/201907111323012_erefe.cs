@@ -3,16 +3,16 @@ namespace Alto_IT.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ivrseProp : DbMigration
+    public partial class erefe : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Exigences", "IDExigence", c => c.Int(nullable: false));
+            DropColumn("dbo.Exigences", "orange");
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Exigences", "IDExigence");
+            AddColumn("dbo.Exigences", "orange", c => c.String());
         }
     }
 }

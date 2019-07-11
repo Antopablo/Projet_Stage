@@ -74,21 +74,25 @@
     <Compile Include="AjoutNorme.xaml.cs">
       <DependentUpon>AjoutNorme.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907051027092_exigene.cs" />
-    <Compile Include="Migrations\201907051027092_exigene.Designer.cs">
-      <DependentUpon>201907051027092_exigene.cs</DependentUpon>
+    <Compile Include="Migrations\201907111234206_init status.cs" />
+    <Compile Include="Migrations\201907111234206_init status.Designer.cs">
+      <DependentUpon>201907111234206_init status.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907091132244_Ajout Normes.cs" />
-    <Compile Include="Migrations\201907091132244_Ajout Normes.Designer.cs">
-      <DependentUpon>201907091132244_Ajout Normes.cs</DependentUpon>
+    <Compile Include="Migrations\201907111320294_orange.cs" />
+    <Compile Include="Migrations\201907111320294_orange.Designer.cs">
+      <DependentUpon>201907111320294_orange.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907091153501_add foreignkeyTONorme.cs" />
-    <Compile Include="Migrations\201907091153501_add foreignkeyTONorme.Designer.cs">
-      <DependentUpon>201907091153501_add foreignkeyTONorme.cs</DependentUpon>
+    <Compile Include="Migrations\201907111323012_erefe.cs" />
+    <Compile Include="Migrations\201907111323012_erefe.Designer.cs">
+      <DependentUpon>201907111323012_erefe.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201907100814505_ivrseProp.cs" />
-    <Compile Include="Migrations\201907100814505_ivrseProp.Designer.cs">
-      <DependentUpon>201907100814505_ivrseProp.cs</DependentUpon>
+    <Compile Include="Migrations\201907111324398_rtgrtgrtgtr.cs" />
+    <Compile Include="Migrations\201907111324398_rtgrtgrtgtr.Designer.cs">
+      <DependentUpon>201907111324398_rtgrtgrtgtr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907111336572_testCouleur.cs" />
+    <Compile Include="Migrations\201907111336572_testCouleur.Designer.cs">
+      <DependentUpon>201907111336572_testCouleur.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
@@ -155,17 +159,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201907051027092_exigene.resx">
-      <DependentUpon>201907051027092_exigene.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907111234206_init status.resx">
+      <DependentUpon>201907111234206_init status.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907091132244_Ajout Normes.resx">
-      <DependentUpon>201907091132244_Ajout Normes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907111320294_orange.resx">
+      <DependentUpon>201907111320294_orange.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907091153501_add foreignkeyTONorme.resx">
-      <DependentUpon>201907091153501_add foreignkeyTONorme.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907111323012_erefe.resx">
+      <DependentUpon>201907111323012_erefe.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907100814505_ivrseProp.resx">
-      <DependentUpon>201907100814505_ivrseProp.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907111324398_rtgrtgrtgtr.resx">
+      <DependentUpon>201907111324398_rtgrtgrtgtr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907111336572_testCouleur.resx">
+      <DependentUpon>201907111336572_testCouleur.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
