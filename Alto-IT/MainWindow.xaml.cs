@@ -61,13 +61,26 @@ namespace Alto_IT
             Text = Text.Replace(' ', '_');
             Text = Text.Replace("'", "");
             Text = Text.Replace('/', '_');
+            Text = Text.Replace('\\', '_');
+            Text = Text.Replace('*', '_');
+            Text = Text.Replace(';', '_');
+            Text = Text.Replace('{', '_');
+            Text = Text.Replace('}', '_');
+            Text = Text.Replace('^', '_');
+            Text = Text.Replace('$', '_');
+            Text = Text.Replace('?', '_');
+            Text = Text.Replace('!', '_');
+            Text = Text.Replace('<', '_');
+            Text = Text.Replace('>', '_');
+            Text = Text.Replace('§', '_');
+            Text = Text.Replace('%', '_');
             Text = Text.Replace("\"", "");
             Text = Text.Replace("[", "_");
             Text = Text.Replace("]", "_");
             Text = Text.Replace(".", "_");
             Text = Text.Replace("-", "_");
             Text.Trim();
-            return Text;
+            return Text; 
         }
 
         public string SimpleQuoteFormater(string text)

@@ -65,19 +65,24 @@ namespace Alto_IT
             {
                 if (MessageBox.Show("Êtes-vous sûr de vouloir supprimer la norme " + NormeSelectionnee.Nom_Norme + " ?", "Supprimer", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
+                    int IDSelected = NormeSelectionnee.Id;
+
+                    mw.database.NormeDatabase.Remove(NormeSelectionnee);
+                    mw.database.SaveChanges(); 
+
                     using (ApplicationDatabase context = new ApplicationDatabase())
                     {
-                        var ListeEnfant = context.Database.SqlQuery<string>("SELECT Name FROM Exigences WHERE ForeignKey_TO_Norme = " + NormeSelectionnee.Id).ToList();
+                        //var ListeEnfant = context.Database.SqlQuery<string>("SELECT Name FROM Exigences WHERE ForeignKey_TO_Norme = " + NormeSelectionnee.Id).ToList();
+                        var ListeEnfant = context.Database.SqlQuery<string>("SELECT Name FROM Exigences WHERE ForeignKey_TO_Norme = " + IDSelected).ToList();
                         foreach (string item in ListeEnfant)
                         {
-                            // supprime de Exigences
-                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" + mw.SimpleQuoteFormater(item) + "'");
                             // supprime la table à son nom
                             var x = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(item)));
+                            // supprime de Exigences
+                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" + mw.SimpleQuoteFormater(item) + "'");
                         }
                     }
-                    mw.database.NormeDatabase.Remove(NormeSelectionnee);
-                    mw.database.SaveChanges();
+
                     dashb.ROOT_Normes.NormeObervCollec.Clear();
                     dashb.AfficherLesNormes();
                     Close();

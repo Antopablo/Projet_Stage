@@ -14,6 +14,7 @@ namespace Alto_IT
         public Vue_Circulaire Vue { get; set; }
         public Norme ROOT_Normes { get; set; }
         public Norme NormeSelectionnee { get; set; }
+        public bool FenetreOuverte { get; set; }
 
 
         public Dashboard(MainWindow m)
@@ -39,8 +40,12 @@ namespace Alto_IT
 
         private void Ajout_exigence_Click(object sender, RoutedEventArgs e)
         {
-            Ajout A = new Ajout(mw, this, (Vue_Circulaire)Frame_Vue_Circulaire.Content);
-            A.Show();
+            if (FenetreOuverte == false)
+            {
+                Ajout A = new Ajout(mw, this, (Vue_Circulaire)Frame_Vue_Circulaire.Content);
+                A.Show();
+                FenetreOuverte = true;
+            }
         }
 
         private void Modif_exigence_Click(object sender, RoutedEventArgs e)
@@ -142,8 +147,13 @@ namespace Alto_IT
 
         private void Ajout_Norme_Click(object sender, RoutedEventArgs e)
         {
-            AjoutNorme AJ = new AjoutNorme(mw, this, Vue);
-            AJ.Show();
+            if (FenetreOuverte == false)
+            {
+                AjoutNorme AJ = new AjoutNorme(mw, this, Vue);
+                AJ.Show();
+                FenetreOuverte = true;
+            }
+
         }
 
         private void Modif_Norme_Click(object sender, RoutedEventArgs e)

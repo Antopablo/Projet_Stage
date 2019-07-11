@@ -43,8 +43,12 @@ namespace Alto_IT
             catch (Exception)
             {
             }
-
             Close();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            dashb.FenetreOuverte = false;
         }
     }
 }

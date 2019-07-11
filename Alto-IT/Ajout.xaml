@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alto_IT"
         mc:Ignorable="d"
-        Title="Ajout" Height="450" Width="800">
+        Title="Ajout" Height="450" Width="800"
+        Closed="Window_Closed">
     <Grid>
         <TextBox Name="Title" HorizontalAlignment="Left" Height="34" Margin="124,18,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" VerticalContentAlignment="Center"/>
         <TextBox x:Name="Content" HorizontalAlignment="Left" Height="154" Margin="124,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" Padding="5,5,5,5"/>

@@ -62,6 +62,7 @@ namespace Alto_IT
                     }
                 }
             }
+            dashb.FenetreOuverte = false;
             Close();
         }
 
@@ -101,6 +102,11 @@ namespace Alto_IT
                     MessageBox.Show("Impossible d'ajouter à la table parent", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            dashb.FenetreOuverte = false;
         }
     }
 }

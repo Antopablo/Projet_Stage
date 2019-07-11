@@ -91,9 +91,9 @@
                                 <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="true">
-                                <!--<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
+                                
                                 <Setter Property="Background" TargetName="Bd" Value="#FFADD8E6"/> <!--couleur du surlignage -->
-                                <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>-->
+                                
                                 <Setter Property="Foreground" Value="Chocolate"/>
                             </Trigger>
                             <MultiTrigger>
@@ -127,20 +127,17 @@
 
     <Grid Background="#FFEBDFDF" Margin="0,0,32.2,9.6" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" >
         <TreeView Name="treeviewFrame"  SelectedItemChanged="TreeviewFrame_SelectedItemChanged" Margin="10" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.RowSpan="2" Grid.ColumnSpan="2" ItemContainerStyle="{StaticResource StretchTreeViewItemStyle}">
-            <!--<TreeView.ItemTemplate>-->
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type self:Exigence}" ItemsSource="{Binding ExigenceObervCollec}">
-                    <!--<StackPanel Orientation="Horizontal">-->
                     <DockPanel LastChildFill="True">
                         <TextBlock Text="{Binding Name}" DockPanel.Dock="Left" VerticalAlignment="Center"/>
                         <TextBlock Text=" [" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding ExigenceObervCollec.Count}" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <TextBlock Text="]" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <Button Content="Bouton" DockPanel.Dock="Right" MaxWidth="70" HorizontalAlignment="Right" Margin="0,0,5,0"></Button>
-                        <!--</StackPanel>-->
+                        <ProgressBar x:Name="StatutExigence" Value="100" DockPanel.Dock="Right" HorizontalAlignment="Right" Width="100" Height="20" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="Gray" ToolTip="Status"></ProgressBar>
                     </DockPanel>
                 </HierarchicalDataTemplate>
-                <!--</TreeView.ItemTemplate>-->
             </TreeView.Resources>
         </TreeView>
     </Grid>
