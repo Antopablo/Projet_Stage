@@ -89,7 +89,6 @@ namespace Alto_IT
         public Dictionary<STATUS, string> Dico_couleurs { get; set; }
 
         private string _Couleur;
-
         public string Couleur
         {
             get { return _Couleur; }
@@ -104,7 +103,7 @@ namespace Alto_IT
         public STATUS Status
         {
             get { return _Status; }
-            set { _Status = value; GetValueDico(); }
+            set { _Status = value; GetValueDico(); OnPropertyChanged("Status"); }
         }
 
 
@@ -116,7 +115,6 @@ namespace Alto_IT
         public ObservableCollection<Exigence> ExigenceObervCollec { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;

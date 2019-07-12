@@ -21,7 +21,7 @@ namespace Alto_IT
         {
             InitializeComponent();
             mw = m;
-           Vue = new Vue_Circulaire(this);
+            Vue = new Vue_Circulaire(this);
 
             ROOT_Normes = new Norme("Normes");
             TreeViewNORME.Items.Add(ROOT_Normes);
@@ -50,21 +50,25 @@ namespace Alto_IT
 
         private void Modif_exigence_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (FenetreOuverte == false)
             {
-                if (Vue.ExigenceSelectionnee.Name != "Menu")
+                try
                 {
-                    Modifier M = new Modifier(mw, Vue);
-                    M.Title.Text = Vue.ExigenceSelectionnee.Name;
-                    M.Content.Text = Vue.ExigenceSelectionnee.Description;
-                    M.Show();
-
+                    if (Vue.ExigenceSelectionnee.Name != "Menu")
+                    {
+                        Modifier M = new Modifier(mw, Vue);
+                        M.Title.Text = Vue.ExigenceSelectionnee.Name;
+                        M.Content.Text = Vue.ExigenceSelectionnee.Description;
+                        M.Show();
+                        FenetreOuverte = true;
+                    }
+                }
+                catch (System.Exception)
+                {
+                    MessageBox.Show("Selectionner une norme à modifier", "error", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
-            catch (System.Exception)
-            {
-                MessageBox.Show("Selectionner une norme à modifier", "error", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            
         }
 
         private void Supr_exigence_Click(object sender, RoutedEventArgs e)
@@ -158,22 +162,30 @@ namespace Alto_IT
 
         private void Modif_Norme_Click(object sender, RoutedEventArgs e)
         {
-            AffichageDesNormes AF = new AffichageDesNormes(mw, this);
-            AF.BoutonValiderModify.Visibility = Visibility.Visible;
-            AF.BoutonSupprimer.Visibility = Visibility.Hidden;
-            AF.TitreModify.Visibility = Visibility.Visible;
-            AF.TitreModifyBlock.Visibility = Visibility.Hidden;
-            AF.Show();
+            if (FenetreOuverte == false)
+            {
+                AffichageDesNormes AF = new AffichageDesNormes(mw, this);
+                AF.BoutonValiderModify.Visibility = Visibility.Visible;
+                AF.BoutonSupprimer.Visibility = Visibility.Hidden;
+                AF.TitreModify.Visibility = Visibility.Visible;
+                AF.TitreModifyBlock.Visibility = Visibility.Hidden;
+                AF.Show();
+                FenetreOuverte = true;
+            }
         }
 
         private void Supr_Norme_Click(object sender, RoutedEventArgs e)
         {
-            AffichageDesNormes AF = new AffichageDesNormes(mw, this);
-            AF.BoutonValiderModify.Visibility = Visibility.Hidden;
-            AF.BoutonSupprimer.Visibility = Visibility.Visible;
-            AF.TitreModify.Visibility = Visibility.Hidden;
-            AF.TitreModifyBlock.Visibility = Visibility.Visible;
-            AF.Show();
+            if (FenetreOuverte == false)
+            {
+                AffichageDesNormes AF = new AffichageDesNormes(mw, this);
+                AF.BoutonValiderModify.Visibility = Visibility.Hidden;
+                AF.BoutonSupprimer.Visibility = Visibility.Visible;
+                AF.TitreModify.Visibility = Visibility.Hidden;
+                AF.TitreModifyBlock.Visibility = Visibility.Visible;
+                AF.Show();
+                FenetreOuverte = true;
+            }
         }
 
         private void TreeViewNORME_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

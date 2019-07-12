@@ -11,7 +11,6 @@ namespace Alto_IT
     {
         public MainWindow mw { get; set; }
         public Vue_Circulaire Vue { get; set; }
-
         public Modifier()
         {
             InitializeComponent();
@@ -62,6 +61,28 @@ namespace Alto_IT
                     //MajCollection obesrvable
                     // Réaliser avec INotifyPropertyChanges
 
+                    switch (ComboBoxStatus.Text)
+                    {
+                        case "Non Évaluée":
+                            Vue.ExigenceSelectionnee.Status = Exigence.STATUS.non_evaluee;
+                            break;
+                        case "Non Appliquée":
+                            Vue.ExigenceSelectionnee.Status = Exigence.STATUS.non_appliquee;
+                            break;
+                        case "Programmée":
+                            Vue.ExigenceSelectionnee.Status = Exigence.STATUS.programmee;
+                            break;
+                        case "Appliquée":
+                            Vue.ExigenceSelectionnee.Status = Exigence.STATUS.appliquee;
+                            break;
+                        case "Non Applicable":
+                            Vue.ExigenceSelectionnee.Status = Exigence.STATUS.non_applicable;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    mw.database.SaveChanges();
                     Vue.AfficherDatabase();
                     Close();
 
@@ -70,6 +91,13 @@ namespace Alto_IT
             {
                 MessageBox.Show("Selectionner une ligne", "error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+
+           
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            Vue.dash.FenetreOuverte = false;
         }
     }
 }

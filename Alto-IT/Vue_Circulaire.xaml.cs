@@ -28,7 +28,6 @@ namespace Alto_IT
        public List<Exigence> ListeExigence { get; set; }
         public Exigence ROOT_Exigences { get; set; }
 
-
         public Vue_Circulaire()
         {
             InitializeComponent();
@@ -84,10 +83,5 @@ namespace Alto_IT
             ExigenceSelectionnee = (Exigence)treeviewFrame.SelectedItem;
         }
 
-        private void Test_Click(object sender, RoutedEventArgs e)
-        {
-            ExigenceSelectionnee.Status = Exigence.STATUS.appliquee;
-            dash.mw.database.SaveChanges();
-        }
     }
 }

@@ -93,5 +93,10 @@ namespace Alto_IT
                 MessageBox.Show("Selectionnez une norme à supprimer", "error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            dashb.FenetreOuverte = false;
+        }
     }
 }
