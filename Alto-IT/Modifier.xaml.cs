@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using Microsoft.Win32;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows;
+using System;
 
 namespace Alto_IT
 {
@@ -23,7 +26,7 @@ namespace Alto_IT
             Vue = v;
         }
 
-        private void ModifierNorme_Click(object sender, RoutedEventArgs e)
+        private void ModifierExigence_Click(object sender, RoutedEventArgs e)
         {
             if (Vue.ExigenceSelectionnee != null && Vue.ExigenceSelectionnee.Name != "Menu")
             {
@@ -41,16 +44,16 @@ namespace Alto_IT
 
                     //modif dans la table Exigence
 
-                    var yy = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Description = ' " + mw.SimpleQuoteFormater(Content.Text) + " ' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
-                    var y = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = ' " + mw.SimpleQuoteFormater(Title.Text) + " ' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
+                    var yy = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Description = '" + mw.SimpleQuoteFormater(Content.Text) + "' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
+                    var y = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = '" + mw.SimpleQuoteFormater(Title.Text) + "' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
 
                     //modif dans table parents
                     var ParentName = context.Database.SqlQuery<string>("SELECT Name from Exigences WHERE Id= " + Vue.ExigenceSelectionnee.ForeignKey).FirstOrDefault();
                     if (ParentName != "Menu" && ParentName != null)
                     {
-                        ParentName = mw.FormaterToSQLRequest(ParentName);
-                        var zz = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Description = '" + mw.SimpleQuoteFormater(Content.Text) + "' WHERE ForeignKey = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
-                        var z = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Titre = '" + mw.SimpleQuoteFormater(Title.Text) + "' WHERE ForeignKey = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
+                        ParentName = mw.FormaterToSQLRequest(ParentName);                                                                                                                   
+                        var zz = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Description = '" + mw.SimpleQuoteFormater(Content.Text) + "' WHERE Titre = '" + Vue.ExigenceSelectionnee.Name +"'");
+                        var z = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Titre = '" + mw.SimpleQuoteFormater(Title.Text) + "' WHERE Titre = '" + Vue.ExigenceSelectionnee.Name + "'");
                     }
 
 
@@ -98,6 +101,30 @@ namespace Alto_IT
         private void Window_Closed(object sender, System.EventArgs e)
         {
             Vue.dash.FenetreOuverte = false;
+        }
+
+        private void Bouton_AjouterDocument_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.ShowDialog();
+
+            string fileName = open.SafeFileName;
+            string sourcePath = open.FileName;
+            string targetPath = @"C:\Users\stagiaire\Desktop\Projet_Stage\Projet_Stage\Alto-IT\bin\Debug\DocumentClient\" + fileName;
+
+            try
+            {
+                File.Copy(sourcePath, targetPath);
+            }
+            catch (IOException)
+            {
+                if (MessageBox.Show("Le document existe déjà, voulez-vous le mettre à jour ?", "Fichier existant", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
+                {
+                    File.Delete(targetPath);
+                    File.Copy(sourcePath, targetPath);
+                }
+            }
+            Vue.ExigenceSelectionnee.DocumentPath = targetPath;
         }
     }
 }

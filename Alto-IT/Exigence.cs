@@ -75,6 +75,15 @@ namespace Alto_IT
             }
         }
 
+        private string _DocumentPath;
+        public string DocumentPath
+        {
+            get { return _DocumentPath; }
+            set { _DocumentPath = value;
+                OnPropertyChanged("DocumentPath");
+            }
+        }
+
 
         private string _description;
         public string Description

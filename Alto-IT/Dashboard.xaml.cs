@@ -132,6 +132,7 @@ namespace Alto_IT
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
                 var RequestListEnfant = context.Database.SqlQuery<string>("Select Titre from " + CurrentItem).ToList();
+                //bug quand je fais e1 > e2 > e3 > je modifie e2 > je supprime e3 > je supprime e1
                 ListeEnfant = RequestListEnfant;
                 foreach (string item in ListeEnfant)
                 {
