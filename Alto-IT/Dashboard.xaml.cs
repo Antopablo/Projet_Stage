@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 
@@ -80,11 +81,14 @@ namespace Alto_IT
             {
                 if (MessageBox.Show("Voulez-vous supprimer "+ Vue.ExigenceSelectionnee.Name, "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
-                    string CurrentItem = mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(Vue.ExigenceSelectionnee.Name));
+                    string CurrentItem = TableFormater(SimpleQuoteFormater(FormaterToSQLRequest(Vue.ExigenceSelectionnee.Name)));
+                    
                     Exigence Ntmp = Vue.ExigenceSelectionnee;
 
-                    string NtmpTableName = "";
-                    NtmpTableName = mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(Ntmp.Name));
+                    //string NtmpTableName = "";
+                    //NtmpTableName = mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(Ntmp.Name));
+                    //StringBuilder builderr = new StringBuilder(NtmpTableName);
+                    //NtmpTableName = builderr.Insert(1, NormeSelectionnee.Id).ToString();
 
 
                     // Supprime de la DbSet, à mettre en 1er
@@ -105,8 +109,8 @@ namespace Alto_IT
 
                         if (ParentName != "Menu" && ParentName != null)
                         {
-                            ParentName = mw.FormaterToSQLRequest(ParentName);
-                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM " + ParentName + " WHERE Titre = '" + mw.SimpleQuoteFormater(Ntmp.Name) +"'");
+                            ParentName = TableFormater(FormaterToSQLRequest(ParentName));
+                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM " + ParentName + " WHERE Titre = '" + SimpleQuoteFormater(Ntmp.Name) +"'");
                         }
 
                         // supprime la table à son nom
@@ -134,17 +138,21 @@ namespace Alto_IT
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
                 var RequestListEnfant = context.Database.SqlQuery<string>("Select Titre from " + CurrentItem).ToList();
-                //bug quand je fais e1 > e2 > e3 > je modifie e2 > je supprime e3 > je supprime e1
                 ListeEnfant = RequestListEnfant;
                 foreach (string item in ListeEnfant)
                 {
+                    string tmp = "";
                     ListeGenerale.Add(item);
-                    SuppressionTabEntant(mw.FormaterToSQLRequest(item));
+                    tmp = item;                   
+                    SuppressionTabEntant(TableFormater(FormaterToSQLRequest(tmp)));
                 }
                 foreach (string item2 in ListeGenerale)
                 {
-                    var suppenfant = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(item2)));
-                    var suppenfantTableExigence = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" +mw.SimpleQuoteFormater(item2) + "'");
+                    var suppenfantTableExigence = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" + SimpleQuoteFormater(item2) + "'");
+
+                    string tmp2 = "";
+                    tmp2 = item2;
+                    var suppenfant = context.Database.ExecuteSqlCommand("DROP TABLE " + TableFormater(SimpleQuoteFormater(FormaterToSQLRequest(tmp2))));
                 }
                 RequestListEnfant.Clear();
             }
@@ -218,6 +226,44 @@ namespace Alto_IT
             {
                 ROOT_Normes.NormeObervCollec.Add(item);
             }
+        }
+
+        public string FormaterToSQLRequest(string Text)
+        {
+            Text = Text.Replace(' ', '_');
+            Text = Text.Replace("'", "");
+            Text = Text.Replace('/', '_');
+            Text = Text.Replace('\\', '_');
+            Text = Text.Replace('*', '_');
+            Text = Text.Replace(';', '_');
+            Text = Text.Replace('{', '_');
+            Text = Text.Replace('}', '_');
+            Text = Text.Replace('^', '_');
+            Text = Text.Replace('$', '_');
+            Text = Text.Replace('?', '_');
+            Text = Text.Replace('!', '_');
+            Text = Text.Replace('<', '_');
+            Text = Text.Replace('>', '_');
+            Text = Text.Replace('§', '_');
+            Text = Text.Replace('%', '_');
+            Text = Text.Replace("\"", "");
+            Text = Text.Replace("[", "_");
+            Text = Text.Replace("]", "_");
+            Text = Text.Replace(".", "_");
+            Text = Text.Replace("-", "_");
+            Text.Trim();
+            return Text;
+        }
+
+        public string TableFormater(string Text)
+        {
+            StringBuilder builder = new StringBuilder(Text);
+            return Text = builder.Insert(0, "_"+NormeSelectionnee.Id).ToString();
+        }
+
+        public string SimpleQuoteFormater(string text)
+        {
+            return text.Replace("'", "''");
         }
     }
 }

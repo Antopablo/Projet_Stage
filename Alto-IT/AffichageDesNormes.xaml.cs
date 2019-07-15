@@ -66,6 +66,7 @@ namespace Alto_IT
                 if (MessageBox.Show("Êtes-vous sûr de vouloir supprimer la norme " + NormeSelectionnee.Nom_Norme + " ?", "Supprimer", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
                     int IDSelected = NormeSelectionnee.Id;
+                    string NameSalected = NormeSelectionnee.Nom_Norme;
 
                     mw.database.NormeDatabase.Remove(NormeSelectionnee);
                     mw.database.SaveChanges(); 
@@ -77,9 +78,11 @@ namespace Alto_IT
                         foreach (string item in ListeEnfant)
                         {
                             // supprime la table à son nom
-                            var x = context.Database.ExecuteSqlCommand("DROP TABLE " + mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(item)));
+                            var x = context.Database.ExecuteSqlCommand("DROP TABLE " + dashb.SimpleQuoteFormater(dashb.FormaterToSQLRequest("_"+IDSelected+item)));
+                            // erreur ICI, formatage du nom de la table pas bon
+
                             // supprime de Exigences
-                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" + mw.SimpleQuoteFormater(item) + "'");
+                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" + dashb.SimpleQuoteFormater(item) + "'");
                         }
                     }
 

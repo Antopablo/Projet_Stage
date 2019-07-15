@@ -68,8 +68,7 @@ namespace Alto_IT
 
         public void CreateTable(string TableName)
         {
-            TableName = mw.FormaterToSQLRequest(TableName);
-
+            TableName = dashb.TableFormater(dashb.SimpleQuoteFormater(dashb.FormaterToSQLRequest(TableName)));
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
                 try
@@ -85,7 +84,7 @@ namespace Alto_IT
 
         public void RemplirTable(string TableName, int ForeignKey)
         {
-            TableName = mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(TableName));
+            TableName = dashb.TableFormater(dashb.SimpleQuoteFormater(dashb.FormaterToSQLRequest(TableName)));
 
             if (TableName != "_Menu")
             {
@@ -93,7 +92,7 @@ namespace Alto_IT
                 {
                     using (ApplicationDatabase context = new ApplicationDatabase())
                     {
-                        var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + " (ForeignKey, Titre, Description) VALUES (" + "'" + ForeignKey + "'" + "," + "'" + mw.SimpleQuoteFormater(Title.Text) + "'" + "," + "'" + mw.SimpleQuoteFormater(Content.Text) + "'" + ")");
+                        var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + " (ForeignKey, Titre, Description) VALUES (" + "'" + ForeignKey + "'" + "," + "'" + dashb.SimpleQuoteFormater(Title.Text) + "'" + "," + "'" + dashb.SimpleQuoteFormater(Content.Text) + "'" + ")");
                         Close();
                     }
                 }
