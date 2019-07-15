@@ -59,6 +59,8 @@ namespace Alto_IT
                         Modifier M = new Modifier(mw, Vue);
                         M.Title.Text = Vue.ExigenceSelectionnee.Name;
                         M.Content.Text = Vue.ExigenceSelectionnee.Description;
+                        M.Status.Text = Vue.ExigenceSelectionnee.Status.ToString();
+                        M.Document.Text = Vue.ExigenceSelectionnee.DocumentName;
                         M.Show();
                         FenetreOuverte = true;
                     }

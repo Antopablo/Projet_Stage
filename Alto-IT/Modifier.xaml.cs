@@ -115,6 +115,8 @@ namespace Alto_IT
             try
             {
                 File.Copy(sourcePath, targetPath);
+                Vue.ExigenceSelectionnee.DocumentPath = targetPath;
+                Vue.ExigenceSelectionnee.DocumentName = fileName;
             }
             catch (IOException)
             {
@@ -122,9 +124,11 @@ namespace Alto_IT
                 {
                     File.Delete(targetPath);
                     File.Copy(sourcePath, targetPath);
+                    Vue.ExigenceSelectionnee.DocumentPath = targetPath;
+                    Vue.ExigenceSelectionnee.DocumentName = fileName;
                 }
             }
-            Vue.ExigenceSelectionnee.DocumentPath = targetPath;
+
         }
     }
 }

@@ -84,6 +84,18 @@ namespace Alto_IT
             }
         }
 
+        private string _DocumentName;
+        
+        public string DocumentName
+
+        {
+            get { return _DocumentName; }
+            set { _DocumentName = value;
+                OnPropertyChanged("DocumentName");
+            }
+        }
+
+
 
         private string _description;
         public string Description
@@ -98,6 +110,7 @@ namespace Alto_IT
         public Dictionary<STATUS, string> Dico_couleurs { get; set; }
 
         private string _Couleur;
+        [NotMapped]
         public string Couleur
         {
             get { return _Couleur; }

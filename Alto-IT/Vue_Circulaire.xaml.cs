@@ -86,10 +86,25 @@ namespace Alto_IT
             ExigenceSelectionnee = (Exigence)treeviewFrame.SelectedItem;
         }
 
-        private void Test_Click(object sender, RoutedEventArgs e)
+        private void DocumentViewer_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            
-            
+            try
+            {
+                String fileName = ExigenceSelectionnee.DocumentPath;
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                process.StartInfo.FileName = fileName;
+                process.Start();
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Sélectionnez une exigence");
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Aucun document associé");
+            }
+
         }
+
     }
 }

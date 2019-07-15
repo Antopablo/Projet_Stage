@@ -131,15 +131,12 @@
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type self:Exigence}" ItemsSource="{Binding ExigenceObervCollec}">
                     <DockPanel LastChildFill="True">
-                        <TextBlock Text="{Binding Name}" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="2,0,0,0"/>
+                        <TextBlock Text="{Binding Name}" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="2,0,0,0" ToolTip="{Binding Description}"/>
                         <TextBlock Text=" [" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding ExigenceObervCollec.Count}" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <TextBlock Text="]" Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                        <TextBlock Text="YEHYEH" DockPanel.Dock="Right" VerticalAlignment="Center" >
-                            <TextBlock.ToolTip>
-                                <!--insert everything you want here-->
-                                <Image Source="{Binding DocumentPath}"/>
-                            </TextBlock.ToolTip>
+                        <TextBlock x:Name="DocumentViewer" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5,0,5,0" Cursor="Help" PreviewMouseUp="DocumentViewer_PreviewMouseUp">
+                            <Image Source="https://cdn.icon-icons.com/icons2/1129/PNG/512/fileinterfacesymboloftextpapersheet_79740.png" Width="20" Height="20" ToolTip="{Binding DocumentName}"></Image>
                         </TextBlock>
                         <StatusBar x:Name="StatutExigence" DockPanel.Dock="Right" HorizontalAlignment="Right" Width="100" Height="20" VerticalAlignment="Center" Margin="0,0,5,0" Background="{Binding Couleur}" ToolTip="{Binding Status}"></StatusBar>
                     </DockPanel>

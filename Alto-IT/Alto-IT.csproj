@@ -113,6 +113,14 @@
     <Compile Include="Migrations\201907121012342_Ajout documents v1.Designer.cs">
       <DependentUpon>201907121012342_Ajout documents v1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907150808012_Modif.cs" />
+    <Compile Include="Migrations\201907150808012_Modif.Designer.cs">
+      <DependentUpon>201907150808012_Modif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907150831251_modif2.cs" />
+    <Compile Include="Migrations\201907150831251_modif2.Designer.cs">
+      <DependentUpon>201907150831251_modif2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -195,6 +203,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907121012342_Ajout documents v1.resx">
       <DependentUpon>201907121012342_Ajout documents v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907150808012_Modif.resx">
+      <DependentUpon>201907150808012_Modif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907150831251_modif2.resx">
+      <DependentUpon>201907150831251_modif2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
