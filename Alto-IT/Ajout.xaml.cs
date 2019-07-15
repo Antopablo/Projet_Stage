@@ -46,10 +46,11 @@ namespace Alto_IT
                         Vue.ROOT_Exigences.ExigenceObervCollec.Add(ExigenceParent);
                         mw.database.ExigenceDatabase.Add(ExigenceParent);
                         mw.database.SaveChanges();
+                        Close();
                     }
                     catch (System.Data.SqlClient.SqlException)
                     {
-                        MessageBox.Show("Une Exigence à ce nom existe déjà", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Une Exigence à ce nom existe déjà ou le nom est trop long", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
@@ -69,6 +70,7 @@ namespace Alto_IT
                             SupprimerTable(Title.Text);
                             MessageBox.Show("Impossible de remplir dans table parent", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
+                        Close();
                     }
                     catch (System.Data.SqlClient.SqlException)
                     {
@@ -77,7 +79,7 @@ namespace Alto_IT
                 mw.database.SaveChanges();
                 }
             }
-            Close();
+            
         }
 
         public void CreateTable(string TableName)
@@ -86,7 +88,7 @@ namespace Alto_IT
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
 
-              var x = context.Database.ExecuteSqlCommand("CREATE TABLE " + TableName + " (ID INTEGER IDENTITY(1,1) PRIMARY KEY, ForeignKey INT, Titre VARCHAR(1000), Description VARCHAR(1000))");
+              var x = context.Database.ExecuteSqlCommand("CREATE TABLE " + TableName + " (ID INTEGER IDENTITY(1,1) PRIMARY KEY, ForeignKey INT, Titre VARCHAR(MAX), Description VARCHAR(MAX))");
                 
             }
         }

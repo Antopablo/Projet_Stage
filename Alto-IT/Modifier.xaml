@@ -11,8 +11,8 @@
 
 
     <Grid Margin="0,0,-0.4,-0.8" >
-        <TextBox Name="Title" HorizontalAlignment="Left" Height="34" Margin="124,18,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="Content" HorizontalAlignment="Left" Height="154" Margin="124,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" Padding="5,5,5,5"/>
+        <TextBox Name="Title" HorizontalAlignment="Left" Height="34" Margin="124,18,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" VerticalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <TextBox x:Name="Content" HorizontalAlignment="Left" Height="154" Margin="124,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" Padding="5,5,5,5" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AutoWordSelection="True"/>
         <Button Name="ModifierExigence" Content="Modifier l'exigence" HorizontalAlignment="Left" Margin="124,425,0,0" VerticalAlignment="Top" Width="519" Height="71" Click="ModifierExigence_Click"/>
 
         <ComboBox Name="ComboBoxStatus"  Margin="124,330,549,154">
