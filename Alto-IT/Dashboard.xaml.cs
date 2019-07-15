@@ -85,11 +85,6 @@ namespace Alto_IT
                     
                     Exigence Ntmp = Vue.ExigenceSelectionnee;
 
-                    //string NtmpTableName = "";
-                    //NtmpTableName = mw.SimpleQuoteFormater(mw.FormaterToSQLRequest(Ntmp.Name));
-                    //StringBuilder builderr = new StringBuilder(NtmpTableName);
-                    //NtmpTableName = builderr.Insert(1, NormeSelectionnee.Id).ToString();
-
 
                     // Supprime de la DbSet, à mettre en 1er
                     mw.database.ExigenceDatabase.Remove(Ntmp);
@@ -236,12 +231,18 @@ namespace Alto_IT
             Text = Text.Replace('\\', '_');
             Text = Text.Replace('*', '_');
             Text = Text.Replace(';', '_');
+            Text = Text.Replace(':', '_');
             Text = Text.Replace('{', '_');
             Text = Text.Replace('}', '_');
             Text = Text.Replace('^', '_');
             Text = Text.Replace('$', '_');
+            Text = Text.Replace('+', '_');
+            Text = Text.Replace('-', '_'); 
+            Text = Text.Replace('=', '_'); 
+            Text = Text.Replace('£', '_');
             Text = Text.Replace('?', '_');
             Text = Text.Replace('!', '_');
+            Text = Text.Replace(',', '_');
             Text = Text.Replace('<', '_');
             Text = Text.Replace('>', '_');
             Text = Text.Replace('§', '_');
@@ -251,6 +252,11 @@ namespace Alto_IT
             Text = Text.Replace("]", "_");
             Text = Text.Replace(".", "_");
             Text = Text.Replace("-", "_");
+            Text = Text.Replace("|", "_");
+            Text = Text.Replace("&", "_");
+            Text = Text.Replace("`", "_");
+            Text = Text.Replace("#", "_");
+            Text = Text.Replace("°", "_");
             Text.Trim();
             return Text;
         }

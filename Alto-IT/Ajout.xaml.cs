@@ -39,30 +39,44 @@ namespace Alto_IT
             {
                 if (Vue.ExigenceSelectionnee == null || Vue.ExigenceSelectionnee.Name == "Menu")
                 {
-                    CreateTable(Title.Text);
-                    Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id);
-                    Vue.ROOT_Exigences.ExigenceObervCollec.Add(ExigenceParent);
-                    mw.database.ExigenceDatabase.Add(ExigenceParent);
-                    mw.database.SaveChanges();
+                    try
+                    {
+                        CreateTable(Title.Text);
+                        Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id);
+                        Vue.ROOT_Exigences.ExigenceObervCollec.Add(ExigenceParent);
+                        mw.database.ExigenceDatabase.Add(ExigenceParent);
+                        mw.database.SaveChanges();
+                    }
+                    catch (System.Data.SqlClient.SqlException)
+                    {
+                        MessageBox.Show("Une Exigence à ce nom existe déjà", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
                 else
                 {
-                    CreateTable(Title.Text);
-                    RemplirTable(Vue.ExigenceSelectionnee.Name, Vue.ExigenceSelectionnee.Id);
-                    Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ExigenceSelectionnee.Id, dashb.NormeSelectionnee.Id);
-                    Vue.ExigenceSelectionnee.ExigenceObervCollec.Add(ExigenceEnfant);
-                    mw.database.ExigenceDatabase.Add(ExigenceEnfant);
                     try
                     {
-                        mw.database.SaveChanges();
+                        CreateTable(Title.Text);
+                        try
+                        {
+                            RemplirTable(Vue.ExigenceSelectionnee.Name, Vue.ExigenceSelectionnee.Id);
+                            Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ExigenceSelectionnee.Id, dashb.NormeSelectionnee.Id);
+                            Vue.ExigenceSelectionnee.ExigenceObervCollec.Add(ExigenceEnfant);
+                            mw.database.ExigenceDatabase.Add(ExigenceEnfant);
+                        }
+                        catch (Exception)
+                        {
+                            SupprimerTable(Title.Text);
+                            MessageBox.Show("Impossible de remplir dans table parent", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
-                    catch (Exception)
+                    catch (System.Data.SqlClient.SqlException)
                     {
-                        MessageBox.Show("Sauvegarde BDD impossible", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Une Exigence à ce nom existe déjà", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
+                mw.database.SaveChanges();
                 }
             }
-            dashb.FenetreOuverte = false;
             Close();
         }
 
@@ -71,14 +85,9 @@ namespace Alto_IT
             TableName = dashb.TableFormater(dashb.SimpleQuoteFormater(dashb.FormaterToSQLRequest(TableName)));
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
-                try
-                {
-                    var x = context.Database.ExecuteSqlCommand("CREATE TABLE " + TableName + " (ID INTEGER IDENTITY(1,1) PRIMARY KEY, ForeignKey INT, Titre VARCHAR(1000), Description VARCHAR(1000))");
-                }
-                catch (System.Data.SqlClient.SqlException)
-                {
-                    MessageBox.Show("Impossible de créer la table dans la BDD", "error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+
+              var x = context.Database.ExecuteSqlCommand("CREATE TABLE " + TableName + " (ID INTEGER IDENTITY(1,1) PRIMARY KEY, ForeignKey INT, Titre VARCHAR(1000), Description VARCHAR(1000))");
+                
             }
         }
 
@@ -101,6 +110,16 @@ namespace Alto_IT
                     MessageBox.Show("Impossible d'ajouter à la table parent", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        public void SupprimerTable(string TableName)
+        {
+            TableName = dashb.TableFormater(dashb.SimpleQuoteFormater(dashb.FormaterToSQLRequest(TableName)));
+            using (ApplicationDatabase context = new ApplicationDatabase())
+            {
+                var x = context.Database.ExecuteSqlCommand("DROP TABLE " + TableName);
+            }
+
         }
 
         private void Window_Closed(object sender, EventArgs e)

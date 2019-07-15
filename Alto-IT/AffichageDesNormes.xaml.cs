@@ -61,19 +61,20 @@ namespace Alto_IT
 
         private void BoutonSupprimer_Click(object sender, RoutedEventArgs e)
         {
+            Norme tmp = NormeSelectionnee;
+
             if (NormeSelectionnee != null)
             {
                 if (MessageBox.Show("Êtes-vous sûr de vouloir supprimer la norme " + NormeSelectionnee.Nom_Norme + " ?", "Supprimer", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
                     int IDSelected = NormeSelectionnee.Id;
-                    string NameSalected = NormeSelectionnee.Nom_Norme;
 
                     mw.database.NormeDatabase.Remove(NormeSelectionnee);
-                    mw.database.SaveChanges(); 
+                    mw.database.SaveChanges();
+
 
                     using (ApplicationDatabase context = new ApplicationDatabase())
                     {
-                        //var ListeEnfant = context.Database.SqlQuery<string>("SELECT Name FROM Exigences WHERE ForeignKey_TO_Norme = " + NormeSelectionnee.Id).ToList();
                         var ListeEnfant = context.Database.SqlQuery<string>("SELECT Name FROM Exigences WHERE ForeignKey_TO_Norme = " + IDSelected).ToList();
                         foreach (string item in ListeEnfant)
                         {

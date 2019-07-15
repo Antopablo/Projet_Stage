@@ -31,37 +31,51 @@ namespace Alto_IT
             if (Vue.ExigenceSelectionnee != null && Vue.ExigenceSelectionnee.Name != "Menu")
             {
                 string CurrentItem = Vue.dash.FormaterToSQLRequest("_"+Vue.dash.NormeSelectionnee.Id+Vue.ExigenceSelectionnee.Name);
+                string CurrentDescription = Vue.dash.SimpleQuoteFormater(Content.Text);
+                string CurrentTitle = Vue.dash.SimpleQuoteFormater(Title.Text);
 
                 using (ApplicationDatabase context = new ApplicationDatabase())
                 {
                     string newTableName = Vue.dash.TableFormater(Vue.dash.SimpleQuoteFormater(Vue.dash.FormaterToSQLRequest(Title.Text)));
 
-                    //renomme la table
-                    var w = context.Database.ExecuteSqlCommand("EXEC sp_rename '" + CurrentItem + "', '" + newTableName + "'");
+                    try
+                    {   
+                        //renomme la table
+                        var w = context.Database.ExecuteSqlCommand("EXEC sp_rename '" + CurrentItem + "', '" + newTableName + "'");
 
+                        //modif dans la table Exigence
+                        var yy = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Description = '" + Vue.dash.SimpleQuoteFormater(Content.Text) + "' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
+                        var y = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = '" + Vue.dash.SimpleQuoteFormater(Title.Text) + "' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
 
-                    //modif dans la table Exigence
-                    var yy = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Description = '" + Vue.dash.SimpleQuoteFormater(Content.Text) + "' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
-                    var y = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = '" + Vue.dash.SimpleQuoteFormater(Title.Text) + "' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
+                        try
+                        {
+                            //modif dans table parents
+                            var ParentName = context.Database.SqlQuery<string>("SELECT Name from Exigences WHERE Id= " + Vue.ExigenceSelectionnee.ForeignKey).FirstOrDefault();
+                            if (ParentName != "Menu" && ParentName != null)
+                            {
+                                ParentName = Vue.dash.TableFormater(Vue.dash.SimpleQuoteFormater(Vue.dash.FormaterToSQLRequest(ParentName)));
 
-                    //modif dans table parents
-                    var ParentName = context.Database.SqlQuery<string>("SELECT Name from Exigences WHERE Id= " + Vue.ExigenceSelectionnee.ForeignKey).FirstOrDefault();
-                    if (ParentName != "Menu" && ParentName != null)
-                    {
-                        ParentName = Vue.dash.TableFormater(Vue.dash.SimpleQuoteFormater(Vue.dash.FormaterToSQLRequest(ParentName)));
+                                var zz = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Description = '" + Vue.dash.SimpleQuoteFormater(Content.Text) + "' WHERE Titre = '" + Vue.ExigenceSelectionnee.Name + "'");
+                                var z = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Titre = '" + Vue.dash.SimpleQuoteFormater(Title.Text) + "' WHERE Titre = '" + Vue.ExigenceSelectionnee.Name + "'");
+                            }
 
-                        var zz = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Description = '" + Vue.dash.SimpleQuoteFormater(Content.Text) + "' WHERE Titre = '" + Vue.ExigenceSelectionnee.Name +"'");
-                        var z = context.Database.ExecuteSqlCommand("UPDATE " + ParentName + " SET Titre = '" + Vue.dash.SimpleQuoteFormater(Title.Text) + "' WHERE Titre = '" + Vue.ExigenceSelectionnee.Name + "'");
+                            //actualise l'itemSleceted et la Vue grâce INotifyProperty
+                            Vue.ExigenceSelectionnee.Name = Title.Text;
+                            Vue.ExigenceSelectionnee.Description = Content.Text;
+                        }
+                        catch (Exception)
+                        {
+                            var w2 = context.Database.ExecuteSqlCommand("EXEC sp_rename '" + newTableName + "', '" + CurrentItem + "'");
+                            var yy2 = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Description = '" + CurrentDescription + "' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
+                            var y2 = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = '" + CurrentTitle + "' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
+                            MessageBox.Show("Modification impossible", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
-
-
-                    //actualise l'itemSleceted
-                    Vue.ExigenceSelectionnee.Name = Title.Text;
-                    Vue.ExigenceSelectionnee.Description = Content.Text;
-
-                    //MajCollection obesrvable
-                    // Réaliser avec INotifyPropertyChanges
-
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Impossible d'actualiser la BDD", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    
                     switch (ComboBoxStatus.Text)
                     {
                         case "Non Évaluée":
@@ -103,10 +117,11 @@ namespace Alto_IT
 
         private void Bouton_AjouterDocument_Click(object sender, RoutedEventArgs e)
         {
+            string fileName = "";
             OpenFileDialog open = new OpenFileDialog();
             open.ShowDialog();
 
-            string fileName = open.SafeFileName;
+            fileName = open.SafeFileName;
             string sourcePath = open.FileName;
             string targetPath = @"C:\Users\stagiaire\Desktop\Projet_Stage\Projet_Stage\Alto-IT\bin\Debug\DocumentClient\" + fileName;
 
