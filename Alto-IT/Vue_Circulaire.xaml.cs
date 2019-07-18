@@ -28,7 +28,7 @@ namespace Alto_IT
     {
         public Dashboard dash { get; set; }
         public Exigence ExigenceSelectionnee { get; set; }
-       public List<Exigence> ListeExigence { get; set; }
+        public List<Exigence> ListeExigence { get; set; }
         public Exigence ROOT_Exigences { get; set; }
 
         public Vue_Circulaire()
@@ -47,8 +47,6 @@ namespace Alto_IT
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Height = SystemParameters.WorkArea.Height - 90;
-            this.Width = SystemParameters.WorkArea.Width - 190;
             AfficherDatabase();
 
         }

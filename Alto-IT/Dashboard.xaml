@@ -8,37 +8,54 @@
         mc:Ignorable="d"
         Title="Dashboard"
         Loaded="Window_Loaded"
-        Width="auto">
+        Width="auto" WindowStartupLocation="CenterScreen">
 
     <Grid x:Name="EspaceTravail">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="215"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <TreeView Name="TreeViewNORME"  SelectedItemChanged="TreeViewNORME_SelectedItemChanged" Margin="0,0,9.6,9.6" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="#00828790">
-            <TreeView.Resources>
-                <Style TargetType="{x:Type TreeViewItem}">
-                    <Setter Property="HeaderTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <TextBlock Width="160"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TreeView  Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" Margin="0,0,9.6,9.6" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="#00828790">
+                <TreeViewItem Header="Documentation" Width="150" HorizontalContentAlignment="Center"/>
+            </TreeView>
+            
+            <TreeView Name="TreeViewNORME" Grid.Row="0" Grid.Column="0" SelectedItemChanged="TreeViewNORME_SelectedItemChanged" Margin="0,0,9.6,9.6" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="#00828790">
+                <TreeView.Resources>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="HeaderTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock MaxWidth="150"
                                    TextWrapping="Wrap"
-                                   Text="{Binding}" 
-                                   Margin="5,10,0,10"/>
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TreeView.Resources>
-            <TreeView.Background>
-                <SolidColorBrush Color="#7FA5D8F7"/>
-            </TreeView.Background>
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type self:Norme}" ItemsSource="{Binding NormeObervCollec}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock  Text="{Binding Nom_Norme}" Width="160"/>
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
-
+                                   Margin="5,10,5,10"/>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TreeView.Resources>
+                <TreeView.Background>
+                    <SolidColorBrush Color="#7FA5D8F7"/>
+                </TreeView.Background>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type self:Norme}" ItemsSource="{Binding NormeObervCollec}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  Text="• " TextWrapping="Wrap"/>
+                            <TextBlock  Text="{Binding Nom_Norme}" Width="150" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </Grid>
+            <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Circulaire" Margin="-10,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
+        </Grid>
 
         <Grid Name="GridControle_Norme" Height="50" VerticalAlignment="Top" Margin="203,0,-0.4,0" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
@@ -52,7 +69,7 @@
 
             <Button x:Name="Ajout_Norme" Click="Ajout_Norme_Click"  Content="Ajouter une Norme"/>
             <Button x:Name="Modif_Norme" Click="Modif_Norme_Click" Content="Modifier une Norme" Grid.Column="1"/>
-            <Button x:Name="Supr_Norme" Click="Supr_Norme_Click" Content="Supprimer une Norme" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
+            <Button x:Name="Supr_Norme" Click="Supr_Norme_Click" Content="Supprimer une Norme" Grid.Column="2" Margin="0,0,0,-0.4"/>
         </Grid>
 
         <Grid Name="GridControle_exigence" Height="50" VerticalAlignment="Top" Margin="203,0,0,0" Visibility="Collapsed">
@@ -70,7 +87,6 @@
             <Button x:Name="Supr_exigence" Click="Supr_exigence_Click" Content="Supprimer une exigence" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
         </Grid>
 
-        <Frame x:Name="Frame_Vue_Circulaire" Margin="203,50,9.6,-0.4" ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
 
     </Grid>
 </Window>

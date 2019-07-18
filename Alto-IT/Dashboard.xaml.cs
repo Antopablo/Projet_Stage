@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -23,7 +24,6 @@ namespace Alto_IT
             InitializeComponent();
             mw = m;
             Vue = new Vue_Circulaire(this);
-
             ROOT_Normes = new Norme("Normes");
             TreeViewNORME.Items.Add(ROOT_Normes);
             AfficherLesNormes();
@@ -76,7 +76,6 @@ namespace Alto_IT
 
         private void Supr_exigence_Click(object sender, RoutedEventArgs e)
         {
-
             if (Vue.ExigenceSelectionnee != null && Vue.ExigenceSelectionnee.Name != "Menu")
             {
                 if (MessageBox.Show("Voulez-vous supprimer "+ Vue.ExigenceSelectionnee.Name, "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
@@ -85,6 +84,14 @@ namespace Alto_IT
                     
                     Exigence Ntmp = Vue.ExigenceSelectionnee;
 
+                    using (ApplicationDatabase context = new ApplicationDatabase())
+                    {
+                        var docASupr = context.Database.SqlQuery<string>("SELECT DocumentPath from Exigences WHERE Id = " + Ntmp.Id).FirstOrDefault();
+                        if (docASupr != null)
+                        {
+                            File.Delete(docASupr);
+                        }
+                    }
 
                     // Supprime de la DbSet, à mettre en 1er
                     mw.database.ExigenceDatabase.Remove(Ntmp);
@@ -143,6 +150,11 @@ namespace Alto_IT
                 }
                 foreach (string item2 in ListeGenerale)
                 {
+                    var docASupr = context.Database.SqlQuery<string>("SELECT DocumentPath from Exigences WHERE Name = '" + SimpleQuoteFormater(item2) + "'").FirstOrDefault();
+                    if (docASupr != null)
+                    {
+                        File.Delete(docASupr);
+                    }
                     var suppenfantTableExigence = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" + SimpleQuoteFormater(item2) + "'");
 
                     string tmp2 = "";
@@ -196,8 +208,10 @@ namespace Alto_IT
 
         private void TreeViewNORME_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-           
-            if (TreeViewNORME.SelectedItem.ToString() == "Normes")
+
+            NormeSelectionnee = (Norme)TreeViewNORME.SelectedItem;
+
+            if ((TreeViewNORME.SelectedItem.ToString() == "Normes"))
             {
                 GridControle_Norme.Visibility = Visibility.Visible;
                 GridControle_exigence.Visibility = Visibility.Collapsed;
@@ -212,7 +226,6 @@ namespace Alto_IT
                 Frame_Vue_Circulaire.Content = new Vue_Circulaire(this);
             }
 
-            NormeSelectionnee = (Norme)TreeViewNORME.SelectedItem;
         }
 
         public void AfficherLesNormes()

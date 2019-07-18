@@ -8,7 +8,7 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d"
       Title="Vue_Circulaire"
-      Loaded="Page_Loaded" Width="56.8">
+      Loaded="Page_Loaded">
 
 
     <Page.Resources>
@@ -121,13 +121,20 @@
                             </ItemsPanelTemplate>
                         </Setter.Value>
                     </Setter>
-                </Trigger>
+                </Trigger>                
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="MenuStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Name}" Value="Menu">
+                    <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
+                </DataTrigger>
             </Style.Triggers>
         </Style>
     </Page.Resources>
 
-    <Grid Background="#FFEBDFDF" Margin="0,0,32.2,9.6" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" >
-        <TreeView Name="treeviewFrame"  SelectedItemChanged="TreeviewFrame_SelectedItemChanged" Margin="10" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.RowSpan="2" Grid.ColumnSpan="2" ItemContainerStyle="{StaticResource StretchTreeViewItemStyle}">
+    <Grid Background="#FFEBDFDF" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" >
+        <TreeView Name="treeviewFrame"  SelectedItemChanged="TreeviewFrame_SelectedItemChanged" Margin="0" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.RowSpan="2" Grid.ColumnSpan="2" ItemContainerStyle="{StaticResource StretchTreeViewItemStyle}" BorderThickness="0">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type self:Exigence}" ItemsSource="{Binding ExigenceObervCollec}">
                     <DockPanel LastChildFill="True">
@@ -135,10 +142,10 @@
                         <TextBlock Text=" [" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding ExigenceObervCollec.Count}" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <TextBlock Text="]" Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                        <TextBlock x:Name="DocumentViewer" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5,0,5,0" Cursor="Help" PreviewMouseUp="DocumentViewer_PreviewMouseUp">
-                            <Image Source="https://cdn.icon-icons.com/icons2/1129/PNG/512/fileinterfacesymboloftextpapersheet_79740.png" Width="20" Height="20" ToolTip="{Binding DocumentName}"></Image>
+                        <TextBlock x:Name="Documentviewer" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5,0,5,0" Cursor="Help" PreviewMouseUp="DocumentViewer_PreviewMouseUp" Style="{StaticResource MenuStyle}">
+                            <Image Source="https://cdn.icon-icons.com/icons2/1129/PNG/512/fileinterfacesymboloftextpapersheet_79740.png" Width="20" Height="20" ToolTip="{Binding DocumentName}" ></Image>
                         </TextBlock>
-                        <StatusBar x:Name="StatutExigence" DockPanel.Dock="Right" HorizontalAlignment="Right" Width="100" Height="20" VerticalAlignment="Center" Margin="0,0,5,0" Background="{Binding Couleur}" ToolTip="{Binding Status}"></StatusBar>
+                        <StatusBar x:Name="StatutExigence" DockPanel.Dock="Right" HorizontalAlignment="Right" Width="100" Height="20" VerticalAlignment="Center" Margin="0,0,5,0" Background="{Binding Couleur}" ToolTip="{Binding Status}" Style="{StaticResource MenuStyle}"></StatusBar>
                     </DockPanel>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
