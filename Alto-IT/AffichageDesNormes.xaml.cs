@@ -148,7 +148,7 @@ namespace Alto_IT
                 if (NormeSelectionnee != null)
                 {
                     fileNameWithID = "[" + (NormeSelectionnee.Id) + "]" + open.SafeFileName;
-                    fileNameWithoutExtension = DocumentSplit[0];
+                    fileNameWithoutExtension = dashb.AccentFormater(dashb.FormaterToSQLRequest(DocumentSplit[0]));
                     fileName = open.SafeFileName;
                     sourcePath = open.FileName;
                     targetPath = @"C:\Users\stagiaire\Desktop\Projet_Stage\Projet_Stage\Alto-IT\bin\Debug\DocumentClient\" + fileNameWithID;

@@ -22,7 +22,6 @@ namespace Alto_IT
     {
         public Dashboard dashb { get; set; }
         public string DocumentSelectionne { get; set; }
-        public string DocumentFullPath { get; set; }
         public Vue_Document()
         {
             InitializeComponent();
@@ -32,7 +31,7 @@ namespace Alto_IT
         {
             InitializeComponent();
             dashb = D;
-            ListeViewDocumentation.ItemsSource = ChargerDocuments();
+            ListeViewDocumentation.ItemsSource = ChargerDocuments().OrderBy(x => x);
         }
 
         public List<string> ChargerDocuments ()
@@ -46,15 +45,25 @@ namespace Alto_IT
 
         private void ListeViewDocumentation_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DocumentSelectionne = ListeViewDocumentation.SelectedItem.ToString();
+            string DocumentFullPath = "";
+            try
+            {
+                DocumentSelectionne = ListeViewDocumentation.SelectedItem.ToString();
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Selectionnez un document");
+            }
             string[] DocumentSplit = DocumentSelectionne.Split('.');
+            string F = dashb.AccentFormater(dashb.FormaterToSQLRequest(DocumentSplit[0]));
 
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
-                var Doc = context.Database.SqlQuery<string>("SELECT DocumentPath FROM Exigences WHERE DocumentWithoutExtension = " + DocumentSplit[0]).FirstOrDefault();
+                var Doc = context.Database.SqlQuery<string>("SELECT DocumentPath FROM Exigences WHERE DocumentWithoutExtension = '" + F + "'").FirstOrDefault();
                 if (Doc == null)
                 {
-                    Doc = context.Database.SqlQuery<string>("SELECT DocumentPath FROM Normes WHERE DocumentWithoutExtension = " + DocumentSplit[0]).FirstOrDefault();
+                    Doc = context.Database.SqlQuery<string>("SELECT DocumentPath FROM Normes WHERE DocumentWithoutExtension = '" + F + "'").FirstOrDefault();
 
                 }
                 DocumentFullPath = Doc;
@@ -71,9 +80,6 @@ namespace Alto_IT
             {
                 MessageBox.Show("Document introuvable");
             }
-
         }
-
-
     }
 }

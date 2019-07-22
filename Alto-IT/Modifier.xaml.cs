@@ -126,7 +126,7 @@ namespace Alto_IT
 
             fileNameWithID = "[" + (Vue.ExigenceSelectionnee.Id) + "]" + open.SafeFileName;
             fileName = open.SafeFileName;
-            fileNameWithoutExtension = DocumentSplit[0];
+            fileNameWithoutExtension = Vue.dash.AccentFormater(Vue.dash.FormaterToSQLRequest(DocumentSplit[0]));
             string sourcePath = open.FileName;
             string targetPath = @"C:\Users\stagiaire\Desktop\Projet_Stage\Projet_Stage\Alto-IT\bin\Debug\DocumentClient\" + fileNameWithID;
 

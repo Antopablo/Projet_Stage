@@ -311,6 +311,31 @@ namespace Alto_IT
             return Text;
         }
 
+        public string AccentFormater(string Text)
+        {
+            Text = Text.Replace("à", "a");
+            Text = Text.Replace("á", "a");
+            Text = Text.Replace("â", "a");
+            Text = Text.Replace("ä", "a");
+
+            Text = Text.Replace("ç", "c");
+
+            Text = Text.Replace("é", "e");
+            Text = Text.Replace("è", "e");          
+            Text = Text.Replace("ê", "e");
+            Text = Text.Replace("ë", "e");
+
+            Text = Text.Replace("î", "i");
+            Text = Text.Replace("ï", "i");
+
+            Text = Text.Replace("ô", "o");
+
+            Text = Text.Replace("û", "u");
+            Text = Text.Replace("ù", "u");
+
+            return Text;
+        }
+
         public string TableFormater(string Text)
         {
             StringBuilder builder = new StringBuilder(Text);
