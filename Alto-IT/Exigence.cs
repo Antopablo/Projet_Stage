@@ -136,7 +136,8 @@ namespace Alto_IT
         public STATUS Status
         {
             get { return _Status; }
-            set { _Status = value; GetValueDico(); OnPropertyChanged("Status"); }
+            set { _Status = value; GetValueDico();
+                OnPropertyChanged("Status"); }
         }
 
 

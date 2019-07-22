@@ -49,7 +49,7 @@ namespace Alto_IT
 
             
             Dashboard D = new Dashboard(this);
-            D.Show();
+             D.Show();
             Close();
 
         }

@@ -20,7 +20,7 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 
@@ -70,6 +70,9 @@
                                                      </DataTrigger>   
                                                    <DataTrigger Binding="{Binding Nom_Norme}" Value="Mesures">
                                                          <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                     </DataTrigger> 
+                                                   <DataTrigger Binding="{Binding Nom_Norme}" Value="Projets">
+                                                         <Setter Property="Visibility" Value="Collapsed"></Setter>
                                                      </DataTrigger>  
                                                </Style.Triggers>
                                            </Style>
@@ -82,8 +85,23 @@
                     </TreeView.ItemTemplate>
                 </TreeView>
             </Grid>
-            <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Circulaire" Margin="-10,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
+            <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Circulaire" Margin="-0,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
             <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Documentation" Margin="-0,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
+        </Grid>
+
+        <Grid Name="GridControle_Projet" Height="50" VerticalAlignment="Top" Margin="235,0,-0.4,0" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="Ajout_Projet"   Content="Ajouter un Projet"/>
+            <Button x:Name="Modif_Projet"  Content="Modifier un Projet" Grid.Column="1"/>
+            <Button x:Name="Supr_Projet"  Content="Supprimer un Projet" Grid.Column="2" Margin="0,0,0,-0.4"/>
         </Grid>
 
         <Grid Name="GridControle_Norme" Height="50" VerticalAlignment="Top" Margin="245,0,-0.4,0" Visibility="Collapsed">

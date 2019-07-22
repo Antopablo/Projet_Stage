@@ -27,6 +27,10 @@ namespace Alto_IT
             InitializeComponent();
             mw = m;
             Vue = new Vue_Circulaire(this);
+            ROOT_Normes = new Norme("Projets");
+            TreeViewNORME.Items.Add(ROOT_Normes);
+            ROOT_Normes = new Norme("");            //espace vide
+            TreeViewNORME.Items.Add(ROOT_Normes);
             ROOT_Normes = new Norme("Documentation");
             TreeViewNORME.Items.Add(ROOT_Normes);
             ROOT_Normes = new Norme("");            //espace vide
@@ -245,6 +249,8 @@ namespace Alto_IT
             {
                 GridControle_Norme.Visibility = Visibility.Visible;
                 GridControle_exigence.Visibility = Visibility.Collapsed;
+                GridControle_Projet.Visibility = Visibility.Collapsed;
+
                 Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
                 Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
 
@@ -253,6 +259,8 @@ namespace Alto_IT
             {
                 GridControle_Norme.Visibility = Visibility.Collapsed;
                 GridControle_exigence.Visibility = Visibility.Collapsed;
+                GridControle_Projet.Visibility = Visibility.Collapsed;
+
                 Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
                 Frame_Vue_Documentation.Visibility = Visibility.Visible;
                 Frame_Vue_Documentation.Content = new Vue_Document(this);
@@ -261,6 +269,18 @@ namespace Alto_IT
             {
                 GridControle_Norme.Visibility = Visibility.Collapsed;
                 GridControle_exigence.Visibility = Visibility.Collapsed;
+                GridControle_Projet.Visibility = Visibility.Collapsed;
+
+                Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
+                Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
+
+            }
+            else if ((TreeViewNORME.SelectedItem.ToString() == "Projets"))
+            {
+                GridControle_Norme.Visibility = Visibility.Collapsed;
+                GridControle_exigence.Visibility = Visibility.Collapsed;
+                GridControle_Projet.Visibility = Visibility.Visible;
+
                 Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
                 Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
 
@@ -269,6 +289,7 @@ namespace Alto_IT
             {
                 GridControle_Norme.Visibility = Visibility.Collapsed;
                 GridControle_exigence.Visibility = Visibility.Visible;
+                GridControle_Projet.Visibility = Visibility.Collapsed;
                 Frame_Vue_Circulaire.Visibility = Visibility.Visible;
                 Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
                 Frame_Vue_Circulaire.Content = new Vue_Circulaire(this);

@@ -105,8 +105,8 @@
     <Compile Include="AjoutNorme.xaml.cs">
       <DependentUpon>AjoutNorme.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Choix du Provier.xaml.cs">
-      <DependentUpon>Choix du Provier.xaml</DependentUpon>
+    <Compile Include="CreationProjet.xaml.cs">
+      <DependentUpon>CreationProjet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201907111234206_init status.cs" />
     <Compile Include="Migrations\201907111234206_init status.Designer.cs">
@@ -161,6 +161,7 @@
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Norme.cs" />
+    <Compile Include="Projets.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Vue_Circulaire.xaml.cs">
       <DependentUpon>Vue_Circulaire.xaml</DependentUpon>
@@ -180,7 +181,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Choix du Provier.xaml">
+    <Page Include="CreationProjet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
