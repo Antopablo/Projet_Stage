@@ -52,6 +52,11 @@ namespace Alto_IT
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
                 var Doc = context.Database.SqlQuery<string>("SELECT DocumentPath FROM Exigences WHERE DocumentWithoutExtension = " + DocumentSplit[0]).FirstOrDefault();
+                if (Doc == null)
+                {
+                    Doc = context.Database.SqlQuery<string>("SELECT DocumentPath FROM Normes WHERE DocumentWithoutExtension = " + DocumentSplit[0]).FirstOrDefault();
+
+                }
                 DocumentFullPath = Doc;
             }
 
