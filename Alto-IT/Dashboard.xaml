@@ -42,7 +42,6 @@
                                 <DataTrigger Binding="{Binding Nom_Norme}" Value="">
                                     <Setter Property="TextBlock.Visibility" Value="Hidden"/>
                                 </DataTrigger>
-                                                            
                             </Style.Triggers>
                             
                         </Style>
@@ -68,7 +67,10 @@
                                                      </DataTrigger>
                                                    <DataTrigger Binding="{Binding Nom_Norme}" Value="Documentation">
                                                          <Setter Property="Visibility" Value="Collapsed"></Setter>
-                                                     </DataTrigger>    
+                                                     </DataTrigger>   
+                                                   <DataTrigger Binding="{Binding Nom_Norme}" Value="Mesures">
+                                                         <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                     </DataTrigger>  
                                                </Style.Triggers>
                                            </Style>
                                        </Image.Style>

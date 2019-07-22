@@ -31,7 +31,11 @@ namespace Alto_IT
             TreeViewNORME.Items.Add(ROOT_Normes);
             ROOT_Normes = new Norme("");            //espace vide
             TreeViewNORME.Items.Add(ROOT_Normes);
-            ROOT_Normes = new Norme("Normes");
+            ROOT_Normes = new Norme("Mesures");
+            TreeViewNORME.Items.Add(ROOT_Normes);
+            ROOT_Normes = new Norme("");            //espace vide
+            TreeViewNORME.Items.Add(ROOT_Normes);
+            ROOT_Normes = new Norme("Normes");         
             TreeViewNORME.Items.Add(ROOT_Normes);
 
             AfficherLesNormes();
@@ -252,6 +256,14 @@ namespace Alto_IT
                 Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
                 Frame_Vue_Documentation.Visibility = Visibility.Visible;
                 Frame_Vue_Documentation.Content = new Vue_Document(this);
+            }
+            else if ((TreeViewNORME.SelectedItem.ToString() == "Mesures"))
+            {
+                GridControle_Norme.Visibility = Visibility.Collapsed;
+                GridControle_exigence.Visibility = Visibility.Collapsed;
+                Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
+                Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
+
             }
             else
             {

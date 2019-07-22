@@ -105,6 +105,9 @@
     <Compile Include="AjoutNorme.xaml.cs">
       <DependentUpon>AjoutNorme.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Choix du Provier.xaml.cs">
+      <DependentUpon>Choix du Provier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201907111234206_init status.cs" />
     <Compile Include="Migrations\201907111234206_init status.Designer.cs">
       <DependentUpon>201907111234206_init status.cs</DependentUpon>
@@ -174,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AjoutNorme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Choix du Provier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
