@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,14 +19,21 @@ namespace Alto_IT
         public Norme NormeSelectionnee { get; set; }
         public bool FenetreOuverte { get; set; }
 
+        public bool SuprDoc { get; set; }
+
 
         public Dashboard(MainWindow m)
         {
             InitializeComponent();
             mw = m;
             Vue = new Vue_Circulaire(this);
+            ROOT_Normes = new Norme("Documentation");
+            TreeViewNORME.Items.Add(ROOT_Normes);
+            ROOT_Normes = new Norme("");            //espace vide
+            TreeViewNORME.Items.Add(ROOT_Normes);
             ROOT_Normes = new Norme("Normes");
             TreeViewNORME.Items.Add(ROOT_Normes);
+
             AfficherLesNormes();
 
         }
@@ -68,7 +76,7 @@ namespace Alto_IT
                 }
                 catch (System.Exception)
                 {
-                    MessageBox.Show("Selectionner une norme à modifier", "error", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Selectionnez une norme à modifier", "error", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             
@@ -78,21 +86,29 @@ namespace Alto_IT
         {
             if (Vue.ExigenceSelectionnee != null && Vue.ExigenceSelectionnee.Name != "Menu")
             {
-                if (MessageBox.Show("Voulez-vous supprimer "+ Vue.ExigenceSelectionnee.Name, "Suppression", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Voulez-vous supprimer "+ Vue.ExigenceSelectionnee.Name, "Suppression de l'exigence", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
                     string CurrentItem = TableFormater(SimpleQuoteFormater(FormaterToSQLRequest(Vue.ExigenceSelectionnee.Name)));
                     
                     Exigence Ntmp = Vue.ExigenceSelectionnee;
 
-                    using (ApplicationDatabase context = new ApplicationDatabase())
+                    if (MessageBox.Show("Voulez - vous supprimer tous les documents associés à " + Vue.ExigenceSelectionnee.Name + " ? ", "Suppression des documents", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                     {
-                        var docASupr = context.Database.SqlQuery<string>("SELECT DocumentPath from Exigences WHERE Id = " + Ntmp.Id).FirstOrDefault();
-                        if (docASupr != null)
+                        SuprDoc = true;
+                        using (ApplicationDatabase context = new ApplicationDatabase())
                         {
-                            File.Delete(docASupr);
+                            //supprime son document associé
+                            var docASupr = context.Database.SqlQuery<string>("SELECT DocumentPath from Exigences WHERE Id = " + Ntmp.Id).FirstOrDefault();
+                            if (docASupr != null)
+                            {
+                                File.Delete(docASupr);
+                            }
+
+                            //supprime des documents enfant 
+                            // TODO
                         }
                     }
-
+                    
                     // Supprime de la DbSet, à mettre en 1er
                     mw.database.ExigenceDatabase.Remove(Ntmp);
                     mw.database.SaveChanges();
@@ -132,7 +148,6 @@ namespace Alto_IT
             }
         }
 
-
         public void SuppressionTabEntant(string CurrentItem)
         {
             List<string> ListeGenerale = new List<string>();
@@ -150,11 +165,16 @@ namespace Alto_IT
                 }
                 foreach (string item2 in ListeGenerale)
                 {
-                    var docASupr = context.Database.SqlQuery<string>("SELECT DocumentPath from Exigences WHERE Name = '" + SimpleQuoteFormater(item2) + "'").FirstOrDefault();
-                    if (docASupr != null)
+                    if (SuprDoc == true)
                     {
-                        File.Delete(docASupr);
+                        var docASupr = context.Database.SqlQuery<string>("SELECT DocumentPath from Exigences WHERE Name = '" + SimpleQuoteFormater(item2) + "'").FirstOrDefault();
+                        if (docASupr != null)
+                        {
+                            File.Delete(docASupr);
+                        }
+                        SuprDoc = false;
                     }
+                    
                     var suppenfantTableExigence = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = '" + SimpleQuoteFormater(item2) + "'");
 
                     string tmp2 = "";
@@ -183,6 +203,12 @@ namespace Alto_IT
             if (FenetreOuverte == false)
             {
                 AffichageDesNormes AF = new AffichageDesNormes(mw, this);
+                if (NormeSelectionnee.Id == 0)
+                {
+                    AF.scrollV.Visibility = Visibility.Collapsed;
+                    AF.label.Visibility = Visibility.Collapsed;
+                    AF.AjoutDocument.Visibility = Visibility.Collapsed;
+                }
                 AF.BoutonValiderModify.Visibility = Visibility.Visible;
                 AF.BoutonSupprimer.Visibility = Visibility.Hidden;
                 AF.TitreModify.Visibility = Visibility.Visible;
@@ -217,6 +243,14 @@ namespace Alto_IT
                 GridControle_exigence.Visibility = Visibility.Collapsed;
                 Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
                 
+            }
+            else if ((TreeViewNORME.SelectedItem.ToString() == "Documentation"))
+            {
+                GridControle_Norme.Visibility = Visibility.Collapsed;
+                GridControle_exigence.Visibility = Visibility.Collapsed;
+                Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
+                Frame_Vue_Documentation.Visibility = Visibility.Visible;
+                //Frame_Vue_Documentation.Content = new Vue_Document(this);
             }
             else
             {
@@ -284,6 +318,26 @@ namespace Alto_IT
         public string SimpleQuoteFormater(string text)
         {
             return text.Replace("'", "''");
+        }
+
+        private void DocumentViewer_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                String fileName = NormeSelectionnee.DocumentPath;
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                process.StartInfo.FileName = fileName;
+                process.Start();
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Sélectionnez une exigence");
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Aucun document associé");
+            }
+
         }
     }
 }

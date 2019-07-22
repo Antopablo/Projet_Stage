@@ -37,6 +37,29 @@ namespace Alto_IT
             }
         }
 
+        private string _DocumentPath;
+        public string DocumentPath
+        {
+            get { return _DocumentPath; }
+            set
+            {
+                _DocumentPath = value;
+                OnPropertyChanged("DocumentPath");
+            }
+        }
+
+        private string _DocumentName;
+        public string DocumentName
+
+        {
+            get { return _DocumentName; }
+            set
+            {
+                _DocumentName = value;
+                OnPropertyChanged("DocumentName");
+            }
+        }
+
         [InverseProperty ("ForeignKey_TO_Norme")]
         public int IDNorme { get; set; }
 

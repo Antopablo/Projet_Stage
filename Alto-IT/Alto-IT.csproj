@@ -137,6 +137,14 @@
     <Compile Include="Migrations\201907150831251_modif2.Designer.cs">
       <DependentUpon>201907150831251_modif2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907181046072_zczv.cs" />
+    <Compile Include="Migrations\201907181046072_zczv.Designer.cs">
+      <DependentUpon>201907181046072_zczv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907190704280_modif affichag normes.cs" />
+    <Compile Include="Migrations\201907190704280_modif affichag normes.Designer.cs">
+      <DependentUpon>201907190704280_modif affichag normes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -225,6 +233,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907150831251_modif2.resx">
       <DependentUpon>201907150831251_modif2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907181046072_zczv.resx">
+      <DependentUpon>201907181046072_zczv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907190704280_modif affichag normes.resx">
+      <DependentUpon>201907190704280_modif affichag normes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
