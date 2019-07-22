@@ -84,14 +84,25 @@ namespace Alto_IT
             }
         }
 
-        private string _DocumentName;
-        
+        private string _DocumentName;        
         public string DocumentName
 
         {
             get { return _DocumentName; }
             set { _DocumentName = value;
                 OnPropertyChanged("DocumentName");
+            }
+        }
+
+        private string _DocumentWithoutExtension;
+        public string DocumentWithoutExtension
+
+        {
+            get { return _DocumentWithoutExtension; }
+            set
+            {
+                _DocumentWithoutExtension = value;
+                OnPropertyChanged("DocumentWithoutExtension");
             }
         }
 

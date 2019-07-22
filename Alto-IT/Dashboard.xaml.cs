@@ -242,7 +242,8 @@ namespace Alto_IT
                 GridControle_Norme.Visibility = Visibility.Visible;
                 GridControle_exigence.Visibility = Visibility.Collapsed;
                 Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
-                
+                Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
+
             }
             else if ((TreeViewNORME.SelectedItem.ToString() == "Documentation"))
             {
@@ -250,13 +251,14 @@ namespace Alto_IT
                 GridControle_exigence.Visibility = Visibility.Collapsed;
                 Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
                 Frame_Vue_Documentation.Visibility = Visibility.Visible;
-                //Frame_Vue_Documentation.Content = new Vue_Document(this);
+                Frame_Vue_Documentation.Content = new Vue_Document(this);
             }
             else
             {
                 GridControle_Norme.Visibility = Visibility.Collapsed;
                 GridControle_exigence.Visibility = Visibility.Visible;
                 Frame_Vue_Circulaire.Visibility = Visibility.Visible;
+                Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
                 Frame_Vue_Circulaire.Content = new Vue_Circulaire(this);
             }
 

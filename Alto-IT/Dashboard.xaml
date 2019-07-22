@@ -81,7 +81,7 @@
                 </TreeView>
             </Grid>
             <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Circulaire" Margin="-10,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
-            <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Documentation" Margin="-10,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
+            <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Documentation" Margin="-0,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
         </Grid>
 
         <Grid Name="GridControle_Norme" Height="50" VerticalAlignment="Top" Margin="245,0,-0.4,0" Visibility="Collapsed">

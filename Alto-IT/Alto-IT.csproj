@@ -145,6 +145,10 @@
     <Compile Include="Migrations\201907190704280_modif affichag normes.Designer.cs">
       <DependentUpon>201907190704280_modif affichag normes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907220848027_doc.cs" />
+    <Compile Include="Migrations\201907220848027_doc.Designer.cs">
+      <DependentUpon>201907220848027_doc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -157,6 +161,9 @@
     <Compile Include="User.cs" />
     <Compile Include="Vue_Circulaire.xaml.cs">
       <DependentUpon>Vue_Circulaire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vue_Document.xaml.cs">
+      <DependentUpon>Vue_Document.xaml</DependentUpon>
     </Compile>
     <Page Include="AffichageDesNormes.xaml">
       <SubType>Designer</SubType>
@@ -192,6 +199,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vue_Circulaire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vue_Document.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -239,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907190704280_modif affichag normes.resx">
       <DependentUpon>201907190704280_modif affichag normes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907220848027_doc.resx">
+      <DependentUpon>201907220848027_doc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

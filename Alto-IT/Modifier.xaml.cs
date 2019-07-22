@@ -118,18 +118,24 @@ namespace Alto_IT
         private void Bouton_AjouterDocument_Click(object sender, RoutedEventArgs e)
         {
             string fileName = "";
+            string fileNameWithoutExtension = "";
+            string fileNameWithID = "";
             OpenFileDialog open = new OpenFileDialog();
             open.ShowDialog();
+            string[] DocumentSplit = open.SafeFileName.Split('.');
 
+            fileNameWithID = "[" + (Vue.ExigenceSelectionnee.Id) + "]" + open.SafeFileName;
             fileName = open.SafeFileName;
+            fileNameWithoutExtension = DocumentSplit[0];
             string sourcePath = open.FileName;
-            string targetPath = @"C:\Users\stagiaire\Desktop\Projet_Stage\Projet_Stage\Alto-IT\bin\Debug\DocumentClient\" + fileName;
+            string targetPath = @"C:\Users\stagiaire\Desktop\Projet_Stage\Projet_Stage\Alto-IT\bin\Debug\DocumentClient\" + fileNameWithID;
 
             try
             {
                 File.Copy(sourcePath, targetPath);
                 Vue.ExigenceSelectionnee.DocumentPath = targetPath;
                 Vue.ExigenceSelectionnee.DocumentName = fileName;
+                Vue.ExigenceSelectionnee.DocumentWithoutExtension = fileNameWithoutExtension;
             }
             catch (IOException)
             {
@@ -139,6 +145,8 @@ namespace Alto_IT
                     File.Copy(sourcePath, targetPath);
                     Vue.ExigenceSelectionnee.DocumentPath = targetPath;
                     Vue.ExigenceSelectionnee.DocumentName = fileName;
+                    Vue.ExigenceSelectionnee.DocumentWithoutExtension = fileNameWithoutExtension;
+
                 }
             }
 
