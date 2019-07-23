@@ -54,7 +54,7 @@ namespace Alto_IT
             mw.database.ProjetDatabase.Add(P);
             mw.database.SaveChanges();
             
-            Dashboard D = new Dashboard(mw, P.Name);
+            Dashboard D = new Dashboard(mw, P);
             D.Show();
             Close();
         }

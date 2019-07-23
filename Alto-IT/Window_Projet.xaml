@@ -9,7 +9,13 @@
     <Grid>
         <Button Name="Add_Projet" Content="Nouveau projet" HorizontalAlignment="Left" Margin="47,27,0,0" VerticalAlignment="Top" Width="238" Height="55" FontFamily="DejaVu Sans Light" FontSize="20" Cursor="Hand" Click="Add_Projet_Click"/>
         <Label Content="Projets existants" Margin="0,142,0.4,288" HorizontalContentAlignment="Center" Height="30"/>
-        <ComboBox Name="Combo_Provider" HorizontalAlignment="Left" Margin="47,177,0,0" VerticalAlignment="Top" Width="238" Height="37" FontFamily="DejaVu Sans Light" FontSize="19" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <ComboBox Name="Combo_Provider" HorizontalAlignment="Left" Margin="47,177,0,0" VerticalAlignment="Top" Width="238" Height="37" FontFamily="DejaVu Sans Light" FontSize="19" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" ToolTip="{Binding Provider}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
         <Button Name="ValiderChoixProjet" Content="Valider" HorizontalAlignment="Left" Margin="47,354,0,0" VerticalAlignment="Top" Width="238" Height="45" FontFamily="DejaVu Sans Condensed" Click="ValiderChoixProjet_Click"/>
     </Grid>
 </Window>

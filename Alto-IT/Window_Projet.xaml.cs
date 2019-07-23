@@ -43,22 +43,15 @@ namespace Alto_IT
 
         public void AfficherProjet ()
         {
-            List<string> X = new List<string>();
-
             foreach (Projets item in mw.database.ProjetDatabase.ToList())
             {
-                X.Add(item.Name);
+                Combo_Provider.Items.Add(item);
             }
-
-            Combo_Provider.ItemsSource = X;
-
         }
 
         private void ValiderChoixProjet_Click(object sender, RoutedEventArgs e)
         {
-            // récupéré le projet dans la bdd qui porte le nom selectionné
-
-            Dashboard D = new Dashboard(mw, Combo_Provider.Text);
+            Dashboard D = new Dashboard(mw, (Projets)Combo_Provider.SelectedValue);
             D.Show();
             Close();
         }

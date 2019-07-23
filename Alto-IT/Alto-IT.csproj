@@ -169,6 +169,10 @@
     <Compile Include="Migrations\201907230621261_sq request document viewer.Designer.cs">
       <DependentUpon>201907230621261_sq request document viewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907231239434_recup obje combo box.cs" />
+    <Compile Include="Migrations\201907231239434_recup obje combo box.Designer.cs">
+      <DependentUpon>201907231239434_recup obje combo box.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -305,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907230621261_sq request document viewer.resx">
       <DependentUpon>201907230621261_sq request document viewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907231239434_recup obje combo box.resx">
+      <DependentUpon>201907231239434_recup obje combo box.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

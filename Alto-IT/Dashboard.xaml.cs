@@ -19,12 +19,12 @@ namespace Alto_IT
         public Norme NormeSelectionnee { get; set; }
         public Mesures ROOT_Mesures { get; set; }
         public Mesures MesureSelectionnee { get; set; }
-        public string ProjetEnCours { get; set; }
+        public Projets ProjetEnCours { get; set; }
         public bool FenetreOuverte { get; set; }
         public bool SuprDoc { get; set; }
 
 
-        public Dashboard(MainWindow m, string p)
+        public Dashboard(MainWindow m, Projets p)
         {
             InitializeComponent();
             mw = m;
@@ -50,7 +50,7 @@ namespace Alto_IT
             this.Width = SystemParameters.WorkArea.Width;
 
             // set du titre du dashboard
-            Title = "Dashboard - Projet : " + ProjetEnCours;
+            Title = "Dashboard - Projet : " + ProjetEnCours.Name;
         }
 
         private void Ajout_exigence_Click(object sender, RoutedEventArgs e)
