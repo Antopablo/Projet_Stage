@@ -98,7 +98,7 @@ namespace Alto_IT
                     }
 
                     mw.database.SaveChanges();
-                    Vue.AfficherDatabase();
+                    Vue.AfficherTreeViewExigences();
                     Close();
 
                 }

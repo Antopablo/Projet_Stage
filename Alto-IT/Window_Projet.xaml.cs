@@ -29,6 +29,7 @@ namespace Alto_IT
         {
             InitializeComponent();
             mw = m;
+            AfficherProjet();
         }
 
 
@@ -38,6 +39,28 @@ namespace Alto_IT
             CP.Show();
             Close();
 
+        }
+
+        public void AfficherProjet ()
+        {
+            List<string> X = new List<string>();
+
+            foreach (Projets item in mw.database.ProjetDatabase.ToList())
+            {
+                X.Add(item.Name);
+            }
+
+            Combo_Provider.ItemsSource = X;
+
+        }
+
+        private void ValiderChoixProjet_Click(object sender, RoutedEventArgs e)
+        {
+            // récupéré le projet dans la bdd qui porte le nom selectionné
+
+            Dashboard D = new Dashboard(mw, Combo_Provider.Text);
+            D.Show();
+            Close();
         }
     }
 }

@@ -17,32 +17,27 @@ namespace Alto_IT
         public Vue_Circulaire Vue { get; set; }
         public Norme ROOT_Normes { get; set; }
         public Norme NormeSelectionnee { get; set; }
+        public Mesures ROOT_Mesures { get; set; }
+        public Mesures MesureSelectionnee { get; set; }
+        public string ProjetEnCours { get; set; }
         public bool FenetreOuverte { get; set; }
-
         public bool SuprDoc { get; set; }
 
 
-        public Dashboard(MainWindow m)
+        public Dashboard(MainWindow m, string p)
         {
             InitializeComponent();
             mw = m;
+            ProjetEnCours = p;
+
             Vue = new Vue_Circulaire(this);
-            ROOT_Normes = new Norme("Projets");
-            TreeViewNORME.Items.Add(ROOT_Normes);
-            ROOT_Normes = new Norme("");            //espace vide
-            TreeViewNORME.Items.Add(ROOT_Normes);
-            ROOT_Normes = new Norme("Documentation");
-            TreeViewNORME.Items.Add(ROOT_Normes);
-            ROOT_Normes = new Norme("");            //espace vide
-            TreeViewNORME.Items.Add(ROOT_Normes);
-            ROOT_Normes = new Norme("Mesures");
-            TreeViewNORME.Items.Add(ROOT_Normes);
-            ROOT_Normes = new Norme("");            //espace vide
-            TreeViewNORME.Items.Add(ROOT_Normes);
             ROOT_Normes = new Norme("Normes");         
             TreeViewNORME.Items.Add(ROOT_Normes);
 
-            AfficherLesNormes();
+            ROOT_Mesures = new Mesures("Mesures");
+            TreeViewMesures.Items.Add(ROOT_Mesures);
+
+            AfficherLesTreeView();
 
         }
 
@@ -53,6 +48,9 @@ namespace Alto_IT
             this.Top = SystemParameters.WorkArea.Top;
             this.Height = SystemParameters.WorkArea.Height;
             this.Width = SystemParameters.WorkArea.Width;
+
+            // set du titre du dashboard
+            Title = "Dashboard - Projet : " + ProjetEnCours;
         }
 
         private void Ajout_exigence_Click(object sender, RoutedEventArgs e)
@@ -240,68 +238,82 @@ namespace Alto_IT
             }
         }
 
-        private void TreeViewNORME_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void TreeViewNORME_MouseUp(object sender, MouseButtonEventArgs e)
         {
-
-            NormeSelectionnee = (Norme)TreeViewNORME.SelectedItem;
-
-            if ((TreeViewNORME.SelectedItem.ToString() == "Normes"))
+            try
             {
-                GridControle_Norme.Visibility = Visibility.Visible;
+                NormeSelectionnee = (Norme)TreeViewNORME.SelectedItem;
+                if (NormeSelectionnee.Nom_Norme == "Normes")
+                {
+                    GridControle_Norme.Visibility = Visibility.Visible;
+                    GridControle_exigence.Visibility = Visibility.Collapsed;
+                    GridControle_Mesure.Visibility = Visibility.Collapsed;
+
+                    Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
+                    Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
+                    Frame_Vue_Mesures.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    GridControle_Norme.Visibility = Visibility.Collapsed;
+                    GridControle_exigence.Visibility = Visibility.Visible;
+                    GridControle_Mesure.Visibility = Visibility.Collapsed;
+
+                    Frame_Vue_Circulaire.Visibility = Visibility.Visible;
+                    Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
+                    Frame_Vue_Mesures.Visibility = Visibility.Collapsed;
+                    Frame_Vue_Circulaire.Content = new Vue_Circulaire(this);
+                }
+            }
+            catch (Exception)
+            {
+            }
+            
+        }
+
+        private void TreeViewMesures_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                MesureSelectionnee = (Mesures)TreeViewMesures.SelectedItem;
+                GridControle_Norme.Visibility = Visibility.Collapsed;
                 GridControle_exigence.Visibility = Visibility.Collapsed;
-                GridControle_Projet.Visibility = Visibility.Collapsed;
+                GridControle_Mesure.Visibility = Visibility.Visible;
 
                 Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
                 Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
 
+                Frame_Vue_Mesures.Visibility = Visibility.Visible;
+                Frame_Vue_Mesures.Content = new Vue_Mesures(this);
             }
-            else if ((TreeViewNORME.SelectedItem.ToString() == "Documentation"))
+            catch (Exception)
             {
-                GridControle_Norme.Visibility = Visibility.Collapsed;
-                GridControle_exigence.Visibility = Visibility.Collapsed;
-                GridControle_Projet.Visibility = Visibility.Collapsed;
-
-                Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
-                Frame_Vue_Documentation.Visibility = Visibility.Visible;
-                Frame_Vue_Documentation.Content = new Vue_Document(this);
-            }
-            else if ((TreeViewNORME.SelectedItem.ToString() == "Mesures"))
-            {
-                GridControle_Norme.Visibility = Visibility.Collapsed;
-                GridControle_exigence.Visibility = Visibility.Collapsed;
-                GridControle_Projet.Visibility = Visibility.Collapsed;
-
-                Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
-                Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
-
-            }
-            else if ((TreeViewNORME.SelectedItem.ToString() == "Projets"))
-            {
-                GridControle_Norme.Visibility = Visibility.Collapsed;
-                GridControle_exigence.Visibility = Visibility.Collapsed;
-                GridControle_Projet.Visibility = Visibility.Visible;
-
-                Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
-                Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
-
-            }
-            else
-            {
-                GridControle_Norme.Visibility = Visibility.Collapsed;
-                GridControle_exigence.Visibility = Visibility.Visible;
-                GridControle_Projet.Visibility = Visibility.Collapsed;
-                Frame_Vue_Circulaire.Visibility = Visibility.Visible;
-                Frame_Vue_Documentation.Visibility = Visibility.Collapsed;
-                Frame_Vue_Circulaire.Content = new Vue_Circulaire(this);
             }
 
         }
 
-        public void AfficherLesNormes()
+        private void TreeViewDocumentation_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            GridControle_Norme.Visibility = Visibility.Collapsed;
+            GridControle_exigence.Visibility = Visibility.Collapsed;
+            GridControle_Mesure.Visibility = Visibility.Collapsed;
+
+            Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
+            Frame_Vue_Documentation.Visibility = Visibility.Visible;
+            Frame_Vue_Mesures.Visibility = Visibility.Collapsed;
+
+            Frame_Vue_Documentation.Content = new Vue_Document(this);
+        }
+
+        public void AfficherLesTreeView()
         {
             foreach (Norme item in mw.database.NormeDatabase)
             {
                 ROOT_Normes.NormeObervCollec.Add(item);
+            }
+            foreach (Mesures item in mw.database.MesuresDatabase)
+            {
+                ROOT_Mesures.MesuresObservCollec.Add(item);
             }
         }
 
@@ -399,5 +411,7 @@ namespace Alto_IT
             }
 
         }
+
+        
     }
 }

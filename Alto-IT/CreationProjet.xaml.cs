@@ -33,7 +33,28 @@ namespace Alto_IT
 
         private void Bouton_validerProjet_Click(object sender, RoutedEventArgs e)
         {
-            Dashboard D = new Dashboard(mw);
+            Projets P = new Projets();
+            switch (Combo_Provider.Text)
+            {
+                case "Amazon Web Services":
+                    P.Name = NomProjet.Text;
+                    P.Provider = PROVIDER.AWS;
+                    break;
+                case "Azure":
+                    P.Name = NomProjet.Text;
+                    P.Provider = PROVIDER.AZURE;
+                    break;
+                case "Google Cloud Services":
+                    P.Name = NomProjet.Text;
+                    P.Provider = PROVIDER.GOOGLE;
+                    break;
+                default:
+                    break;
+            }
+            mw.database.ProjetDatabase.Add(P);
+            mw.database.SaveChanges();
+            
+            Dashboard D = new Dashboard(mw, P.Name);
             D.Show();
             Close();
         }

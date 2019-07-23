@@ -6,11 +6,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alto_IT"
         mc:Ignorable="d"
-        Title="Dashboard"
         Loaded="Window_Loaded"
         Width="auto" WindowStartupLocation="CenterScreen">
-   
-    
+
+
     <Grid x:Name="EspaceTravail">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -20,13 +19,14 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
-                
 
-                <TreeView Name="TreeViewNORME" Grid.Row="0" Grid.Column="0" SelectedItemChanged="TreeViewNORME_SelectedItemChanged" Margin="0,0,9.6,9.6" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="#00828790">
+
+
+                <TreeView Name="TreeViewNORME" Grid.Row="0" Grid.Column="0" MouseUp="TreeViewNORME_MouseUp" Margin="0,0,9.6,9.6" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="#00828790">
                     <TreeView.Resources>
                         <Style TargetType="{x:Type TreeViewItem}">
                             <Setter Property="HeaderTemplate">
@@ -43,15 +43,15 @@
                                     <Setter Property="TextBlock.Visibility" Value="Hidden"/>
                                 </DataTrigger>
                             </Style.Triggers>
-                            
+
                         </Style>
                     </TreeView.Resources>
-                    
-                    
+
+
                     <TreeView.Background>
                         <SolidColorBrush Color="#7FA5D8F7"/>
                     </TreeView.Background>
-                    
+
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate DataType="{x:Type self:Norme}" ItemsSource="{Binding NormeObervCollec}">
                             <StackPanel Orientation="Horizontal">
@@ -65,15 +65,6 @@
                                                     <DataTrigger Binding="{Binding Nom_Norme}" Value="Normes">
                                                          <Setter Property="Visibility" Value="Collapsed"></Setter>
                                                      </DataTrigger>
-                                                   <DataTrigger Binding="{Binding Nom_Norme}" Value="Documentation">
-                                                         <Setter Property="Visibility" Value="Collapsed"></Setter>
-                                                     </DataTrigger>   
-                                                   <DataTrigger Binding="{Binding Nom_Norme}" Value="Mesures">
-                                                         <Setter Property="Visibility" Value="Collapsed"></Setter>
-                                                     </DataTrigger> 
-                                                   <DataTrigger Binding="{Binding Nom_Norme}" Value="Projets">
-                                                         <Setter Property="Visibility" Value="Collapsed"></Setter>
-                                                     </DataTrigger>  
                                                </Style.Triggers>
                                            </Style>
                                        </Image.Style>
@@ -84,27 +75,71 @@
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>
+
+                <TreeView Name="TreeViewMesures" Grid.Row="1" Grid.Column="0" MouseUp="TreeViewMesures_MouseUp"  Margin="0,0,9.6,9.6" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="#00828790">
+                    <TreeView.Resources>
+                        <Style TargetType="{x:Type TreeViewItem}">
+                            <Setter Property="HeaderTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <TextBlock MaxWidth="235"
+                                   TextWrapping="Wrap"
+                                   Margin="5,10,5,10"/>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TreeView.Resources>
+
+
+                    <TreeView.Background>
+                        <SolidColorBrush Color="#7FA5D8F7"/>
+                    </TreeView.Background>
+
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type self:Mesures}" ItemsSource="{Binding MesuresObservCollec}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock  Text="• " TextWrapping="Wrap"/>
+                                <TextBlock  Text="{Binding Name}" Width="150" TextWrapping="Wrap"/>
+                                <TextBlock x:Name="Documentviewer" DockPanel.Dock="Right" VerticalAlignment="Center" Cursor="Help" PreviewMouseUp="DocumentViewer_PreviewMouseUp">
+                                   <Image Name="Img" Source="https://cdn.icon-icons.com/icons2/1129/PNG/512/fileinterfacesymboloftextpapersheet_79740.png" Width="20" Height="20" >
+                                       <Image.Style>
+                                           <Style TargetType="Image" >
+                                               <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Name}" Value="Mesures">
+                                                         <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                                     </DataTrigger>
+                                               </Style.Triggers>
+                                           </Style>
+                                       </Image.Style>
+                                   </Image>
+                                </TextBlock>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+
+                <TreeView Name="TreeViewDocumentation" Grid.Row="2" Grid.Column="0" Margin="0,0.4,0,0" MouseUp="TreeViewDocumentation_MouseUp" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="#00828790" Width="185">
+                    <TreeView.Background>
+                        <SolidColorBrush Color="#7FA5D8F7"/>
+                    </TreeView.Background>
+                    <TreeViewItem Header="• Documentation"/>
+                </TreeView>
+
+                <TreeView Name="RetourSelectProj" Grid.Row="2" Grid.Column="0" Margin="0,0,9.6,9.6" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="#00828790">
+                    <TreeViewItem>
+                        <TreeViewItem.Header>Changer de Projet</TreeViewItem.Header>
+                    </TreeViewItem>
+                </TreeView>
+
             </Grid>
             <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Circulaire" Margin="-0,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
             <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Documentation" Margin="-0,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
+            <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Mesures" Margin="-0,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
+
         </Grid>
 
-        <Grid Name="GridControle_Projet" Height="50" VerticalAlignment="Top" Margin="235,0,-0.4,0" Visibility="Visible">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <Button x:Name="Ajout_Projet"   Content="Ajouter un Projet"/>
-            <Button x:Name="Modif_Projet"  Content="Modifier un Projet" Grid.Column="1"/>
-            <Button x:Name="Supr_Projet"  Content="Supprimer un Projet" Grid.Column="2" Margin="0,0,0,-0.4"/>
-        </Grid>
-
-        <Grid Name="GridControle_Norme" Height="50" VerticalAlignment="Top" Margin="245,0,-0.4,0" Visibility="Collapsed">
+        <Grid Name="GridControle_Norme" Height="50" VerticalAlignment="Top" Margin="235,0,-0.4,0" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -116,10 +151,10 @@
 
             <Button x:Name="Ajout_Norme" Click="Ajout_Norme_Click"  Content="Ajouter une Norme"/>
             <Button x:Name="Modif_Norme" Click="Modif_Norme_Click" Content="Modifier une Norme" Grid.Column="1"/>
-            <Button x:Name="Supr_Norme" Click="Supr_Norme_Click" Content="Supprimer une Norme" Grid.Column="2" Margin="0,0,0,-0.4"/>
+            <Button x:Name="Supr_Norme" Click="Supr_Norme_Click" Content="Supprimer une Norme" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
         </Grid>
 
-        <Grid Name="GridControle_exigence" Height="50" VerticalAlignment="Top" Margin="245,0,0,0" Visibility="Collapsed">
+        <Grid Name="GridControle_exigence" Height="50" VerticalAlignment="Top" Margin="235,0,0,0" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -134,6 +169,20 @@
             <Button x:Name="Supr_exigence" Click="Supr_exigence_Click" Content="Supprimer une exigence" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
         </Grid>
 
+        <Grid Name="GridControle_Mesure" Height="50" VerticalAlignment="Top" Margin="235,0,-0.4,0" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="Ajout_Mesure"   Content="Ajouter une Mesure"/>
+            <Button x:Name="Modif_Mesure" Content="Modifier une Mesure" Grid.Column="1"/>
+            <Button x:Name="Supr_Mesure" Content="Supprimer une Mesure" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
+        </Grid>
 
     </Grid>
 

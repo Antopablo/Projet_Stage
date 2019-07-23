@@ -178,8 +178,8 @@
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Norme.cs" />
-    <Compile Include="Projet.xaml.cs">
-      <DependentUpon>Projet.xaml</DependentUpon>
+    <Compile Include="Window_Projet.xaml.cs">
+      <DependentUpon>Window_Projet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Projets.cs" />
     <Compile Include="RelationMesureExigence.cs" />
@@ -189,6 +189,9 @@
     </Compile>
     <Compile Include="Vue_Document.xaml.cs">
       <DependentUpon>Vue_Document.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vue_Mesures.xaml.cs">
+      <DependentUpon>Vue_Mesures.xaml</DependentUpon>
     </Compile>
     <Page Include="AffichageDesNormes.xaml">
       <SubType>Designer</SubType>
@@ -227,7 +230,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Projet.xaml">
+    <Page Include="Window_Projet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,6 +239,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vue_Document.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vue_Mesures.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

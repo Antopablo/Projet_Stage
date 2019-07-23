@@ -9,7 +9,6 @@
 
 
     <Grid>
-        <ListView x:Name="ListeViewDocumentation" Background="Azure" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.RowSpan="2" Grid.ColumnSpan="2" MouseDoubleClick="ListeViewDocumentation_MouseDoubleClick">
-        </ListView>
+        <ListView x:Name="ListeViewDocumentation" Background="Azure" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.RowSpan="2" Grid.ColumnSpan="2" MouseDoubleClick="ListeViewDocumentation_MouseDoubleClick" BorderThickness="0" FontFamily="DejaVu Sans" FontSize="13"/>
     </Grid>
 </Page>

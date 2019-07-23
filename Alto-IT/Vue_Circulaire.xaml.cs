@@ -47,11 +47,11 @@ namespace Alto_IT
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            AfficherDatabase();
+            AfficherTreeViewExigences();
 
         }
 
-        public void AfficherDatabase()
+        public void AfficherTreeViewExigences()
         {
             dash.mw.database.ExigenceDatabase.ToList();
             

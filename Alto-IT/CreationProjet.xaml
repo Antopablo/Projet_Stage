@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alto_IT"
         mc:Ignorable="d"
-        Title="Choix_du_Provier" Width="287.076" Height="309.4" WindowStartupLocation="CenterScreen">
+        Title="Nouveau Projet" Width="287.076" Height="309.4" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
@@ -41,9 +41,9 @@
     
     
     <Grid>
-        <TextBox x:Name="NomProjet" Margin="28,21,31.8,196" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="DejaVu Sans" FontSize="18" FontWeight="Bold" Style="{StaticResource placeHolder}" Tag="Nom de votre projet" ></TextBox>
+        <TextBox x:Name="NomProjet" Margin="28,21,31.8,196" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="DejaVu Sans" FontSize="18" FontWeight="Bold" Tag="Nom de votre projet" ></TextBox>
         <Label Content="Choix du Provider" Margin="71,115,79.8,133" FontFamily="DejaVu Sans" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
-        <ComboBox HorizontalAlignment="Left" Margin="63,147,0,0" VerticalAlignment="Top" Width="157">
+        <ComboBox Name="Combo_Provider" HorizontalAlignment="Left" Margin="63,147,0,0" VerticalAlignment="Top" Width="157">
             <TextBlock Text="Amazon Web Services"/>
             <TextBlock Text="Azure"/>
             <TextBlock Text="Google Cloud Services"/>

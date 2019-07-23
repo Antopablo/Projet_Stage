@@ -55,7 +55,7 @@ namespace Alto_IT
                 NormeSelectionnee.Nom_Norme = TitreModify.Text;
                 mw.database.SaveChanges();
                 dashb.ROOT_Normes.NormeObervCollec.Clear();
-                dashb.AfficherLesNormes();
+                dashb.AfficherLesTreeView();
                 Close();
 
             }
@@ -118,7 +118,7 @@ namespace Alto_IT
                     }
 
                     dashb.ROOT_Normes.NormeObervCollec.Clear();
-                    dashb.AfficherLesNormes();
+                    dashb.AfficherLesTreeView();
                     Close();
                 }
             }

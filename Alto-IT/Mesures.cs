@@ -33,6 +33,12 @@ namespace Alto_IT
         {
         }
 
+        public Mesures(string name)
+        {
+            Name = name;
+            MesuresObservCollec = new ObservableCollection<Mesures>();
+        }
+
         public Mesures(string name, string description)
         {
             Name = name;
