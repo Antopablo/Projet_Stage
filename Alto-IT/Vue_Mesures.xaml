@@ -125,7 +125,7 @@
         </Style>
         <Style x:Key="MenuStyle">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Name}" Value="Mesures">
+                <DataTrigger Binding="{Binding Name}" Value="Menu">
                     <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
                 </DataTrigger>
             </Style.Triggers>

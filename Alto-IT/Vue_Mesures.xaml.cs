@@ -21,7 +21,8 @@ namespace Alto_IT
     public partial class Vue_Mesures : Page
     {
         public Dashboard dashb { get; set; }
-        public Mesures MyProperty { get; set; }
+        public Mesures ROOT_Mesures { get; set; }
+
         public Vue_Mesures()
         {
             InitializeComponent();
@@ -31,6 +32,9 @@ namespace Alto_IT
         {
             InitializeComponent();
             dashb = D;
+            dashb.Vue_Mesure = this;
+            ROOT_Mesures = new Mesures("Menu");
+            treeviewFrame.Items.Add(ROOT_Mesures);
         }
 
         private void TreeviewFrame_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

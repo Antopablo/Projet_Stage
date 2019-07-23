@@ -15,6 +15,7 @@ namespace Alto_IT
     {
         public MainWindow mw { get; set; }
         public Vue_Circulaire Vue { get; set; }
+        public Vue_Mesures Vue_Mesure { get; set; }
         public Norme ROOT_Normes { get; set; }
         public Norme NormeSelectionnee { get; set; }
         public Mesures ROOT_Mesures { get; set; }
@@ -30,7 +31,7 @@ namespace Alto_IT
             mw = m;
             ProjetEnCours = p;
 
-            Vue = new Vue_Circulaire(this);
+            //Vue = new Vue_Circulaire(this);
             ROOT_Normes = new Norme("Normes");         
             TreeViewNORME.Items.Add(ROOT_Normes);
 
