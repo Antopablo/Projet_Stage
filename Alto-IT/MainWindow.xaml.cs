@@ -47,9 +47,12 @@ namespace Alto_IT
             //}
 
 
-            
-            Dashboard D = new Dashboard(this);
-             D.Show();
+
+            //Dashboard D = new Dashboard(this);
+            // D.Show();
+
+            Projet P = new Projet(this);
+            P.Show();
             Close();
 
         }

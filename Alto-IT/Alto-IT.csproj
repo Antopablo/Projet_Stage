@@ -108,6 +108,7 @@
     <Compile Include="CreationProjet.xaml.cs">
       <DependentUpon>CreationProjet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Mesures.cs" />
     <Compile Include="Migrations\201907111234206_init status.cs" />
     <Compile Include="Migrations\201907111234206_init status.Designer.cs">
       <DependentUpon>201907111234206_init status.cs</DependentUpon>
@@ -152,6 +153,22 @@
     <Compile Include="Migrations\201907220848027_doc.Designer.cs">
       <DependentUpon>201907220848027_doc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907221327214_ajout selon notion de projet.cs" />
+    <Compile Include="Migrations\201907221327214_ajout selon notion de projet.Designer.cs">
+      <DependentUpon>201907221327214_ajout selon notion de projet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907221331394_ajout dbSet mesure et proj.cs" />
+    <Compile Include="Migrations\201907221331394_ajout dbSet mesure et proj.Designer.cs">
+      <DependentUpon>201907221331394_ajout dbSet mesure et proj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907221333403_frdvfgdtbvergt.cs" />
+    <Compile Include="Migrations\201907221333403_frdvfgdtbvergt.Designer.cs">
+      <DependentUpon>201907221333403_frdvfgdtbvergt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907230621261_sq request document viewer.cs" />
+    <Compile Include="Migrations\201907230621261_sq request document viewer.Designer.cs">
+      <DependentUpon>201907230621261_sq request document viewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -161,7 +178,11 @@
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Norme.cs" />
+    <Compile Include="Projet.xaml.cs">
+      <DependentUpon>Projet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Projets.cs" />
+    <Compile Include="RelationMesureExigence.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Vue_Circulaire.xaml.cs">
       <DependentUpon>Vue_Circulaire.xaml</DependentUpon>
@@ -203,6 +224,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Modifier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Projet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -261,6 +286,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907220848027_doc.resx">
       <DependentUpon>201907220848027_doc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907221327214_ajout selon notion de projet.resx">
+      <DependentUpon>201907221327214_ajout selon notion de projet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907221331394_ajout dbSet mesure et proj.resx">
+      <DependentUpon>201907221331394_ajout dbSet mesure et proj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907221333403_frdvfgdtbvergt.resx">
+      <DependentUpon>201907221333403_frdvfgdtbvergt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907230621261_sq request document viewer.resx">
+      <DependentUpon>201907230621261_sq request document viewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

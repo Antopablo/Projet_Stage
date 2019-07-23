@@ -55,17 +55,10 @@ namespace Alto_IT
             {
                 MessageBox.Show("Selectionnez un document");
             }
-            string[] DocumentSplit = DocumentSelectionne.Split('.');
-            string F = dashb.AccentFormater(dashb.FormaterToSQLRequest(DocumentSplit[0]));
 
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
-                var Doc = context.Database.SqlQuery<string>("SELECT DocumentPath FROM Exigences WHERE DocumentWithoutExtension = '" + F + "'").FirstOrDefault();
-                if (Doc == null)
-                {
-                    Doc = context.Database.SqlQuery<string>("SELECT DocumentPath FROM Normes WHERE DocumentWithoutExtension = '" + F + "'").FirstOrDefault();
-
-                }
+                var Doc = context.Database.SqlQuery<string>("SELECT DocumentPath FROM Exigences WHERE DocumentName = '" + DocumentSelectionne + "'").FirstOrDefault();
                 DocumentFullPath = Doc;
             }
 

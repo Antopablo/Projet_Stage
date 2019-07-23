@@ -79,19 +79,19 @@ namespace Alto_IT
                     switch (ComboBoxStatus.Text)
                     {
                         case "Non Évaluée":
-                            Vue.ExigenceSelectionnee.Status = Exigence.STATUS.non_evaluee;
+                            Vue.ExigenceSelectionnee.Status = STATUS.non_evaluee;
                             break;
                         case "Non Appliquée":
-                            Vue.ExigenceSelectionnee.Status = Exigence.STATUS.non_appliquee;
+                            Vue.ExigenceSelectionnee.Status = STATUS.non_appliquee;
                             break;
                         case "Programmée":
-                            Vue.ExigenceSelectionnee.Status = Exigence.STATUS.programmee;
+                            Vue.ExigenceSelectionnee.Status = STATUS.programmee;
                             break;
                         case "Appliquée":
-                            Vue.ExigenceSelectionnee.Status = Exigence.STATUS.appliquee;
+                            Vue.ExigenceSelectionnee.Status = STATUS.appliquee;
                             break;
                         case "Non Applicable":
-                            Vue.ExigenceSelectionnee.Status = Exigence.STATUS.non_applicable;
+                            Vue.ExigenceSelectionnee.Status = STATUS.non_applicable;
                             break;
                         default:
                             break;
@@ -118,15 +118,12 @@ namespace Alto_IT
         private void Bouton_AjouterDocument_Click(object sender, RoutedEventArgs e)
         {
             string fileName = "";
-            string fileNameWithoutExtension = "";
             string fileNameWithID = "";
             OpenFileDialog open = new OpenFileDialog();
             open.ShowDialog();
-            string[] DocumentSplit = open.SafeFileName.Split('.');
 
             fileNameWithID = "[" + (Vue.ExigenceSelectionnee.Id) + "]" + open.SafeFileName;
             fileName = open.SafeFileName;
-            fileNameWithoutExtension = Vue.dash.AccentFormater(Vue.dash.FormaterToSQLRequest(DocumentSplit[0]));
             string sourcePath = open.FileName;
             string targetPath = @"C:\Users\stagiaire\Desktop\Projet_Stage\Projet_Stage\Alto-IT\bin\Debug\DocumentClient\" + fileNameWithID;
 
@@ -135,7 +132,6 @@ namespace Alto_IT
                 File.Copy(sourcePath, targetPath);
                 Vue.ExigenceSelectionnee.DocumentPath = targetPath;
                 Vue.ExigenceSelectionnee.DocumentName = fileName;
-                Vue.ExigenceSelectionnee.DocumentWithoutExtension = fileNameWithoutExtension;
             }
             catch (IOException)
             {
@@ -145,7 +141,6 @@ namespace Alto_IT
                     File.Copy(sourcePath, targetPath);
                     Vue.ExigenceSelectionnee.DocumentPath = targetPath;
                     Vue.ExigenceSelectionnee.DocumentName = fileName;
-                    Vue.ExigenceSelectionnee.DocumentWithoutExtension = fileNameWithoutExtension;
 
                 }
             }

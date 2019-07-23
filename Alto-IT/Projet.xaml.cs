@@ -15,27 +15,29 @@ using System.Windows.Shapes;
 namespace Alto_IT
 {
     /// <summary>
-    /// Logique d'interaction pour Choix_du_Provier.xaml
+    /// Logique d'interaction pour Projet.xaml
     /// </summary>
-    public partial class CreationProjet : Window
+    public partial class Projet : Window
     {
         public MainWindow mw { get; set; }
-        public CreationProjet()
+        public Projet()
         {
             InitializeComponent();
         }
 
-        public CreationProjet(MainWindow m)
+        public Projet(MainWindow m)
         {
             InitializeComponent();
             mw = m;
         }
 
-        private void Bouton_validerProjet_Click(object sender, RoutedEventArgs e)
+
+        private void Add_Projet_Click(object sender, RoutedEventArgs e)
         {
-            Dashboard D = new Dashboard(mw);
-            D.Show();
+            CreationProjet CP = new CreationProjet(mw);
+            CP.Show();
             Close();
+
         }
     }
 }

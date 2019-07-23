@@ -60,18 +60,6 @@ namespace Alto_IT
             }
         }
 
-        private string _DocumentWithoutExtension;
-        public string DocumentWithoutExtension
-
-        {
-            get { return _DocumentWithoutExtension; }
-            set
-            {
-                _DocumentWithoutExtension = value;
-                OnPropertyChanged("DocumentWithoutExtension");
-            }
-        }
-
         [InverseProperty ("ForeignKey_TO_Norme")]
         public int IDNorme { get; set; }
 

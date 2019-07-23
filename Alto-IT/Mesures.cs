@@ -9,26 +9,9 @@ using System.Threading.Tasks;
 
 namespace Alto_IT
 {
-    public enum PROVIDER
+    public class Mesures : INotifyPropertyChanged
     {
-        AWS,
-        AZURE,
-        GOOGLE
-    }
 
-    public class Projets : INotifyPropertyChanged
-
-    {
-        public Projets()
-        {
-        }
-
-        public Projets(string name, PROVIDER provider)
-        {
-            Name = name;
-            Provider = provider;
-            ProjetsObservCollec = new ObservableCollection<Projets>();
-        }
 
         [Key]
         public int Id { get; set; }
@@ -37,23 +20,37 @@ namespace Alto_IT
         public string Name
         {
             get { return _name; }
-            set { _name = value;
+            set
+            {
+                _name = value;
                 OnPropertyChanged("Name");
             }
         }
 
+        private string _description;
 
-        private PROVIDER _provider;
-
-        public PROVIDER Provider
+        public Mesures()
         {
-            get { return _provider; }
-            set { _provider = value;
-                OnPropertyChanged("Provider");
+        }
+
+        public Mesures(string name, string description)
+        {
+            Name = name;
+            Description = description;
+            MesuresObservCollec = new ObservableCollection<Mesures>();
+        }
+
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                OnPropertyChanged("Description");
             }
         }
 
-        public ObservableCollection<Projets> ProjetsObservCollec { get; set; }
+        public ObservableCollection<Mesures> MesuresObservCollec { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
@@ -64,7 +61,5 @@ namespace Alto_IT
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
-
-
     }
 }

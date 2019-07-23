@@ -138,17 +138,14 @@ namespace Alto_IT
             {
                 string fileName = "";
                 string fileNameWithID = "";
-                string fileNameWithoutExtension = "";
                 string sourcePath;
                 string targetPath;
                 OpenFileDialog open = new OpenFileDialog();
                 open.ShowDialog();
-                string[] DocumentSplit = open.SafeFileName.Split('.');
 
                 if (NormeSelectionnee != null)
                 {
                     fileNameWithID = "[" + (NormeSelectionnee.Id) + "]" + open.SafeFileName;
-                    fileNameWithoutExtension = dashb.AccentFormater(dashb.FormaterToSQLRequest(DocumentSplit[0]));
                     fileName = open.SafeFileName;
                     sourcePath = open.FileName;
                     targetPath = @"C:\Users\stagiaire\Desktop\Projet_Stage\Projet_Stage\Alto-IT\bin\Debug\DocumentClient\" + fileNameWithID;
@@ -158,7 +155,6 @@ namespace Alto_IT
                     File.Copy(sourcePath, targetPath);
                     NormeSelectionnee.DocumentPath = targetPath;
                     NormeSelectionnee.DocumentName = fileName;
-                    NormeSelectionnee.DocumentWithoutExtension = fileNameWithoutExtension;
                 }
                 catch (IOException)
                 {
@@ -168,8 +164,6 @@ namespace Alto_IT
                         File.Copy(sourcePath, targetPath);
                         NormeSelectionnee.DocumentPath = targetPath;
                         NormeSelectionnee.DocumentName = fileName;
-                        NormeSelectionnee.DocumentWithoutExtension = fileNameWithoutExtension;
-
                         }
                     }
                 }

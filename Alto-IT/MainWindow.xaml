@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alto_IT"
         mc:Ignorable="d"
-        Title="Connection" Height="490" Width="341">
+        Title="Connection" Height="490" Width="341" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <TextBox Name="Champ_identifiant" HorizontalAlignment="Left" Height="29" Margin="101,124,0,0" TextWrapping="Wrap" Text="Identifiant" VerticalAlignment="Top" Width="120" FontFamily="Gill Sans MT" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>

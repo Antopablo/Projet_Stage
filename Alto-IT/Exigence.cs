@@ -10,17 +10,16 @@ using System.Threading.Tasks;
 
 namespace Alto_IT
 {
+    public enum STATUS
+    {
+        non_evaluee,
+        non_appliquee,
+        programmee,
+        appliquee,
+        non_applicable
+    }
     public class Exigence : INotifyPropertyChanged
     {
-        public enum STATUS
-        {
-            non_evaluee,
-            non_appliquee,
-            programmee,
-            appliquee,
-            non_applicable
-        }
-
         public Exigence(string name, string description, int foreignkey, int foreignkeyTOnorme)
         {
             Name = name;
@@ -93,20 +92,6 @@ namespace Alto_IT
                 OnPropertyChanged("DocumentName");
             }
         }
-
-        private string _DocumentWithoutExtension;
-        public string DocumentWithoutExtension
-
-        {
-            get { return _DocumentWithoutExtension; }
-            set
-            {
-                _DocumentWithoutExtension = value;
-                OnPropertyChanged("DocumentWithoutExtension");
-            }
-        }
-
-
 
         private string _description;
         public string Description
