@@ -33,23 +33,31 @@ namespace Alto_IT
 
         private void ValiderNorme_Click(object sender, RoutedEventArgs e)
         {
-            Norme N = new Norme(Title.Text) ;
+            Norme N = new Norme(Title.Text,dashb.ProjetEncours.Id) ;
             List<string> Controle = new List<string>();
-            foreach (Norme item in dashb.ROOT_Normes.NormeObervCollec)
+            if (Title.Text == "" || Title.Text == null)
             {
-                Controle.Add(item.Nom_Norme);
-            }
-            if (!Controle.Contains(Title.Text))
-            {
-                dashb.ROOT_Normes.NormeObervCollec.Add(N);
-                mw.database.NormeDatabase.Add(N);
-                mw.database.SaveChanges();
-                Close();
+                MessageBox.Show("Veuillez saisir le nom de la Norme", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("Cette Norme éxiste déja", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
+                foreach (Norme item in dashb.ROOT_Normes.NormeObervCollec)
+                {
+                    Controle.Add(item.Nom_Norme);
+                }
+                if (!Controle.Contains(Title.Text))
+                {
+                    dashb.ROOT_Normes.NormeObervCollec.Add(N);
+                    mw.database.NormeDatabase.Add(N);
+                    mw.database.SaveChanges();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Cette Norme éxiste déja", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
+            
             
             
         }

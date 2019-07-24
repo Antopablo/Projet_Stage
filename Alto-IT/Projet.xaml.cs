@@ -46,9 +46,17 @@ namespace Alto_IT
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Dashboard D = new Dashboard(mw,(Projets)listeProjet.SelectedValue);
-            D.Show();
-            Close();
+            if (listeProjet.Text == "")
+            {
+                MessageBox.Show("Veuillez choisir un projet", "erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                Dashboard D = new Dashboard(mw, (Projets)listeProjet.SelectedValue);
+                D.Show();
+                Close();
+            }
+            
         }
     }
 }

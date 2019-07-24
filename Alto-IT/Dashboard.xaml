@@ -139,7 +139,7 @@
             <Button x:Name="Supr_Norme" Click="Supr_Norme_Click" Content="Supprimer une Norme" Grid.Column="2"/>
         </Grid>
 
-        <Grid Grid.Column="1" Name="GridControle_exigence" Height="50" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="Visible">
+        <Grid Grid.Column="1" Name="GridControle_exigence" Height="50" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -154,7 +154,7 @@
             <Button x:Name="Supr_exigence" Click="Supr_exigence_Click" Content="Supprimer une exigence" Grid.Column="2"/>
         </Grid>
 
-        <Grid Grid.Column="1" Name="GridControle_Mesures" Height="50" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="Visible">
+        <Grid Grid.Column="1" Name="GridControle_Mesures" Height="50" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

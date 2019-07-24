@@ -18,11 +18,12 @@ namespace Alto_IT
 
         private string _Nom_Norme;
 
-        public Norme(string nom_Norme)
+        public Norme(string nom_Norme,int FKProjet)
         {
             Nom_Norme = nom_Norme;
             NormeObervCollec = new ObservableCollection<Norme>();
             IDNorme = Id;
+            FKToProjet = FKProjet;
         }
 
         public Norme() { }
@@ -69,6 +70,8 @@ namespace Alto_IT
                 OnPropertyChanged("DocumentPath");
             }
         }
+
+        public int FKToProjet { get; set; }
 
         private string _DocumentName;
 

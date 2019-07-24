@@ -36,7 +36,7 @@ namespace Alto_IT
             //Vue = new Vue_Circulaire(this);
 
             
-            ROOT_Normes = new Norme("Normes");
+            ROOT_Normes = new Norme("Normes",ProjetEncours.Id);
             ROOT_Mesure = new Mesures("Mesures");
             TreeViewNORME.Items.Add(ROOT_Normes);
             TreeViewMesures.Items.Add(ROOT_Mesure);
@@ -225,6 +225,7 @@ namespace Alto_IT
                 AF.BoutonSupprimer.Visibility = Visibility.Hidden;
                 AF.TitreModify.Visibility = Visibility.Visible;
                 AF.TitreModifyBlock.Visibility = Visibility.Hidden;
+                AF.AjoutDocument.Visibility = Visibility.Visible;
                 AF.Show();
                 FenetreOuverte = true;
             }
@@ -240,6 +241,7 @@ namespace Alto_IT
                 AF.BoutonSupprimer.Visibility = Visibility.Visible;
                 AF.TitreModify.Visibility = Visibility.Hidden;
                 AF.TitreModifyBlock.Visibility = Visibility.Visible;
+                AF.AjoutDocument.Visibility = Visibility.Hidden;
                 AF.Show();
                 FenetreOuverte = true;
             }
@@ -273,7 +275,11 @@ namespace Alto_IT
         {
             foreach (Norme item in mw.database.NormeDatabase)
             {
-                ROOT_Normes.NormeObervCollec.Add(item);
+                if (item.FKToProjet == ProjetEncours.Id)
+                {
+                    ROOT_Normes.NormeObervCollec.Add(item);
+                }
+
             }
         }
 
@@ -281,7 +287,11 @@ namespace Alto_IT
         {
             foreach (Mesures item in mw.database.MesuresDatabase)
             {
-                ROOT_Mesure.MesureObservableCollec.Add(item);
+                if (item.Nom == "Mesure")
+                {
+                    ROOT_Mesure.MesureObservableCollec.Add(item);
+                }
+                
             }
         }
 
@@ -369,17 +379,9 @@ namespace Alto_IT
             Frame_VueMesures.Visibility = Visibility.Collapsed;
             Frame_VueDocuments.Content = VueDoc;
 
-            Ajout_Norme.Visibility = Visibility.Collapsed;
-            Modif_Norme.Visibility = Visibility.Collapsed;
-            Supr_Norme.Visibility = Visibility.Collapsed;
-
-            Ajout_Mesures.Visibility = Visibility.Collapsed;
-            Modif_Mesures.Visibility = Visibility.Collapsed;
-            Supr_Mesures.Visibility = Visibility.Collapsed;
-
-            Ajout_exigence.Visibility = Visibility.Collapsed;
-            Modif_exigence.Visibility = Visibility.Collapsed;
-            Supr_exigence.Visibility = Visibility.Collapsed;
+            GridControle_exigence.Visibility = Visibility.Collapsed;
+            GridControle_Mesures.Visibility = Visibility.Collapsed;
+            GridControle_Norme.Visibility = Visibility.Collapsed;
         }
 
 
@@ -390,17 +392,9 @@ namespace Alto_IT
                 NormeSelectionnee = (Norme)TreeViewNORME.SelectedItem;
                 if (NormeSelectionnee.Nom_Norme == "Normes")
                 {
-                    Ajout_Norme.Visibility = Visibility.Visible;
-                    Modif_Norme.Visibility = Visibility.Visible;
-                    Supr_Norme.Visibility = Visibility.Visible;
-
-                    Ajout_Mesures.Visibility = Visibility.Collapsed;
-                    Modif_Mesures.Visibility = Visibility.Collapsed;
-                    Supr_Mesures.Visibility = Visibility.Collapsed;
-
-                    Ajout_exigence.Visibility = Visibility.Collapsed;
-                    Modif_exigence.Visibility = Visibility.Collapsed;
-                    Supr_exigence.Visibility = Visibility.Collapsed;
+                    GridControle_exigence.Visibility = Visibility.Collapsed;
+                    GridControle_Norme.Visibility = Visibility.Visible;
+                    GridControle_Mesures.Visibility = Visibility.Collapsed;
 
 
                     Frame_VueDocuments.Visibility = Visibility.Collapsed;
@@ -409,17 +403,9 @@ namespace Alto_IT
                 }
                 else
                 {
-                    Ajout_Norme.Visibility = Visibility.Collapsed;
-                    Modif_Norme.Visibility = Visibility.Collapsed;
-                    Supr_Norme.Visibility = Visibility.Collapsed;
-
-                    Ajout_Mesures.Visibility = Visibility.Collapsed;
-                    Modif_Mesures.Visibility = Visibility.Collapsed;
-                    Supr_Mesures.Visibility = Visibility.Collapsed;
-
-                    Ajout_exigence.Visibility = Visibility.Visible;
-                    Modif_exigence.Visibility = Visibility.Visible;
-                    Supr_exigence.Visibility = Visibility.Visible;
+                    GridControle_exigence.Visibility = Visibility.Visible;
+                    GridControle_Norme.Visibility = Visibility.Collapsed;
+                    GridControle_Mesures.Visibility = Visibility.Collapsed;
 
                     Frame_VueDocuments.Visibility = Visibility.Collapsed;
                     Frame_VueMesures.Visibility = Visibility.Collapsed;
@@ -437,18 +423,10 @@ namespace Alto_IT
         private void TreeViewMesures_MouseUp(object sender, MouseButtonEventArgs e)
         {
             //Vue_Mesure.MesureSelectionne = (Mesures)TreeViewMesures.SelectedItem;
+            GridControle_exigence.Visibility = Visibility.Collapsed;
+            GridControle_Norme.Visibility = Visibility.Collapsed;
+            GridControle_Mesures.Visibility = Visibility.Visible;
 
-            Ajout_Norme.Visibility = Visibility.Collapsed;
-            Modif_Norme.Visibility = Visibility.Collapsed;
-            Supr_Norme.Visibility = Visibility.Collapsed;
-
-            Ajout_Mesures.Visibility = Visibility.Visible;
-            Modif_Mesures.Visibility = Visibility.Visible;
-            Supr_Mesures.Visibility = Visibility.Visible;
-
-            Ajout_exigence.Visibility = Visibility.Collapsed;
-            Modif_exigence.Visibility = Visibility.Collapsed;
-            Supr_exigence.Visibility = Visibility.Collapsed;
 
             Frame_Vue_Circulaire.Visibility = Visibility.Collapsed;
             Frame_VueDocuments.Visibility = Visibility.Collapsed;

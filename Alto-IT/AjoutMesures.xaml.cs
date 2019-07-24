@@ -31,60 +31,67 @@ namespace Alto_IT
 
         private void ValiderMesure_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(Dash.ProjetEncours.Id+"");
-            if (MesureName.Text == "Menu")
+            if (MesureName.Text == "" || MesureName == null) 
             {
-                MessageBox.Show("Vous ne pouvez pas appeler une Mesure ainsi", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Veuillez saisir le nom de la mesure", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             else
             {
-                if (Dash.Vue_Mesure.MesureSelectionne == null || Dash.Vue_Mesure.MesureSelectionne.Nom == "Menu")
+                if (MesureName.Text == "Menu")
                 {
-                    try
-                    {
-                        CreateTable(MesureName.Text);
-                        Mesures MesureParent = new Mesures(MesureName.Text, MesureDescription.Text, 0, Dash.ProjetEncours.Id);
-                        Dash.Vue_Mesure.ROOT_Mesures.MesureObservableCollec.Add(MesureParent);
-                        mw.database.MesuresDatabase.Add(MesureParent);
-                        mw.database.SaveChanges();
-                        Close();
-                    }
-                    catch (System.Data.SqlClient.SqlException)
-                    {
-
-                        MessageBox.Show("Une mesure porte déja ce nom", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-
+                    MessageBox.Show("Vous ne pouvez pas appeler une Mesure ainsi", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
                 else
                 {
-                    try
+                    if (Dash.Vue_Mesure.MesureSelectionne == null || Dash.Vue_Mesure.MesureSelectionne.Nom == "Menu")
                     {
-                        CreateTable(MesureName.Text);
                         try
                         {
-                            RemplirTable(Dash.Vue_Mesure.MesureSelectionne.Nom, Dash.Vue_Mesure.MesureSelectionne.Id);
-                            Mesures MesureEnfant = new Mesures(MesureName.Text, MesureDescription.Text, Dash.Vue_Mesure.MesureSelectionne.Id, Dash.ProjetEncours.Id);
-                            Dash.Vue_Mesure.MesureSelectionne.MesureObservableCollec.Add(MesureEnfant);
-                            mw.database.MesuresDatabase.Add(MesureEnfant);
+                            CreateTable(MesureName.Text);
+                            Mesures MesureParent = new Mesures(MesureName.Text, MesureDescription.Text, 0, Dash.ProjetEncours.Id);
+                            Dash.Vue_Mesure.ROOT_Mesures.MesureObservableCollec.Add(MesureParent);
+                            mw.database.MesuresDatabase.Add(MesureParent);
+                            mw.database.SaveChanges();
+                            Close();
                         }
-                        catch (Exception)
+                        catch (System.Data.SqlClient.SqlException)
                         {
 
-                            SupprimerTable(MesureName.Text);
-                            MessageBox.Show("Impossible de remplir la Table Parent", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("Une mesure porte déja ce nom", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
-                        Close();
+
                     }
-                    catch (System.Data.SqlClient.SqlException)
+                    else
                     {
+                        try
+                        {
+                            CreateTable(MesureName.Text);
+                            try
+                            {
+                                RemplirTable(Dash.Vue_Mesure.MesureSelectionne.Nom, Dash.Vue_Mesure.MesureSelectionne.Id);
+                                Mesures MesureEnfant = new Mesures(MesureName.Text, MesureDescription.Text, Dash.Vue_Mesure.MesureSelectionne.Id, Dash.ProjetEncours.Id);
+                                Dash.Vue_Mesure.MesureSelectionne.MesureObservableCollec.Add(MesureEnfant);
+                                mw.database.MesuresDatabase.Add(MesureEnfant);
+                            }
+                            catch (Exception)
+                            {
 
-                        MessageBox.Show("Une mesure porte déja ce nom", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
+                                SupprimerTable(MesureName.Text);
+                                MessageBox.Show("Impossible de remplir la Table Parent", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            Close();
+                        }
+                        catch (System.Data.SqlClient.SqlException)
+                        {
 
+                            MessageBox.Show("Une mesure porte déja ce nom", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        }
+                        mw.database.SaveChanges();
                     }
-                    mw.database.SaveChanges();
                 }
             }
+            
         }
 
 

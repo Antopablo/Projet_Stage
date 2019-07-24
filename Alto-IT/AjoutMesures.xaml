@@ -8,8 +8,10 @@
         Title="Ajout d'une Mesure" Height="400" Width="700"
         Closed="Window_Closed">
     <Grid Margin="0,0,-0.4,-1">
-        <TextBox Name="MesureName" HorizontalAlignment="Left" Height="46" Margin="119,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="465"/>
-        <TextBox Name="MesureDescription" HorizontalAlignment="Left" Height="110" Margin="119,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="465"/>
-        <Button Name="ValiderMesure" Content="Button" HorizontalAlignment="Left" Margin="119,272,0,0" VerticalAlignment="Top" Width="465" Height="60" Click="ValiderMesure_Click"/>
+        <TextBox Name="MesureName" HorizontalAlignment="Left" Height="46" Margin="119,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="465" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+        <TextBox Name="MesureDescription" HorizontalAlignment="Left" Height="110" Margin="119,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="465" HorizontalContentAlignment="Left" AcceptsReturn="True"/>
+        <Button Name="ValiderMesure" Content="Ajouter la Mesure" HorizontalAlignment="Left" Margin="119,272,0,0" VerticalAlignment="Top" Width="465" Height="60" Click="ValiderMesure_Click"/>
+        <Label Content="Nom de la mesure" HorizontalAlignment="Left" Margin="0,46,0,0" VerticalAlignment="Top" Height="46" Width="114" VerticalContentAlignment="Center"/>
+        <Label Content="Description" HorizontalAlignment="Left" Margin="23,177,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
