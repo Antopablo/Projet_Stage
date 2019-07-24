@@ -99,11 +99,11 @@
     <Compile Include="AffichageDesNormes.xaml.cs">
       <DependentUpon>AffichageDesNormes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ajout.xaml.cs">
-      <DependentUpon>Ajout.xaml</DependentUpon>
+    <Compile Include="Ajout_Exigence.xaml.cs">
+      <DependentUpon>Ajout_Exigence.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AjoutNorme.xaml.cs">
-      <DependentUpon>AjoutNorme.xaml</DependentUpon>
+    <Compile Include="Ajout_Norme.xaml.cs">
+      <DependentUpon>Ajout_Norme.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ajout_Mesure.xaml.cs">
       <DependentUpon>Ajout_Mesure.xaml</DependentUpon>
@@ -216,11 +216,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ajout.xaml">
+    <Page Include="Ajout_Exigence.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AjoutNorme.xaml">
+    <Page Include="Ajout_Norme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

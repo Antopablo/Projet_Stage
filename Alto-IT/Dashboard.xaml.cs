@@ -276,7 +276,6 @@ namespace Alto_IT
         {
             try
             {
-                //Vue_Mesure.MesureSelectionnee = (Mesures)TreeViewMesures.SelectedItem;
                 GridControle_Norme.Visibility = Visibility.Collapsed;
                 GridControle_exigence.Visibility = Visibility.Collapsed;
                 GridControle_Mesure.Visibility = Visibility.Visible;

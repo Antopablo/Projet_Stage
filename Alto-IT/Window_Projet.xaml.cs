@@ -51,9 +51,16 @@ namespace Alto_IT
 
         private void ValiderChoixProjet_Click(object sender, RoutedEventArgs e)
         {
-            Dashboard D = new Dashboard(mw, (Projets)Combo_Provider.SelectedValue);
-            D.Show();
-            Close();
+            if (Combo_Provider.Text == null || Combo_Provider.Text == "")
+            {
+                MessageBox.Show("Vous devez choisir un projet ou en créer un nouveau", "Choix du projet", MessageBoxButton.OK, MessageBoxImage.Information);
+            } else
+            {
+                Dashboard D = new Dashboard(mw, (Projets)Combo_Provider.SelectedValue);
+                D.Show();
+                Close();
+            }
+
         }
     }
 }

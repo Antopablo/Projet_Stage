@@ -44,6 +44,6 @@
     <Grid>
         <TextBox Name="TitleMesure" Tag="Nom de la mesure" FontFamily="DejaVu Sans" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="34" Margin="124,18,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" VerticalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Auto" Style="{StaticResource placeHolder}"/>
         <TextBox x:Name="ContentMesure" HorizontalAlignment="Left" Height="154" Margin="124,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" Padding="5,5,5,5" AcceptsReturn="True" AutoWordSelection="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Tag="Description de la mesure" Style="{StaticResource placeHolder}" FontFamily="DejaVu Sans" FontSize="18"/>
-        <Button Name="ValiderMesure" Content="Valider la norme" HorizontalAlignment="Left" Margin="124,277,0,0" VerticalAlignment="Top" Width="519" Height="71" Click="ValiderMesure_Click"/>
+        <Button Name="ValiderMesure" Content="Valider la mesure" HorizontalAlignment="Left" Margin="124,277,0,0" VerticalAlignment="Top" Width="519" Height="71" Click="ValiderMesure_Click"/>
     </Grid>
 </Window>
