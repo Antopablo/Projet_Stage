@@ -139,7 +139,7 @@
 
         </Grid>
 
-        <Grid Name="GridControle_Norme" Height="50" VerticalAlignment="Top" Margin="235,0,-0.4,0" Visibility="Collapsed">
+        <Grid Name="GridControle_Norme" Height="50" VerticalAlignment="Top" Margin="235,0,-0.4,0" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

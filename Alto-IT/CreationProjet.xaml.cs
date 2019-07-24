@@ -51,12 +51,24 @@ namespace Alto_IT
                 default:
                     break;
             }
-            mw.database.ProjetDatabase.Add(P);
-            mw.database.SaveChanges();
+            if (NomProjet.Text == null || NomProjet.Text == "")
+            {
+                MessageBox.Show("Vous devez donner un nom au projet", "Nom invalide", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            } else if (Combo_Provider.Text == null || Combo_Provider.Text == "")
+            {
+                MessageBox.Show("Vous devez séléctionner un provider", "Provider invalide", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+            }
+            else
+            {
+                mw.database.ProjetDatabase.Add(P);
+                mw.database.SaveChanges();
+
+                Dashboard D = new Dashboard(mw, P);
+                D.Show();
+                Close();
+            }
             
-            Dashboard D = new Dashboard(mw, P);
-            D.Show();
-            Close();
         }
     }
 }

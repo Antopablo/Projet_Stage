@@ -32,51 +32,59 @@ namespace Alto_IT
 
         private void ValiderExigence_Click(object sender, RoutedEventArgs e)
         {
-            if (Title.Text == "Menu")
+            if (Title.Text == null || Title.Text == "")
             {
-                MessageBox.Show("Vous ne pouvez pas appeler une exigence ainsi", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            } else
+                MessageBox.Show("Vous devez donner un nom à l'exigence", "Nom invalide", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else
             {
-                if (Vue.ExigenceSelectionnee == null || Vue.ExigenceSelectionnee.Name == "Menu")
+                if (Title.Text == "Menu")
                 {
-                    try
-                    {
-                        CreateTable(Title.Text);
-                        Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id, dashb.ProjetEnCours.Id);
-                        Vue.ROOT_Exigences.ExigenceObervCollec.Add(ExigenceParent);
-                        mw.database.ExigenceDatabase.Add(ExigenceParent);
-                        mw.database.SaveChanges();
-                        Close();
-                    }
-                    catch (System.Data.SqlClient.SqlException)
-                    {
-                        MessageBox.Show("Une Exigence à ce nom existe déjà ou le nom est trop long", "error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                    MessageBox.Show("Vous ne pouvez pas appeler une exigence ainsi", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
                 else
                 {
-                    try
+                    if (Vue.ExigenceSelectionnee == null || Vue.ExigenceSelectionnee.Name == "Menu")
                     {
-                        CreateTable(Title.Text);
                         try
                         {
-                            RemplirTable(Vue.ExigenceSelectionnee.Name, Vue.ExigenceSelectionnee.Id);
-                            Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ExigenceSelectionnee.Id, dashb.NormeSelectionnee.Id, dashb.ProjetEnCours.Id);
-                            Vue.ExigenceSelectionnee.ExigenceObervCollec.Add(ExigenceEnfant);
-                            mw.database.ExigenceDatabase.Add(ExigenceEnfant);
+                            CreateTable(Title.Text);
+                            Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id, dashb.ProjetEnCours.Id);
+                            Vue.ROOT_Exigences.ExigenceObervCollec.Add(ExigenceParent);
+                            mw.database.ExigenceDatabase.Add(ExigenceParent);
+                            mw.database.SaveChanges();
+                            Close();
                         }
-                        catch (Exception)
+                        catch (System.Data.SqlClient.SqlException)
                         {
-                            SupprimerTable(Title.Text);
-                            MessageBox.Show("Impossible de remplir dans table parent", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Une Exigence à ce nom existe déjà ou le nom est trop long", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                        Close();
                     }
-                    catch (System.Data.SqlClient.SqlException)
+                    else
                     {
-                        MessageBox.Show("Une Exigence à ce nom existe déjà", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        try
+                        {
+                            CreateTable(Title.Text);
+                            try
+                            {
+                                RemplirTable(Vue.ExigenceSelectionnee.Name, Vue.ExigenceSelectionnee.Id);
+                                Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ExigenceSelectionnee.Id, dashb.NormeSelectionnee.Id, dashb.ProjetEnCours.Id);
+                                Vue.ExigenceSelectionnee.ExigenceObervCollec.Add(ExigenceEnfant);
+                                mw.database.ExigenceDatabase.Add(ExigenceEnfant);
+                            }
+                            catch (Exception)
+                            {
+                                SupprimerTable(Title.Text);
+                                MessageBox.Show("Impossible de remplir dans table parent", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            Close();
+                        }
+                        catch (System.Data.SqlClient.SqlException)
+                        {
+                            MessageBox.Show("Une Exigence à ce nom existe déjà", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        mw.database.SaveChanges();
                     }
-                mw.database.SaveChanges();
                 }
             }
             

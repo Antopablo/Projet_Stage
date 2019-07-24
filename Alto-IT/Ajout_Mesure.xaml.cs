@@ -35,54 +35,61 @@ namespace Alto_IT
 
         private void ValiderMesure_Click(object sender, RoutedEventArgs e)
         {
-            if (TitleMesure.Text == "Menu")
+            if (TitleMesure.Text == null || TitleMesure.Text == "")
             {
-                MessageBox.Show("Vous ne pouvez pas appeler une mesure ainsi", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Vous devez donner un nom à la mesure", "Nom invalide", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             else
             {
-                if (dashb.Vue_Mesure.MesureSelectionnee == null || dashb.Vue_Mesure.MesureSelectionnee.Name == "Menu")
+                if (TitleMesure.Text == "Menu")
                 {
-                    try
-                    {
-                        CreateTable(TitleMesure.Text);
-                        Mesures MesureParent = new Mesures(TitleMesure.Text, ContentMesure.Text, 0, dashb.ProjetEnCours.Id);
-                        dashb.Vue_Mesure.ROOT_Mesures.MesuresObservCollec.Add(MesureParent);
-                        mw.database.MesuresDatabase.Add(MesureParent);
-                        mw.database.SaveChanges();
-                        Close();
-                    }
-                    catch (System.Data.SqlClient.SqlException)
-                    {
-                        MessageBox.Show("Une Mesure à ce nom existe déjà ou le nom est trop long", "error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                    MessageBox.Show("Vous ne pouvez pas appeler une mesure ainsi", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
                 else
                 {
-                    try
+                    if (dashb.Vue_Mesure.MesureSelectionnee == null || dashb.Vue_Mesure.MesureSelectionnee.Name == "Menu")
                     {
-                        CreateTable(TitleMesure.Text);
                         try
                         {
-                            RemplirTable(dashb.Vue_Mesure.MesureSelectionnee.Name, dashb.Vue_Mesure.MesureSelectionnee.Id);
-                            Mesures MesureEnfant = new Mesures(TitleMesure.Text, ContentMesure.Text, dashb.Vue_Mesure.MesureSelectionnee.Id, dashb.ProjetEnCours.Id);
-                            dashb.Vue_Mesure.MesureSelectionnee.MesuresObservCollec.Add(MesureEnfant);
-                            mw.database.MesuresDatabase.Add(MesureEnfant);
+                            CreateTable(TitleMesure.Text);
+                            Mesures MesureParent = new Mesures(TitleMesure.Text, ContentMesure.Text, 0, dashb.ProjetEnCours.Id);
+                            dashb.Vue_Mesure.ROOT_Mesures.MesuresObservCollec.Add(MesureParent);
+                            mw.database.MesuresDatabase.Add(MesureParent);
+                            mw.database.SaveChanges();
+                            Close();
                         }
-                        catch (Exception)
+                        catch (System.Data.SqlClient.SqlException)
                         {
-                            SupprimerTable(TitleMesure.Text);
-                            MessageBox.Show("Impossible de remplir dans table parent", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Une Mesure à ce nom existe déjà ou le nom est trop long", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                        Close();
                     }
-                    catch (System.Data.SqlClient.SqlException)
+                    else
                     {
+                        try
+                        {
+                            CreateTable(TitleMesure.Text);
+                            try
+                            {
+                                RemplirTable(dashb.Vue_Mesure.MesureSelectionnee.Name, dashb.Vue_Mesure.MesureSelectionnee.Id);
+                                Mesures MesureEnfant = new Mesures(TitleMesure.Text, ContentMesure.Text, dashb.Vue_Mesure.MesureSelectionnee.Id, dashb.ProjetEnCours.Id);
+                                dashb.Vue_Mesure.MesureSelectionnee.MesuresObservCollec.Add(MesureEnfant);
+                                mw.database.MesuresDatabase.Add(MesureEnfant);
+                            }
+                            catch (Exception)
+                            {
+                                SupprimerTable(TitleMesure.Text);
+                                MessageBox.Show("Impossible de remplir dans table parent", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            Close();
+                        }
+                        catch (System.Data.SqlClient.SqlException)
+                        {
 
-                        MessageBox.Show("Une Mesure à ce nom existe déjà ou le nom est trop long", "error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Une Mesure à ce nom existe déjà ou le nom est trop long", "error", MessageBoxButton.OK, MessageBoxImage.Error);
 
+                        }
+                        mw.database.SaveChanges();
                     }
-                    mw.database.SaveChanges();
                 }
             }
         }
