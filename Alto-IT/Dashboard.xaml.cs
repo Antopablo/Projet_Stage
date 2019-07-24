@@ -215,7 +215,8 @@ namespace Alto_IT
                     AF.AjoutDocument.Visibility = Visibility.Collapsed;
                 }
                 AF.BoutonValiderModify.Visibility = Visibility.Visible;
-                AF.BoutonSupprimer.Visibility = Visibility.Hidden;
+                AF.BoutonSupprimer.Visibility = Visibility.Collapsed;
+                AF.AjoutDocument.Visibility = Visibility.Visible;
                 AF.TitreModify.Visibility = Visibility.Visible;
                 AF.TitreModifyBlock.Visibility = Visibility.Hidden;
                 AF.Show();
@@ -229,6 +230,7 @@ namespace Alto_IT
             {
                 AffichageDesNormes AF = new AffichageDesNormes(mw, this);
                 AF.BoutonValiderModify.Visibility = Visibility.Hidden;
+                AF.AjoutDocument.Visibility = Visibility.Collapsed;
                 AF.BoutonSupprimer.Visibility = Visibility.Visible;
                 AF.TitreModify.Visibility = Visibility.Hidden;
                 AF.TitreModifyBlock.Visibility = Visibility.Visible;
