@@ -180,6 +180,14 @@
     <Compile Include="Migrations\201907240622481_ajout FK to mesures.Designer.cs">
       <DependentUpon>201907240622481_ajout FK to mesures.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907240847046_class norme aojout.cs" />
+    <Compile Include="Migrations\201907240847046_class norme aojout.Designer.cs">
+      <DependentUpon>201907240847046_class norme aojout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907240918310_FK to proj pour les exigenes.cs" />
+    <Compile Include="Migrations\201907240918310_FK to proj pour les exigenes.Designer.cs">
+      <DependentUpon>201907240918310_FK to proj pour les exigenes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -326,6 +334,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907240622481_ajout FK to mesures.resx">
       <DependentUpon>201907240622481_ajout FK to mesures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907240847046_class norme aojout.resx">
+      <DependentUpon>201907240847046_class norme aojout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907240918310_FK to proj pour les exigenes.resx">
+      <DependentUpon>201907240918310_FK to proj pour les exigenes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -42,7 +42,7 @@ namespace Alto_IT
                     try
                     {
                         CreateTable(Title.Text);
-                        Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id);
+                        Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id, dashb.ProjetEnCours.Id);
                         Vue.ROOT_Exigences.ExigenceObervCollec.Add(ExigenceParent);
                         mw.database.ExigenceDatabase.Add(ExigenceParent);
                         mw.database.SaveChanges();
@@ -61,7 +61,7 @@ namespace Alto_IT
                         try
                         {
                             RemplirTable(Vue.ExigenceSelectionnee.Name, Vue.ExigenceSelectionnee.Id);
-                            Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ExigenceSelectionnee.Id, dashb.NormeSelectionnee.Id);
+                            Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ExigenceSelectionnee.Id, dashb.NormeSelectionnee.Id, dashb.ProjetEnCours.Id);
                             Vue.ExigenceSelectionnee.ExigenceObervCollec.Add(ExigenceEnfant);
                             mw.database.ExigenceDatabase.Add(ExigenceEnfant);
                         }

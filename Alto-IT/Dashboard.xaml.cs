@@ -30,7 +30,7 @@ namespace Alto_IT
             mw = m;
             ProjetEnCours = p;
             //Vue = new Vue_Circulaire(this);
-            ROOT_Normes = new Norme("Normes");         
+            ROOT_Normes = new Norme("Normes", ProjetEnCours.Id);         
             TreeViewNORME.Items.Add(ROOT_Normes);
 
             ROOT_Mesures = new Mesures("Mesures");
@@ -308,12 +308,23 @@ namespace Alto_IT
         {
             foreach (Norme item in mw.database.NormeDatabase)
             {
-                ROOT_Normes.NormeObervCollec.Add(item);
+                if (item.FK_to_Projet == ProjetEnCours.Id)
+                {
+                    ROOT_Normes.NormeObervCollec.Add(item);
+                }
             }
             foreach (Mesures item in mw.database.MesuresDatabase)
             {
-                ROOT_Mesures.MesuresObservCollec.Add(item);
+                if (item.Name == "Mesures")
+                {
+                    ROOT_Mesures.MesuresObservCollec.Add(item);
+                }
             }
+        }
+
+        public void AfficherTreeViewNorme()
+        {
+
         }
 
         public string FormaterToSQLRequest(string Text)

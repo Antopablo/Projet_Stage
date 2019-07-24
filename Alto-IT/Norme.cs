@@ -18,9 +18,10 @@ namespace Alto_IT
 
         private string _Nom_Norme;
 
-        public Norme(string nom_Norme)
+        public Norme(string nom_Norme, int IDProj)
         {
             Nom_Norme = nom_Norme;
+            FK_to_Projet = IDProj;
             NormeObervCollec = new ObservableCollection<Norme>();
             IDNorme = Id;
         }
@@ -62,6 +63,8 @@ namespace Alto_IT
 
         [InverseProperty ("ForeignKey_TO_Norme")]
         public int IDNorme { get; set; }
+
+        public int FK_to_Projet { get; set; }
 
         public ObservableCollection<Norme> NormeObervCollec { get; set; }
 

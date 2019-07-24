@@ -33,7 +33,7 @@ namespace Alto_IT
 
         private void ValiderNorme_Click(object sender, RoutedEventArgs e)
         {
-            Norme N = new Norme(Title.Text) ;
+            Norme N = new Norme(Title.Text, dashb.ProjetEnCours.Id) ;
             List<string> Controle = new List<string>();
             foreach (Norme item in dashb.ROOT_Normes.NormeObervCollec)
             {
