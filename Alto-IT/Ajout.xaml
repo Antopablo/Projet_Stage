@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alto_IT"
         mc:Ignorable="d"
+        Closed="Window_Closed"
         Title="Ajout" Height="450" Width="800">
     <Grid>
         <TextBox Name="Title" HorizontalAlignment="Left" Height="34" Margin="124,18,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="Content" HorizontalAlignment="Left" Height="154" Margin="124,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" Padding="5,5,5,5"/>
-        <Button Name="ValiderNorme" Content="Valider la norme" HorizontalAlignment="Left" Margin="124,277,0,0" VerticalAlignment="Top" Width="519" Height="71" Click="ValiderNorme_Click"/>
+        <TextBox AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="Content" HorizontalAlignment="Left" Height="154" Margin="124,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" Padding="5,5,5,5"/>
+        <Button Name="ValiderExigence" Content="Valider la norme" HorizontalAlignment="Left" Margin="124,277,0,0" VerticalAlignment="Top" Width="519" Height="71" Click="ValiderExigence_Click"/>
     </Grid>
 </Window>

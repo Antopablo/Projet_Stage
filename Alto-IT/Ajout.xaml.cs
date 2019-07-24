@@ -30,76 +30,101 @@ namespace Alto_IT
             Vue = vc;
         }
 
-        private void ValiderNorme_Click(object sender, RoutedEventArgs e)
+        private void ValiderExigence_Click(object sender, RoutedEventArgs e)
         {
             if (Title.Text == "Menu")
             {
                 MessageBox.Show("Vous ne pouvez pas appeler une norme ainsi", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             } else
             {
-                if (Vue.ItemSelectionne == null)
+                if (Vue.ExigenceSelectionne == null || Vue.ExigenceSelectionne.Name == "Menu")
                 {
-                    CreateTable(Title.Text);
-                    Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id);
-                    Vue.ROOT_Exigences.ExigenceObervCollec.Add(ExigenceParent);
-                    mw.database.ExigenceDatabase.Add(ExigenceParent);
-                    mw.database.SaveChanges();
+                    try
+                    {
+                        CreateTable(Title.Text);
+                        Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id);
+                        Vue.ROOT_Exigences.ExigenceObervCollec.Add(ExigenceParent);
+                        mw.database.ExigenceDatabase.Add(ExigenceParent);
+                        mw.database.SaveChanges();
+                        Close();
+                    }
+                    catch (System.Data.SqlClient.SqlException)
+                    {
+                        MessageBox.Show("Une éxigence porte déja ce nom", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
+                    } 
                 }
                 else
                 {
-                    CreateTable(Title.Text);
-                    RemplirTable(Vue.ItemSelectionne.Name, Vue.ItemSelectionne.Id);
-                    Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ItemSelectionne.Id, dashb.NormeSelectionnee.Id);
-                    Vue.ItemSelectionne.ExigenceObervCollec.Add(ExigenceEnfant);
-                    mw.database.ExigenceDatabase.Add(ExigenceEnfant);
                     try
                     {
-                        mw.database.SaveChanges();
+                        CreateTable(Title.Text);
+                        try
+                        {
+                            RemplirTable(Vue.ExigenceSelectionne.Name, Vue.ExigenceSelectionne.Id);
+                            Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ExigenceSelectionne.Id, dashb.NormeSelectionnee.Id);
+                            Vue.ExigenceSelectionne.ExigenceObervCollec.Add(ExigenceEnfant);
+                            mw.database.ExigenceDatabase.Add(ExigenceEnfant);
+                        }
+                        catch (Exception)
+                        {
+                            SupprimerTable(Title.Text);
+                            MessageBox.Show("Impossible de remplir la Table Parent", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        Close();
                     }
-                    catch (Exception)
+                    catch (System.Data.SqlClient.SqlException)
                     {
-                        MessageBox.Show("saveChanges AJOUT KO");
+                        MessageBox.Show("Une éxigence porte déja ce nom", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
+                    
+                    mw.database.SaveChanges();
+
                 }
             }
-            Close();
+            
         }
 
         public void CreateTable(string TableName)
         {
-            TableName = mw.FormaterToSQLRequest(TableName);
+            TableName = dashb.TableFormater(dashb.SimpleCotFormater(dashb.FormaterToSQLRequest(TableName)));
 
             using (ApplicationDatabase context = new ApplicationDatabase())
             {
-                try
-                {
-                    var x = context.Database.ExecuteSqlCommand("CREATE TABLE " + TableName + " (ID INTEGER IDENTITY(1,1) PRIMARY KEY, ForeignKey INT, Titre VARCHAR(1000), Description VARCHAR(1000))");
-                }
-                catch (System.Data.SqlClient.SqlException)
-                {
-                    MessageBox.Show("Table non crée", "error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+
+                var x = context.Database.ExecuteSqlCommand("CREATE TABLE " + TableName + " (ID INTEGER IDENTITY(1,1) PRIMARY KEY, ForeignKey INT, Titre VARCHAR(MAX), Description VARCHAR(MAX))");
+
             }
         }
 
         public void RemplirTable(string TableName, int ForeignKey)
         {
-            TableName = mw.FormaterToSQLRequest(TableName);
+            TableName = dashb.TableFormater(dashb.SimpleCotFormater(dashb.FormaterToSQLRequest(TableName)));
 
-            if (TableName != "Menu")
+            if (TableName != "_Menu")
             {
-                try
+
+                using (ApplicationDatabase context = new ApplicationDatabase())
                 {
-                    using (ApplicationDatabase context = new ApplicationDatabase())
-                    {
-                        var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + " (ForeignKey, Titre, Description) VALUES (" + "'" + ForeignKey + "'" + "," + "'" + Title.Text + "'" + "," + "'" + Content.Text + "'" + ")");
-                        Close();
-                    }
+                    var x = context.Database.ExecuteSqlCommand("INSERT INTO " + TableName + " (ForeignKey, Titre, Description) VALUES (" + "'" + ForeignKey + "'" + "," + "'" + dashb.SimpleCotFormater(Title.Text) + "'" + "," + "'" + dashb.SimpleCotFormater(Content.Text) + "'" + ")");
+                    Close();
                 }
-                catch (Exception)
-                {
-                }
+
             }
+        }
+
+        public void SupprimerTable(string TabName)
+        {
+            TabName = dashb.TableFormater(dashb.SimpleCotFormater(dashb.FormaterToSQLRequest(TabName)));
+
+            using (ApplicationDatabase context = new ApplicationDatabase())
+            {
+                var x = context.Database.ExecuteSqlCommand("DROP TABLE " + TabName);
+            }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            dashb.FenetreOuverte = false;
         }
     }
 }

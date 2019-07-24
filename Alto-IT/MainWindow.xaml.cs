@@ -47,29 +47,14 @@ namespace Alto_IT
             //}
 
 
-            
-            Dashboard D = new Dashboard(this);
-            D.Show();
+            Projet P = new Projet(this);
+            P.Show();
+            //Dashboard D = new Dashboard(this);
+            //D.Show();
             Close();
 
         }
 
-        public string FormaterToSQLRequest(string Text)
-        {
-            StringBuilder builder = new StringBuilder(Text);
-            Text = builder.Insert(0, "_").ToString();
-            Text = Text.Replace(' ', '_');
-            Text = Text.Replace("'", "");
-            Text = Text.Replace('/', '_');
-            Text = Text.Replace("'", "");
-            Text = Text.Replace("\"", "");
-            Text = Text.Replace("[", "_");
-            Text = Text.Replace("]", "_");
-            Text = Text.Replace(".", "_");
-            Text = Text.Replace(".", "_");
-            Text = Text.Replace("-", "_");
-            Text.Trim();
-            return Text;
-        }
+        
     }
 }

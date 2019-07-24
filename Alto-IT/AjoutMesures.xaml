@@ -1,0 +1,15 @@
+﻿<Window x:Class="Alto_IT.AjoutMesures"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Alto_IT"
+        mc:Ignorable="d"
+        Title="Ajout d'une Mesure" Height="400" Width="700"
+        Closed="Window_Closed">
+    <Grid Margin="0,0,-0.4,-1">
+        <TextBox Name="MesureName" HorizontalAlignment="Left" Height="46" Margin="119,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="465"/>
+        <TextBox Name="MesureDescription" HorizontalAlignment="Left" Height="110" Margin="119,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="465"/>
+        <Button Name="ValiderMesure" Content="Button" HorizontalAlignment="Left" Margin="119,272,0,0" VerticalAlignment="Top" Width="465" Height="60" Click="ValiderMesure_Click"/>
+    </Grid>
+</Window>

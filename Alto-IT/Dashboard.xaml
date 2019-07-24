@@ -11,68 +11,120 @@
         Width="auto">
 
     <Grid x:Name="EspaceTravail">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Width="220">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
 
-        <TreeView Name="TreeViewNORME"  SelectedItemChanged="TreeViewNORME_SelectedItemChanged" Margin="10,10,9.6,9.6">
-            <TreeView.Resources>
-                <Style TargetType="{x:Type TreeViewItem}">
-                    <Setter Property="HeaderTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <TextBlock Width="150"
+            <TreeView MouseUp="TreeViewNORME_MouseUp" Grid.Column="0"  Name="TreeViewNORME"  Margin="10,10,9.6,9.6" Background="Lavender" HorizontalAlignment="Stretch">
+                <TreeView.Resources>
+                    <Style TargetType="{x:Type TreeViewItem}" xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
+                        <Setter Property="HeaderTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock
                                    TextWrapping="Wrap"
                                    Text="{Binding}" 
                                    Margin="5,10,0,10"
                                    />
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TreeView.Resources>
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type self:Norme}" ItemsSource="{Binding NormeObervCollec}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock  Text="{Binding Nom_Norme}" Width="150"/>
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
 
+                    </Style>
+                    <Style x:Key="NormeStyle">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Nom_Norme}" Value="Normes">
+                                <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
 
+                </TreeView.Resources>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type self:Norme}" ItemsSource="{Binding NormeObervCollec}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                            <TextBlock  Text="{Binding Nom_Norme}" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
+                            <TextBlock DockPanel.Dock="Right" Cursor="Help" VerticalAlignment="Center" Style="{StaticResource NormeStyle}" ToolTip="{Binding DocumentName}" MouseUp="TextBlock_MouseDown">
+                                <Image Source="https://cdn.icon-icons.com/icons2/1129/PNG/512/fileinterfacesymboloftextpapersheet_79740.png" Width="20" Height="20" ></Image>
+                            </TextBlock>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
 
-
-            <!--<TreeView Name="treeview">
-            <TreeView.Resources>
-                <Style TargetType="{x:Type TreeViewItem}">
-                    <Setter Property="HeaderTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <TextBlock Width="160"
+            <TreeView Name="TreeViewMesures" MouseUp="TreeViewMesures_MouseUp" Grid.Column="0" Grid.Row="1" Background="Lavender" Margin="10,10,9.6,9.6" HorizontalAlignment="Stretch">
+                <TreeView.Resources>
+                    <Style TargetType="{x:Type TreeViewItem}" xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
+                        <Setter Property="HeaderTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <TextBlock
                                    TextWrapping="Wrap"
                                    Text="{Binding}" 
                                    Margin="5,10,0,10"
                                    />
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TreeView.Resources>
-            <TreeViewItem Header="Norme" Width="201" HorizontalAlignment="Left">
-                <TreeViewItem Name="GestionNorme" Header="Gestion des normes" MouseDoubleClick="GestionNorme_MouseDoubleClick"></TreeViewItem>
-                <TreeViewItem Name="Cloud19714" Header="Cloud Computing Circular 19/714 from CSSF" MouseDoubleClick="Cloud19714_MouseDoubleClick"></TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem Header="Appréciations">
-                <TreeViewItem Header="Mesures de sécurtié"></TreeViewItem>
-                <TreeViewItem Header="Vulnérabilités"></TreeViewItem>
-                <TreeViewItem Header="Risques"></TreeViewItem>
-                <TreeViewItem Header="Évènements redoutés"></TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem Header="Documentation">
-                <TreeViewItem Header="?????"></TreeViewItem>
-            </TreeViewItem>
-        </TreeView>-->
-        
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
 
-        <Grid Name="GridControle_Norme" Background="Aqua" Height="50" VerticalAlignment="Top" Margin="203,0,0,0" Visibility="Visible">
+                    </Style>
+                    <Style x:Key="Mesure">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Nom}" Value="Mesures">
+                                <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+
+                </TreeView.Resources>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type self:Mesures}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                            <TextBlock  Text="{Binding Nom}" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
+                            <TextBlock DockPanel.Dock="Right" Cursor="Help" VerticalAlignment="Center" MouseUp="TextBlock_MouseDown">
+                                <Image Source="https://cdn.icon-icons.com/icons2/1129/PNG/512/fileinterfacesymboloftextpapersheet_79740.png" Width="20" Height="20" >
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Nom}" Value="Mesures">
+                                                    <Setter Property="Visibility" Value="Collapsed">
+                                                        
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                            </TextBlock>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <TreeView Name="TreeviewDocumentation" Grid.Column="0" Grid.Row="2" Margin="10,0,9.6,9.6" Background="MintCream">
+                <TreeViewItem Header="Documentation" MouseDoubleClick="TreeViewItem_MouseDoubleClick"/>
+            </TreeView>
+        </Grid>
+
+
+
+        <Grid Grid.Column="1" Name="GridControle_Norme" Height="50" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -87,7 +139,7 @@
             <Button x:Name="Supr_Norme" Click="Supr_Norme_Click" Content="Supprimer une Norme" Grid.Column="2"/>
         </Grid>
 
-        <Grid Name="GridControle_exigence" Background="Aqua" Height="50" VerticalAlignment="Top" Margin="203,0,0,0" Visibility="Collapsed">
+        <Grid Grid.Column="1" Name="GridControle_exigence" Height="50" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -101,7 +153,24 @@
             <Button x:Name="Modif_exigence" Click="Modif_exigence_Click" Content="Modifier une exigence" Grid.Column="1"/>
             <Button x:Name="Supr_exigence" Click="Supr_exigence_Click" Content="Supprimer une exigence" Grid.Column="2"/>
         </Grid>
-        <Frame x:Name="Frame_Vue_Circulaire" Margin="203,0,9.6,-0.4" ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Automatic"/>
 
+        <Grid Grid.Column="1" Name="GridControle_Mesures" Height="50" VerticalAlignment="Top" Margin="0,0,0,0" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="Ajout_Mesures" Click="Ajout_Mesures_Click" Content="Ajouter une Mesure"/>
+            <Button x:Name="Modif_Mesures" Click="Modif_Mesures_Click" Content="Modifier un Mesure" Grid.Column="1"/>
+            <Button x:Name="Supr_Mesures" Click="Supr_Mesures_Click" Content="Supprimer une Mesure" Grid.Column="2"/>
+        </Grid>
+
+        <Frame Grid.Row="1" Grid.Column="1" x:Name="Frame_Vue_Circulaire" Margin="0,50,0,-0.4" ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Row="1" Grid.Column="1" Name="Frame_VueDocuments" Margin="0,50,0,-0.4" ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Row="1" Grid.Column="1" Name="Frame_VueMesures" Margin="0,50,0,-0.4" ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

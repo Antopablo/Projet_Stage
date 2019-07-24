@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace Alto_IT
         {
             Nom_Norme = nom_Norme;
             NormeObervCollec = new ObservableCollection<Norme>();
+            IDNorme = Id;
         }
 
         public Norme() { }
@@ -34,6 +36,8 @@ namespace Alto_IT
                 OnPropertyChanged("Nom_Norme");
             }
         }
+
+        [InverseProperty ("ForeignKey_TO_Norme")]
         public int IDNorme { get; set; }
 
         public ObservableCollection<Norme> NormeObervCollec { get; set; }
@@ -52,6 +56,30 @@ namespace Alto_IT
         public override string ToString()
         {
             return Nom_Norme;
+        }
+
+        private string _DocumentPath;
+
+        public string DocumentPath
+        {
+            get { return _DocumentPath; }
+            set
+            {
+                _DocumentPath = value;
+                OnPropertyChanged("DocumentPath");
+            }
+        }
+
+        private string _DocumentName;
+
+        public string DocumentName
+        {
+            get { return _DocumentName; }
+            set
+            {
+                _DocumentName = value;
+                OnPropertyChanged("DocumentName");
+            }
         }
     }
 }

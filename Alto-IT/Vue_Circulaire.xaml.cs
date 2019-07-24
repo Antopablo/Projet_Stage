@@ -1,18 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.IO;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System;
 
 namespace Alto_IT
 {
@@ -22,7 +14,7 @@ namespace Alto_IT
     public partial class Vue_Circulaire : Page
     {
         public Dashboard dash { get; set; }
-        public Exigence ItemSelectionne { get; set; }
+        public Exigence ExigenceSelectionne { get; set; }
        public List<Exigence> ListeExigence { get; set; }
 
         public Exigence ROOT_Exigences { get; set; }
@@ -38,20 +30,19 @@ namespace Alto_IT
             InitializeComponent();
             dash = D;
             
-            ROOT_Exigences = new Exigence() { Name = "Menu" }; //modifier le nom entraine un changement dans plusieurs classes            
+            ROOT_Exigences = new Exigence() { Name = "Menu" }; //modifier le nom entraine un changement dans plusieurs classes  
+
             treeviewFrame.Items.Add(ROOT_Exigences);
-
-
+            dash.Vue = this;
+            
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Height = SystemParameters.WorkArea.Height - 90;
-            this.Width = SystemParameters.WorkArea.Width - 190;
-            AfficherDatabase();
+            AfficherTreeViewExigence();
         }
 
-        public void AfficherDatabase()
+        public void AfficherTreeViewExigence()
         {
             dash.mw.database.ExigenceDatabase.ToList();
             
@@ -61,12 +52,12 @@ namespace Alto_IT
                 {
                     if (dash.mw.database.ExigenceDatabase.ToList()[i].Id == dash.mw.database.ExigenceDatabase.ToList()[j].ForeignKey)
                     {
-                        if (!dash.mw.database.ExigenceDatabase.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]) )
+                        if (!dash.mw.database.ExigenceDatabase.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]))
                         {
                             dash.mw.database.ExigenceDatabase.ToList()[i].ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[j]);
                         }
                     }
-                    else if(dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey == 0)
+                    else if(dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey == 0 && dash.NormeSelectionnee.Id == dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey_TO_Norme)
                     {
                         if (!ROOT_Exigences.ExigenceObervCollec.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]))
                         {
@@ -81,7 +72,35 @@ namespace Alto_IT
 
         private void TreeviewFrame_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            ItemSelectionne = (Exigence)treeviewFrame.SelectedItem;
+            ExigenceSelectionne = (Exigence)treeviewFrame.SelectedItem;
+        }
+
+
+        private void DocumentViewer_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            try
+            {
+                String filename = ExigenceSelectionne.DocumentPath;
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                process.StartInfo.FileName = filename;
+                process.Start();
+            }
+            catch (NullReferenceException)
+            {
+
+                MessageBox.Show("Veuillez sélectionner une éxigence");
+            }
+            catch (InvalidOperationException)
+            {
+
+                MessageBox.Show("Aucun document associé");
+            }
+
+        }
+
+        private void Image_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
         }
     }
 }

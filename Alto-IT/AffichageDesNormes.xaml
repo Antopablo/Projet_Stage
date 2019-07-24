@@ -6,9 +6,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alto_IT"
         mc:Ignorable="d"
+        Closed="Window_Closed"
         Title="AffichageDesNormes" Height="455.6" Width="528.542">
     <Grid Margin="0,0,3.4,3.4">
-        <ListView x:Name="ListeViewNormes" HorizontalAlignment="Left" Height="395" Margin="10,10,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ListeViewNormes_SelectionChanged">
+        <ListView x:Name="ListeViewNormes" HorizontalAlignment="Left" Height="395" Margin="10,10,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="ListeViewNormes_SelectionChanged" SelectionMode="Single">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -16,6 +17,7 @@
             </ListView.View>
         </ListView>
 
+        <Button Name="AjoutDocument" Content="Ajouter un document" HorizontalAlignment="Left" VerticalAlignment="Top" Width="186" Height="56" Click="AjoutDocument_Click" Margin="241,199,0,0"/>
         <TextBlock x:Name="TitreModifyBlock" HorizontalAlignment="Left" Height="36" Margin="241,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" Visibility="Visible"/>
         <TextBox x:Name="TitreModify" HorizontalAlignment="Left" Height="36" Margin="241,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" Visibility="Hidden"/>
         <Button x:Name="BoutonValiderModify" Content="Valider la modification" HorizontalAlignment="Left" Margin="241,328,0,0" VerticalAlignment="Top" Width="169" Height="35" Click="BoutonValiderModify_Click" Visibility="Collapsed"/>

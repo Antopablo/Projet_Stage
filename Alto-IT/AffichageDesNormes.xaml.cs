@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,8 +67,20 @@ namespace Alto_IT
             {
                 if (MessageBox.Show("Êtes-vous sûr de vouloir supprimer la norme " + NormeSelectionnee.Nom_Norme + " ?", "Supprimer", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
                 {
+                    int IdSelected = NormeSelectionnee.Id;
+                    
                     mw.database.NormeDatabase.Remove(NormeSelectionnee);
                     mw.database.SaveChanges();
+                    using (ApplicationDatabase context = new ApplicationDatabase())
+                    {
+                        var Listeenfants = context.Database.SqlQuery<string>("SELECT Name from Exigences WHERE ForeignKey_TO_Norme= " + IdSelected).ToList();
+                        foreach (string item in Listeenfants)
+                        {
+                            var x = context.Database.ExecuteSqlCommand("DROP TABLE " +dashb.SimpleCotFormater(dashb.FormaterToSQLRequest("_" + IdSelected + item)));
+                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM Exigences WHERE Name = " + "'" + dashb.SimpleCotFormater(item) + "'");
+                        }
+                    }
+                    
                     dashb.ROOT_Normes.NormeObervCollec.Clear();
                     dashb.AfficherLesNormes();
                     Close();
@@ -76,6 +90,44 @@ namespace Alto_IT
             {
                 MessageBox.Show("Selectionnez une norme", "error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            dashb.FenetreOuverte = false;
+        }
+
+        private void AjoutDocument_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.ShowDialog();
+            string filename = "(" + NormeSelectionnee.Id + ")" + open.SafeFileName ;
+            string targetPath = @"C:\Users\stagiaire\Desktop\Alto\Projet_Stage\Alto-IT\bin\Debug\Files\" + filename ;
+            try
+            {
+
+                File.Copy(open.FileName, targetPath);
+                NormeSelectionnee.DocumentPath = targetPath;
+                NormeSelectionnee.DocumentName = filename;
+            }
+            catch (System.Exception)
+            {
+                if (MessageBox.Show("Ce fichier éxiste déja voulez vous le Remplacer ?", "Erreur", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        File.Delete(targetPath);
+                        File.Copy(open.FileName, targetPath);
+                        NormeSelectionnee.DocumentPath = targetPath;
+                        NormeSelectionnee.DocumentName = filename;
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Impossible de supprimer");
+                    }
+                }
+            }
+            MessageBox.Show("Document bien enregistré");
         }
     }
 }

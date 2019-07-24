@@ -34,10 +34,29 @@ namespace Alto_IT
         private void ValiderNorme_Click(object sender, RoutedEventArgs e)
         {
             Norme N = new Norme(Title.Text) ;
-            dashb.ROOT_Normes.NormeObervCollec.Add(N);
-            mw.database.NormeDatabase.Add(N);
-            mw.database.SaveChanges();
-            Close();
+            List<string> Controle = new List<string>();
+            foreach (Norme item in dashb.ROOT_Normes.NormeObervCollec)
+            {
+                Controle.Add(item.Nom_Norme);
+            }
+            if (!Controle.Contains(Title.Text))
+            {
+                dashb.ROOT_Normes.NormeObervCollec.Add(N);
+                mw.database.NormeDatabase.Add(N);
+                mw.database.SaveChanges();
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Cette Norme éxiste déja", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            
+            
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            dashb.FenetreOuverte = false;
         }
     }
 }

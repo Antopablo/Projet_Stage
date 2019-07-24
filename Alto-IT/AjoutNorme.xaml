@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Alto_IT"
       mc:Ignorable="d"
+        Closed="Window_Closed"
       Title="Ajouter une Norme" Width="381.991" Height="210.071">
 
     <Grid Margin="0,0,-0.4,0.4">

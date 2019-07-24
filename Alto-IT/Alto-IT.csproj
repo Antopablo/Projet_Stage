@@ -41,6 +41,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="PresentationFramework.AeroLite" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -68,9 +71,17 @@
     <Compile Include="Ajout.xaml.cs">
       <DependentUpon>Ajout.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AjoutMesures.xaml.cs">
+      <DependentUpon>AjoutMesures.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AjoutNorme.xaml.cs">
       <DependentUpon>AjoutNorme.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CreationProjet.xaml.cs">
+      <DependentUpon>CreationProjet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="keyAttribute.cs" />
+    <Compile Include="Mesures.cs" />
     <Compile Include="Migrations\201907051027092_exigene.cs" />
     <Compile Include="Migrations\201907051027092_exigene.Designer.cs">
       <DependentUpon>201907051027092_exigene.cs</DependentUpon>
@@ -83,6 +94,54 @@
     <Compile Include="Migrations\201907091153501_add foreignkeyTONorme.Designer.cs">
       <DependentUpon>201907091153501_add foreignkeyTONorme.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907100831466_oper.cs" />
+    <Compile Include="Migrations\201907100831466_oper.Designer.cs">
+      <DependentUpon>201907100831466_oper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907111234278_tot.cs" />
+    <Compile Include="Migrations\201907111234278_tot.Designer.cs">
+      <DependentUpon>201907111234278_tot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907111626477_fjbghj.cs" />
+    <Compile Include="Migrations\201907111626477_fjbghj.Designer.cs">
+      <DependentUpon>201907111626477_fjbghj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907121012188_fichier.cs" />
+    <Compile Include="Migrations\201907121012188_fichier.Designer.cs">
+      <DependentUpon>201907121012188_fichier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907150807331_modiff.cs" />
+    <Compile Include="Migrations\201907150807331_modiff.Designer.cs">
+      <DependentUpon>201907150807331_modiff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907150833169_mod.cs" />
+    <Compile Include="Migrations\201907150833169_mod.Designer.cs">
+      <DependentUpon>201907150833169_mod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907190658386_DocumentNormes.cs" />
+    <Compile Include="Migrations\201907190658386_DocumentNormes.Designer.cs">
+      <DependentUpon>201907190658386_DocumentNormes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907221327302_mesures.cs" />
+    <Compile Include="Migrations\201907221327302_mesures.Designer.cs">
+      <DependentUpon>201907221327302_mesures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907221336257_relationsmesures.cs" />
+    <Compile Include="Migrations\201907221336257_relationsmesures.Designer.cs">
+      <DependentUpon>201907221336257_relationsmesures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907230817493_mesures1.cs" />
+    <Compile Include="Migrations\201907230817493_mesures1.Designer.cs">
+      <DependentUpon>201907230817493_mesures1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907231256108_sjgvdsnj.cs" />
+    <Compile Include="Migrations\201907231256108_sjgvdsnj.Designer.cs">
+      <DependentUpon>201907231256108_sjgvdsnj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907240624142_sjbdch.cs" />
+    <Compile Include="Migrations\201907240624142_sjbdch.Designer.cs">
+      <DependentUpon>201907240624142_sjbdch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -92,9 +151,20 @@
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Norme.cs" />
+    <Compile Include="Projet.xaml.cs">
+      <DependentUpon>Projet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Projets.cs" />
+    <Compile Include="RelationsMesuresExigences.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Vue_Circulaire.xaml.cs">
       <DependentUpon>Vue_Circulaire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vue_Document.xaml.cs">
+      <DependentUpon>Vue_Document.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vue_Mesures.xaml.cs">
+      <DependentUpon>Vue_Mesures.xaml</DependentUpon>
     </Compile>
     <Page Include="AffichageDesNormes.xaml">
       <SubType>Designer</SubType>
@@ -104,7 +174,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AjoutMesures.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AjoutNorme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreationProjet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,7 +207,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Projet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vue_Circulaire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vue_Document.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vue_Mesures.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,6 +246,42 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907091153501_add foreignkeyTONorme.resx">
       <DependentUpon>201907091153501_add foreignkeyTONorme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907100831466_oper.resx">
+      <DependentUpon>201907100831466_oper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907111234278_tot.resx">
+      <DependentUpon>201907111234278_tot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907111626477_fjbghj.resx">
+      <DependentUpon>201907111626477_fjbghj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907121012188_fichier.resx">
+      <DependentUpon>201907121012188_fichier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907150807331_modiff.resx">
+      <DependentUpon>201907150807331_modiff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907150833169_mod.resx">
+      <DependentUpon>201907150833169_mod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907190658386_DocumentNormes.resx">
+      <DependentUpon>201907190658386_DocumentNormes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907221327302_mesures.resx">
+      <DependentUpon>201907221327302_mesures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907221336257_relationsmesures.resx">
+      <DependentUpon>201907221336257_relationsmesures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907230817493_mesures1.resx">
+      <DependentUpon>201907230817493_mesures1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907231256108_sjgvdsnj.resx">
+      <DependentUpon>201907231256108_sjgvdsnj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907240624142_sjbdch.resx">
+      <DependentUpon>201907240624142_sjbdch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
