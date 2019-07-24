@@ -19,7 +19,6 @@ namespace Alto_IT
         public Norme ROOT_Normes { get; set; }
         public Norme NormeSelectionnee { get; set; }
         public Mesures ROOT_Mesures { get; set; }
-        public Mesures MesureSelectionnee { get; set; }
         public Projets ProjetEnCours { get; set; }
         public bool FenetreOuverte { get; set; }
         public bool SuprDoc { get; set; }
@@ -30,7 +29,6 @@ namespace Alto_IT
             InitializeComponent();
             mw = m;
             ProjetEnCours = p;
-
             //Vue = new Vue_Circulaire(this);
             ROOT_Normes = new Norme("Normes");         
             TreeViewNORME.Items.Add(ROOT_Normes);
@@ -276,7 +274,7 @@ namespace Alto_IT
         {
             try
             {
-                MesureSelectionnee = (Mesures)TreeViewMesures.SelectedItem;
+                //Vue_Mesure.MesureSelectionnee = (Mesures)TreeViewMesures.SelectedItem;
                 GridControle_Norme.Visibility = Visibility.Collapsed;
                 GridControle_exigence.Visibility = Visibility.Collapsed;
                 GridControle_Mesure.Visibility = Visibility.Visible;
@@ -388,6 +386,12 @@ namespace Alto_IT
             return Text = builder.Insert(0, "_"+NormeSelectionnee.Id).ToString();
         }
 
+        public string TableFormaterMesure(string Text)
+        {
+            StringBuilder builder = new StringBuilder(Text);
+            return Text = builder.Insert(0, "_" + ProjetEnCours.Id).ToString();
+        }
+
         public string SimpleQuoteFormater(string text)
         {
             return text.Replace("'", "''");
@@ -413,6 +417,21 @@ namespace Alto_IT
 
         }
 
-        
+        private void Ajout_Mesure_Click(object sender, RoutedEventArgs e)
+        {
+            Ajout_Mesure AM = new Ajout_Mesure(mw, this);
+            AM.Show();
+            FenetreOuverte = true;
+        }
+
+        private void Modif_Mesure_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Supr_Mesure_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

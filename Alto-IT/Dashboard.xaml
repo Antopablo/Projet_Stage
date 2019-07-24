@@ -97,7 +97,7 @@
                     </TreeView.Background>
 
                     <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate DataType="{x:Type self:Mesures}" ItemsSource="{Binding MesuresObservCollec}">
+                        <HierarchicalDataTemplate DataType="{x:Type self:Mesures}">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock  Text="• " TextWrapping="Wrap"/>
                                 <TextBlock  Text="{Binding Name}" Width="150" TextWrapping="Wrap"/>
@@ -179,9 +179,9 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button x:Name="Ajout_Mesure"   Content="Ajouter une Mesure"/>
-            <Button x:Name="Modif_Mesure" Content="Modifier une Mesure" Grid.Column="1"/>
-            <Button x:Name="Supr_Mesure" Content="Supprimer une Mesure" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
+            <Button x:Name="Ajout_Mesure" Click="Ajout_Mesure_Click"  Content="Ajouter une Mesure"/>
+            <Button x:Name="Modif_Mesure" Click="Modif_Mesure_Click" Content="Modifier une Mesure" Grid.Column="1"/>
+            <Button x:Name="Supr_Mesure" Click="Supr_Mesure_Click" Content="Supprimer une Mesure" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
         </Grid>
 
     </Grid>

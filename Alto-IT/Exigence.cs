@@ -27,6 +27,7 @@ namespace Alto_IT
             ForeignKey = foreignkey;
             ForeignKey_TO_Norme = foreignkeyTOnorme;
             this.ExigenceObervCollec = new ObservableCollection<Exigence>();
+            ListeNomMesureAssociee = new ObservableCollection<string>();
             IDExigence = Id;
 
             Dico_couleurs = new Dictionary<STATUS, string>();
@@ -42,6 +43,7 @@ namespace Alto_IT
             ForeignKey = foreignkey;
             ForeignKey_TO_Norme = foreignkeyTOnorme;
             this.ExigenceObervCollec = new ObservableCollection<Exigence>();
+            ListeNomMesureAssociee = new ObservableCollection<string>();
             IDExigence = Id;
 
             Dico_couleurs = new Dictionary<STATUS, string>();
@@ -53,6 +55,7 @@ namespace Alto_IT
         public Exigence()
         {
             this.ExigenceObervCollec = new ObservableCollection<Exigence>();
+            ListeNomMesureAssociee = new ObservableCollection<string>();
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
@@ -132,6 +135,7 @@ namespace Alto_IT
 
 
         public ObservableCollection<Exigence> ExigenceObervCollec { get; set; }
+        public ObservableCollection<string> ListeNomMesureAssociee { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)

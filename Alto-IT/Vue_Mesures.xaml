@@ -6,7 +6,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Alto_IT"
       mc:Ignorable="d" 
-      Title="Vue_Mesures">
+      Title="Vue_Mesures"
+      Loaded="Page_Loaded">
 
 
 

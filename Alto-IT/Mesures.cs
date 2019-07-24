@@ -12,7 +12,14 @@ namespace Alto_IT
 {
     public class Mesures : INotifyPropertyChanged
     {
-        public Mesures() { }
+        public Mesures()
+        {
+            MesuresObservCollec = new ObservableCollection<Mesures>();
+            Dico_couleurs = new Dictionary<STATUS, string>();
+            RemplirDicoCouleur();
+            Status = STATUS.non_evaluee;
+        }
+
         public Mesures(string name)
         {
             Name = name;
@@ -23,10 +30,12 @@ namespace Alto_IT
             Status = STATUS.non_evaluee;
         }
 
-        public Mesures(string name, string description)
+        public Mesures(string name, string description, int ForeignKeyM, int foreignKeyP)
         {
             Name = name;
             Description = description;
+            FK_to_Mesures = ForeignKeyM;
+            FK_to_Projets = foreignKeyP;
             MesuresObservCollec = new ObservableCollection<Mesures>();
 
             Dico_couleurs = new Dictionary<STATUS, string>();
@@ -37,6 +46,7 @@ namespace Alto_IT
         [Key]
         public int Id { get; set; }
         public int FK_to_Projets { get; set; }
+        public int FK_to_Mesures { get; set; }
 
         private string _name;
         public string Name
