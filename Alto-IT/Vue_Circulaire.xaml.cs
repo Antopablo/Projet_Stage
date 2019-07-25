@@ -32,6 +32,8 @@ namespace Alto_IT
         public List<Exigence> ListeExigence { get; set; }
         public Exigence ROOT_Exigences { get; set; }
 
+        readonly object _lockCollection = new object();
+
         public Vue_Circulaire()
         {
             InitializeComponent();
@@ -46,37 +48,14 @@ namespace Alto_IT
             treeviewFrame.Items.Add(ROOT_Exigences);
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            AfficherTreeViewExigences();
+            await Task.Run(AfficherTreeViewExigences);
 
         }
 
         public void AfficherTreeViewExigences()
         {
-            //dash.mw.database.ExigenceDatabase.ToList();
-
-            //for (int i = 0; i < dash.mw.database.ExigenceDatabase.ToList().Count(); i++)
-            //{
-            //    for (int j = 0; j < dash.mw.database.ExigenceDatabase.ToList().Count(); j++)
-            //    {
-            //        if (dash.mw.database.ExigenceDatabase.ToList()[i].Id == dash.mw.database.ExigenceDatabase.ToList()[j].ForeignKey)
-            //        {
-            //            if (!dash.mw.database.ExigenceDatabase.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]) )
-            //            {
-            //                dash.mw.database.ExigenceDatabase.ToList()[i].ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[j]);
-            //            }
-            //        }
-            //        else if((dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey == 0) && (dash.NormeSelectionnee.Id == dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey_TO_Norme))
-            //        {
-            //            if (!ROOT_Exigences.ExigenceObervCollec.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]))
-            //            {
-            //                ROOT_Exigences.ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[i]);
-            //            }
-            //        }
-
-            //    }
-            //}
 
             Exigence[] Li = dash.mw.database.ExigenceDatabase.ToArray();
             Exigence[] Lj = Li;
@@ -93,9 +72,12 @@ namespace Alto_IT
                 if ((Li[i].Id == Lj[i].ForeignKey) && (Array.BinarySearch(Ls, M) < 0))
                 {
                     lar[i] = M;
-                    lock (ROOT_Exigences.ExigenceObervCollec)
+                    lock (_lockCollection)
                     {
-                        dash.mw.database.ExigenceDatabase.ToList()[i].ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[i]);
+                        Application.Current.Dispatcher.Invoke(delegate ()
+                        {
+                            dash.mw.database.ExigenceDatabase.ToList()[i].ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[i]);
+                        });
                     }
                 }
                 else if ((Li[i].ForeignKey == 0) && (dash.NormeSelectionnee.Id == Li[i].ForeignKey_TO_Norme))
@@ -104,9 +86,12 @@ namespace Alto_IT
                     if (Array.BinarySearch(lar, MM) < 0)
                     {
                         lar[i] = MM;
-                        lock (ROOT_Exigences.ExigenceObervCollec)
+                        lock (_lockCollection)
                         {
-                            ROOT_Exigences.ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[i]);
+                            Application.Current.Dispatcher.Invoke(delegate ()
+                            {
+                                ROOT_Exigences.ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[i]);
+                            });
                         }
                     }
                 }
