@@ -8,14 +8,16 @@
         Title="Projet" Height="450" Width="300">
     <Grid>
         <Button Name="add" Content="     +       ADD" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="44,24,0,0" VerticalAlignment="Top" Width="206" Height="43" FontSize="20" Click="Add_Click"/>
-        <ComboBox Name="listeProjet" HorizontalAlignment="Left" Margin="44,128,0,0" VerticalAlignment="Top" Width="206">
+        <ComboBox Name="listeProjet" HorizontalAlignment="Left" Margin="44,221,0,0" VerticalAlignment="Top" Width="206">
             <ComboBox.ItemTemplate>
                 <DataTemplate >
                     <TextBlock Text="{Binding Nom}" ToolTip="{Binding CloudProvider}"></TextBlock>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Content="Valider" HorizontalAlignment="Left" Margin="44,303,0,0" VerticalAlignment="Top" Width="206" RenderTransformOrigin="-0.095,0.543" Click="Button_Click" Height="29"/>
+        <Button Content="Valider" HorizontalAlignment="Left" Margin="44,339,0,0" VerticalAlignment="Top" Width="206" RenderTransformOrigin="-0.095,0.543" Click="Button_Click" Height="29"/>
+        <Button Name="modifierprojet" Content="Modifier" HorizontalAlignment="Left" Margin="44,81,0,0" VerticalAlignment="Top" Width="206" RenderTransformOrigin="-0.243,0.417" Height="43" Click="Modifierprojet_Click"/>
+        <Button x:Name="supprimerprojet" Content="supprimer" HorizontalAlignment="Left" Margin="44,143,0,0" VerticalAlignment="Top" Width="206" RenderTransformOrigin="-0.243,0.417" Height="43" Click="Supprimerprojet_Click"/>
 
     </Grid>
 </Window>

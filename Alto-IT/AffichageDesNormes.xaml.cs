@@ -99,35 +99,39 @@ namespace Alto_IT
 
         private void AjoutDocument_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog open = new OpenFileDialog();
-            open.ShowDialog();
-            string filename = "(" + NormeSelectionnee.Id + ")" + open.SafeFileName ;
-            string targetPath = @"C:\Users\stagiaire\Desktop\Alto\Projet_Stage\Alto-IT\bin\Debug\Files\" + filename ;
-            try
+            if (NormeSelectionnee != null)
             {
-
-                File.Copy(open.FileName, targetPath);
-                NormeSelectionnee.DocumentPath = targetPath;
-                NormeSelectionnee.DocumentName = filename;
-            }
-            catch (System.Exception)
-            {
-                if (MessageBox.Show("Ce fichier éxiste déja voulez vous le Remplacer ?", "Erreur", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                OpenFileDialog open = new OpenFileDialog();
+                open.ShowDialog();
+                string filename = "(" + NormeSelectionnee.Id + ")" + open.SafeFileName;
+                string targetPath = @"C:\Users\stagiaire\Desktop\Alto\Projet_Stage\Alto-IT\bin\Debug\Files\" + filename;
+                try
                 {
-                    try
+
+                    File.Copy(open.FileName, targetPath);
+                    NormeSelectionnee.DocumentPath = targetPath;
+                    NormeSelectionnee.DocumentName = filename;
+                }
+                catch (System.Exception)
+                {
+                    if (MessageBox.Show("Ce fichier éxiste déja voulez vous le Remplacer ?", "Erreur", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
-                        File.Delete(targetPath);
-                        File.Copy(open.FileName, targetPath);
-                        NormeSelectionnee.DocumentPath = targetPath;
-                        NormeSelectionnee.DocumentName = filename;
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Impossible de supprimer");
+                        try
+                        {
+                            File.Delete(targetPath);
+                            File.Copy(open.FileName, targetPath);
+                            NormeSelectionnee.DocumentPath = targetPath;
+                            NormeSelectionnee.DocumentName = filename;
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Impossible de supprimer");
+                        }
                     }
                 }
+                MessageBox.Show("Document bien enregistré");
             }
-            MessageBox.Show("Document bien enregistré");
+            
         }
     }
 }

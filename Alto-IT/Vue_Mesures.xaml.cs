@@ -54,27 +54,36 @@ namespace Alto_IT
 
         public void AfficherTreeViewMesures()
         {
-            Dash.mw.database.MesuresDatabase.ToList();
-
-            for (int i = 0; i < Dash.mw.database.MesuresDatabase.ToList().Count(); i++)
+            Mesures[] Li = Dash.mw.database.MesuresDatabase.ToArray();
+            Mesures[] Lj = Li;
+            int[] Ls = new int[Lj.Length];
+            int[] lar = new int[Lj.Length];
+            for (int i = 0; i < Lj.Length; i++)
             {
-                for (int j = 0; j < Dash.mw.database.MesuresDatabase.ToList().Count(); j++)
+                Ls[i] = Lj[i].Id;
+            }
+            for (int i = 0; i < Li.Length; i++)
+            {
+                int M = Li[i].Id;
+                if ((Li[i].Id == Lj[i].FKToMesure) && (Array.BinarySearch(Ls, M) < 0))
                 {
-                    if (Dash.mw.database.MesuresDatabase.ToList()[i].Id == Dash.mw.database.MesuresDatabase.ToList()[j].FKToMesure)
+                    lar[i] = M;
+                    lock (ROOT_Mesures.MesureObservableCollec)
                     {
-                        if (!Dash.mw.database.MesuresDatabase.ToList().Contains(Dash.mw.database.MesuresDatabase.ToList()[i]))
-                        {
-                            Dash.mw.database.MesuresDatabase.ToList()[i].MesureObservableCollec.Add(Dash.mw.database.MesuresDatabase.ToList()[j]);
-                        }
+                        Dash.mw.database.MesuresDatabase.ToList()[i].MesureObservableCollec.Add(Dash.mw.database.MesuresDatabase.ToList()[i]);
                     }
-                    else if (Dash.mw.database.MesuresDatabase.ToList()[i].FKToMesure == 0 && Dash.ProjetEncours.Id == Dash.mw.database.MesuresDatabase.ToList()[i].FKToProjets)
+                }
+                else if ((Li[i].FKToMesure == 0) && (Dash.ProjetEncours.Id == Li[i].FKToProjets))
+                {
+                    int MM = Li[i].Id;
+                    if (Array.BinarySearch(lar, MM) < 0)
                     {
-                        if (!ROOT_Mesures.MesureObservableCollec.ToList().Contains(Dash.mw.database.MesuresDatabase.ToList()[i]))
+                        lar[i] = MM;
+                        lock (ROOT_Mesures.MesureObservableCollec)
                         {
                             ROOT_Mesures.MesureObservableCollec.Add(Dash.mw.database.MesuresDatabase.ToList()[i]);
                         }
                     }
-
                 }
             }
         }

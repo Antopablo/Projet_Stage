@@ -68,6 +68,9 @@
     <Compile Include="AffichageDesNormes.xaml.cs">
       <DependentUpon>AffichageDesNormes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="affichageProjets.xaml.cs">
+      <DependentUpon>affichageProjets.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ajout.xaml.cs">
       <DependentUpon>Ajout.xaml</DependentUpon>
     </Compile>
@@ -175,6 +178,10 @@
       <DependentUpon>Vue_Mesures.xaml</DependentUpon>
     </Compile>
     <Page Include="AffichageDesNormes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="affichageProjets.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

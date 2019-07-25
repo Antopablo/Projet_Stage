@@ -80,8 +80,8 @@ namespace Alto_IT
                         Modifier M = new Modifier(mw, Vue);
                         M.Title.Text = Vue.ExigenceSelectionne.Name;
                         M.Content.Text = Vue.ExigenceSelectionne.Description;
-                        M.statut.Text = Vue.ExigenceSelectionne.Status.ToString();
-                        M.DocName.Text = Vue.ExigenceSelectionne.DocumentName;
+                        //M.statut.Text = Vue.ExigenceSelectionne.Status.ToString();
+                        //M.DocName.Text = Vue.ExigenceSelectionne.DocumentName;
                         M.Show();
                         FenetreOuverte = true;
                     }
@@ -452,6 +452,11 @@ namespace Alto_IT
 
         }
 
-
+        private void Retour_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Projet Pr = new Projet(mw);
+            Pr.Show();
+            Close();
+        }
     }
 }

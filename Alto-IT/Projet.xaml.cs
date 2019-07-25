@@ -58,5 +58,39 @@ namespace Alto_IT
             }
             
         }
+
+        private void Modifierprojet_Click(object sender, RoutedEventArgs e)
+        {
+            if (listeProjet.SelectedItem != null)
+            {
+                affichageProjets Af = new affichageProjets(mw,(Projets)listeProjet.SelectedValue);
+                Af.Show();
+            }
+            else
+            {
+                MessageBox.Show("Veuillez saisir un projet à modifier", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            
+        }
+
+        private void Supprimerprojet_Click(object sender, RoutedEventArgs e)
+        {
+            if (listeProjet.Text != null || listeProjet.Text != "")
+            {
+                Projets projetsel = (Projets)listeProjet.SelectedValue;
+
+
+                if (MessageBox.Show("Voulez vous vraiment supprimer le projet :" + projetsel.Nom + " ?", "Attention", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                {
+                    mw.database.ProjetsDatabase.Remove(projetsel);
+                    mw.database.SaveChanges();
+                    MessageBox.Show("Projet supprimé", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    listeProjet.Items.Clear();
+                    afficherProjets();
+                }
+            }
+            
+        }
     }
 }

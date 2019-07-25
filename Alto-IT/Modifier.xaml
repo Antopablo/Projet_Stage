@@ -6,22 +6,25 @@
         xmlns:local="clr-namespace:Alto_IT"
         mc:Ignorable="d"
         Closed="Window_Closed"
-        Title="Modifier" Height="722.017" Width="782.4">
-    <Grid Margin="0,0,0,0" VerticalAlignment="Top">
-        <TextBox Name="Title" HorizontalAlignment="Left" Margin="124,52,0,584.6" TextWrapping="Wrap" Text="" Width="519" VerticalContentAlignment="Center"/>
-        <TextBox AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="Content" HorizontalAlignment="Left" Height="154" Margin="124,142,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" Padding="5,5,5,5"/>
-        <Button Name="ModifierExigence" Content="Modifier l'Exigence" HorizontalAlignment="Left" Margin="124,563,0,0" VerticalAlignment="Top" Width="519" Height="71" Click="ModifierExigence_Click"/>
-
-        <ComboBox Name="ComboBoxStatus" Margin="124,380,463,278.8">
-            <TextBlock Text="Non Appliqué"/>
-            <TextBlock Text="Appliqué"/>
-            <TextBlock Text="Non Aplicable"/>
-            <TextBlock Text="Programmée"/>
-            <TextBlock Text="Non évaluée"/>
-        </ComboBox>
-        <Button Name="AjoutDocument" Content="Ajouter un document" HorizontalAlignment="Left" Margin="457,417,0,0" VerticalAlignment="Top" Width="186" Height="56" Click="AjoutDocument_Click"/>
-        <Label Content="Statut Actuel" HorizontalAlignment="Left" Margin="30,343,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="statut" HorizontalAlignment="Left" Margin="124,348,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
-        <TextBlock Name="DocName" HorizontalAlignment="Left" Margin="457,396,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="186"/>
+        Title="Modifier" Height="800" Width="782.4"
+        Loaded="Window_Loaded">
+    <Grid VerticalAlignment="Top" Height="765">
+        <TextBox Name="Title" HorizontalAlignment="Left" Margin="49,52,0,585" TextWrapping="Wrap" Text="" Width="677" />
+        <TextBox AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="Content" HorizontalAlignment="Left" Height="154" Margin="49,229,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="677" Padding="5,5,5,5"/>
+        <Button Name="ModifierExigence" Content="Modifier l'Exigence" HorizontalAlignment="Left" Margin="124,656,0,0" VerticalAlignment="Top" Width="519" Height="71" Click="ModifierExigence_Click"/>
+        <ListView x:Name="listeboxMesures" HorizontalAlignment="Left" Height="210" Margin="49,414,0,0" VerticalAlignment="Top" Width="677" ItemsSource="{Binding Mesures}" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Name="checkboxMesures" Content="{Binding Nom}" Checked="CheckboxMesures_Checked" Unchecked="CheckboxMesures_Unchecked">
+                    </CheckBox>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical">
+                    </WrapPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListView>
     </Grid>
 </Window>

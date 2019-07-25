@@ -1,9 +1,11 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Alto_IT
 {
@@ -15,9 +17,12 @@ namespace Alto_IT
         public MainWindow mw { get; set; }
         public Vue_Circulaire Vue { get; set; }
 
+        public List<string> ListedeMesuresChecked { get; set; }
+
         public Modifier()
         {
             InitializeComponent();
+            ListedeMesuresChecked = new List<string>();
         }
 
         public Modifier(MainWindow m, Vue_Circulaire v)
@@ -25,6 +30,11 @@ namespace Alto_IT
             InitializeComponent();
             mw = m;
             Vue = v;
+            listeboxMesures.ItemsSource = mw.database.MesuresDatabase.Local;
+            mw.database.MesuresDatabase.ToList();
+
+            ListedeMesuresChecked = new List<string>();
+
         }
         
         private void ModifierExigence_Click(object sender, RoutedEventArgs e)
@@ -35,6 +45,7 @@ namespace Alto_IT
                 string CurrentTitle = Vue.dash.SimpleCotFormater(Vue.ExigenceSelectionne.Name);
                 string CurrentDesc = Vue.dash.SimpleCotFormater(Vue.ExigenceSelectionne.Description);
                 
+
 
                 using (ApplicationDatabase context = new ApplicationDatabase())
                 {
@@ -72,6 +83,10 @@ namespace Alto_IT
                             MessageBox.Show("Impossible d ajouter à la table Parent", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
 
+                        
+
+                        
+
                     }
                     catch (Exception)
                     {
@@ -79,48 +94,19 @@ namespace Alto_IT
                     }
 
 
-                    //actualise l'itemSleceted
-                    //Vue.ExigenceSelectionne.Name = Title.Text;
-                    //Vue.ExigenceSelectionne.Description = Content.Text;
-
-                    //MajCollection obesrvable
-                    // Réaliser avec INotifyPropertyChanges
-
-                    //sauvegarde
-                    //mw.database.SaveChanges();
-
-                    switch (ComboBoxStatus.Text)
-                    {
-                        case "Non Appliqué":
-                            Vue.ExigenceSelectionne.Status = STATUS.non_appliquee;
-                        break;
-
-                        case "Appliqué":
-                            Vue.ExigenceSelectionne.Status = STATUS.appliquee;
-                        break;
-
-                        case "Non Aplicable":
-                            Vue.ExigenceSelectionne.Status = STATUS.non_applicable;
-                        break;
-
-                        case "Programmée":
-                            Vue.ExigenceSelectionne.Status = STATUS.programmee;
-                        break;
-
-                        case "Non évaluée":
-                        Vue.ExigenceSelectionne.Status = STATUS.non_evalue;
-                        break;
-
-                        default:
-                            break;
-                    }
-
                     mw.database.SaveChanges();
                     Vue.AfficherTreeViewExigence();
                     Close();
 
                 }
-            } else
+
+                ////////   Traitement des relations entre Exigences et Mesures
+                
+
+
+               
+            }
+            else
             {
                 MessageBox.Show("Selectionner une ligne", "error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -162,6 +148,23 @@ namespace Alto_IT
                 }
             }
             MessageBox.Show("Document bien enregistré");
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void CheckboxMesures_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox Cb = (CheckBox)sender;
+            ListedeMesuresChecked.Add(Cb.Content.ToString());
+        }
+
+        private void CheckboxMesures_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox Cb = (CheckBox)sender;
+            ListedeMesuresChecked.Remove(Cb.Content.ToString());
         }
     }
 }
