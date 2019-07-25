@@ -70,5 +70,15 @@ namespace Alto_IT
             }
             
         }
+
+        private void Retour_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (MessageBox.Show("Voulez-vous revenir à la selection des projets ?", "Retour aux projets", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
+            {
+                Projet P = new Projet(mw);
+                P.Show();
+                Close();
+            }
+        }
     }
 }

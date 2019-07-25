@@ -62,5 +62,33 @@ namespace Alto_IT
             }
 
         }
+
+        private void Bouton_modifier_projet_Click(object sender, RoutedEventArgs e)
+        {
+            Projets P = (Projets)Combo_Provider.SelectedValue;
+            Modif_Projet AP = new Modif_Projet(mw, (Projets)Combo_Provider.SelectedValue);
+            AP.Title = "Modification de : " + P.Name;
+            AP.Show();
+        }
+
+        private void Combo_Provider_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+             Bouton_modifier_projet.Visibility = Visibility.Visible;
+             Bouton_supprimer_projet.Visibility = Visibility.Visible;
+        }
+
+        private void Bouton_supprimer_projet_Click(object sender, RoutedEventArgs e)
+        {
+            Projets tmp = (Projets)Combo_Provider.SelectedValue;
+            if (MessageBox.Show("Êtes-vous sûr de vouloir supprimer le projet " + tmp.Name , "Suppression du projet", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
+            {
+                mw.database.ProjetDatabase.Remove(tmp);
+                mw.database.SaveChanges();
+                Combo_Provider.Items.Clear();
+                AfficherProjet();
+                MessageBox.Show("Projet supprimé", "Projet Supprimé", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+        }
     }
 }

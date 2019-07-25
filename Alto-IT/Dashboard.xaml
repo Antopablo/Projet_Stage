@@ -127,9 +127,7 @@
                 </TreeView>
 
                 <TreeView Name="RetourSelectProj" Grid.Row="2" Grid.Column="0" Margin="0,0,9.6,9.6" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="#00828790">
-                    <TreeViewItem>
-                        <TreeViewItem.Header>Changer de Projet</TreeViewItem.Header>
-                    </TreeViewItem>
+                    <Image x:Name="Retour" Source="https://image.flaticon.com/icons/png/512/60/60793.png" Height="30" Width="42" MouseUp="Retour_MouseUp"/>
                 </TreeView>
 
             </Grid>

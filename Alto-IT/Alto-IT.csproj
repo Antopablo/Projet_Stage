@@ -99,6 +99,13 @@
     <Compile Include="AffichageDesNormes.xaml.cs">
       <DependentUpon>AffichageDesNormes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907250647583_checked.cs" />
+    <Compile Include="Migrations\201907250647583_checked.Designer.cs">
+      <DependentUpon>201907250647583_checked.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modif_Projet.xaml.cs">
+      <DependentUpon>Modif_Projet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ajout_Exigence.xaml.cs">
       <DependentUpon>Ajout_Exigence.xaml</DependentUpon>
     </Compile>
@@ -108,8 +115,8 @@
     <Compile Include="Ajout_Mesure.xaml.cs">
       <DependentUpon>Ajout_Mesure.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CreationProjet.xaml.cs">
-      <DependentUpon>CreationProjet.xaml</DependentUpon>
+    <Compile Include="Ajout_Projet.xaml.cs">
+      <DependentUpon>Ajout_Projet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Mesures.cs" />
     <Compile Include="Migrations\201907111234206_init status.cs" />
@@ -189,8 +196,8 @@
       <DependentUpon>201907240918310_FK to proj pour les exigenes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Modifier.xaml.cs">
-      <DependentUpon>Modifier.xaml</DependentUpon>
+    <Compile Include="Modifier_Exigence.xaml.cs">
+      <DependentUpon>Modifier_Exigence.xaml</DependentUpon>
     </Compile>
     <Compile Include="Exigence.cs" />
     <Compile Include="Dashboard.xaml.cs">
@@ -216,6 +223,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modif_Projet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Ajout_Exigence.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -228,7 +239,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreationProjet.xaml">
+    <Page Include="Ajout_Projet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -249,7 +260,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Modifier.xaml">
+    <Page Include="Modifier_Exigence.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -340,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907240918310_FK to proj pour les exigenes.resx">
       <DependentUpon>201907240918310_FK to proj pour les exigenes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907250647583_checked.resx">
+      <DependentUpon>201907250647583_checked.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

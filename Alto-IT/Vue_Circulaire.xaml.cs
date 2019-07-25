@@ -54,27 +54,61 @@ namespace Alto_IT
 
         public void AfficherTreeViewExigences()
         {
-            dash.mw.database.ExigenceDatabase.ToList();
-            
-            for (int i = 0; i < dash.mw.database.ExigenceDatabase.ToList().Count(); i++)
+            //dash.mw.database.ExigenceDatabase.ToList();
+
+            //for (int i = 0; i < dash.mw.database.ExigenceDatabase.ToList().Count(); i++)
+            //{
+            //    for (int j = 0; j < dash.mw.database.ExigenceDatabase.ToList().Count(); j++)
+            //    {
+            //        if (dash.mw.database.ExigenceDatabase.ToList()[i].Id == dash.mw.database.ExigenceDatabase.ToList()[j].ForeignKey)
+            //        {
+            //            if (!dash.mw.database.ExigenceDatabase.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]) )
+            //            {
+            //                dash.mw.database.ExigenceDatabase.ToList()[i].ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[j]);
+            //            }
+            //        }
+            //        else if((dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey == 0) && (dash.NormeSelectionnee.Id == dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey_TO_Norme))
+            //        {
+            //            if (!ROOT_Exigences.ExigenceObervCollec.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]))
+            //            {
+            //                ROOT_Exigences.ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[i]);
+            //            }
+            //        }
+
+            //    }
+            //}
+
+            Exigence[] Li = dash.mw.database.ExigenceDatabase.ToArray();
+            Exigence[] Lj = Li;
+            int[] Ls = new int[Lj.Length];
+            int[] lar = new int[Lj.Length];
+
+            for (int i = 0; i < Lj.Length; i++)
             {
-                for (int j = 0; j < dash.mw.database.ExigenceDatabase.ToList().Count(); j++)
+                Ls[i] = Lj[i].Id;
+            }
+            for (int i = 0; i < Li.Length; i++)
+            {
+                int M = Li[i].Id;
+                if ((Li[i].Id == Lj[i].ForeignKey) && (Array.BinarySearch(Ls, M) < 0))
                 {
-                    if (dash.mw.database.ExigenceDatabase.ToList()[i].Id == dash.mw.database.ExigenceDatabase.ToList()[j].ForeignKey)
+                    lar[i] = M;
+                    lock (ROOT_Exigences.ExigenceObervCollec)
                     {
-                        if (!dash.mw.database.ExigenceDatabase.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]) )
-                        {
-                            dash.mw.database.ExigenceDatabase.ToList()[i].ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[j]);
-                        }
+                        dash.mw.database.ExigenceDatabase.ToList()[i].ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[i]);
                     }
-                    else if((dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey == 0) && (dash.NormeSelectionnee.Id == dash.mw.database.ExigenceDatabase.ToList()[i].ForeignKey_TO_Norme))
+                }
+                else if ((Li[i].ForeignKey == 0) && (dash.NormeSelectionnee.Id == Li[i].ForeignKey_TO_Norme))
+                {
+                    int MM = Li[i].Id;
+                    if (Array.BinarySearch(lar, MM) < 0)
                     {
-                        if (!ROOT_Exigences.ExigenceObervCollec.ToList().Contains(dash.mw.database.ExigenceDatabase.ToList()[i]))
+                        lar[i] = MM;
+                        lock (ROOT_Exigences.ExigenceObervCollec)
                         {
                             ROOT_Exigences.ExigenceObervCollec.Add(dash.mw.database.ExigenceDatabase.ToList()[i]);
                         }
                     }
-                    
                 }
             }
         }
@@ -85,7 +119,7 @@ namespace Alto_IT
             ExigenceSelectionnee = (Exigence)treeviewFrame.SelectedItem;
         }
 
-        private void DocumentViewer_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        private void MesureAssocie_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             //try
             //{

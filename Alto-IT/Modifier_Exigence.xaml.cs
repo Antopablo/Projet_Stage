@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System;
+using System.Collections.Generic;
+using System.Windows.Controls;
 
 namespace Alto_IT
 {
@@ -14,9 +16,13 @@ namespace Alto_IT
     {
         public MainWindow mw { get; set; }
         public Vue_Circulaire Vue { get; set; }
+
+        List<string> listeMesureCheck { get; set; }
+
         public Modifier()
         {
             InitializeComponent();
+            listeMesureCheck = new List<string>();
         }
 
         public Modifier(MainWindow m, Vue_Circulaire v)
@@ -24,6 +30,9 @@ namespace Alto_IT
             InitializeComponent();
             mw = m;
             Vue = v;
+            ListeDesMesures.ItemsSource = mw.database.MesuresDatabase.Local;
+            mw.database.MesuresDatabase.ToList();
+            listeMesureCheck = new List<string>();
         }
 
         private void ModifierExigence_Click(object sender, RoutedEventArgs e)
@@ -37,7 +46,6 @@ namespace Alto_IT
                 using (ApplicationDatabase context = new ApplicationDatabase())
                 {
                     string newTableName = Vue.dash.TableFormater(Vue.dash.SimpleQuoteFormater(Vue.dash.FormaterToSQLRequest(Title.Text)));
-
                     try
                     {   
                         //renomme la table
@@ -70,32 +78,35 @@ namespace Alto_IT
                             var y2 = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = '" + CurrentTitle + "' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
                             MessageBox.Show("Modification impossible", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
+
+                        
+
                     }
                     catch (Exception)
                     {
                         MessageBox.Show("Impossible d'actualiser la BDD", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     
-                    switch (ComboBoxStatus.Text)
-                    {
-                        case "Non Évaluée":
-                            Vue.ExigenceSelectionnee.Status = STATUS.non_evaluee;
-                            break;
-                        case "Non Appliquée":
-                            Vue.ExigenceSelectionnee.Status = STATUS.non_appliquee;
-                            break;
-                        case "Programmée":
-                            Vue.ExigenceSelectionnee.Status = STATUS.programmee;
-                            break;
-                        case "Appliquée":
-                            Vue.ExigenceSelectionnee.Status = STATUS.appliquee;
-                            break;
-                        case "Non Applicable":
-                            Vue.ExigenceSelectionnee.Status = STATUS.non_applicable;
-                            break;
-                        default:
-                            break;
-                    }
+                    //switch (ComboBoxStatus.Text)
+                    //{
+                    //    case "Non Évaluée":
+                    //        Vue.ExigenceSelectionnee.Status = STATUS.non_evaluee;
+                    //        break;
+                    //    case "Non Appliquée":
+                    //        Vue.ExigenceSelectionnee.Status = STATUS.non_appliquee;
+                    //        break;
+                    //    case "Programmée":
+                    //        Vue.ExigenceSelectionnee.Status = STATUS.programmee;
+                    //        break;
+                    //    case "Appliquée":
+                    //        Vue.ExigenceSelectionnee.Status = STATUS.appliquee;
+                    //        break;
+                    //    case "Non Applicable":
+                    //        Vue.ExigenceSelectionnee.Status = STATUS.non_applicable;
+                    //        break;
+                    //    default:
+                    //        break;
+                    //}
 
                     mw.database.SaveChanges();
                     Vue.AfficherTreeViewExigences();
@@ -145,6 +156,18 @@ namespace Alto_IT
                 }
             }
 
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox check = (CheckBox)sender;
+            listeMesureCheck.Add(check.Content.ToString());
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox uncheck = (CheckBox)sender;
+            listeMesureCheck.Remove(uncheck.Content.ToString());
         }
     }
 }

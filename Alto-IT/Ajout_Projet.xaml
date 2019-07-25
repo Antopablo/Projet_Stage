@@ -50,6 +50,7 @@
             <TextBlock Text="Google Cloud Services"/>
         </ComboBox>
         <Button Name="Bouton_validerProjet" Content="Créer mon projet" HorizontalAlignment="Left" Margin="71,202,0,0" VerticalAlignment="Top" Width="130" Height="30" Click="Bouton_validerProjet_Click"/>
+        <Image x:Name="Retour" Source="https://image.flaticon.com/icons/png/512/60/60793.png" Height="20" Width="20" MouseUp="Retour_MouseUp" Margin="0,250,238.8,0"/>
 
     </Grid>
 </Window>

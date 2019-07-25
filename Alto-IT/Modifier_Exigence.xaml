@@ -6,16 +6,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alto_IT"
         mc:Ignorable="d"
-        Title="Modifier" Height="548.4" Width="800"
+        Title="Modifier" Height="648.4" Width="800"
         Closed="Window_Closed">
 
 
     <Grid Margin="0,0,-0.4,-0.8" >
         <TextBox Name="Title" HorizontalAlignment="Left" Height="34" Margin="124,18,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" VerticalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBox x:Name="Content" HorizontalAlignment="Left" Height="154" Margin="124,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" Padding="5,5,5,5" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AutoWordSelection="True"/>
-        <Button Name="ModifierExigence" Content="Modifier l'exigence" HorizontalAlignment="Left" Margin="124,425,0,0" VerticalAlignment="Top" Width="519" Height="71" Click="ModifierExigence_Click"/>
 
-        <ComboBox Name="ComboBoxStatus"  Margin="124,330,549,154">
+
+
+        <ListView x:Name="ListeDesMesures" HorizontalAlignment="Left" Height="210" Margin="124,252,0,0" VerticalAlignment="Top" Width="519" ItemsSource="{Binding Mesures}" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Name="checkboxMesures" Content="{Binding Name}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
+                    </CheckBox>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical">
+                    </WrapPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListView>
+
+
+        <Button Name="ModifierExigence" Content="Modifier l'exigence" HorizontalAlignment="Left" Margin="124,521,0,0" VerticalAlignment="Top" Width="519" Height="71" Click="ModifierExigence_Click"/>
+
+        <!--<ComboBox Name="ComboBoxStatus"  Margin="124,330,549,154">
             <TextBlock Text="Appliquée"/>
             <TextBlock Text="Programmée"/>
             <TextBlock Text="Non Appliquée"/>
@@ -29,6 +48,6 @@
         <Label Content="Document Actuel" HorizontalAlignment="Left" Margin="482,274,0,0" VerticalAlignment="Top" Width="112" FontWeight="Bold"/>
         <ScrollViewer Margin="484,298,151,169" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
             <TextBlock x:Name="Document" TextWrapping="Wrap"  VerticalAlignment="Top" Text="Aucun Document" HorizontalAlignment="Left" Padding="5,5,5,5" ScrollViewer.CanContentScroll="True" RenderTransformOrigin="0.5,0.5"/>
-        </ScrollViewer>
+        </ScrollViewer>-->
     </Grid>
 </Window>

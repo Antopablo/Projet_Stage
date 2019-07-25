@@ -142,7 +142,7 @@
                         <TextBlock Text=" [" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding ExigenceObervCollec.Count}" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <TextBlock Text="]" Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                        <TextBlock x:Name="Documentviewer" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0,30,0" Cursor="Help" PreviewMouseUp="DocumentViewer_PreviewMouseUp" Style="{StaticResource MenuStyle}">
+                        <TextBlock x:Name="MesureAssocie" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0,30,0" Cursor="Help" PreviewMouseUp="MesureAssocie_PreviewMouseUp" Style="{StaticResource MenuStyle}">
                             <Image Source="http://simpleicon.com/wp-content/uploads/link-2.png" Width="20" Height="20" VerticalAlignment="Center">
                                 <Image.ToolTip>
                                     <StackPanel>

@@ -73,8 +73,8 @@ namespace Alto_IT
                         Modifier M = new Modifier(mw, Vue);
                         M.Title.Text = Vue.ExigenceSelectionnee.Name;
                         M.Content.Text = Vue.ExigenceSelectionnee.Description;
-                        M.Status.Text = Vue.ExigenceSelectionnee.Status.ToString();
-                        M.Document.Text = Vue.ExigenceSelectionnee.DocumentName;
+                        //M.Status.Text = Vue.ExigenceSelectionnee.Status.ToString();
+                        //M.Document.Text = Vue.ExigenceSelectionnee.DocumentName;
                         M.Show();
                         FenetreOuverte = true;
                     }
@@ -205,23 +205,27 @@ namespace Alto_IT
 
         private void Modif_Norme_Click(object sender, RoutedEventArgs e)
         {
-            if (FenetreOuverte == false)
+            if (NormeSelectionnee != null)
             {
-                AffichageDesNormes AF = new AffichageDesNormes(mw, this);
-                if (NormeSelectionnee.Id == 0)
+                if (FenetreOuverte == false)
                 {
-                    AF.scrollV.Visibility = Visibility.Collapsed;
-                    AF.label.Visibility = Visibility.Collapsed;
-                    AF.AjoutDocument.Visibility = Visibility.Collapsed;
+                    AffichageDesNormes AF = new AffichageDesNormes(mw, this);
+                    if (NormeSelectionnee.Id == 0)
+                    {
+                        AF.scrollV.Visibility = Visibility.Collapsed;
+                        AF.label.Visibility = Visibility.Collapsed;
+                        AF.AjoutDocument.Visibility = Visibility.Collapsed;
+                    }
+                    AF.BoutonValiderModify.Visibility = Visibility.Visible;
+                    AF.BoutonSupprimer.Visibility = Visibility.Collapsed;
+                    AF.AjoutDocument.Visibility = Visibility.Visible;
+                    AF.TitreModify.Visibility = Visibility.Visible;
+                    AF.TitreModifyBlock.Visibility = Visibility.Hidden;
+                    AF.Show();
+                    FenetreOuverte = true;
                 }
-                AF.BoutonValiderModify.Visibility = Visibility.Visible;
-                AF.BoutonSupprimer.Visibility = Visibility.Collapsed;
-                AF.AjoutDocument.Visibility = Visibility.Visible;
-                AF.TitreModify.Visibility = Visibility.Visible;
-                AF.TitreModifyBlock.Visibility = Visibility.Hidden;
-                AF.Show();
-                FenetreOuverte = true;
             }
+            
         }
 
         private void Supr_Norme_Click(object sender, RoutedEventArgs e)
@@ -444,6 +448,16 @@ namespace Alto_IT
         private void Supr_Mesure_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Retour_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (MessageBox.Show("Voulez-vous revenir à la selection des projets ?", "Retour aux projets", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
+            {
+                Projet P = new Projet(mw);
+                P.Show();
+                Close();
+            }
         }
     }
 }

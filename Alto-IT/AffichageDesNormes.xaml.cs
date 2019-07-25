@@ -140,11 +140,12 @@ namespace Alto_IT
                 string fileNameWithID = "";
                 string sourcePath;
                 string targetPath;
-                OpenFileDialog open = new OpenFileDialog();
-                open.ShowDialog();
+                
 
                 if (NormeSelectionnee != null)
                 {
+                    OpenFileDialog open = new OpenFileDialog();
+                    open.ShowDialog();
                     fileNameWithID = "[" + (NormeSelectionnee.Id) + "]" + open.SafeFileName;
                     fileName = open.SafeFileName;
                     sourcePath = open.FileName;
