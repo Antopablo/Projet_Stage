@@ -28,17 +28,12 @@ namespace Alto_IT
             ForeignKey_TO_Norme = foreignkeyTOnorme;
             ForeignKey_TO_Projet = foreignkeyTOProj;
             this.ExigenceObervCollec = new ObservableCollection<Exigence>();
-            ListeNomMesureAssociee = new ObservableCollection<string>();
             IDExigence = Id;
 
-            Dico_relationExigence_to_Mesure = new Dictionary<int, bool>();
-            Relation_Exigence_to_Mesures = new List<string>();
-
-        Dico_couleurs = new Dictionary<STATUS, string>();
+            Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
             GetValueDico();
-
         }
 
         public Exigence(string name, int foreignkey, int foreignkeyTOnorme, int foreignkeyTOProj)
@@ -48,11 +43,8 @@ namespace Alto_IT
             ForeignKey_TO_Norme = foreignkeyTOnorme;
             ForeignKey_TO_Projet = foreignkeyTOProj;
             this.ExigenceObervCollec = new ObservableCollection<Exigence>();
-            ListeNomMesureAssociee = new ObservableCollection<string>();
             IDExigence = Id;
 
-            Dico_relationExigence_to_Mesure = new Dictionary<int, bool>();
-            Relation_Exigence_to_Mesures = new List<string>();
 
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
@@ -63,9 +55,6 @@ namespace Alto_IT
         public Exigence()
         {
             this.ExigenceObervCollec = new ObservableCollection<Exigence>();
-            ListeNomMesureAssociee = new ObservableCollection<string>();
-            Dico_relationExigence_to_Mesure = new Dictionary<int, bool>();
-            Relation_Exigence_to_Mesures = new List<string>();
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
@@ -116,11 +105,6 @@ namespace Alto_IT
         }
 
         [NotMapped]
-        public Dictionary<int, bool> Dico_relationExigence_to_Mesure { get; set; }
-        [NotMapped]
-        public List<string> Relation_Exigence_to_Mesures { get; set; }
-
-        [NotMapped]
         public Dictionary<STATUS, string> Dico_couleurs { get; set; }
 
 
@@ -152,7 +136,6 @@ namespace Alto_IT
 
 
         public ObservableCollection<Exigence> ExigenceObervCollec { get; set; }
-        public ObservableCollection<string> ListeNomMesureAssociee { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)

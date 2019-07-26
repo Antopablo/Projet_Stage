@@ -103,6 +103,18 @@
     <Compile Include="Migrations\201907250647583_checked.Designer.cs">
       <DependentUpon>201907250647583_checked.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907260838028_prep relation exigence to mesure.cs" />
+    <Compile Include="Migrations\201907260838028_prep relation exigence to mesure.Designer.cs">
+      <DependentUpon>201907260838028_prep relation exigence to mesure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907260912250_test-binding exigences.cs" />
+    <Compile Include="Migrations\201907260912250_test-binding exigences.Designer.cs">
+      <DependentUpon>201907260912250_test-binding exigences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907260952313_supr bool ischecked.cs" />
+    <Compile Include="Migrations\201907260952313_supr bool ischecked.Designer.cs">
+      <DependentUpon>201907260952313_supr bool ischecked.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modif_Projet.xaml.cs">
       <DependentUpon>Modif_Projet.xaml</DependentUpon>
     </Compile>
@@ -354,6 +366,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907250647583_checked.resx">
       <DependentUpon>201907250647583_checked.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907260838028_prep relation exigence to mesure.resx">
+      <DependentUpon>201907260838028_prep relation exigence to mesure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907260912250_test-binding exigences.resx">
+      <DependentUpon>201907260912250_test-binding exigences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907260952313_supr bool ischecked.resx">
+      <DependentUpon>201907260952313_supr bool ischecked.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

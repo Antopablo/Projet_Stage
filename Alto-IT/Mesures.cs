@@ -106,8 +106,6 @@ namespace Alto_IT
             }
         }
 
-        public bool IsChecked { get; set; }
-
         [NotMapped]
         public Dictionary<STATUS, string> Dico_couleurs { get; set; }
 

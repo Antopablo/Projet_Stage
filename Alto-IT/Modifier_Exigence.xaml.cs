@@ -18,11 +18,15 @@ namespace Alto_IT
         public Vue_Circulaire Vue { get; set; }
 
         List<string> listeMesureCheck { get; set; }
+        List<int> listeMesureCheckID { get; set; }
+
+        readonly object locker = new object();
 
         public Modifier()
         {
             InitializeComponent();
             listeMesureCheck = new List<string>();
+            listeMesureCheckID = new List<int>();
         }
 
         public Modifier(MainWindow m, Vue_Circulaire v)
@@ -30,9 +34,10 @@ namespace Alto_IT
             InitializeComponent();
             mw = m;
             Vue = v;
-            ListeDesMesures.ItemsSource = mw.database.MesuresDatabase.Local;
+            //ListeDesMesures.ItemsSource = mw.database.MesuresDatabase.Local;
             mw.database.MesuresDatabase.ToList();
             listeMesureCheck = new List<string>();
+            listeMesureCheckID = new List<int>();
         }
 
         private void ModifierExigence_Click(object sender, RoutedEventArgs e)
@@ -71,13 +76,6 @@ namespace Alto_IT
                             Vue.ExigenceSelectionnee.Name = Title.Text;
                             Vue.ExigenceSelectionnee.Description = Content.Text;
 
-                            //Mesure associée avec checkbox
-                            Vue.ExigenceSelectionnee.Relation_Exigence_to_Mesures = listeMesureCheck;
-                            foreach (string item in Vue.ExigenceSelectionnee.Relation_Exigence_to_Mesures)
-                            {
-                                Console.WriteLine(item);;
-                            }
-                            // TODO
                         }
                         catch (Exception)
                         {
@@ -86,9 +84,6 @@ namespace Alto_IT
                             var y2 = context.Database.ExecuteSqlCommand("UPDATE Exigences" + " SET Name = '" + CurrentTitle + "' WHERE Id = " + "'" + Vue.ExigenceSelectionnee.Id + "'");
                             MessageBox.Show("Modification impossible", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-
-                        
-
                     }
                     catch (Exception)
                     {
@@ -117,7 +112,6 @@ namespace Alto_IT
                     //}
 
                     mw.database.SaveChanges();
-                    
                     Vue.AfficherTreeViewExigences();
                     Close();
 
@@ -171,12 +165,77 @@ namespace Alto_IT
         {
             CheckBox check = (CheckBox)sender;
             listeMesureCheck.Add(check.Content.ToString());
+
+            IQueryable<int> recupID = (from m in mw.database.MesuresDatabase
+                        where m.Name == check.Content.ToString()
+                        select m.Id);
+
+            var M = from m in mw.database.MesuresDatabase
+                    where m.Name == check.Content.ToString()
+                    select m;
+
+            listeMesureCheckID.Add(recupID.FirstOrDefault());
+
+            RelationMesureExigence rme = new RelationMesureExigence(Vue.ExigenceSelectionnee.Id, recupID.FirstOrDefault());
+            mw.database.RelationMesureExigenceDatabase.Add(rme);
+
+            mw.database.SaveChanges();
+
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox uncheck = (CheckBox)sender;
             listeMesureCheck.Remove(uncheck.Content.ToString());
+
+            IQueryable<int> recupID = (from m in mw.database.MesuresDatabase
+                                       where m.Name == uncheck.Content.ToString()
+                                       select m.Id);
+
+            listeMesureCheckID.Remove(recupID.FirstOrDefault());
+
+            var recherheRelation = from n in mw.database.RelationMesureExigenceDatabase
+                    where n.IdExigence == Vue.ExigenceSelectionnee.Id && n.IdMesure == recupID.FirstOrDefault()
+                    select n;
+
+            var M = from m in mw.database.MesuresDatabase
+                    where m.Name == uncheck.Content.ToString()
+                    select m;
+
+            mw.database.RelationMesureExigenceDatabase.Remove(recherheRelation.FirstOrDefault());
+
+            mw.database.SaveChanges();
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var c = from a in mw.database.RelationMesureExigenceDatabase
+                    where a.IdExigence == Vue.ExigenceSelectionnee.Id
+                    select a.IdMesure;
+
+            List<int> IDMesure = c.ToList();
+            List<CheckBox> listcheck = new List<CheckBox>();
+
+            foreach (Mesures item in mw.database.MesuresDatabase)
+            {
+                CheckBox ch = new CheckBox();
+                ch.Content = item.Name;
+
+                if (IDMesure.Contains(item.Id))
+                {
+                    ch.IsChecked = true;
+                }
+                listcheck.Add(ch);
+                mw.database.SaveChanges();
+            }
+            ListeDesMesures.ItemsSource = listcheck;
+
+            foreach (CheckBox item in listcheck)
+            {
+                item.Checked += CheckBox_Checked;
+                item.Unchecked += CheckBox_Unchecked;
+            }
         }
     }
 }

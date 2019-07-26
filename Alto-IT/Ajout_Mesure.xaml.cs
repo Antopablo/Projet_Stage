@@ -76,6 +76,7 @@ namespace Alto_IT
                                 Mesures MesureEnfant = new Mesures(TitleMesure.Text, ContentMesure.Text, dashb.Vue_Mesure.MesureSelectionnee.Id, dashb.ProjetEnCours.Id);
                                 dashb.Vue_Mesure.MesureSelectionnee.MesuresObservCollec.Add(MesureEnfant);
                                 mw.database.MesuresDatabase.Add(MesureEnfant);
+                                
                             }
                             catch (Exception)
                             {

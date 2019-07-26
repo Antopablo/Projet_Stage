@@ -52,6 +52,7 @@ namespace Alto_IT
                             Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id, dashb.ProjetEnCours.Id);
                             Vue.ROOT_Exigences.ExigenceObervCollec.Add(ExigenceParent);
                             mw.database.ExigenceDatabase.Add(ExigenceParent);
+                            
                             mw.database.SaveChanges();
                             Close();
                         }
@@ -71,6 +72,8 @@ namespace Alto_IT
                                 Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ExigenceSelectionnee.Id, dashb.NormeSelectionnee.Id, dashb.ProjetEnCours.Id);
                                 Vue.ExigenceSelectionnee.ExigenceObervCollec.Add(ExigenceEnfant);
                                 mw.database.ExigenceDatabase.Add(ExigenceEnfant);
+                                
+
                             }
                             catch (Exception)
                             {
@@ -83,6 +86,7 @@ namespace Alto_IT
                         {
                             MessageBox.Show("Une Exigence à ce nom existe déjà", "error", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
+
                         mw.database.SaveChanges();
                     }
                 }
@@ -136,5 +140,7 @@ namespace Alto_IT
         {
             dashb.FenetreOuverte = false;
         }
+
+        
     }
 }

@@ -9,11 +9,13 @@ namespace Alto_IT
 {
     public class RelationMesureExigence
     {
-        public RelationMesureExigence(int idMesure, int idExigence)
+        public RelationMesureExigence(int idExigence, int idMesure)
         {
             IdMesure = idMesure;
             IdExigence = idExigence;
         }
+
+        public RelationMesureExigence() { }
 
         [Key]
         public int Id { get; set; }

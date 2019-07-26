@@ -7,28 +7,14 @@
         xmlns:local="clr-namespace:Alto_IT"
         mc:Ignorable="d"
         Title="Modifier" Height="648.4" Width="800"
-        Closed="Window_Closed">
-
+        Closed="Window_Closed"
+        Loaded="Window_Loaded">
 
     <Grid Margin="0,0,-0.4,-0.8" >
         <TextBox Name="Title" HorizontalAlignment="Left" Height="34" Margin="124,18,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" VerticalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <TextBox x:Name="Content" HorizontalAlignment="Left" Height="154" Margin="124,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="519" Padding="5,5,5,5" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AutoWordSelection="True"/>
-
-
-
-        <ListView x:Name="ListeDesMesures" HorizontalAlignment="Left" Height="210" Margin="124,252,0,0" VerticalAlignment="Top" Width="519" ItemsSource="{Binding Mesures}" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <CheckBox Name="checkboxMesures" Content="{Binding Name}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
-                    </CheckBox>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical">
-                    </WrapPanel>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
+        
+        <ListView x:Name="ListeDesMesures" HorizontalAlignment="Left" Height="210" Margin="124,252,0,0" VerticalAlignment="Top" Width="519" ScrollViewer.VerticalScrollBarVisibility="Disabled">
         </ListView>
 
 
