@@ -52,6 +52,7 @@ namespace Alto_IT
                             Exigence ExigenceParent = new Exigence(Title.Text, Content.Text, 0, dashb.NormeSelectionnee.Id, dashb.ProjetEncours.Id);
                             Vue.ROOT_Exigences.ExigenceObervCollec.Add(ExigenceParent);
                             mw.database.ExigenceDatabase.Add(ExigenceParent);
+                            RemplirDico(ExigenceParent);
                             mw.database.SaveChanges();
                             Close();
                         }
@@ -71,6 +72,7 @@ namespace Alto_IT
                                 Exigence ExigenceEnfant = new Exigence(Title.Text, Content.Text, Vue.ExigenceSelectionne.Id, dashb.NormeSelectionnee.Id, dashb.ProjetEncours.Id);
                                 Vue.ExigenceSelectionne.ExigenceObervCollec.Add(ExigenceEnfant);
                                 mw.database.ExigenceDatabase.Add(ExigenceEnfant);
+                                RemplirDico(ExigenceEnfant);
                             }
                             catch (Exception)
                             {
@@ -84,6 +86,8 @@ namespace Alto_IT
                             MessageBox.Show("Une éxigence porte déja ce nom", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
 
+                        
+
                         mw.database.SaveChanges();
 
                     }
@@ -91,6 +95,14 @@ namespace Alto_IT
             }
             
             
+        }
+
+        public void RemplirDico(Exigence E)
+        {
+            foreach (Mesures item in mw.database.MesuresDatabase)
+            {
+                item.Dico_ExigenceCheck.Add(E,false);
+            }
         }
 
         public void CreateTable(string TableName)

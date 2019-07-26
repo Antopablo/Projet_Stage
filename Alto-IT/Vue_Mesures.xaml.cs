@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,6 +25,8 @@ namespace Alto_IT
         public Dashboard Dash { get; set; }
 
         public Mesures ROOT_Mesures { get; set; }
+
+        readonly object _LockCollection = new object();
         public Vue_Mesures()
         {
             InitializeComponent();
@@ -54,6 +57,10 @@ namespace Alto_IT
 
         public void AfficherTreeViewMesures()
         {
+            Application.Current.Dispatcher.Invoke(delegate ()
+            {
+                ROOT_Mesures.MesureObservableCollec.Clear();
+            });
             Mesures[] Li = Dash.mw.database.MesuresDatabase.ToArray();
             Mesures[] Lj = Li;
             int[] Ls = new int[Lj.Length];
@@ -68,9 +75,13 @@ namespace Alto_IT
                 if ((Li[i].Id == Lj[i].FKToMesure) && (Array.BinarySearch(Ls, M) < 0))
                 {
                     lar[i] = M;
-                    lock (ROOT_Mesures.MesureObservableCollec)
+                    lock (_LockCollection)
                     {
-                        Dash.mw.database.MesuresDatabase.ToList()[i].MesureObservableCollec.Add(Dash.mw.database.MesuresDatabase.ToList()[i]);
+                        Application.Current.Dispatcher.Invoke(delegate ()
+                        {
+                            Dash.mw.database.MesuresDatabase.ToList()[i].MesureObservableCollec.Add(Dash.mw.database.MesuresDatabase.ToList()[i]);
+                        });
+                        Thread.Sleep(2);
                     }
                 }
                 else if ((Li[i].FKToMesure == 0) && (Dash.ProjetEncours.Id == Li[i].FKToProjets))
@@ -79,10 +90,15 @@ namespace Alto_IT
                     if (Array.BinarySearch(lar, MM) < 0)
                     {
                         lar[i] = MM;
-                        lock (ROOT_Mesures.MesureObservableCollec)
+                        lock (_LockCollection)
                         {
-                            ROOT_Mesures.MesureObservableCollec.Add(Dash.mw.database.MesuresDatabase.ToList()[i]);
-                        }
+                            Application.Current.Dispatcher.Invoke(delegate ()
+                            {
+                                ROOT_Mesures.MesureObservableCollec.Add(Dash.mw.database.MesuresDatabase.ToList()[i]);
+                            });
+                            Thread.Sleep(2);
+                        }   
+                            
                     }
                 }
             }

@@ -45,8 +45,14 @@
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="PresentationFramework.AeroLite" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -152,6 +158,14 @@
     <Compile Include="Migrations\201907240918231_FkToproj.cs" />
     <Compile Include="Migrations\201907240918231_FkToproj.Designer.cs">
       <DependentUpon>201907240918231_FkToproj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907260914199_binding.cs" />
+    <Compile Include="Migrations\201907260914199_binding.Designer.cs">
+      <DependentUpon>201907260914199_binding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907261130079_dico.cs" />
+    <Compile Include="Migrations\201907261130079_dico.Designer.cs">
+      <DependentUpon>201907261130079_dico.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
@@ -303,6 +317,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907240918231_FkToproj.resx">
       <DependentUpon>201907240918231_FkToproj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907260914199_binding.resx">
+      <DependentUpon>201907260914199_binding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907261130079_dico.resx">
+      <DependentUpon>201907261130079_dico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

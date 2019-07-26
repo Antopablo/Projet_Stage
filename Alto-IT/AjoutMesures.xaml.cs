@@ -51,6 +51,7 @@ namespace Alto_IT
                             Mesures MesureParent = new Mesures(MesureName.Text, MesureDescription.Text, 0, Dash.ProjetEncours.Id);
                             Dash.Vue_Mesure.ROOT_Mesures.MesureObservableCollec.Add(MesureParent);
                             mw.database.MesuresDatabase.Add(MesureParent);
+                            RemplirDico(MesureParent);
                             mw.database.SaveChanges();
                             Close();
                         }
@@ -72,6 +73,7 @@ namespace Alto_IT
                                 Mesures MesureEnfant = new Mesures(MesureName.Text, MesureDescription.Text, Dash.Vue_Mesure.MesureSelectionne.Id, Dash.ProjetEncours.Id);
                                 Dash.Vue_Mesure.MesureSelectionne.MesureObservableCollec.Add(MesureEnfant);
                                 mw.database.MesuresDatabase.Add(MesureEnfant);
+                                RemplirDico(MesureEnfant);
                             }
                             catch (Exception)
                             {
@@ -94,7 +96,13 @@ namespace Alto_IT
             
         }
 
-
+        public void RemplirDico(Mesures M)
+        {
+            foreach (Exigence item in mw.database.ExigenceDatabase)
+            {
+                item.Dico_MesuresCheck.Add(M, false);
+            }
+        }
 
         public void CreateTable(string TableName)
         {

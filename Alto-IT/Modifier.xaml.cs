@@ -19,10 +19,13 @@ namespace Alto_IT
 
         public List<string> ListedeMesuresChecked { get; set; }
 
+        public List<int> ListedeMesuresCheckedId { get; set; }
+
         public Modifier()
         {
             InitializeComponent();
             ListedeMesuresChecked = new List<string>();
+            ListedeMesuresCheckedId = new List<int>();
         }
 
         public Modifier(MainWindow m, Vue_Circulaire v)
@@ -30,11 +33,11 @@ namespace Alto_IT
             InitializeComponent();
             mw = m;
             Vue = v;
-            listeboxMesures.ItemsSource = mw.database.MesuresDatabase.Local;
+            //listeboxMesures.ItemsSource = mw.database.MesuresDatabase.Local;
             mw.database.MesuresDatabase.ToList();
 
             ListedeMesuresChecked = new List<string>();
-
+            ListedeMesuresCheckedId = new List<int>();
         }
         
         private void ModifierExigence_Click(object sender, RoutedEventArgs e)
@@ -73,6 +76,13 @@ namespace Alto_IT
                             }
                             Vue.ExigenceSelectionne.Name = Title.Text;
                             Vue.ExigenceSelectionne.Description = Content.Text;
+
+                            ////////   Traitement des relations entre Exigences et Mesures
+                            
+
+
+
+
                         }
                         catch (Exception)
                         {
@@ -83,15 +93,15 @@ namespace Alto_IT
                             MessageBox.Show("Impossible d ajouter à la table Parent", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
 
-                        
-
-                        
-
                     }
                     catch (Exception)
                     {
                         MessageBox.Show("Impossible de Modifier la table", "erreur", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
+
+
+
+
 
 
                     mw.database.SaveChanges();
@@ -100,8 +110,8 @@ namespace Alto_IT
 
                 }
 
-                ////////   Traitement des relations entre Exigences et Mesures
                 
+
 
 
                
@@ -125,7 +135,6 @@ namespace Alto_IT
             string targetPath = @"C:\Users\stagiaire\Desktop\Alto\Projet_Stage\Alto-IT\bin\Debug\Files\" + filename;
             try
             {
-                
                 File.Copy(open.FileName, targetPath);
                 Vue.ExigenceSelectionne.DocumentPath = targetPath;
                 Vue.ExigenceSelectionne.DocumentName = filename;
@@ -152,19 +161,85 @@ namespace Alto_IT
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            var rechercheid = from idrech in mw.database.RelationMesuresExigenceDatabase
+                              where idrech.IdExigence == Vue.ExigenceSelectionne.Id
+                              select idrech.IdMesures;
+
+
+            foreach (Mesures item in mw.database.MesuresDatabase)
+            {
+                if (rechercheid.ToList().Contains(item.Id) && !Vue.ExigenceSelectionne.Dico_MesuresCheck.ContainsKey(item))
+                {
+                    Vue.ExigenceSelectionne.Dico_MesuresCheck.Add(item, true);
+                }
+                else if (!rechercheid.ToList().Contains(item.Id) &&!Vue.ExigenceSelectionne.Dico_MesuresCheck.ContainsKey(item))
+                {
+                    Vue.ExigenceSelectionne.Dico_MesuresCheck.Add(item, false);
+                }
+            }
+
+            foreach (KeyValuePair<Mesures,bool> item in Vue.ExigenceSelectionne.Dico_MesuresCheck )
+            {
+                CheckBox C = new CheckBox();
+                C.Content = item.Key.Nom;
+                C.IsChecked = item.Value;
+                C.Checked += CheckboxMesures_Checked;
+                C.Unchecked += CheckboxMesures_Unchecked;
+                listviewMesures.Items.Add(C);
+            }
         }
 
         private void CheckboxMesures_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox Cb = (CheckBox)sender;
             ListedeMesuresChecked.Add(Cb.Content.ToString());
+
+            var query = from i in mw.database.MesuresDatabase
+                        where i.Nom == Cb.Content.ToString()
+                        select i.Id;
+
+            ListedeMesuresCheckedId.Add(query.FirstOrDefault());
+
+            RelationsMesuresExigences rel = new RelationsMesuresExigences(Vue.ExigenceSelectionne.Id, query.FirstOrDefault());
+            mw.database.RelationMesuresExigenceDatabase.Add(rel);
+
+
+            var Mesuresel = from m in mw.database.MesuresDatabase
+                            where m.Nom == Cb.Content.ToString()
+                            select m;
+
+
+
+            Vue.ExigenceSelectionne.Dico_MesuresCheck[Mesuresel.FirstOrDefault()] = true;
+            Mesuresel.FirstOrDefault().Dico_ExigenceCheck[Vue.ExigenceSelectionne] = true;
+            mw.database.SaveChanges();
         }
 
         private void CheckboxMesures_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox Cb = (CheckBox)sender;
             ListedeMesuresChecked.Remove(Cb.Content.ToString());
+
+            var query = from i in mw.database.MesuresDatabase
+                        where i.Nom == Cb.Content.ToString()
+                        select i.Id;
+
+            ListedeMesuresCheckedId.Remove(query.FirstOrDefault());
+
+            var delete = from relation in mw.database.RelationMesuresExigenceDatabase
+                         where relation.IdExigence == Vue.ExigenceSelectionne.Id && relation.IdMesures == query.FirstOrDefault()
+                         select relation;
+            
+            mw.database.RelationMesuresExigenceDatabase.Remove(delete.FirstOrDefault());
+
+            var Mesuresel = from m in mw.database.MesuresDatabase
+                            where m.Nom == Cb.Content.ToString()
+                            select m;
+
+            Vue.ExigenceSelectionne.Dico_MesuresCheck[Mesuresel.FirstOrDefault()] = false;
+            Mesuresel.FirstOrDefault().Dico_ExigenceCheck[Vue.ExigenceSelectionne] = false;
+            mw.database.SaveChanges();
+
         }
     }
 }

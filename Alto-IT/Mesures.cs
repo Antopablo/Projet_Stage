@@ -64,6 +64,7 @@ namespace Alto_IT
             Dico_Couleur = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evalue;
+            Dico_ExigenceCheck = new Dictionary<Exigence, bool>();
         }
 
         public Mesures(string nom)
@@ -73,6 +74,16 @@ namespace Alto_IT
             Dico_Couleur = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evalue;
+            Dico_ExigenceCheck = new Dictionary<Exigence, bool>();
+        }
+
+        public Mesures()
+        {
+            MesureObservableCollec = new ObservableCollection<Mesures>();
+            Dico_Couleur = new Dictionary<STATUS, string>();
+            RemplirDicoCouleur();
+            Status = STATUS.non_evalue;
+            Dico_ExigenceCheck = new Dictionary<Exigence, bool>();
         }
 
         public Mesures(string nom, string description,int FKMesure,int FKProjet)
@@ -85,6 +96,16 @@ namespace Alto_IT
             Status = STATUS.non_evalue;
             FKToMesure = FKMesure;
             FKToProjets = FKProjet;
+            Dico_ExigenceCheck = new Dictionary<Exigence, bool>();
+        }
+        private Dictionary<Exigence,bool> _Dico_ExigenceCheck;
+
+        public Dictionary<Exigence,bool> Dico_ExigenceCheck
+        {
+            get { return _Dico_ExigenceCheck; }
+            set { _Dico_ExigenceCheck = value;
+                OnPropertyChanged("Dico_ExigenceCheck");
+            }
         }
 
 
@@ -135,13 +156,6 @@ namespace Alto_IT
 
         public int FKToMesure { get; set; }
 
-        public Mesures()
-        {
-            MesureObservableCollec = new ObservableCollection<Mesures>();
-            Dico_Couleur = new Dictionary<STATUS, string>();
-            RemplirDicoCouleur();
-            Status = STATUS.non_evalue;
-        }
 
     }
 }
