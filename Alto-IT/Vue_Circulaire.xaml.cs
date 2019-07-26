@@ -57,6 +57,10 @@ namespace Alto_IT
 
         public void AfficherTreeViewExigences()
         {
+            Application.Current.Dispatcher.Invoke(delegate ()
+            {
+                ROOT_Exigences.ExigenceObervCollec.Clear();
+            });
 
             Exigence[] Li = dash.mw.database.ExigenceDatabase.ToArray();
             Exigence[] Lj = Li;

@@ -70,6 +70,14 @@ namespace Alto_IT
                             //actualise l'itemSleceted et la Vue grâce INotifyProperty
                             Vue.ExigenceSelectionnee.Name = Title.Text;
                             Vue.ExigenceSelectionnee.Description = Content.Text;
+
+                            //Mesure associée avec checkbox
+                            Vue.ExigenceSelectionnee.Relation_Exigence_to_Mesures = listeMesureCheck;
+                            foreach (string item in Vue.ExigenceSelectionnee.Relation_Exigence_to_Mesures)
+                            {
+                                Console.WriteLine(item);;
+                            }
+                            // TODO
                         }
                         catch (Exception)
                         {
@@ -109,6 +117,7 @@ namespace Alto_IT
                     //}
 
                     mw.database.SaveChanges();
+                    
                     Vue.AfficherTreeViewExigences();
                     Close();
 

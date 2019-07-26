@@ -31,7 +31,10 @@ namespace Alto_IT
             ListeNomMesureAssociee = new ObservableCollection<string>();
             IDExigence = Id;
 
-            Dico_couleurs = new Dictionary<STATUS, string>();
+            Dico_relationExigence_to_Mesure = new Dictionary<int, bool>();
+            Relation_Exigence_to_Mesures = new List<string>();
+
+        Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
             GetValueDico();
@@ -48,6 +51,9 @@ namespace Alto_IT
             ListeNomMesureAssociee = new ObservableCollection<string>();
             IDExigence = Id;
 
+            Dico_relationExigence_to_Mesure = new Dictionary<int, bool>();
+            Relation_Exigence_to_Mesures = new List<string>();
+
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
@@ -58,6 +64,8 @@ namespace Alto_IT
         {
             this.ExigenceObervCollec = new ObservableCollection<Exigence>();
             ListeNomMesureAssociee = new ObservableCollection<string>();
+            Dico_relationExigence_to_Mesure = new Dictionary<int, bool>();
+            Relation_Exigence_to_Mesures = new List<string>();
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
@@ -108,7 +116,13 @@ namespace Alto_IT
         }
 
         [NotMapped]
+        public Dictionary<int, bool> Dico_relationExigence_to_Mesure { get; set; }
+        [NotMapped]
+        public List<string> Relation_Exigence_to_Mesures { get; set; }
+
+        [NotMapped]
         public Dictionary<STATUS, string> Dico_couleurs { get; set; }
+
 
         private string _Couleur;
         [NotMapped]

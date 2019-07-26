@@ -51,6 +51,11 @@ namespace Alto_IT
 
         public void AfficherTreeViewMesure()
         {
+            Application.Current.Dispatcher.Invoke(delegate ()
+            {
+                ROOT_Mesures.MesuresObservCollec.Clear();
+            });
+
             Mesures[] Li = dashb.mw.database.MesuresDatabase.ToArray();
             Mesures[] Lj = Li;
             int[] Ls = new int[Lj.Length];

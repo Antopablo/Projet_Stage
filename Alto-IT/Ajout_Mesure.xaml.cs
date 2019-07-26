@@ -51,14 +51,11 @@ namespace Alto_IT
                     {
                         try
                         {
-                            //CreateTable(TitleMesure.Text);
-                            for (int i = 0; i < 1000; i++)
-                            {
-                                Mesures MesureParent = new Mesures(TitleMesure.Text, ContentMesure.Text, 0, dashb.ProjetEnCours.Id);
-                                dashb.Vue_Mesure.ROOT_Mesures.MesuresObservCollec.Add(MesureParent);
-                                mw.database.MesuresDatabase.Add(MesureParent);
-                            }
-
+                            CreateTable(TitleMesure.Text);
+                            Mesures MesureParent = new Mesures(TitleMesure.Text, ContentMesure.Text, 0, dashb.ProjetEnCours.Id);
+                            dashb.Vue_Mesure.ROOT_Mesures.MesuresObservCollec.Add(MesureParent);
+                            mw.database.MesuresDatabase.Add(MesureParent);
+                            
                             mw.database.SaveChanges();
 
                             Close();
