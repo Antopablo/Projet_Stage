@@ -73,6 +73,7 @@ namespace Alto_IT
                         {
                             dashb.mw.database.MesuresDatabase.ToList()[i].MesuresObservCollec.Add(dashb.mw.database.MesuresDatabase.ToList()[i]);
                         });
+                        Thread.Sleep(2);
                     }
                 }
                 else if ((Li[i].FK_to_Mesures == 0) && (dashb.ProjetEnCours.Id == Li[i].FK_to_Projets))
@@ -87,7 +88,7 @@ namespace Alto_IT
                             {
                                 ROOT_Mesures.MesuresObservCollec.Add(dashb.mw.database.MesuresDatabase.ToList()[i]);
                             });
-
+                            Thread.Sleep(2);
                         }
                     } 
                 }
