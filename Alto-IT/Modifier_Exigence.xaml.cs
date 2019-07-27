@@ -127,6 +127,7 @@ namespace Alto_IT
         private void Window_Closed(object sender, System.EventArgs e)
         {
             Vue.dash.FenetreOuverte = false;
+            Vue.afficherMesureAssociee();
         }
 
         private void Bouton_AjouterDocument_Click(object sender, RoutedEventArgs e)

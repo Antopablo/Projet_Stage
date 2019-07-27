@@ -30,6 +30,8 @@ namespace Alto_IT
             this.ExigenceObervCollec = new ObservableCollection<Exigence>();
             IDExigence = Id;
 
+            Relation_Exigence_to_Mesures = new List<string>();
+
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
@@ -45,6 +47,8 @@ namespace Alto_IT
             this.ExigenceObervCollec = new ObservableCollection<Exigence>();
             IDExigence = Id;
 
+            Relation_Exigence_to_Mesures = new List<string>();
+
 
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
@@ -58,6 +62,8 @@ namespace Alto_IT
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
+            Relation_Exigence_to_Mesures = new List<string>();
+
         }
 
         [Key]
@@ -101,6 +107,17 @@ namespace Alto_IT
             get { return _description; }
             set { _description = value;
                 OnPropertyChanged("Description");
+            }
+        }
+
+        private List<string> _Relation_Exigence_to_Mesures;
+        public List<string> Relation_Exigence_to_Mesures
+        {
+            get { return _Relation_Exigence_to_Mesures; }
+            set
+            {
+                _Relation_Exigence_to_Mesures = value;
+                OnPropertyChanged("Relation_Exigence_to_Mesures");
             }
         }
 

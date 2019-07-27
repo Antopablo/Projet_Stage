@@ -52,7 +52,7 @@ namespace Alto_IT
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             await Task.Run(AfficherTreeViewExigences);
-
+            afficherMesureAssociee();
         }
 
         public void AfficherTreeViewExigences()
@@ -109,6 +109,7 @@ namespace Alto_IT
         private void TreeviewFrame_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             ExigenceSelectionnee = (Exigence)treeviewFrame.SelectedItem;
+
         }
 
         private void MesureAssocie_PreviewMouseUp(object sender, MouseButtonEventArgs e)
@@ -132,5 +133,44 @@ namespace Alto_IT
 
         }
 
+
+        public void afficherMesureAssociee ()
+        {
+            List<Exigence> exigencesPresente = new List<Exigence>();
+
+            // récupère toutes les exigences du treeview
+            foreach (Exigence item in dash.mw.database.ExigenceDatabase)
+            {
+                if (item.ForeignKey_TO_Norme == dash.NormeSelectionnee.Id)
+                {
+                    exigencesPresente.Add(item);      
+
+                }
+            }
+
+            // récupère tout les ID mesures qui sont associé a chaque exigence
+            foreach (Exigence item in exigencesPresente)           
+            {
+                item.Relation_Exigence_to_Mesures.Clear();
+                List<int> ID = (from a in dash.mw.database.RelationMesureExigenceDatabase
+                               where a.IdExigence == item.Id
+                               select a.IdMesure).ToList();
+
+                foreach (int mesuresID in ID)
+                {
+                    // retrouve l'objet mesures
+                    var mesure = (from b in dash.mw.database.MesuresDatabase
+                                  where b.Id == mesuresID
+                                  select b);
+
+                    // l'ajoute dans la liste associé à la bonne exigences
+                    foreach (Mesures name in mesure)
+                    {
+                        item.Relation_Exigence_to_Mesures.Add(name.Name);
+                        item.Relation_Exigence_to_Mesures.Sort();
+                    } 
+                }
+            }
+        }
     }
 }
