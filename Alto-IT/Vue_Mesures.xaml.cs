@@ -106,7 +106,7 @@ namespace Alto_IT
             await Task.Run(AfficherTreeViewMesure);
             if (dashb.Vue != null)
             {
-                dashb.Vue.afficherMesureAssociee();
+                dashb.Vue.AfficherMesureAssociee();
             } else
             {
                 dashb.Vue = new Vue_Circulaire(dashb);
@@ -114,12 +114,57 @@ namespace Alto_IT
 
         }
 
-        private void ExigenceAssocie_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        private void Btn_supr_MouseUp(object sender, MouseButtonEventArgs e)
         {
 
         }
 
+        private void Btn_modif_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+            if (dashb.FenetreOuverte == false)
+            {
+                try
+                {
+                    if (dashb.Vue_Mesure.Name != "Menu")
+                    {
+                        Modifier_Mesure MM = new Modifier_Mesure(dashb.mw, dashb.Vue_Mesure);
+                        MM.Title.Text = dashb.Vue_Mesure.MesureSelectionnee.Name;
+                        MM.Content.Text = dashb.Vue_Mesure.MesureSelectionnee.Description;
+                        MM.Status.Text = dashb.Vue_Mesure.MesureSelectionnee.Status.ToString();
+                        MM.Document.Text = dashb.Vue_Mesure.MesureSelectionnee.DocumentName;
+                        MM.Show();
+                        dashb.FenetreOuverte = true;
+                    }
+                }
+                catch (System.Exception)
+                {
+                    MessageBox.Show("Selectionnez une mesure à modifier", "error", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+
         private void Documentviewer_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+            try
+            {
+                String fileName = dashb.NormeSelectionnee.DocumentPath;
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                process.StartInfo.FileName = fileName;
+                process.Start();
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Sélectionnez une exigence");
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Aucun document associé");
+            }
+        }
+
+        private void ExigenceAssocie_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
 
         }

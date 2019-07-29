@@ -127,6 +127,9 @@
     <Compile Include="Migrations\201907290721503_isextendMesureBis.Designer.cs">
       <DependentUpon>201907290721503_isextendMesureBis.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modifier_Mesure.xaml.cs">
+      <DependentUpon>Modifier_Mesure.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modif_Projet.xaml.cs">
       <DependentUpon>Modif_Projet.xaml</DependentUpon>
     </Compile>
@@ -244,6 +247,10 @@
       <DependentUpon>Vue_Mesures.xaml</DependentUpon>
     </Compile>
     <Page Include="AffichageDesNormes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modifier_Mesure.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

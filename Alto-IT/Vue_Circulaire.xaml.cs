@@ -51,7 +51,7 @@ namespace Alto_IT
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             await Task.Run(AfficherTreeViewExigences);
-            afficherMesureAssociee();
+            AfficherMesureAssociee();
         }
 
         public void AfficherTreeViewExigences()
@@ -133,7 +133,7 @@ namespace Alto_IT
         }
 
 
-        public void afficherMesureAssociee ()
+        public void AfficherMesureAssociee ()
         {
             List<Exigence> exigencesPresente = new List<Exigence>();
 
@@ -142,7 +142,7 @@ namespace Alto_IT
             {
                 if (item.ForeignKey_TO_Norme == dash.NormeSelectionnee.Id)
                 {
-                    exigencesPresente.Add(item);      
+                    exigencesPresente.Add(item);
 
                 }
             }
@@ -172,6 +172,95 @@ namespace Alto_IT
                         mesure.Relation_Mesures_to_exigences.Add(item.Name);
                     }
                     
+                }
+            }
+        }
+
+        private void Btn_supr_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+            if (dash.Vue.ExigenceSelectionnee != null && dash.Vue.ExigenceSelectionnee.Name != "Menu")
+            {
+                if (MessageBox.Show("Voulez-vous supprimer " + dash.Vue.ExigenceSelectionnee.Name, "Suppression de l'exigence", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
+                {
+                    string CurrentItem = dash.TableFormater(dash.SimpleQuoteFormater(dash.FormaterToSQLRequest(dash.Vue.ExigenceSelectionnee.Name)));
+
+                    Exigence Ntmp = dash.Vue.ExigenceSelectionnee;
+
+                    if (MessageBox.Show("Voulez - vous supprimer tous les documents associés à " + dash.Vue.ExigenceSelectionnee.Name + " ? ", "Suppression des documents", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
+                    {
+                        dash.SuprDoc = true;
+                        using (ApplicationDatabase context = new ApplicationDatabase())
+                        {
+                            //supprime son document associé
+                            var docASupr = context.Database.SqlQuery<string>("SELECT DocumentPath from Exigences WHERE Id = " + Ntmp.Id).FirstOrDefault();
+                            if (docASupr != null)
+                            {
+                                File.Delete(docASupr);
+                            }
+
+                            //supprime des documents enfant 
+                            // TODO
+                        }
+                    }
+
+                    // Supprime de la DbSet, à mettre en 1er
+                    dash.mw.database.ExigenceDatabase.Remove(Ntmp);
+                    dash.mw.database.SaveChanges();
+
+
+                    using (ApplicationDatabase context = new ApplicationDatabase())
+                    {
+
+                        //Quand suppression d'un parent => supprimer la table nominative des enfants
+                        dash.SuppressionTabEntant(CurrentItem);
+
+                        //supprime de la table parent
+                        var ParentName = context.Database.SqlQuery<string>("SELECT Name from Exigences WHERE Id= " + Ntmp.ForeignKey).FirstOrDefault();
+
+                        var ListeEnfant = context.Database.SqlQuery<string>("SELECT * FROM " + Ntmp);
+
+                        if (ParentName != "Menu" && ParentName != null)
+                        {
+                            ParentName = dash.TableFormater(dash.FormaterToSQLRequest(ParentName));
+                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM " + ParentName + " WHERE Titre = '" + dash.SimpleQuoteFormater(Ntmp.Name) + "'");
+                        }
+
+                        // supprime la table à son nom
+                        var x = context.Database.ExecuteSqlCommand("DROP TABLE " + CurrentItem);
+                    }
+
+                    // remove tous ses enfants de la collection Observable
+                    Ntmp.ExigenceObervCollec.Clear();
+
+                    // remove de la liste général dans le treeview
+                    dash.Vue.ROOT_Exigences.ExigenceObervCollec.Remove(Ntmp);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selectionner une ligne", "error", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void Btn_modif_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dash.FenetreOuverte == false)
+            {
+                try
+                {
+                    if (dash.Vue.ExigenceSelectionnee.Name != "Menu")
+                    {
+                        Modifier M = new Modifier(dash.mw, dash.Vue);
+                        M.Title.Text = dash.Vue.ExigenceSelectionnee.Name;
+                        M.Content.Text = dash.Vue.ExigenceSelectionnee.Description;
+                        M.Show();
+                        dash.FenetreOuverte = true;
+                    }
+                }
+                catch (System.Exception)
+                {
+                    MessageBox.Show("Selectionnez une exigence à modifier", "error", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }

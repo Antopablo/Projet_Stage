@@ -62,97 +62,6 @@ namespace Alto_IT
             }
         }
 
-        private void Modif_exigence_Click(object sender, RoutedEventArgs e)
-        {
-            if (FenetreOuverte == false)
-            {
-                try
-                {
-                    if (Vue.ExigenceSelectionnee.Name != "Menu")
-                    {
-                        Modifier M = new Modifier(mw, Vue);
-                        M.Title.Text = Vue.ExigenceSelectionnee.Name;
-                        M.Content.Text = Vue.ExigenceSelectionnee.Description;
-                        //M.Status.Text = Vue.ExigenceSelectionnee.Status.ToString();
-                        //M.Document.Text = Vue.ExigenceSelectionnee.DocumentName;
-                        M.Show();
-                        FenetreOuverte = true;
-                    }
-                }
-                catch (System.Exception)
-                {
-                    MessageBox.Show("Selectionnez une norme à modifier", "error", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            
-        }
-
-        private void Supr_exigence_Click(object sender, RoutedEventArgs e)
-        {
-            if (Vue.ExigenceSelectionnee != null && Vue.ExigenceSelectionnee.Name != "Menu")
-            {
-                if (MessageBox.Show("Voulez-vous supprimer "+ Vue.ExigenceSelectionnee.Name, "Suppression de l'exigence", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
-                {
-                    string CurrentItem = TableFormater(SimpleQuoteFormater(FormaterToSQLRequest(Vue.ExigenceSelectionnee.Name)));
-                    
-                    Exigence Ntmp = Vue.ExigenceSelectionnee;
-
-                    if (MessageBox.Show("Voulez - vous supprimer tous les documents associés à " + Vue.ExigenceSelectionnee.Name + " ? ", "Suppression des documents", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
-                    {
-                        SuprDoc = true;
-                        using (ApplicationDatabase context = new ApplicationDatabase())
-                        {
-                            //supprime son document associé
-                            var docASupr = context.Database.SqlQuery<string>("SELECT DocumentPath from Exigences WHERE Id = " + Ntmp.Id).FirstOrDefault();
-                            if (docASupr != null)
-                            {
-                                File.Delete(docASupr);
-                            }
-
-                            //supprime des documents enfant 
-                            // TODO
-                        }
-                    }
-                    
-                    // Supprime de la DbSet, à mettre en 1er
-                    mw.database.ExigenceDatabase.Remove(Ntmp);
-                    mw.database.SaveChanges();
-
-
-                    using (ApplicationDatabase context = new ApplicationDatabase())
-                    {
-                        
-                        //Quand suppression d'un parent => supprimer la table nominative des enfants
-                        SuppressionTabEntant(CurrentItem);
-
-                        //supprime de la table parent
-                        var ParentName = context.Database.SqlQuery<string>("SELECT Name from Exigences WHERE Id= " + Ntmp.ForeignKey).FirstOrDefault();
-
-                        var ListeEnfant = context.Database.SqlQuery<string>("SELECT * FROM " + Ntmp);
-
-                        if (ParentName != "Menu" && ParentName != null)
-                        {
-                            ParentName = TableFormater(FormaterToSQLRequest(ParentName));
-                            var zz = context.Database.ExecuteSqlCommand("DELETE FROM " + ParentName + " WHERE Titre = '" + SimpleQuoteFormater(Ntmp.Name) +"'");
-                        }
-
-                        // supprime la table à son nom
-                        var x = context.Database.ExecuteSqlCommand("DROP TABLE " + CurrentItem);
-                    }
-
-                    // remove tous ses enfants de la collection Observable
-                    Ntmp.ExigenceObervCollec.Clear();
-
-                    // remove de la liste général dans le treeview
-                    Vue.ROOT_Exigences.ExigenceObervCollec.Remove(Ntmp);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Selectionner une ligne", "error", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
         public void SuppressionTabEntant(string CurrentItem)
         {
             List<string> ListeGenerale = new List<string>();
@@ -205,27 +114,20 @@ namespace Alto_IT
 
         private void Modif_Norme_Click(object sender, RoutedEventArgs e)
         {
-            if (NormeSelectionnee != null)
+            if (FenetreOuverte == false)
             {
-                if (FenetreOuverte == false)
-                {
-                    AffichageDesNormes AF = new AffichageDesNormes(mw, this);
-                    if (NormeSelectionnee.Id == 0)
-                    {
-                        AF.scrollV.Visibility = Visibility.Collapsed;
-                        AF.label.Visibility = Visibility.Collapsed;
-                        AF.AjoutDocument.Visibility = Visibility.Collapsed;
-                    }
-                    AF.BoutonValiderModify.Visibility = Visibility.Visible;
-                    AF.BoutonSupprimer.Visibility = Visibility.Collapsed;
-                    AF.AjoutDocument.Visibility = Visibility.Visible;
-                    AF.TitreModify.Visibility = Visibility.Visible;
-                    AF.TitreModifyBlock.Visibility = Visibility.Hidden;
-                    AF.Show();
-                    FenetreOuverte = true;
-                }
+                AffichageDesNormes AF = new AffichageDesNormes(mw, this);
+                AF.scrollV.Visibility = Visibility.Collapsed;
+                AF.label.Visibility = Visibility.Collapsed;
+                AF.AjoutDocument.Visibility = Visibility.Collapsed;
+                AF.BoutonValiderModify.Visibility = Visibility.Visible;
+                AF.BoutonSupprimer.Visibility = Visibility.Collapsed;
+                AF.AjoutDocument.Visibility = Visibility.Visible;
+                AF.TitreModify.Visibility = Visibility.Visible;
+                AF.TitreModifyBlock.Visibility = Visibility.Hidden;
+                AF.Show();
+                FenetreOuverte = true;
             }
-            
         }
 
         private void Supr_Norme_Click(object sender, RoutedEventArgs e)
@@ -248,8 +150,11 @@ namespace Alto_IT
             try
             {
                 NormeSelectionnee = (Norme)TreeViewNORME.SelectedItem;
+
                 if (NormeSelectionnee.Nom_Norme == "Normes")
                 {
+                    TreeViewMesures.Visibility = Visibility.Collapsed;
+
                     GridControle_Norme.Visibility = Visibility.Visible;
                     GridControle_exigence.Visibility = Visibility.Collapsed;
                     GridControle_Mesure.Visibility = Visibility.Collapsed;
@@ -260,6 +165,8 @@ namespace Alto_IT
                 }
                 else
                 {
+                    TreeViewMesures.Visibility = Visibility.Visible;
+
                     GridControle_Norme.Visibility = Visibility.Collapsed;
                     GridControle_exigence.Visibility = Visibility.Visible;
                     GridControle_Mesure.Visibility = Visibility.Collapsed;
@@ -413,7 +320,7 @@ namespace Alto_IT
             return text.Replace("'", "''");
         }
 
-        private void DocumentViewer_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        private void Documentviewer_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             try
             {
@@ -440,15 +347,29 @@ namespace Alto_IT
             FenetreOuverte = true;
         }
 
-        private void Modif_Mesure_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Supr_Mesure_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        //private void Modif_Mesure_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (FenetreOuverte == false)
+        //    {
+        //        try
+        //        {
+        //            if (Vue_Mesure.Name != "Menu")
+        //            {
+        //                Modifier_Mesure MM = new Modifier_Mesure(mw, Vue_Mesure);
+        //                MM.Title.Text = Vue_Mesure.MesureSelectionnee.Name;
+        //                MM.Content.Text = Vue_Mesure.MesureSelectionnee.Description;
+        //                MM.Status.Text = Vue_Mesure.MesureSelectionnee.Status.ToString();
+        //                MM.Document.Text = Vue_Mesure.MesureSelectionnee.DocumentName;
+        //                MM.Show();
+        //                FenetreOuverte = true;
+        //            }
+        //        }
+        //        catch (System.Exception)
+        //        {
+        //            MessageBox.Show("Selectionnez une mesure à modifier", "error", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        }
+        //    }
+        //}
 
         private void Retour_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -459,5 +380,16 @@ namespace Alto_IT
                 Close();
             }
         }
+
+        private void Ajout_exigence_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Ajout_Mesure_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
     }
 }

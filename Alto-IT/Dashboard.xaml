@@ -57,7 +57,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock  Text="• " TextWrapping="Wrap"/>
                                 <TextBlock  Text="{Binding Nom_Norme}" Width="150" TextWrapping="Wrap"/>
-                                <TextBlock x:Name="Documentviewer" DockPanel.Dock="Right" VerticalAlignment="Center" Cursor="Help" PreviewMouseUp="DocumentViewer_PreviewMouseUp" ToolTip="{Binding DocumentName}">
+                                <TextBlock x:Name="Documentviewer" DockPanel.Dock="Right" VerticalAlignment="Center" Cursor="Help" PreviewMouseUp="Documentviewer_PreviewMouseUp" ToolTip="{Binding DocumentName}">
                                    <Image Name="Img" Source="https://cdn.icon-icons.com/icons2/1129/PNG/512/fileinterfacesymboloftextpapersheet_79740.png" Width="20" Height="20" >
                                        <Image.Style>
                                            <Style TargetType="Image" >
@@ -76,7 +76,7 @@
                     </TreeView.ItemTemplate>
                 </TreeView>
 
-                <TreeView Name="TreeViewMesures" Grid.Row="1" Grid.Column="0" MouseUp="TreeViewMesures_MouseUp"  Margin="0,0,9.6,9.6" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="#00828790">
+                <TreeView Name="TreeViewMesures" Visibility="Collapsed" Grid.Row="1" Grid.Column="0" MouseUp="TreeViewMesures_MouseUp"  Margin="0,0,9.6,9.6" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI Semibold" BorderBrush="#00828790">
                     <TreeView.Resources>
                         <Style TargetType="{x:Type TreeViewItem}">
                             <Setter Property="HeaderTemplate">
@@ -101,7 +101,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock  Text="• " TextWrapping="Wrap"/>
                                 <TextBlock  Text="{Binding Name}" Width="150" TextWrapping="Wrap"/>
-                                <TextBlock x:Name="Documentviewer" DockPanel.Dock="Right" VerticalAlignment="Center" Cursor="Help" PreviewMouseUp="DocumentViewer_PreviewMouseUp">
+                                <TextBlock x:Name="Documentviewer" DockPanel.Dock="Right" VerticalAlignment="Center" Cursor="Help" PreviewMouseUp="Documentviewer_PreviewMouseUp">
                                    <Image Name="Img" Source="https://cdn.icon-icons.com/icons2/1129/PNG/512/fileinterfacesymboloftextpapersheet_79740.png" Width="20" Height="20" >
                                        <Image.Style>
                                            <Style TargetType="Image" >
@@ -134,60 +134,58 @@
             <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Circulaire" Margin="-0,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
             <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Documentation" Margin="-0,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
             <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Mesures" Margin="-0,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
-            <Border Margin="115.8,457,209.6,5.6" Width="200" Height="40" Grid.Column="1" CornerRadius="20" Background="WhiteSmoke" BorderThickness="1" BorderBrush="DarkGray">
+
+
+
+        </Grid>
+
+        <Grid x:Name="GridControle_Norme" Margin="235,0,-0.4,-0.4" Visibility="Visible" Grid.ColumnSpan="2" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border x:Name="Ajout_Norme" Margin="-75,21.6,-8,-10.4" Width="250" Height="40" Grid.Column="0" CornerRadius="20" Background="WhiteSmoke" BorderThickness="1" BorderBrush="DarkGray" MouseLeftButtonUp="Ajout_Norme_Click">
                 <Grid>
-                    <Button Content="Ajouter une norme" Click="Ajout_Norme_Click" Cursor="Hand" BorderThickness="0" Background="{x:Null}" FontSize="18" Margin="0,0,0.4,-0.4" HorizontalAlignment="Right" VerticalAlignment="Center" Height="42" Width="198"/>
-                    <Image Source="https://www.noelshack.com/2019-31-1-1564390527-plus.png" Height="20" Width="20" HorizontalAlignment="Left" Margin="10,10,0,10" />
+                    <Button Content="Ajouter une norme" Click="Ajout_Norme_Click" Cursor="Hand" BorderThickness="0" Background="{x:Null}" FontSize="18" Margin="0,0,10,0.4" HorizontalAlignment="Right" VerticalAlignment="Center" Height="42" Width="168"/>
+                    <Image Source="https://image.noelshack.com/fichiers/2019/31/1/1564390527-plus.png" Width="20" HorizontalAlignment="Left" Margin="13,13,0,7.4" RenderTransformOrigin="1.28,1.063" />
                 </Grid>
             </Border>
 
+            <Border x:Name="Modif_Norme" Margin="-75,72.6,-8,-61.4" Width="250" Height="40" Grid.Column="0"  CornerRadius="20" Background="WhiteSmoke" BorderThickness="1" BorderBrush="DarkGray" MouseLeftButtonUp="Modif_Norme_Click">
+                <Grid>
+                    <Button Content="Modifier une norme" Click="Modif_Norme_Click" Cursor="Hand" BorderThickness="0" Background="{x:Null}" FontSize="18" Margin="0,0,10,0.4" HorizontalAlignment="Right" VerticalAlignment="Center" Height="42" Width="168"/>
+                    <Image Source="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Edit_icon_%28the_Noun_Project_30184%29.svg/1024px-Edit_icon_%28the_Noun_Project_30184%29.svg.png" Width="20" HorizontalAlignment="Left" Margin="13,13,0,7.4" RenderTransformOrigin="1.28,1.063" />
+                </Grid>
+            </Border>
+
+            <Border x:Name="Supr_Norme" Margin="-75,123.6,-8,-112.4" Width="250" Height="40" Grid.Column="0" CornerRadius="20" Background="WhiteSmoke" BorderThickness="1" BorderBrush="DarkGray" MouseLeftButtonUp="Supr_Norme_Click">
+                <Grid>
+                    <Button Content="Supprimer une norme" Click="Supr_Norme_Click" Cursor="Hand" BorderThickness="0" Background="{x:Null}" FontSize="18" Margin="0,0,10,0.4" HorizontalAlignment="Right" VerticalAlignment="Center" Height="42" Width="185"/>
+                    <Image Source="http://www.sclance.com/backgrounds/red-x-mark-transparent-background/red-x-mark-transparent-background_1903744.jpg" Width="20" HorizontalAlignment="Left" Margin="13,13,0,7.4" RenderTransformOrigin="1.28,1.063" />
+                </Grid>
+            </Border>
         </Grid>
 
-        <Grid Name="GridControle_Norme" Height="50" VerticalAlignment="Top" Margin="235,0,-0.4,0" Visibility="Visible">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
 
-            <Button x:Name="Ajout_Norme" Click="Ajout_Norme_Click"  Content="Ajouter une Norme"/>
-            <Button x:Name="Modif_Norme" Click="Modif_Norme_Click" Content="Modifier une Norme" Grid.Column="1"/>
-            <Button x:Name="Supr_Norme" Click="Supr_Norme_Click" Content="Supprimer une Norme" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
+        <Grid Name="GridControle_exigence" Grid.ColumnSpan="2"  Visibility="Collapsed" Margin="235,0,-0.4,30" VerticalAlignment="Bottom">
+            <Border x:Name="Ajout_exigence" Width="250" Height="40" Grid.Column="0"  CornerRadius="20" Background="WhiteSmoke" BorderThickness="1" BorderBrush="DarkGray" MouseLeftButtonUp="Ajout_exigence_MouseLeftButtonUp" Margin="139,0,112,0">
+                <Grid>
+                    <Button Content="Ajouter une exigence" Click="Ajout_exigence_Click" Cursor="Hand" BorderThickness="0" Background="{x:Null}" FontSize="18" Margin="0,0,9.6,6" HorizontalAlignment="Right" VerticalAlignment="Center" Height="42" Width="188"/>
+                    <Image Source="https://image.noelshack.com/fichiers/2019/31/1/1564390527-plus.png" Width="34" HorizontalAlignment="Left" Margin="13,13,0,7" RenderTransformOrigin="1.28,1.063" />
+                </Grid>
+            </Border>
         </Grid>
 
-        <Grid Name="GridControle_exigence" Height="50" VerticalAlignment="Top" Margin="235,0,0,0" Visibility="Collapsed">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <Button x:Name="Ajout_exigence" Click="Ajout_exigence_Click" Content="Ajouter une exigence"/>
-            <Button x:Name="Modif_exigence" Click="Modif_exigence_Click" Content="Modifier une exigence" Grid.Column="1"/>
-            <Button x:Name="Supr_exigence" Click="Supr_exigence_Click" Content="Supprimer une exigence" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
+        <Grid Name="GridControle_Mesure" Grid.ColumnSpan="2"  Visibility="Collapsed" Margin="235,0,-0.4,30" VerticalAlignment="Bottom">
+            <Border x:Name="Ajout_Mesure" Width="250" Height="40" Grid.Column="0"  CornerRadius="20" Background="WhiteSmoke" BorderThickness="1" BorderBrush="DarkGray" MouseLeftButtonUp="Ajout_Mesure_MouseLeftButtonUp" Margin="139,0,112,0">
+                <Grid>
+                    <Button Content="Ajouter une mesure" Click="Ajout_Mesure_Click" Cursor="Hand" BorderThickness="0" Background="{x:Null}" FontSize="18" Margin="0,0,9.6,6" HorizontalAlignment="Right" VerticalAlignment="Center" Height="42" Width="188"/>
+                    <Image Source="https://image.noelshack.com/fichiers/2019/31/1/1564390527-plus.png" Width="34" HorizontalAlignment="Left" Margin="13,13,0,7" RenderTransformOrigin="1.28,1.063" />
+                </Grid>
+            </Border>
         </Grid>
-
-        <Grid Name="GridControle_Mesure" Height="50" VerticalAlignment="Top" Margin="235,0,-0.4,0" Visibility="Collapsed">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <Button x:Name="Ajout_Mesure" Click="Ajout_Mesure_Click"  Content="Ajouter une Mesure"/>
-            <Button x:Name="Modif_Mesure" Click="Modif_Mesure_Click" Content="Modifier une Mesure" Grid.Column="1"/>
-            <Button x:Name="Supr_Mesure" Click="Supr_Mesure_Click" Content="Supprimer une Mesure" Grid.Column="2" Margin="0,0,10.4,-0.4"/>
-        </Grid>
-
     </Grid>
 
 </Window>

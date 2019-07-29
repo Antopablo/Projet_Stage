@@ -127,7 +127,7 @@ namespace Alto_IT
         private void Window_Closed(object sender, System.EventArgs e)
         {
             Vue.dash.FenetreOuverte = false;
-            Vue.afficherMesureAssociee();
+            Vue.AfficherMesureAssociee();
         }
 
         private void Bouton_AjouterDocument_Click(object sender, RoutedEventArgs e)
@@ -220,15 +220,18 @@ namespace Alto_IT
 
             foreach (Mesures item in mw.database.MesuresDatabase)
             {
-                CheckBox ch = new CheckBox();
-                ch.Content = item.Name;
-
-                if (IDMesure.Contains(item.Id))
+                if (item.FK_to_Projets == Vue.dash.ProjetEnCours.Id)
                 {
-                    ch.IsChecked = true;
+                    CheckBox ch = new CheckBox();
+                    ch.Content = item.Name;
+
+                    if (IDMesure.Contains(item.Id))
+                    {
+                        ch.IsChecked = true;
+                    }
+                    listcheck.Add(ch);
+                    mw.database.SaveChanges();
                 }
-                listcheck.Add(ch);
-                mw.database.SaveChanges();
             }
             ListeDesMesures.ItemsSource = listcheck;
 
