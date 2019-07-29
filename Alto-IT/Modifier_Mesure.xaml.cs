@@ -111,15 +111,18 @@ namespace Alto_IT
 
             foreach (Exigence item in mw.database.ExigenceDatabase)
             {
-                CheckBox ch = new CheckBox();
-                ch.Content = item.Name;
-
-                if (IDexigence.Contains(item.Id))
+                if (item.ForeignKey_TO_Projet == VueMesure.dashb.ProjetEnCours.Id)
                 {
-                    ch.IsChecked = true;
+                    CheckBox ch = new CheckBox();
+                    ch.Content = item.Name;
+
+                    if (IDexigence.Contains(item.Id))
+                    {
+                        ch.IsChecked = true;
+                    }
+                    listcheck.Add(ch);
+                    mw.database.SaveChanges();
                 }
-                listcheck.Add(ch);
-                mw.database.SaveChanges();
             }
             ListesDesExigences.ItemsSource = listcheck;
 
