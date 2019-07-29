@@ -145,7 +145,10 @@
                         <TextBlock Text=" [" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding ExigenceObervCollec.Count}" Foreground="DodgerBlue" VerticalAlignment="Center"/>
                         <TextBlock Text="]" Foreground="DodgerBlue" VerticalAlignment="Center"/>
-                        <TextBlock x:Name="MesureAssocie" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0,30,0" Cursor="Help" PreviewMouseUp="MesureAssocie_PreviewMouseUp" Style="{StaticResource MenuStyle}">
+                        <Button x:Name="btn_supr" Width="20" Height="20" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="15,0,30,0" Cursor="Hand">
+                            <Image Source="http://www.sclance.com/backgrounds/red-x-mark-transparent-background/red-x-mark-transparent-background_1903744.jpg" ToolTip="Supprimer"/>
+                        </Button>
+                        <TextBlock x:Name="MesureAssocie" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0,0,0" Cursor="Help" PreviewMouseUp="MesureAssocie_PreviewMouseUp" Style="{StaticResource MenuStyle}">
                             <Image Source="http://simpleicon.com/wp-content/uploads/link-2.png" Width="20" Height="20" VerticalAlignment="Center">
                                 <Image.ToolTip>
                                     <StackPanel>
@@ -154,6 +157,9 @@
                                 </Image.ToolTip>
                             </Image>
                         </TextBlock>
+                        <Button x:Name="btn_modif" Width="20" Height="20" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand">
+                            <Image Source="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Edit_icon_%28the_Noun_Project_30184%29.svg/1024px-Edit_icon_%28the_Noun_Project_30184%29.svg.png" ToolTip="Modifier"/>
+                        </Button>
                     </DockPanel>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>

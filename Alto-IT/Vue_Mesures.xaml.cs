@@ -111,6 +111,7 @@ namespace Alto_IT
             {
                 dashb.Vue = new Vue_Circulaire(dashb);
             }
+
         }
 
         private void ExigenceAssocie_PreviewMouseUp(object sender, MouseButtonEventArgs e)

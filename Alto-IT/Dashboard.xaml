@@ -134,6 +134,12 @@
             <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Circulaire" Margin="-0,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
             <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Documentation" Margin="-0,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
             <Frame Grid.Column="1" Grid.Row="0" x:Name="Frame_Vue_Mesures" Margin="-0,50,0,-0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.VerticalScrollBarVisibility="Visible" NavigationUIVisibility="Hidden"/>
+            <Border Margin="115.8,457,209.6,5.6" Width="200" Height="40" Grid.Column="1" CornerRadius="20" Background="WhiteSmoke" BorderThickness="1" BorderBrush="DarkGray">
+                <Grid>
+                    <Button Content="Ajouter une norme" Click="Ajout_Norme_Click" Cursor="Hand" BorderThickness="0" Background="{x:Null}" FontSize="18" Margin="0,0,0.4,-0.4" HorizontalAlignment="Right" VerticalAlignment="Center" Height="42" Width="198"/>
+                    <Image Source="https://www.noelshack.com/2019-31-1-1564390527-plus.png" Height="20" Width="20" HorizontalAlignment="Left" Margin="10,10,0,10" />
+                </Grid>
+            </Border>
 
         </Grid>
 

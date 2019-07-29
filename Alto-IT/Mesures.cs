@@ -19,7 +19,6 @@ namespace Alto_IT
             Relation_Mesures_to_exigences = new List<string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
-
             if (FK_to_Mesures == 0)
             {
                 IsNodeExpanded = true;
@@ -34,8 +33,6 @@ namespace Alto_IT
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
-
-
             if (FK_to_Mesures == 0)
             {
                 IsNodeExpanded = true;
@@ -53,8 +50,6 @@ namespace Alto_IT
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
-
-
             if (FK_to_Mesures == 0)
             {
                 IsNodeExpanded = true;
