@@ -21,6 +21,7 @@ namespace Alto_IT
         public Vue_Mesures Vue_Mesure { get; set; }
 
         public Mesures ROOT_Mesure { get; set; }
+
         public Norme NormeSelectionnee { get; set; }
 
         
@@ -444,7 +445,13 @@ namespace Alto_IT
 
         private void Modif_Mesures_Click(object sender, RoutedEventArgs e)
         {
-
+            ModifierMesure M = new ModifierMesure(mw, Vue_Mesure);
+            M.Show();
+            M.Title.Text = M.vue.MesureSelectionne.Nom;
+            M.Content.Text = M.vue.MesureSelectionne.Description;
+            M.Status.Text = M.vue.MesureSelectionne.Status.ToString();
+            M.Document.Text = M.vue.MesureSelectionne.DocumentName;
+            FenetreOuverte = true;
         }
 
         private void Supr_Mesures_Click(object sender, RoutedEventArgs e)

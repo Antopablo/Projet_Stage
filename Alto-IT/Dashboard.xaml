@@ -121,8 +121,8 @@
             <TreeView Name="TreeviewDocumentation" Grid.Column="0" Grid.Row="2" Margin="10,0,9.6,9.6" Background="MintCream">
                 <TreeViewItem Header="Documentation" MouseDoubleClick="TreeViewItem_MouseDoubleClick"/>
             </TreeView>
-            <TreeView Name="return" Grid.Column="0" Grid.Row="3" Margin="10,0,9.6,9.6">
-                <Image Name="retour" Source="http://www.iconhot.com/icon/png/crystal/256/fleche-gauche.png" Width="30" Height="30" MouseDown="Retour_MouseDown"></Image>
+            <TreeView Name="return" Grid.Column="0" Grid.Row="3" Margin="10,0,9.6,9.6" HorizontalContentAlignment="Center">
+                <Image x:Name="retour" Source="https://justisna.files.wordpress.com/2011/04/ip_icon_02_back.png" Width="40" Height="40" MouseDown="Retour_MouseDown" HorizontalAlignment="Center" Margin="55,0,30,0"/>
             </TreeView>
         </Grid>
 

@@ -7,25 +7,13 @@
         mc:Ignorable="d"
         Closed="Window_Closed"
         Title="Modifier" Height="800" Width="782.4"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        >
     <Grid VerticalAlignment="Top" Height="765">
         <TextBox Name="Title" HorizontalAlignment="Left" Margin="49,52,0,585" TextWrapping="Wrap" Text="" Width="677" />
         <TextBox AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="Content" HorizontalAlignment="Left" Height="154" Margin="49,229,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="677" Padding="5,5,5,5"/>
         <Button Name="ModifierExigence" Content="Modifier l'Exigence" HorizontalAlignment="Left" Margin="124,656,0,0" VerticalAlignment="Top" Width="519" Height="71" Click="ModifierExigence_Click"/>
-        <!--<ListView x:Name="listeboxMesures" HorizontalAlignment="Left" Height="210" Margin="49,414,0,0" VerticalAlignment="Top" Width="677" ItemsSource="{Binding }" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <CheckBox Name="checkboxMesures" Content="{Binding Nom}" Checked="CheckboxMesures_Checked" Unchecked="CheckboxMesures_Unchecked" IsChecked="{Binding Dico_ExigenceCheck.Value}">
-                    </CheckBox>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical">
-                    </WrapPanel>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListView>-->
+        
         <ListView x:Name="listviewMesures" HorizontalAlignment="Left" Height="210" Margin="49,414,0,0" VerticalAlignment="Top" Width="677" ScrollViewer.VerticalScrollBarVisibility="Disabled">
             
         </ListView>

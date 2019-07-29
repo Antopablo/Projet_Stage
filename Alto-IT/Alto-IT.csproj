@@ -167,6 +167,18 @@
     <Compile Include="Migrations\201907261130079_dico.Designer.cs">
       <DependentUpon>201907261130079_dico.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907261332200_binding1.cs" />
+    <Compile Include="Migrations\201907261332200_binding1.Designer.cs">
+      <DependentUpon>201907261332200_binding1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907290918041_listeexisel.cs" />
+    <Compile Include="Migrations\201907290918041_listeexisel.Designer.cs">
+      <DependentUpon>201907290918041_listeexisel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907291002287_docpath.cs" />
+    <Compile Include="Migrations\201907291002287_docpath.Designer.cs">
+      <DependentUpon>201907291002287_docpath.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modifier.xaml.cs">
       <DependentUpon>Modifier.xaml</DependentUpon>
@@ -174,6 +186,9 @@
     <Compile Include="Exigence.cs" />
     <Compile Include="Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModifierMesure.xaml.cs">
+      <DependentUpon>ModifierMesure.xaml</DependentUpon>
     </Compile>
     <Compile Include="Norme.cs" />
     <Compile Include="Projet.xaml.cs">
@@ -233,6 +248,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Modifier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModifierMesure.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -323,6 +342,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907261130079_dico.resx">
       <DependentUpon>201907261130079_dico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907261332200_binding1.resx">
+      <DependentUpon>201907261332200_binding1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907290918041_listeexisel.resx">
+      <DependentUpon>201907290918041_listeexisel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907291002287_docpath.resx">
+      <DependentUpon>201907291002287_docpath.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

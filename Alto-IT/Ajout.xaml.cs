@@ -146,6 +146,7 @@ namespace Alto_IT
         private void Window_Closed(object sender, EventArgs e)
         {
             dashb.FenetreOuverte = false;
+            Vue.remplirtab();
         }
     }
 }

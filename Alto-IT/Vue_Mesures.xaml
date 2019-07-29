@@ -147,7 +147,7 @@
                             <Image Source="http://simpleicon.com/wp-content/uploads/link-2.png" Width="20" Height="20" MouseUp="Image_MouseUp">
                                 <Image.ToolTip>
                                     <StackPanel>
-                                        <ListView ItemsSource="{Binding ListeNomMesuresAssociees}">
+                                        <ListView ItemsSource="{Binding ListeExigenceCheck}">
                                             
                                         </ListView>
                                     </StackPanel>

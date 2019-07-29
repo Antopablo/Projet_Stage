@@ -65,6 +65,7 @@ namespace Alto_IT
             RemplirDicoCouleur();
             Status = STATUS.non_evalue;
             Dico_ExigenceCheck = new Dictionary<Exigence, bool>();
+            ListeExigenceCheck = new List<string>();
         }
 
         public Mesures(string nom)
@@ -75,6 +76,7 @@ namespace Alto_IT
             RemplirDicoCouleur();
             Status = STATUS.non_evalue;
             Dico_ExigenceCheck = new Dictionary<Exigence, bool>();
+            ListeExigenceCheck = new List<string>();
         }
 
         public Mesures()
@@ -84,6 +86,7 @@ namespace Alto_IT
             RemplirDicoCouleur();
             Status = STATUS.non_evalue;
             Dico_ExigenceCheck = new Dictionary<Exigence, bool>();
+            ListeExigenceCheck = new List<string>();
         }
 
         public Mesures(string nom, string description,int FKMesure,int FKProjet)
@@ -97,6 +100,7 @@ namespace Alto_IT
             FKToMesure = FKMesure;
             FKToProjets = FKProjet;
             Dico_ExigenceCheck = new Dictionary<Exigence, bool>();
+            ListeExigenceCheck = new List<string>();
         }
         private Dictionary<Exigence,bool> _Dico_ExigenceCheck;
 
@@ -105,6 +109,29 @@ namespace Alto_IT
             get { return _Dico_ExigenceCheck; }
             set { _Dico_ExigenceCheck = value;
                 OnPropertyChanged("Dico_ExigenceCheck");
+            }
+        }
+
+        public List<string> ListeExigenceCheck { get; set; }
+
+        private string _DocumentName;
+
+        public string DocumentName
+        {
+            get { return _DocumentName; }
+            set { _DocumentName = value;
+                OnPropertyChanged("DocumentName");
+            }
+        }
+
+
+        private string _DocumentPath;
+
+        public string DocumentPath
+        {
+            get { return _DocumentPath; }
+            set { _DocumentPath = value;
+                OnPropertyChanged("DocumentPath");
             }
         }
 

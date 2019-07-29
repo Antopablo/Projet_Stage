@@ -146,6 +146,7 @@ namespace Alto_IT
         private void Window_Closed(object sender, EventArgs e)
         {
             Dash.FenetreOuverte = false;
+            Dash.Vue_Mesure.RemplirTab();
         }
     }
 }

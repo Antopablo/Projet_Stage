@@ -77,11 +77,7 @@ namespace Alto_IT
                             Vue.ExigenceSelectionne.Name = Title.Text;
                             Vue.ExigenceSelectionne.Description = Content.Text;
 
-                            ////////   Traitement des relations entre Exigences et Mesures
                             
-
-
-
 
                         }
                         catch (Exception)
@@ -100,20 +96,11 @@ namespace Alto_IT
                     }
 
 
-
-
-
-
                     mw.database.SaveChanges();
                     Vue.AfficherTreeViewExigence();
                     Close();
 
                 }
-
-                
-
-
-
                
             }
             else
@@ -125,6 +112,7 @@ namespace Alto_IT
         private void Window_Closed(object sender, System.EventArgs e)
         {
             Vue.dash.FenetreOuverte = false;
+            Vue.remplirtab();
         }
 
         private void AjoutDocument_Click(object sender, RoutedEventArgs e)
@@ -161,31 +149,18 @@ namespace Alto_IT
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var rechercheid = from idrech in mw.database.RelationMesuresExigenceDatabase
-                              where idrech.IdExigence == Vue.ExigenceSelectionne.Id
-                              select idrech.IdMesures;
-
-
-            foreach (Mesures item in mw.database.MesuresDatabase)
+            foreach (KeyValuePair<Mesures,bool> item in Vue.ExigenceSelectionne.Dico_MesuresCheck)
             {
-                if (rechercheid.ToList().Contains(item.Id) && !Vue.ExigenceSelectionne.Dico_MesuresCheck.ContainsKey(item))
+                if (item.Key.FKToProjets == Vue.dash.ProjetEncours.Id)
                 {
-                    Vue.ExigenceSelectionne.Dico_MesuresCheck.Add(item, true);
+                    CheckBox C = new CheckBox();
+                    C.Content = item.Key.Nom;
+                    C.IsChecked = item.Value;
+                    C.Checked += CheckboxMesures_Checked;
+                    C.Unchecked += CheckboxMesures_Unchecked;
+                    listviewMesures.Items.Add(C);
                 }
-                else if (!rechercheid.ToList().Contains(item.Id) &&!Vue.ExigenceSelectionne.Dico_MesuresCheck.ContainsKey(item))
-                {
-                    Vue.ExigenceSelectionne.Dico_MesuresCheck.Add(item, false);
-                }
-            }
-
-            foreach (KeyValuePair<Mesures,bool> item in Vue.ExigenceSelectionne.Dico_MesuresCheck )
-            {
-                CheckBox C = new CheckBox();
-                C.Content = item.Key.Nom;
-                C.IsChecked = item.Value;
-                C.Checked += CheckboxMesures_Checked;
-                C.Unchecked += CheckboxMesures_Unchecked;
-                listviewMesures.Items.Add(C);
+                
             }
         }
 
@@ -239,6 +214,16 @@ namespace Alto_IT
             Vue.ExigenceSelectionne.Dico_MesuresCheck[Mesuresel.FirstOrDefault()] = false;
             Mesuresel.FirstOrDefault().Dico_ExigenceCheck[Vue.ExigenceSelectionne] = false;
             mw.database.SaveChanges();
+
+        }
+
+        private void Window_Closed_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Window_Closed_2(object sender, EventArgs e)
+        {
 
         }
     }

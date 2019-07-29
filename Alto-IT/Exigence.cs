@@ -35,6 +35,7 @@ namespace Alto_IT
             Status = STATUS.non_evalue;
             ListeNomMesuresAssociees = new ObservableCollection<string>();
             Dico_MesuresCheck = new Dictionary<Mesures, bool>();
+            listeRelationMesures = new List<string>();
         }
 
         public Exigence(string name, int foreignkey, int foreignkeyTOnorme, int FKProjet)
@@ -50,6 +51,7 @@ namespace Alto_IT
             Status = STATUS.non_evalue;
             ListeNomMesuresAssociees = new ObservableCollection<string>();
             Dico_MesuresCheck = new Dictionary<Mesures, bool>();
+            listeRelationMesures = new List<string>();
         }
 
         public Exigence()
@@ -59,6 +61,7 @@ namespace Alto_IT
             RemplirDicoCouleur();
             Status = STATUS.non_evalue;
             Dico_MesuresCheck = new Dictionary<Mesures, bool>();
+            listeRelationMesures = new List<string>();
         }
 
         private Dictionary<Mesures, bool> _Dico_MesuresCheck;
@@ -92,16 +95,7 @@ namespace Alto_IT
             }
         }
 
-        private bool _IsChecked;
-
-        public bool Ischecked
-        {
-            get { return _IsChecked; }
-            set { _IsChecked = value;
-                OnPropertyChanged("Ischecked");
-            }
-        }
-
+        public List<string> listeRelationMesures { get; set; }
 
         private STATUS _Status;
 

@@ -104,9 +104,42 @@ namespace Alto_IT
             }
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            AfficherTreeViewMesures();
+            await Task.Run(AfficherTreeViewMesures);
+            RemplirTab();
         }
+
+        public void RemplirTab()
+        {
+
+            foreach (Mesures mesureencours in Dash.mw.database.MesuresDatabase)
+            {
+                mesureencours.ListeExigenceCheck.Clear();
+
+                mesureencours.Dico_ExigenceCheck.Clear();
+
+                var rechercheid = (from idrecherche in Dash.mw.database.RelationMesuresExigenceDatabase
+                                   where idrecherche.IdMesures == mesureencours.Id
+                                   select idrecherche.IdExigence).ToList();
+
+
+                foreach (Exigence item in Dash.mw.database.ExigenceDatabase)
+                {
+                    if (rechercheid.Contains(item.Id) && !mesureencours.Dico_ExigenceCheck.ContainsKey(item))
+                    {
+                        mesureencours.Dico_ExigenceCheck.Add(item, true);
+                        mesureencours.ListeExigenceCheck.Add(item.Name);
+                    }
+                    else if (!rechercheid.Contains(item.Id) && !mesureencours.Dico_ExigenceCheck.ContainsKey(item))
+                    {
+                        mesureencours.Dico_ExigenceCheck.Add(item, false);
+                    }
+                }
+
+            }
+
+        }
+
     }
 }

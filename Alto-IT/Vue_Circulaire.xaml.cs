@@ -44,6 +44,7 @@ namespace Alto_IT
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             await Task.Run(AfficherTreeViewExigence);
+            await Task.Run(remplirtab);
         }
 
         public void AfficherTreeViewExigence()
@@ -92,6 +93,46 @@ namespace Alto_IT
                     }
                 }
             }
+        }
+
+        public void remplirtab()
+        {
+            List<Exigence> listetem = new List<Exigence>();
+
+            foreach (Exigence item in dash.mw.database.ExigenceDatabase)
+            {
+                if (item.ForeignKey_TO_Norme == dash.NormeSelectionnee.Id)
+                {
+                    listetem.Add(item);
+                }
+            }
+
+            foreach (Exigence exiencours in listetem)
+            {
+
+                exiencours.listeRelationMesures.Clear();
+
+                exiencours.Dico_MesuresCheck.Clear();
+
+                var rechercheid = (from idrech in dash.mw.database.RelationMesuresExigenceDatabase
+                                    where idrech.IdExigence == exiencours.Id
+                                    select idrech.IdMesures).ToList();                                  ////// id des mesures cochées
+
+                foreach (Mesures item in dash.mw.database.MesuresDatabase)
+                {
+                    if (rechercheid.Contains(item.Id) && !exiencours.Dico_MesuresCheck.ContainsKey(item))
+                    {
+                        exiencours.Dico_MesuresCheck.Add(item, true);
+                        exiencours.listeRelationMesures.Add(item.Nom);
+                    }
+                    else if (!rechercheid.Contains(item.Id) && !exiencours.Dico_MesuresCheck.ContainsKey(item))
+                    {
+                        exiencours.Dico_MesuresCheck.Add(item, false);
+                    }
+                }
+
+            }
+
         }
 
 
