@@ -65,6 +65,7 @@
             <Setter Property="Padding" Value="1,0,0,0"/>
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
             <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}"/>
+            <Setter Property="IsExpanded" Value="{Binding IsNodeExpanded}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TreeViewItem}">
@@ -131,10 +132,12 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+
+
     </Page.Resources>
 
     <Grid Background="#FFEBDFDF" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" >
-        <TreeView Name="treeviewFrame"  SelectedItemChanged="TreeviewFrame_SelectedItemChanged" Margin="0" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.RowSpan="2" Grid.ColumnSpan="2" ItemContainerStyle="{StaticResource StretchTreeViewItemStyle}" BorderThickness="0">
+        <TreeView Name="treeviewFrame" SelectedItemChanged="TreeviewFrame_SelectedItemChanged" Margin="0" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.RowSpan="2" Grid.ColumnSpan="2" ItemContainerStyle="{StaticResource StretchTreeViewItemStyle}" BorderThickness="0">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type self:Exigence}" ItemsSource="{Binding ExigenceObervCollec}">
                     <DockPanel LastChildFill="True">

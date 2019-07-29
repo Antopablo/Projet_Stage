@@ -157,21 +157,21 @@ namespace Alto_IT
 
                 foreach (int mesuresID in ID)
                 {
-                    // retrouve l'objet mesures
+                    // retrouve l'objet mesure
                     var mesure = (from b in dash.mw.database.MesuresDatabase
                                   where b.Id == mesuresID
-                                  select b);
+                                  select b).Single();
 
-                    // l'ajoute dans la liste associé à la bonne exigences
-                    foreach (Mesures name in mesure)
+                    // ajoute dans la liste Exigence 'item' le nom de la mesure associé
+                    item.Relation_Exigence_to_Mesures.Add(mesure.Name);
+                    item.Relation_Exigence_to_Mesures.Sort();
+
+                    // ajoute dans la mesure, l'exigence 'item' associé
+                    if (!mesure.Relation_Mesures_to_exigences.Contains(item.Name))
                     {
-                        item.Relation_Exigence_to_Mesures.Add(name.Name);
-                        item.Relation_Exigence_to_Mesures.Sort();
-                        if (!name.Relation_Mesures_to_exigences.Contains(item.Name))
-                        {
-                            name.Relation_Mesures_to_exigences.Add(item.Name);
-                        }
-                    } 
+                        mesure.Relation_Mesures_to_exigences.Add(item.Name);
+                    }
+                    
                 }
             }
         }

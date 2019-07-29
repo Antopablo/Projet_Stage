@@ -115,6 +115,18 @@
     <Compile Include="Migrations\201907260952313_supr bool ischecked.Designer.cs">
       <DependentUpon>201907260952313_supr bool ischecked.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907290716468_isexpend.cs" />
+    <Compile Include="Migrations\201907290716468_isexpend.Designer.cs">
+      <DependentUpon>201907290716468_isexpend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907290719150_isextendMesure.cs" />
+    <Compile Include="Migrations\201907290719150_isextendMesure.Designer.cs">
+      <DependentUpon>201907290719150_isextendMesure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907290721503_isextendMesureBis.cs" />
+    <Compile Include="Migrations\201907290721503_isextendMesureBis.Designer.cs">
+      <DependentUpon>201907290721503_isextendMesureBis.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modif_Projet.xaml.cs">
       <DependentUpon>Modif_Projet.xaml</DependentUpon>
     </Compile>
@@ -375,6 +387,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907260952313_supr bool ischecked.resx">
       <DependentUpon>201907260952313_supr bool ischecked.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907290716468_isexpend.resx">
+      <DependentUpon>201907290716468_isexpend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907290719150_isextendMesure.resx">
+      <DependentUpon>201907290719150_isextendMesure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907290721503_isextendMesureBis.resx">
+      <DependentUpon>201907290721503_isextendMesureBis.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

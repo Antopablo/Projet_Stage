@@ -32,6 +32,11 @@ namespace Alto_IT
 
             Relation_Exigence_to_Mesures = new List<string>();
 
+            if (ForeignKey == 0)
+            {
+                IsNodeExpanded = true;
+            }
+
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
@@ -49,6 +54,10 @@ namespace Alto_IT
 
             Relation_Exigence_to_Mesures = new List<string>();
 
+            if (ForeignKey == 0)
+            {
+                IsNodeExpanded = true;
+            }
 
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
@@ -64,6 +73,10 @@ namespace Alto_IT
             Status = STATUS.non_evaluee;
             Relation_Exigence_to_Mesures = new List<string>();
 
+            if (ForeignKey == 0)
+            {
+                IsNodeExpanded = true;
+            }
         }
 
         [Key]
@@ -145,7 +158,7 @@ namespace Alto_IT
                 OnPropertyChanged("Status"); }
         }
 
-
+        public bool IsNodeExpanded { get; private set; }
         public int ForeignKey { get; set; }
 
         public int ForeignKey_TO_Norme { get; set; }
