@@ -104,6 +104,13 @@ namespace Alto_IT
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             await Task.Run(AfficherTreeViewMesure);
+            if (dashb.Vue != null)
+            {
+                dashb.Vue.afficherMesureAssociee();
+            } else
+            {
+                dashb.Vue = new Vue_Circulaire(dashb);
+            }
         }
 
         private void ExigenceAssocie_PreviewMouseUp(object sender, MouseButtonEventArgs e)

@@ -152,7 +152,7 @@
                             <Image Source="http://simpleicon.com/wp-content/uploads/link-2.png" Width="20" Height="20" VerticalAlignment="Center">
                                 <Image.ToolTip>
                                     <StackPanel>
-                                        <ListView ItemsSource="{Binding ListeNomExigenceAssociee}"/>
+                                        <ListView ItemsSource="{Binding Relation_Mesures_to_exigences}"/>
                                     </StackPanel>
                                 </Image.ToolTip>
                             </Image>

@@ -16,6 +16,7 @@ namespace Alto_IT
         {
             MesuresObservCollec = new ObservableCollection<Mesures>();
             Dico_couleurs = new Dictionary<STATUS, string>();
+            Relation_Mesures_to_exigences = new List<string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
         }
@@ -24,7 +25,7 @@ namespace Alto_IT
         {
             Name = name;
             MesuresObservCollec = new ObservableCollection<Mesures>();
-
+            Relation_Mesures_to_exigences = new List<string>();
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
@@ -37,7 +38,7 @@ namespace Alto_IT
             FK_to_Mesures = ForeignKeyM;
             FK_to_Projets = foreignKeyP;
             MesuresObservCollec = new ObservableCollection<Mesures>();
-
+            Relation_Mesures_to_exigences = new List<string>();
             Dico_couleurs = new Dictionary<STATUS, string>();
             RemplirDicoCouleur();
             Status = STATUS.non_evaluee;
@@ -103,6 +104,17 @@ namespace Alto_IT
                 _Status = value;
                 GetValueDico();
                 OnPropertyChanged("Status");
+            }
+        }
+
+        private List<string> _Relation_Mesures_to_exigences;
+        public List<string> Relation_Mesures_to_exigences
+        {
+            get { return _Relation_Mesures_to_exigences; }
+            set
+            {
+                _Relation_Mesures_to_exigences = value;
+                OnPropertyChanged("Relation_Mesures_to_exigences");
             }
         }
 

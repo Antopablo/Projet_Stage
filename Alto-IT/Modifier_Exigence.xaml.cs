@@ -236,6 +236,7 @@ namespace Alto_IT
             {
                 item.Checked += CheckBox_Checked;
                 item.Unchecked += CheckBox_Unchecked;
+                
             }
         }
     }

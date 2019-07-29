@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -168,6 +167,10 @@ namespace Alto_IT
                     {
                         item.Relation_Exigence_to_Mesures.Add(name.Name);
                         item.Relation_Exigence_to_Mesures.Sort();
+                        if (!name.Relation_Mesures_to_exigences.Contains(item.Name))
+                        {
+                            name.Relation_Mesures_to_exigences.Add(item.Name);
+                        }
                     } 
                 }
             }
